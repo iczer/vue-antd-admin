@@ -7,10 +7,12 @@
         <slot name="action"></slot>
       </span>
       </div>
-      <div class="total"><span>￥ 1358.34</span></div>
+      <div class="total"><span>{{total}}</span></div>
     </div>
     <div class="chart-card-content">
-      <slot></slot>
+      <div class="content-fix">
+        <slot></slot>
+      </div>
     </div>
     <div class="chart-card-footer">
       <slot name="footer"></slot>
@@ -23,7 +25,7 @@ import ACard from 'vue-antd-ui/es/card/Card'
 export default {
   name: 'ChartCard',
   components: {ACard},
-  props: ['title']
+  props: ['title', 'total']
 }
 </script>
 
@@ -67,6 +69,13 @@ export default {
   .chart-card-content{
     margin-bottom: 12px;
     position: relative;
+    height: 46px;
+    width: 100%;
+  }
+  .chart-card-content .content-fix{
+    position: absolute;
+    left: 0;
+    bottom: 0;
     width: 100%;
   }
 </style>

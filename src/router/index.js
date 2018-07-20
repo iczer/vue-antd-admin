@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Dashboard from '@/components/dashboard/Dashboard'
-import MiniChart from '@/components/chart/MiniChart'
+import MiniArea from '@/components/chart/MiniArea'
 
 Vue.use(Router)
 
@@ -20,7 +20,7 @@ export default new Router({
     {
       path: '/chart',
       name: 'chart',
-      component: MiniChart
+      component: MiniArea
     }
   ]
 })

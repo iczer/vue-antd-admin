@@ -14,6 +14,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "moment": "^2.22.2",
     "viser-vue": "^2.2.5",
     "vue": "^2.5.2",
     "vue-antd-ui": "^0.7.0",
@@ -54,6 +55,8 @@
     "html-webpack-plugin": "^2.30.1",
     "jest": "^22.0.4",
     "jest-serializer-vue": "^0.3.0",
+    "less": "^3.7.1",
+    "less-loader": "^4.1.0",
     "nightwatch": "^0.9.12",
     "node-notifier": "^5.1.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",
