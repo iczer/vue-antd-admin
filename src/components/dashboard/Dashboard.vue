@@ -51,10 +51,43 @@
           <div>
             <mini-progress target="90" percent="78" color="#13C2C2" height="8px"/>
           </div>
-          <div slot="footer">日均销售额      <span>￥ 234.56</span></div>
+          <div slot="footer">日均销售额  <span>￥ 234.56</span></div>
         </chart-card>
       </a-col>
     </a-row>
+    <a-card :bordered="false" :body-style="{padding: '24px'}">
+      <div class="salesCard">
+        <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
+          <div class="extra-wrap" slot="tabBarExtraContent">
+            <div class="extra-item">
+              <a>今日</a>
+              <a>本周</a>
+              <a>本月</a>
+              <a>本年</a>
+            </div>
+            <a-range-picker :style="{width: '256px'}"></a-range-picker>
+          </div>
+          <a-tab-pane loading="true" tab="销售额" key="1">
+            <a-row>
+              <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
+                <bar title="销售额趋势" />
+              </a-col>
+              <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
+                123
+              </a-col>
+            </a-row>
+          </a-tab-pane>
+          <a-tab-pane tab="访问量" key="2"><a-row>
+            <a-col :xl="16" :lg="12" :md="12" :sm="24" :xs="24">
+              <bar title="销售额趋势" />
+            </a-col>
+            <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
+              123
+            </a-col>
+          </a-row></a-tab-pane>
+        </a-tabs>
+      </div>
+    </a-card>
   </div>
 </template>
 
@@ -68,12 +101,40 @@ import AIcon from 'vue-antd-ui/es/icon/icon'
 import MiniArea from '../chart/MiniArea'
 import MiniBar from '../chart/MiniBar'
 import MiniProgress from '../chart/MiniProgress'
+import ATabs from 'vue-antd-ui/es/tabs'
+import ADatePicker from 'vue-antd-ui/es/date-picker'
+import Bar from "../chart/Bar";
+
+const ATabPane = ATabs.TabPane
+const ARangePicker = ADatePicker.RangePicker
 export default {
   name: 'dashboard',
-  components: {MiniProgress, MiniBar, MiniArea, AIcon, ATooltip, ChartCard, ACard, ARow, ACol}
+  components: {
+    Bar,
+    ARangePicker,
+    ATabPane,
+    ATabs,
+    MiniProgress,
+    MiniBar,
+    MiniArea,
+    AIcon,
+    ATooltip,
+    ChartCard,
+    ACard,
+    ARow,
+    ACol}
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
+  .extra-wrap{
 
+  }
+  .extra-item{
+    display: inline-block;
+    margin-right: 24px;
+    a{
+      margin-left: 24px;
+    }
+  }
 </style>
