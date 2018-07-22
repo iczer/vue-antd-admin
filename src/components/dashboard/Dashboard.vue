@@ -73,7 +73,7 @@
                 <bar title="销售额趋势" />
               </a-col>
               <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-                123
+                <ranking-list title="门店销售排行榜" :list="rankList"/>
               </a-col>
             </a-row>
           </a-tab-pane>
@@ -82,12 +82,27 @@
               <bar title="销售额趋势" />
             </a-col>
             <a-col :xl="8" :lg="12" :md="12" :sm="24" :xs="24">
-              123
+              <ranking-list title="门店销售排行榜" :list="rankList"/>
             </a-col>
           </a-row></a-tab-pane>
         </a-tabs>
       </div>
     </a-card>
+    <a-row style="margin: 0 -12px">
+      <a-col style="padding: 0 12px" :xl="12" :lg="24" :md="24" :sm="24" :xs="24">
+        <a-card :bordered="false" style="margin-top: 24px" title="热门搜索">
+          <hot-search />
+        </a-card>
+      </a-col>
+      <a-col style="padding: 0 12px" :xl="12" :lg="24" :md="24" :sm="24" :xs="24">
+        <a-card :bordered="false" style="margin-top: 24px;" title="销售额占比">
+          <sales-data />
+          <div slot="extra">
+            <div>...</div>
+          </div>
+        </a-card>
+      </a-col>
+    </a-row>
   </div>
 </template>
 
@@ -103,13 +118,34 @@ import MiniBar from '../chart/MiniBar'
 import MiniProgress from '../chart/MiniProgress'
 import ATabs from 'vue-antd-ui/es/tabs'
 import ADatePicker from 'vue-antd-ui/es/date-picker'
-import Bar from "../chart/Bar";
+import Bar from '../chart/Bar'
+import RankingList from '../chart/RankingList'
+import HotSearch from '../analysis/HotSearch'
+import SalesData from '../analysis/SalesData'
+
+
+const rankList = []
+
+for (let i = 0; i < 8; i++) {
+  rankList.push({
+    name: '桃源村' + i + '号店',
+    total: 1234.56 - i * 100
+  })
+}
 
 const ATabPane = ATabs.TabPane
 const ARangePicker = ADatePicker.RangePicker
 export default {
   name: 'dashboard',
+  data () {
+    return {
+      rankList
+    }
+  },
   components: {
+    SalesData,
+    HotSearch,
+    RankingList,
     Bar,
     ARangePicker,
     ATabPane,
