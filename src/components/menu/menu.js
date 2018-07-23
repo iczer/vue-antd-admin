@@ -44,6 +44,12 @@ export default {
       default: 'inline'
     }
   },
+  data () {
+    return {
+      rootSubmenuKeys: ['/form', '/list', '/detail', '/exception', '/result'],
+      openKeys: ['/form']
+    }
+  },
   methods: {
     renderIcon: function (h, icon) {
       return icon === 'none' ? null
@@ -103,6 +109,14 @@ export default {
         menuArr.push(this2_.renderItem(h, menu, '0', i))
       })
       return menuArr
+    },
+    onOpenChange (openKeys) {
+      const latestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1)
+      if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
+        this.openKeys = openKeys
+      } else {
+        this.openKeys = latestOpenKey ? [latestOpenKey] : []
+      }
     }
   },
   render (h) {
@@ -112,7 +126,11 @@ export default {
         props: {
           theme: this.$props.theme,
           mode: this.$props.mode,
-          inlineCollapsed: false
+          inlineCollapsed: false,
+          openKeys: this.openKeys
+        },
+        on: {
+          openChange: this.onOpenChange
         }
       }, this.renderMenu(h, this.menuData)
     )

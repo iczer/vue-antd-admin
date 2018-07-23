@@ -7,7 +7,6 @@
           <h1>Vue Ant Pro</h1>
         </a>
       </div>
-      <!--<gloabl-menu :collapsed="collapsed"/>-->
       <i-menu :menuData="menuData" />
     </a-layout-sider>
     <a-layout>
@@ -24,7 +23,6 @@
 import ALayout from 'vue-antd-ui/es/layout'
 import GloablHeader from './GloablHeader'
 import AIcon from 'vue-antd-ui/es/icon/icon'
-import GloablMenu from './GloablMenu'
 import IMenu from '../menu/menu'
 
 const ALayoutSider = ALayout.Sider
@@ -38,7 +36,6 @@ let menuData = []
 export default {
   name: 'GloablLayout',
   components: {
-    GloablMenu,
     AIcon,
     GloablHeader,
     ALayout,
