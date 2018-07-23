@@ -49,8 +49,8 @@ import AForm from 'vue-antd-ui/es/form/Form'
 import AFormItem from 'vue-antd-ui/es/form/FormItem'
 import AButton from 'vue-antd-ui/es/button/button'
 import ASelect from 'vue-antd-ui/es/select/index'
-import AInputGroup from "vue-antd-ui/es/input/Group";
-import AInput from "vue-antd-ui/es/input/Input";
+import AInputGroup from 'vue-antd-ui/es/input/Group'
+import AInput from 'vue-antd-ui/es/input/Input'
 
 const ASelectOption = ASelect.Option
 
