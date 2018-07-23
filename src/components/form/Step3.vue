@@ -1,10 +1,8 @@
 <template>
   <div>
     <a-form style="max-width: 500px; margin: 40px auto 0;">
-      <a-form-item :wrapperCol="{span: 15, offset: 9}">
-        success
-      </a-form-item>
-      <a-form-item :wrapperCol="{span: 19, offset: 5}">
+      <result title="支付完成" :is-success="true" />
+      <a-form-item :wrapperCol="{span: 16, offset: 8}">
         <a-button type="primary" @click="doOnceAgin">再转一笔</a-button>
         <a-button style="margin-left: 8px">查看账单</a-button>
       </a-form-item>
@@ -16,9 +14,10 @@
 import AForm from 'vue-antd-ui/es/form/Form'
 import AFormItem from 'vue-antd-ui/es/form/FormItem'
 import AButton from 'vue-antd-ui/es/button/button'
+import Result from '../result/Result'
 export default {
   name: 'Step3',
-  components: {AButton, AFormItem, AForm},
+  components: {Result, AButton, AFormItem, AForm},
   methods: {
     doOnceAgin () {
       this.$emit('finish')
