@@ -93,7 +93,7 @@ import AInputNumber from 'vue-antd-ui/es/input-number/index'
 import ARadioGroup from 'vue-antd-ui/es/radio/Group'
 import ARadio from 'vue-antd-ui/es/radio/Radio'
 import ASelect from 'vue-antd-ui/es/select/index'
-import AButton from "vue-antd-ui/es/button/button";
+import AButton from 'vue-antd-ui/es/button/button'
 
 const ARangePicker = ADatePicker.RangePicker
 const ASelectOption = ASelect.Option
@@ -101,10 +101,19 @@ export default {
   name: 'BasicForm',
   components: {
     AButton,
-    ASelectOption, ASelect, ARadio, ARadioGroup, AInputNumber, ATextarea, ARangePicker, AInput, AFormItem, AForm, ACard},
+    ASelectOption,
+    ASelect,
+    ARadio,
+    ARadioGroup,
+    AInputNumber,
+    ATextarea,
+    ARangePicker,
+    AInput,
+    AFormItem,
+    AForm,
+    ACard},
   data () {
     return {
-      title: '基础表单',
       desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
       value: 1
     }

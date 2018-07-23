@@ -58,7 +58,7 @@ export default {
       },
       labelConfig: ['percent', {
         formatter: (val, item) => {
-          return item.point.item + ': ' + val;
+          return item.point.item + ': ' + val
         }
       }]
     }

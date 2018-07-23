@@ -7,6 +7,7 @@ import NotPermit from '@/components/exception/403'
 import ServerError from '@/components/exception/500'
 import Form from '@/components/form/Form'
 import BasicForm from '@/components/form/BasicForm'
+import StepForm from '@/components/form/StepForm'
 
 Vue.use(Router)
 
@@ -33,7 +34,7 @@ export default new Router({
         {
           path: '/form/step',
           name: '分步表单',
-          component: NotFound,
+          component: StepForm,
           icon: 'none'
         },
         {
