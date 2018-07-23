@@ -5,6 +5,8 @@ import Exception from '@/components/exception/Exception'
 import NotFound from '@/components/exception/404'
 import NotPermit from '@/components/exception/403'
 import ServerError from '@/components/exception/500'
+import Form from '@/components/form/Form'
+import BasicForm from '@/components/form/BasicForm'
 
 Vue.use(Router)
 
@@ -19,13 +21,13 @@ export default new Router({
     {
       path: '/form',
       name: '表单页',
-      component: Exception,
+      component: Form,
       icon: 'form',
       children: [
         {
           path: '/form/basic',
           name: '基础表单',
-          component: NotFound,
+          component: BasicForm,
           icon: 'none'
         },
         {

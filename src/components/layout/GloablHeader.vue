@@ -1,5 +1,5 @@
 <template>
-  <a-layout-header style="background: #fff; padding: 0 12px 0 0;box-shadow: 0 1px 4px rgba(0,21,41,.08);">
+  <a-layout-header class="gloabl-header">
     <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
     <div style="float: right">
         <header-search class="header-item"/>
@@ -72,5 +72,12 @@ export default {
   .header-item i{
     font-size: 16px;
     color: rgba(0,0,0,.65);
+  }
+  .gloabl-header{
+    background: #fff;
+    padding: 0 12px 0 0;
+    -webkit-box-shadow: 0 1px 4px rgba(0,21,41,.08);
+    box-shadow: 0 1px 4px rgba(0,21,41,.08);
+    position: relative;
   }
 </style>
