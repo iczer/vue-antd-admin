@@ -33,33 +33,7 @@ const ALayoutContent = ALayout.Content
 const ALayoutFooter = ALayout.Footer
 const minHeight = window.innerHeight - 64 - 48
 
-const menuData = [
-  {
-    title: '统计分析',
-    path: '/dashboard'
-  },
-  {
-    title: '图表',
-    path: '/chart',
-    icon: 'line-chart'
-  },
-  {
-    title: '报表系统'
-  },
-  {
-    title: '日志',
-    children: [
-      {
-        title: '日志分析',
-        icon: 'none'
-      },
-      {
-        title: '数据分析',
-        icon: 'none'
-      }
-    ]
-  }
-]
+let menuData = []
 
 export default {
   name: 'GloablLayout',
@@ -84,6 +58,9 @@ export default {
     toggleCollapse () {
       this.collapsed = !this.collapsed
     }
+  },
+  beforeCreate () {
+    menuData = this.$router.options.routes
   }
 }
 </script>

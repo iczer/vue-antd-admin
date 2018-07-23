@@ -123,7 +123,6 @@ import RankingList from '../chart/RankingList'
 import HotSearch from '../analysis/HotSearch'
 import SalesData from '../analysis/SalesData'
 
-
 const rankList = []
 
 for (let i = 0; i < 8; i++) {
