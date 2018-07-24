@@ -31,7 +31,7 @@ import Result from './Result'
 import ACard from 'vue-antd-ui/es/card/Card'
 import PageHeader from '../page/PageHeader'
 import AIcon from 'vue-antd-ui/es/icon/icon'
-import AButton from "vue-antd-ui/es/button/button";
+import AButton from 'vue-antd-ui/es/button/button'
 export default {
   name: 'Error',
   components: {AButton, AIcon, PageHeader, ACard, Result},
