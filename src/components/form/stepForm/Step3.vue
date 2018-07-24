@@ -14,7 +14,7 @@
 import AForm from 'vue-antd-ui/es/form/Form'
 import AFormItem from 'vue-antd-ui/es/form/FormItem'
 import AButton from 'vue-antd-ui/es/button/button'
-import Result from '../result/Result'
+import Result from '../../result/Result'
 export default {
   name: 'Step3',
   components: {Result, AButton, AFormItem, AForm},

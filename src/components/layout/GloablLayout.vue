@@ -1,6 +1,6 @@
 <template>
   <a-layout>
-    <a-layout-sider width="256px" collapsible v-model="collapsed" :trigger="null">
+    <a-layout-sider width="256px" style="z-index: 10" collapsible v-model="collapsed" :trigger="null">
       <div class="logo">
         <a href="/">
           <img src="static/img/vue-antd-logo.png">

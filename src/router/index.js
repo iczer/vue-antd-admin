@@ -7,7 +7,8 @@ import NotPermit from '@/components/exception/403'
 import ServerError from '@/components/exception/500'
 import Form from '@/components/form/Form'
 import BasicForm from '@/components/form/BasicForm'
-import StepForm from '@/components/form/StepForm'
+import StepForm from '@/components/form/stepForm/StepForm'
+import AdvancedForm from '@/components/form/advancedForm/AdvancedForm'
 
 Vue.use(Router)
 
@@ -40,7 +41,7 @@ export default new Router({
         {
           path: '/form/advanced',
           name: '高级表单',
-          component: NotFound,
+          component: AdvancedForm,
           icon: 'none'
         }
       ]
