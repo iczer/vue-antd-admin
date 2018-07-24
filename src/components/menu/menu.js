@@ -47,7 +47,7 @@ export default {
   data () {
     return {
       rootSubmenuKeys: ['/form', '/list', '/detail', '/exception', '/result'],
-      openKeys: ['/form']
+      openKeys: []
     }
   },
   methods: {

@@ -9,6 +9,8 @@ import Form from '@/components/form/Form'
 import BasicForm from '@/components/form/BasicForm'
 import StepForm from '@/components/form/stepForm/StepForm'
 import AdvancedForm from '@/components/form/advancedForm/AdvancedForm'
+import Success from '@/components/result/Success'
+import Error from '@/components/result/Error'
 
 Vue.use(Router)
 
@@ -100,7 +102,7 @@ export default new Router({
     },
     {
       path: '/result',
-      name: '详情页',
+      name: '结果页',
       icon: 'check-circle-o',
       component: Exception,
       children: [
@@ -108,13 +110,13 @@ export default new Router({
           path: '/result/success',
           name: '成功',
           icon: 'none',
-          component: NotFound
+          component: Success
         },
         {
-          path: '/result/failure',
+          path: '/result/error',
           name: '失败',
           icon: 'none',
-          component: NotFound
+          component: Error
         }
       ]
     },

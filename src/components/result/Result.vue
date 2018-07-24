@@ -3,9 +3,13 @@
     <div >
       <a-icon :class="[isSuccess ? 'success' : 'error' ,'icon']" :type="isSuccess ? 'check-circle' : 'close-circle'" />
     </div>
-    <div class="title">{{title}}</div>
-    <div>
-      <slot name="content"></slot>
+    <div class="title" v-if="title">{{title}}</div>
+    <div class="desc" v-if="description">{{description}}</div>
+    <div class="content">
+      <slot></slot>
+    </div>
+    <div class="action">
+      <slot name="action"></slot>
     </div>
   </div>
 </template>
@@ -15,13 +19,12 @@ import AIcon from 'vue-antd-ui/es/icon/icon'
 export default {
   name: 'Result',
   components: {AIcon},
-  props: ['isSuccess', 'title']
+  props: ['isSuccess', 'title', 'description']
 }
 </script>
 
 <style lang="less" scoped>
   .result{
-    text-align: center;
     text-align: center;
     width: 72%;
     margin: 0 auto;
@@ -42,6 +45,21 @@ export default {
       font-weight: 500;
       line-height: 32px;
       margin-bottom: 16px;
+    }
+    .desc{
+      font-size: 14px;
+      line-height: 22px;
+      color: rgba(0, 0, 0, 0.45);
+      margin-bottom: 24px;
+    }
+    .content{
+      background: #fafafa;
+      padding: 24px 40px;
+      border-radius: 2px;
+      text-align: left;
+    }
+    .action{
+      margin-top: 32px;
     }
   }
 
