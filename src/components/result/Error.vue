@@ -1,6 +1,4 @@
 <template>
-  <div>
-    <page-header :breadcrumb="breadcrumb" style="margin: -24px -24px 24px -24px"/>
     <a-card :bordered="false">
       <result style="margin-bottom: 16px; margin-top: 48px" :is-success="false" :title="title" :description="description">
         <template slot="action">
@@ -23,7 +21,6 @@
         </div>
       </result>
     </a-card>
-  </div>
 </template>
 
 <script>
@@ -37,20 +34,8 @@ export default {
   components: {AButton, AIcon, PageHeader, ACard, Result},
   data () {
     return {
-      breadcrumb: [],
       title: '提交失败',
       description: '请核对并修改以下信息后，再重新提交。'
-    }
-  },
-  mounted () {
-    this.getPageHeaderInfo()
-  },
-  beforeUpdate () {
-    this.getPageHeaderInfo()
-  },
-  methods: {
-    getPageHeaderInfo () {
-      this.breadcrumb = this.$route.matched
     }
   }
 }

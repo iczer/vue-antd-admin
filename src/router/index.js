@@ -5,7 +5,7 @@ import Exception from '@/components/exception/Exception'
 import NotFound from '@/components/exception/404'
 import NotPermit from '@/components/exception/403'
 import ServerError from '@/components/exception/500'
-import Form from '@/components/form/Form'
+import PageLayout from '@/components/layout/PageLayout'
 import BasicForm from '@/components/form/BasicForm'
 import StepForm from '@/components/form/stepForm/StepForm'
 import AdvancedForm from '@/components/form/advancedForm/AdvancedForm'
@@ -25,7 +25,7 @@ export default new Router({
     {
       path: '/form',
       name: '表单页',
-      component: Form,
+      component: PageLayout,
       icon: 'form',
       children: [
         {
@@ -51,7 +51,7 @@ export default new Router({
     {
       path: '/list',
       name: '列表页',
-      component: Exception,
+      component: PageLayout,
       icon: 'table',
       children: [
         {
@@ -84,7 +84,7 @@ export default new Router({
       path: '/detail',
       name: '详情页',
       icon: 'profile',
-      component: Exception,
+      component: PageLayout,
       children: [
         {
           path: '/detail/basic',
@@ -104,7 +104,7 @@ export default new Router({
       path: '/result',
       name: '结果页',
       icon: 'check-circle-o',
-      component: Exception,
+      component: PageLayout,
       children: [
         {
           path: '/result/success',

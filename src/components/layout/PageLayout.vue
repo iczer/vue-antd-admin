@@ -12,7 +12,7 @@
 <script>
 import PageHeader from '../page/PageHeader'
 export default {
-  name: 'Form',
+  name: 'PageLayout',
   components: {PageHeader},
   data () {
     return {

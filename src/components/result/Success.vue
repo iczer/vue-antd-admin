@@ -1,6 +1,4 @@
 <template>
-  <div>
-    <page-header :breadcrumb="breadcrumb" style="margin: -24px -24px 24px -24px"/>
     <a-card :bordered="false">
       <result :is-success="true" :description="description" :title="title">
         <template slot="action">
@@ -59,7 +57,6 @@
         </div>
       </result>
     </a-card>
-  </div>
 </template>
 
 <script>
@@ -78,23 +75,11 @@ export default {
   components: {AIcon, AStep, ASteps, ARow, ACol, AButton, PageHeader, ACard, Result},
   data () {
     return {
-      breadcrumb: [],
       title: '提交成功',
       description: '提交结果页用于反馈一系列操作任务的处理结果，\n' +
       ' 如果仅是简单操作，使用 Message 全局提示反馈即可。\n' +
       ' 本文字区域可以展示简单的补充说明，如果有类似展示\n' +
       ' “单据”的需求，下面这个灰色区域可以呈现比较复杂的内容。'
-    }
-  },
-  mounted () {
-    this.getPageHeaderInfo()
-  },
-  beforeUpdate () {
-    this.getPageHeaderInfo()
-  },
-  methods: {
-    getPageHeaderInfo () {
-      this.breadcrumb = this.$route.matched
     }
   }
 }
