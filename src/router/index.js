@@ -11,6 +11,7 @@ import StepForm from '@/components/form/stepForm/StepForm'
 import AdvancedForm from '@/components/form/advancedForm/AdvancedForm'
 import Success from '@/components/result/Success'
 import Error from '@/components/result/Error'
+import QueryList from '@/components/list/QueryList'
 
 Vue.use(Router)
 
@@ -57,7 +58,7 @@ export default new Router({
         {
           path: '/form/query',
           name: '查询表格',
-          component: NotFound,
+          component: QueryList,
           icon: 'none'
         },
         {
