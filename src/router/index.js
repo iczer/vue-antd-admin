@@ -6,12 +6,14 @@ import NotFound from '@/components/exception/404'
 import NotPermit from '@/components/exception/403'
 import ServerError from '@/components/exception/500'
 import PageLayout from '@/components/layout/PageLayout'
+import CommonPageLayout from '@/components/layout/CommonPageLayout'
 import BasicForm from '@/components/form/BasicForm'
 import StepForm from '@/components/form/stepForm/StepForm'
 import AdvancedForm from '@/components/form/advancedForm/AdvancedForm'
 import Success from '@/components/result/Success'
 import Error from '@/components/result/Error'
 import QueryList from '@/components/list/QueryList'
+import StandardList from '@/components/list/StandardList'
 
 Vue.use(Router)
 
@@ -52,7 +54,7 @@ export default new Router({
     {
       path: '/list',
       name: '列表页',
-      component: PageLayout,
+      component: CommonPageLayout,
       icon: 'table',
       children: [
         {
@@ -64,7 +66,7 @@ export default new Router({
         {
           path: '/form/primary',
           name: '标准表格',
-          component: NotFound,
+          component: StandardList,
           icon: 'none'
         },
         {
@@ -85,7 +87,7 @@ export default new Router({
       path: '/detail',
       name: '详情页',
       icon: 'profile',
-      component: PageLayout,
+      component: CommonPageLayout,
       children: [
         {
           path: '/detail/basic',
@@ -105,7 +107,7 @@ export default new Router({
       path: '/result',
       name: '结果页',
       icon: 'check-circle-o',
-      component: PageLayout,
+      component: CommonPageLayout,
       children: [
         {
           path: '/result/success',

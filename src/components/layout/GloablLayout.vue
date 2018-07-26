@@ -14,7 +14,9 @@
       <a-layout-content :style="{minHeight: minHeight, margin: '24px 24px 0'}">
         <slot></slot>
       </a-layout-content>
-      <a-layout-footer></a-layout-footer>
+      <a-layout-footer style="padding: 0px">
+        <gloabl-footer />
+      </a-layout-footer>
     </a-layout>
   </a-layout>
 </template>
@@ -24,6 +26,7 @@ import ALayout from 'vue-antd-ui/es/layout'
 import GloablHeader from './GloablHeader'
 import AIcon from 'vue-antd-ui/es/icon/icon'
 import IMenu from '../menu/menu'
+import GloablFooter from './GloablFooter'
 
 const ALayoutSider = ALayout.Sider
 const ALayoutHeader = ALayout.Header
@@ -36,6 +39,7 @@ let menuData = []
 export default {
   name: 'GloablLayout',
   components: {
+    GloablFooter,
     AIcon,
     GloablHeader,
     ALayout,
