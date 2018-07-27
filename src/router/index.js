@@ -6,7 +6,6 @@ import NotFound from '@/components/exception/404'
 import NotPermit from '@/components/exception/403'
 import ServerError from '@/components/exception/500'
 import PageLayout from '@/components/layout/PageLayout'
-import CommonPageLayout from '@/components/layout/CommonPageLayout'
 import BasicForm from '@/components/form/BasicForm'
 import StepForm from '@/components/form/stepForm/StepForm'
 import AdvancedForm from '@/components/form/advancedForm/AdvancedForm'
@@ -14,6 +13,9 @@ import Success from '@/components/result/Success'
 import Error from '@/components/result/Error'
 import QueryList from '@/components/list/QueryList'
 import StandardList from '@/components/list/StandardList'
+import CardList from '@/components/list/CardList'
+import SearchLayout from '@/components/list/SearchLayout'
+import ArticleList from '@/components/list/ArticleList'
 
 Vue.use(Router)
 
@@ -54,32 +56,40 @@ export default new Router({
     {
       path: '/list',
       name: '列表页',
-      component: CommonPageLayout,
+      component: PageLayout,
       icon: 'table',
       children: [
         {
-          path: '/form/query',
+          path: '/list/query',
           name: '查询表格',
           component: QueryList,
           icon: 'none'
         },
         {
-          path: '/form/primary',
+          path: '/list/primary',
           name: '标准表格',
           component: StandardList,
           icon: 'none'
         },
         {
-          path: '/form/card',
+          path: '/list/card',
           name: '卡片表格',
-          component: NotFound,
+          component: CardList,
           icon: 'none'
         },
         {
-          path: '/form/search',
+          path: '/list/search',
           name: '搜索表格',
-          component: NotFound,
-          icon: 'none'
+          component: SearchLayout,
+          icon: 'none',
+          children: [
+            {
+              path: '/list/search/article',
+              name: '文章',
+              component: ArticleList,
+              icon: 'none'
+            }
+          ]
         }
       ]
     },
@@ -87,7 +97,7 @@ export default new Router({
       path: '/detail',
       name: '详情页',
       icon: 'profile',
-      component: CommonPageLayout,
+      component: PageLayout,
       children: [
         {
           path: '/detail/basic',
@@ -107,7 +117,7 @@ export default new Router({
       path: '/result',
       name: '结果页',
       icon: 'check-circle-o',
-      component: CommonPageLayout,
+      component: PageLayout,
       children: [
         {
           path: '/result/success',
