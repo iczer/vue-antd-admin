@@ -17,6 +17,7 @@ export default {
   .head-info{
     position: relative;
     text-align: center;
+    padding: 0 32px;
   span{
     color: rgba(0,0,0,.45);
     display: inline-block;

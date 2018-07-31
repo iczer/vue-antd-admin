@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div class="card-list">
     <a-list
       :grid="{gutter: 24, lg: 3, md: 2, sm: 1, xs: 1}"
       :dataSource="dataSource"
@@ -12,9 +12,10 @@
         </template>
         <template v-else>
           <a-card :hoverable="true">
-            <a-card-meta :title="item.title" :description="item.content">
+            <a-card-meta >
+              <div style="margin-bottom: 3px" slot="title">{{item.title}}</div>
               <a-avatar class="card-avatar" slot="avatar" :src="item.avatar" size="large" />
-              <div slot="description">{{item.content}}</div>
+              <div class="meta-content" slot="description">{{item.content}}</div>
             </a-card-meta>
             <ul class="ant-card-actions" slot="actions">
               <li><a >操作一</a></li>
@@ -37,15 +38,15 @@ import AButton from 'vue-antd-ui/es/button/button'
 import AIcon from 'vue-antd-ui/es/icon/icon'
 
 const dataSource = []
-
-for (let i = 0; i < 11  ; i++) {
+dataSource.push(null)
+for (let i = 0; i < 11; i++) {
   dataSource.push({
     title: 'Alipay',
     avatar: 'https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png',
     content: '在中台产品的研发过程中，会出现不同的设计规范和实现方式，但其中往往存在很多类似的页面和组件，这些类似的组件会被抽离成一套标准规范。'
   })
 }
-dataSource.push(null)
+
 export default {
   name: 'CardList',
   components: {AIcon, AButton, AAvatar, ACardMeta, ACard, AListItem, AList},
@@ -91,4 +92,14 @@ export default {
     width: 100%;
     height: 188px;
   }
+  .meta-content{
+    position: relative;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    height: 64px;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+  }
+
 </style>

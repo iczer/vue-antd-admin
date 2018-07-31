@@ -9,6 +9,7 @@
     <div class="detail">
       <h1 v-if="title" class="title">{{title}}</h1>
       <div class="content"><slot name="content"></slot></div>
+      <div class="extra"><slot name="extra"></slot></div>
     </div>
   </div>
 </template>
@@ -41,13 +42,24 @@ export default {
     .breadcrumb{
       margin-bottom: 16px;
     }
-    .title{
-      font-size: 20px;
-      font-weight: 500;
-      color: rgba(0,0,0,.85);
-    }
-    .content{
-      margin-bottom: 16px;
+    .detail{
+      display: flex;
+      .title{
+        font-size: 20px;
+        font-weight: 500;
+        color: rgba(0,0,0,.85);
+      }
+      .content{
+        margin-bottom: 16px;
+        flex: auto;
+      }
+      .extra
+      {
+        flex: 0 1 auto;
+        margin-left: 88px;
+        min-width: 450px;
+        float: right;
+      }
     }
   }
 </style>

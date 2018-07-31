@@ -5,7 +5,8 @@ import Exception from '@/components/exception/Exception'
 import NotFound from '@/components/exception/404'
 import NotPermit from '@/components/exception/403'
 import ServerError from '@/components/exception/500'
-import PageLayout from '@/components/layout/PageLayout'
+import PageView from '@/components/layout/PageView'
+import RouteView from '@/components/layout/RouteView'
 import BasicForm from '@/components/form/BasicForm'
 import StepForm from '@/components/form/stepForm/StepForm'
 import AdvancedForm from '@/components/form/advancedForm/AdvancedForm'
@@ -16,21 +17,37 @@ import StandardList from '@/components/list/StandardList'
 import CardList from '@/components/list/CardList'
 import SearchLayout from '@/components/list/SearchLayout'
 import ArticleList from '@/components/list/ArticleList'
+import WorkPlace from '@/components/dashboard/WorkPlace'
 
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
-      path: '/dashboard',
-      name: 'Dashboard',
-      component: Dashboard,
-      icon: 'dashboard'
+      path: '/',
+      name: 'dashboard',
+      component: RouteView,
+      icon: 'dashboard',
+      children: [
+        {
+          path: '/workplace',
+          name: '工作台',
+          component: WorkPlace,
+          alias: '/',
+          icon: 'none'
+        },
+        {
+          path: '/dashboard',
+          name: '分析页',
+          component: Dashboard,
+          icon: 'none'
+        }
+      ]
     },
     {
       path: '/form',
       name: '表单页',
-      component: PageLayout,
+      component: PageView,
       icon: 'form',
       children: [
         {
@@ -56,7 +73,7 @@ export default new Router({
     {
       path: '/list',
       name: '列表页',
-      component: PageLayout,
+      component: PageView,
       icon: 'table',
       children: [
         {
@@ -97,7 +114,7 @@ export default new Router({
       path: '/detail',
       name: '详情页',
       icon: 'profile',
-      component: PageLayout,
+      component: PageView,
       children: [
         {
           path: '/detail/basic',
@@ -117,7 +134,7 @@ export default new Router({
       path: '/result',
       name: '结果页',
       icon: 'check-circle-o',
-      component: PageLayout,
+      component: PageView,
       children: [
         {
           path: '/result/success',

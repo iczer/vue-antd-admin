@@ -1,10 +1,20 @@
 <template>
   <div style="margin: -24px -24px 0px">
     <page-header :breadcrumb="breadcrumb" :title="title">
-      <div slot="content">{{desc}}</div>
+      <div slot="content">
+        <template v-if="this.$slots.desc">
+          <slot name="desc"></slot>
+        </template>
+        <template v-else>
+          {{desc}}
+        </template>
+      </div>
+      <div slot="extra">
+        <slot name="extra"></slot>
+      </div>
     </page-header>
-    <div style="margin: 24px 24px 0px">
-      <router-view  ref="page"/>
+    <div ref="page" style="margin: 24px 24px 0px">
+      <slot ></slot>
     </div>
   </div>
 </template>
@@ -14,24 +24,21 @@ import PageHeader from '../page/PageHeader'
 export default {
   name: 'PageLayout',
   components: {PageHeader},
+  props: ['desc', 'title'],
   data () {
     return {
-      title: '',
-      breadcrumb: [],
-      desc: ''
+      breadcrumb: []
     }
   },
   mounted () {
-    this.getPageHeaderInfo()
+    this.getBreadcrumb()
   },
   beforeUpdate () {
-    this.getPageHeaderInfo()
+    this.getBreadcrumb()
   },
   methods: {
-    getPageHeaderInfo () {
-      this.title = this.$route.name
+    getBreadcrumb () {
       this.breadcrumb = this.$route.matched
-      this.desc = this.$refs.page.desc
     }
   }
 }

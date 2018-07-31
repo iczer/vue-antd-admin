@@ -8027,9 +8027,9 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
-vue-antd-ui@^1.0.0:
-  version "1.0.0"
-  resolved "http://registry.npm.taobao.org/vue-antd-ui/download/vue-antd-ui-1.0.0.tgz#b7fd61c3b3c9f3334f313a34a28e58e5a0e3ff8d"
+vue-antd-ui@^1.0.1:
+  version "1.0.1"
+  resolved "http://registry.npm.taobao.org/vue-antd-ui/download/vue-antd-ui-1.0.1.tgz#ac45c1121137b742a112cbfafa32444dc001d8b9"
   dependencies:
     add-dom-event-listener "^1.0.2"
     array-tree-filter "^2.1.0"
