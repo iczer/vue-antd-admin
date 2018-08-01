@@ -1,6 +1,6 @@
 <template>
-    <v-chart>
-      <v-tooltip :forceFit="true" height="400" :data="data" :padding="[20, 20, 95, 20]" :scale="scale" />
+    <v-chart :forceFit="true" height="400" :data="data" :padding="[20, 20, 95, 20]" :scale="scale">
+      <v-tooltip  />
       <v-axis :dataKey="axis1Opts.dataKey" :line="axis1Opts.line" :tickLine="axis1Opts.tickLine" :grid="axis1Opts.grid" />
       <v-axis :dataKey="axis2Opts.dataKey" :line="axis2Opts.line" :tickLine="axis2Opts.tickLine" :grid="axis2Opts.grid" />
       <v-legend dataKey="user" marker="circle" :offset="30" />
@@ -14,22 +14,18 @@
 const DataSet = require('@antv/data-set')
 
 const sourceData = [
-  { item: 'Design', a: 70, b: 30 },
-  { item: 'Development', a: 60, b: 70 },
-  { item: 'Marketing', a: 50, b: 60 },
-  { item: 'Users', a: 40, b: 50 },
-  { item: 'Test', a: 60, b: 70 },
-  { item: 'Language', a: 70, b: 50 },
-  { item: 'Technology', a: 50, b: 40 },
-  { item: 'Support', a: 30, b: 40 },
-  { item: 'Sales', a: 60, b: 40 },
-  { item: 'UX', a: 50, b: 60 }
+  {item: '引用', a: 70, b: 30, c: 40},
+  {item: '口碑', a: 60, b: 70, c: 40},
+  {item: '产量', a: 50, b: 60, c: 40},
+  {item: '贡献', a: 40, b: 50, c: 40},
+  {item: '热度', a: 60, b: 70, c: 40},
+  {item: '引用', a: 70, b: 50, c: 40}
 ]
 
 const dv = new DataSet.View().source(sourceData)
 dv.transform({
   type: 'fold',
-  fields: ['a', 'b'],
+  fields: ['a', 'b', 'c'],
   key: 'user',
   value: 'score'
 })
@@ -69,6 +65,7 @@ export default {
   name: 'Radar',
   data () {
     return {
+      sourceData,
       data,
       axis1Opts,
       axis2Opts,

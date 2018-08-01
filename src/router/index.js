@@ -121,7 +121,7 @@ export default new Router({
           path: '/detail/basic',
           name: '基础详情页',
           icon: 'none',
-          component: Radar
+          component: NotFound
         },
         {
           path: '/detail/advanced',

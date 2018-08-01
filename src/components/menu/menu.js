@@ -52,13 +52,17 @@ export default {
   data () {
     return {
       rootSubmenuKeys: ['/form', '/list', '/detail', '/exception', '/result'],
-      openKeys: []
+      openKeys: [],
+      cachedOpenKeys: []
     }
   },
   watch: {
     collapsed (val) {
       if (val) {
+        this.cachedOpenKeys = this.openKeys
         this.openKeys = []
+      } else {
+        this.openKeys = this.cachedOpenKeys
       }
     }
   },
