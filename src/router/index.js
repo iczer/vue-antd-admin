@@ -18,6 +18,7 @@ import CardList from '@/components/list/CardList'
 import SearchLayout from '@/components/list/SearchLayout'
 import ArticleList from '@/components/list/ArticleList'
 import WorkPlace from '@/components/dashboard/WorkPlace'
+import Radar from '@/components/chart/Radar'
 
 Vue.use(Router)
 
@@ -120,7 +121,7 @@ export default new Router({
           path: '/detail/basic',
           name: '基础详情页',
           icon: 'none',
-          component: NotFound
+          component: Radar
         },
         {
           path: '/detail/advanced',

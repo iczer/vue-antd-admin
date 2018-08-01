@@ -42,12 +42,24 @@ export default {
       type: String,
       required: false,
       default: 'inline'
+    },
+    collapsed: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data () {
     return {
       rootSubmenuKeys: ['/form', '/list', '/detail', '/exception', '/result'],
       openKeys: []
+    }
+  },
+  watch: {
+    collapsed (val) {
+      if (val) {
+        this.openKeys = []
+      }
     }
   },
   methods: {

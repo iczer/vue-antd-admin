@@ -70,7 +70,9 @@
             </div>
           </a-card>
           <a-card title="XX指数" style="margin-bottom: 24px" :bordered="false" :body-style="{padding: 0}">
-            <div style="min-height: 400px;"></div>
+            <div style="min-height: 400px;">
+              <radar />
+            </div>
           </a-card>
           <a-card title="团队" :bordered="false">
             <a-row>
@@ -102,12 +104,14 @@ import AList from 'vue-antd-ui/es/list/index'
 import AListItem from 'vue-antd-ui/es/list/Item'
 import AButton from 'vue-antd-ui/es/button/button'
 import AIcon from 'vue-antd-ui/es/icon/icon'
+import Radar from '../chart/Radar'
 
 const AListItemMeta = AListItem.Meta
 
 export default {
   name: 'WorkPlace',
   components: {
+    Radar,
     AIcon,
     AButton,
     AListItemMeta,

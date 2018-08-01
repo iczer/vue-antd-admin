@@ -6,7 +6,7 @@ import router from './router'
 import 'vue-antd-ui/dist/antd.css'
 import Viser from 'viser-vue'
 import axios from 'axios'
-import '@/mock/index'
+import '@/mock'
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false

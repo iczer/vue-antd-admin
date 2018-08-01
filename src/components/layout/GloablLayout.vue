@@ -7,7 +7,7 @@
           <h1>Vue Ant Pro</h1>
         </a>
       </div>
-      <i-menu :menuData="menuData" />
+      <i-menu :collapsed="collapsed" :menuData="menuData" />
     </a-layout-sider>
     <a-layout>
       <gloabl-header :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
