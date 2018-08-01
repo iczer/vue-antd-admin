@@ -1,8 +1,8 @@
 <template>
   <a-dropdown style="display: inline-block; height: 100%" >
     <span style="vertical-align: middle; cursor: pointer">
-      <a-avatar style="vertical-align: middle;" size="small" shape="circle" src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png"/>
-      <span>ICZER</span>
+      <a-avatar style="vertical-align: middle;" size="small" shape="circle" :src="currUser.avatar"/>
+      <span>{{currUser.name}}</span>
     </span>
     <a-menu style="width: 150px" slot="overlay">
       <a-menu-item>
@@ -33,7 +33,28 @@ const AMenuDivider = AMenu.Divider
 
 export default {
   name: 'HeaderAvatar',
-  components: {AMenu, AMenuItem, AMenuDivider, AIcon, AAvatar, ADropdown}
+  components: {AMenu, AMenuItem, AMenuDivider, AIcon, AAvatar, ADropdown},
+  data () {
+    return {
+      currUser: {
+        name: 'XXXXX',
+        avatar: ''
+      }
+    }
+  },
+  mounted () {
+    this.currentUser()
+  },
+  methods: {
+    currentUser () {
+      this.$axios({
+        method: 'get',
+        url: '/user/current'
+      }).then(res => {
+        this.currUser = res.data
+      })
+    }
+  }
 }
 </script>
 

@@ -2,11 +2,11 @@
   <page-layout>
     <div slot="desc" class="desc">
       <div class="avatar">
-        <a-avatar size="large" shape="circle" src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
+        <a-avatar size="large" shape="circle" :src="currUser.avatar" />
       </div>
       <div class="content">
-        <div class="title">早安，ICZER，祝你开心每一天！</div>
-        <div>交互专家 | 蚂蚁金服－某某某事业群－某某平台部－某某技术部－UED</div>
+        <div class="title">{{currUser.timefix}}，{{currUser.name}}，{{currUser.welcome}}</div>
+        <div>{{currUser.position}}</div>
       </div>
     </div>
     <div slot="extra">
@@ -27,11 +27,11 @@
         <a-col style="padding: 0 12px" :xl="16" :lg="24" :md="24" :sm="24" :xs="24">
           <a-card style="margin-bottom: 24px;" :bordered="false" title="进行中的项目" :body-style="{padding: 0}">
             <a slot="extra">全部项目</a>
-            <a-card-grid :key="n" v-for="n in 6">
+            <a-card-grid :key="i" v-for="(item, i) in projects">
               <a-card :bordered="false" :body-style="{padding: 0}">
-                <a-card-meta description="那是一种内在的东西，他们到达不了，也无法触及的">
+                <a-card-meta :description="item.desc">
                   <div slot="title" class="card-title">
-                    <a-avatar size="small" src="https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png" />
+                    <a-avatar size="small" :src="item.logo" />
                     <a>Alipay</a>
                   </div>
                 </a-card-meta>
@@ -121,7 +121,35 @@ export default {
     HeadInfo,
     AAvatar,
     PageLayout,
-    PageHeader}
+    PageHeader},
+  data () {
+    return {
+      currUser: {},
+      projects: []
+    }
+  },
+  mounted () {
+    this.currentUser()
+    this.getProjectList()
+  },
+  methods: {
+    currentUser () {
+      this.$axios({
+        method: 'get',
+        url: '/user/current'
+      }).then(res => {
+        this.currUser = res.data
+      })
+    },
+    getProjectList () {
+      this.$axios({
+        method: 'get',
+        url: '/project'
+      }).then(res => {
+        this.projects = res.data
+      })
+    }
+  }
 }
 </script>
 
