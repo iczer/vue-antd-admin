@@ -1,7 +1,7 @@
 <template>
   <div>
     <a-card style="" :bordered="false">
-      aaaa
+      ccc
     </a-card>
   </div>
 </template>
@@ -9,7 +9,7 @@
 <script>
 import ACard from 'vue-antd-ui/es/card/Card'
 export default {
-  name: 'ArticleList',
+  name: 'ProjectList',
   components: {ACard}
 }
 </script>

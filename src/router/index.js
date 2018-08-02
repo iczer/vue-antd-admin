@@ -17,6 +17,8 @@ import StandardList from '@/components/list/StandardList'
 import CardList from '@/components/list/CardList'
 import SearchLayout from '@/components/list/SearchLayout'
 import ArticleList from '@/components/list/ArticleList'
+import ApplicationList from '@/components/list/ApplicationList'
+import ProjectList from '@/components/list/ProjectList'
 import WorkPlace from '@/components/dashboard/WorkPlace'
 
 Vue.use(Router)
@@ -104,6 +106,18 @@ export default new Router({
               path: '/list/search/article',
               name: '文章',
               component: ArticleList,
+              icon: 'none'
+            },
+            {
+              path: '/list/search/application',
+              name: '应用',
+              component: ApplicationList,
+              icon: 'none'
+            },
+            {
+              path: '/list/search/project',
+              name: '项目',
+              component: ProjectList,
               icon: 'none'
             }
           ]

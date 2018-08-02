@@ -53,8 +53,12 @@ export default {
     return {
       rootSubmenuKeys: ['/form', '/list', '/detail', '/exception', '/result'],
       openKeys: [],
+      selectedKeys: [],
       cachedOpenKeys: []
     }
+  },
+  created () {
+    this.updateMenu()
   },
   watch: {
     collapsed (val) {
@@ -64,6 +68,9 @@ export default {
       } else {
         this.openKeys = this.cachedOpenKeys
       }
+    },
+    '$route': function () {
+      this.updateMenu()
     }
   },
   methods: {
@@ -133,6 +140,15 @@ export default {
       } else {
         this.openKeys = latestOpenKey ? [latestOpenKey] : []
       }
+    },
+    updateMenu () {
+      let routes = this.$route.matched.concat()
+      this.selectedKeys = [routes.pop().path]
+      let openKeys = []
+      routes.forEach((item) => {
+        openKeys.push(item.path)
+      })
+      this.openKeys = openKeys
     }
   },
   render (h) {
@@ -143,10 +159,12 @@ export default {
           theme: this.$props.theme,
           mode: this.$props.mode,
           inlineCollapsed: false,
-          openKeys: this.openKeys
+          openKeys: this.openKeys,
+          selectedKeys: this.selectedKeys
         },
         on: {
-          openChange: this.onOpenChange
+          openChange: this.onOpenChange,
+          select: (obj) => { this.selectedKeys = obj.selectedKeys }
         }
       }, this.renderMenu(h, this.menuData)
     )
