@@ -1,13 +1,8 @@
 <template>
-  <page-layout>
-    <div slot="desc" class="desc">
-      <div class="avatar">
-        <a-avatar size="large" shape="circle" :src="currUser.avatar" />
-      </div>
-      <div class="content">
-        <div class="title">{{currUser.timefix}}，{{currUser.name}}，{{currUser.welcome}}</div>
-        <div>{{currUser.position}}</div>
-      </div>
+  <page-layout :avatar="currUser.avatar">
+    <div slot="headerContent" class="content">
+      <div class="title">{{currUser.timefix}}，{{currUser.name}}，{{currUser.welcome}}</div>
+      <div>{{currUser.position}}</div>
     </div>
     <div slot="extra">
       <a-row>
@@ -25,22 +20,24 @@
     <div>
       <a-row style="margin: 0 -12px">
         <a-col style="padding: 0 12px" :xl="16" :lg="24" :md="24" :sm="24" :xs="24">
-          <a-card style="margin-bottom: 24px;" :bordered="false" title="进行中的项目" :body-style="{padding: 0}">
+          <a-card :loading="loading" style="margin-bottom: 24px;" :bordered="false" title="进行中的项目" :body-style="{padding: 0}">
             <a slot="extra">全部项目</a>
-            <a-card-grid :key="i" v-for="(item, i) in projects">
-              <a-card :bordered="false" :body-style="{padding: 0}">
-                <a-card-meta :description="item.desc">
-                  <div slot="title" class="card-title">
-                    <a-avatar size="small" :src="item.logo" />
-                    <a>Alipay</a>
+            <div>
+              <a-card-grid :key="i" v-for="(item, i) in projects">
+                <a-card :bordered="false" :body-style="{padding: 0}">
+                  <a-card-meta :description="item.desc">
+                    <div slot="title" class="card-title">
+                      <a-avatar size="small" :src="item.logo" />
+                      <a>Alipay</a>
+                    </div>
+                  </a-card-meta>
+                  <div class="project-item">
+                    <a href="/#/">科学搬砖组</a>
+                    <span class="datetime">9小时前</span>
                   </div>
-                </a-card-meta>
-                <div class="project-item">
-                  <a href="/#/">科学搬砖组</a>
-                  <span class="datetime">9小时前</span>
-                </div>
-              </a-card>
-            </a-card-grid>
+                </a-card>
+              </a-card-grid>
+            </div>
           </a-card>
           <a-card title="动态" :bordered="false">
             <a-list>
@@ -52,7 +49,6 @@
                   </div>
                   <div slot="description">9小时前</div>
                 </a-list-item-meta>
-
               </a-list-item>
             </a-list>
           </a-card>
@@ -129,7 +125,8 @@ export default {
   data () {
     return {
       currUser: {},
-      projects: []
+      projects: [],
+      loading: true
     }
   },
   mounted () {
@@ -151,6 +148,7 @@ export default {
         url: '/project'
       }).then(res => {
         this.projects = res.data
+        this.loading = false
       })
     }
   }
@@ -158,30 +156,18 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .desc{
-    display: flex;
-    .avatar {
-      flex: 0 1 72px;
-      margin-bottom: 8px;
-      & > span {
-        border-radius: 72px;
-        display: block;
-        width: 72px;
-        height: 72px;
-      }
-    }
-    .content {
-      position: relative;
-      top: 4px;
-      flex: 1 1 auto;
-      color: rgba(0, 0, 0, 0.45);
-      line-height: 22px;
-      .title {
-        font-size: 20px;
-        line-height: 28px;
-        font-weight: 500;
-        margin-bottom: 12px;
-      }
+  .content {
+    position: relative;
+    top: 4px;
+    flex: 1 1 auto;
+    color: rgba(0, 0, 0, 0.45);
+    line-height: 22px;
+    margin-left: 24px;
+    .title {
+      font-size: 20px;
+      line-height: 28px;
+      font-weight: 500;
+      margin-bottom: 12px;
     }
   }
   .card-title {

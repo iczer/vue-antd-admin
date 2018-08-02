@@ -5,7 +5,7 @@
           <a-input-search style="width: 522px" placeholder="请输入..." size="large" enterButton="搜索" />
         </div>
         <div style="padding: 0 24px">
-          <a-tabs tabBarStyle="margin: 0">
+          <a-tabs :tabBarStyle="{margin: 0}">
             <a-tab-pane tab="文章" key="1"></a-tab-pane>
             <a-tab-pane tab="应用" key="2"></a-tab-pane>
             <a-tab-pane tab="项目" key="3"></a-tab-pane>

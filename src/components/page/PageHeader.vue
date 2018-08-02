@@ -7,20 +7,30 @@
       </a-breadcrumb>
     </div>
     <div class="detail">
-      <h1 v-if="title" class="title">{{title}}</h1>
-      <div class="content"><slot name="content"></slot></div>
-      <div class="extra"><slot name="extra"></slot></div>
+      <div v-if="logo" class="logo"><a-avatar :src="logo" /></div>
+      <div class="main">
+        <div class="row">
+          <h1 v-if="title" class="title">{{title}}</h1>
+          <div class="action"><slot name="action"></slot></div>
+        </div>
+        <div class="row">
+          <div class="content"><slot name="content"></slot></div>
+          <div class="extra"><slot name="extra"></slot></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
 import ABreadcrumb from 'vue-antd-ui/es/breadcrumb'
+import AAvatar from 'vue-antd-ui/es/avatar/Avatar'
 
 const ABreadcrumbItem = ABreadcrumb.Item
 export default {
   name: 'PageHeader',
-  components: {ABreadcrumbItem, ABreadcrumb},
+  components: {AAvatar, ABreadcrumbItem, ABreadcrumb},
   props: {
     title: {
       type: String,
@@ -28,6 +38,10 @@ export default {
     },
     breadcrumb: {
       type: Array,
+      required: false
+    },
+    logo: {
+      type: String,
       required: false
     }
   }
@@ -44,21 +58,44 @@ export default {
     }
     .detail{
       display: flex;
-      .title{
-        font-size: 20px;
-        font-weight: 500;
-        color: rgba(0,0,0,.85);
+      .row {
+        display: flex;
+        width: 100%;
       }
-      .content{
-        margin-bottom: 16px;
-        flex: auto;
+      .logo {
+        flex: 0 1 72px;
+        margin-bottom: 8px;
+        & > span {
+          border-radius: 72px;
+          display: block;
+          width: 72px;
+          height: 72px;
+        }
       }
-      .extra
-      {
+      .main{
+        width: 100%;
         flex: 0 1 auto;
-        margin-left: 88px;
-        min-width: 450px;
-        float: right;
+        .title{
+          flex: auto;
+          font-size: 20px;
+          font-weight: 500;
+          color: rgba(0,0,0,.85);
+        }
+        .content{
+          margin-bottom: 16px;
+          flex: auto;
+        }
+        .extra{
+          flex: 0 1 auto;
+          margin-left: 88px;
+          min-width: 242px;
+          text-align: right;
+        }
+        .action{
+          margin-left: 56px;
+          min-width: 266px;
+          flex: 0 1 auto;
+        }
       }
     }
   }

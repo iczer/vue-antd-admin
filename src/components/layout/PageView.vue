@@ -1,5 +1,8 @@
 <template>
-  <page-layout :desc="desc">
+  <page-layout :desc="desc" :title="title" :linkList="linkList">
+    <div slot="extra" class="extraImg">
+      <img :src="extraImage"/>
+    </div>
     <router-view  ref="page"/>
   </page-layout>
 </template>
@@ -13,24 +16,36 @@ export default {
   data () {
     return {
       title: '',
-      desc: ''
+      desc: '',
+      linkList: [],
+      extraImage: ''
     }
   },
   mounted () {
     this.getPageHeaderInfo()
   },
-  beforeUpdate () {
+  updated () {
     this.getPageHeaderInfo()
   },
   methods: {
     getPageHeaderInfo () {
       this.title = this.$route.name
-      this.desc = this.$refs.page.desc
+      const page = this.$refs.page
+      this.desc = page.desc
+      this.linkList = page.linkList
+      this.extraImage = page.extraImage
     }
   }
 }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+  .extraImg{
+    margin-top: -60px;
+    text-align: center;
+    width: 195px;
+    img{
+      width: 100%;
+    }
+  }
 </style>

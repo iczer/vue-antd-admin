@@ -18,7 +18,6 @@ import CardList from '@/components/list/CardList'
 import SearchLayout from '@/components/list/SearchLayout'
 import ArticleList from '@/components/list/ArticleList'
 import WorkPlace from '@/components/dashboard/WorkPlace'
-import Radar from '@/components/chart/Radar'
 
 Vue.use(Router)
 
@@ -85,19 +84,19 @@ export default new Router({
         },
         {
           path: '/list/primary',
-          name: '标准表格',
+          name: '标准列表',
           component: StandardList,
           icon: 'none'
         },
         {
           path: '/list/card',
-          name: '卡片表格',
+          name: '卡片列表',
           component: CardList,
           icon: 'none'
         },
         {
           path: '/list/search',
-          name: '搜索表格',
+          name: '搜索列表',
           component: SearchLayout,
           icon: 'none',
           children: [

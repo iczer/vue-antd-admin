@@ -52,6 +52,13 @@ export default {
   components: {AIcon, AButton, AAvatar, ACardMeta, ACard, AListItem, AList},
   data () {
     return {
+      desc: '段落示意：蚂蚁金服务设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态， 提供跨越设计与开发的体验解决方案。',
+      linkList: [
+        {icon: 'rocket', href: '/#/', title: '快速开始'},
+        {icon: 'info-circle-o', href: '/#/', title: '产品简介'},
+        {icon: 'file-text', href: '/#/', title: '产品文档'}
+      ],
+      extraImage: 'https://gw.alipayobjects.com/zos/rmsportal/RzwpdLnhmvDJToTdfDPe.png',
       dataSource
     }
   }
