@@ -2,7 +2,7 @@
   <div style="margin: -24px -24px 0px">
     <page-header :breadcrumb="breadcrumb" :title="title" :logo="avatar">
       <slot slot="content" name="headerContent"></slot>
-      <div slot="content" v-if="!this.$slots.headerContent">
+      <div slot="content" v-if="!this.$slots.headerContent && desc">
         <p style="font-size: 14px;line-height: 1.5;color: rgba(0,0,0,.65)">{{desc}}</p>
         <div class="link">
           <template  v-for="(link, index) in linkList">

@@ -32,11 +32,11 @@ export default {
   components: {ATabPane, ATabs, AInputSearch, AButton, AInputGroup, AInput},
   data () {
     return {
-      activeKey: ''
+      activeKey: '1'
     }
   },
   watch: {
-    '$route': (val) => {
+    '$route': function (val) {
       switch (val.path) {
         case '/list/search/article':
           this.activeKey = '1'
@@ -48,12 +48,13 @@ export default {
           this.activeKey = '3'
           break
         default:
-          this.activeKey = '1'
+          this.activeKey = '2'
       }
     }
   },
   methods: {
     navigate (key) {
+      this.activeKey = key
       switch (key) {
         case '1':
           this.$router.push('/list/search/article')

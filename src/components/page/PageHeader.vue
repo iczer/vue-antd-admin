@@ -14,8 +14,8 @@
           <div class="action"><slot name="action"></slot></div>
         </div>
         <div class="row">
-          <div class="content"><slot name="content"></slot></div>
-          <div class="extra"><slot name="extra"></slot></div>
+          <div v-if="this.$slots.content" class="content"><slot name="content"></slot></div>
+          <div v-if="this.$slots.extra" class="extra"><slot name="extra"></slot></div>
         </div>
       </div>
 
@@ -80,6 +80,7 @@ export default {
           font-size: 20px;
           font-weight: 500;
           color: rgba(0,0,0,.85);
+          margin-bottom: 16px;
         }
         .content{
           margin-bottom: 16px;

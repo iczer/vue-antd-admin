@@ -1,16 +1,18 @@
 <template>
   <div>
-    <a-card style="" :bordered="false">
-      aaaa
+    <search-form />
+    <a-card :bordered="false">
+      contentA
     </a-card>
   </div>
 </template>
 
 <script>
 import ACard from 'vue-antd-ui/es/card/Card'
+import SearchForm from './SearchForm'
 export default {
   name: 'ArticleList',
-  components: {ACard}
+  components: {SearchForm, ACard}
 }
 </script>
 
