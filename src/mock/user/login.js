@@ -10,7 +10,7 @@ Mock.mock('/login', 'post', ({body}) => {
     result.message = '账户名或密码错误（admin/888888）'
   } else {
     result.code = 0
-    result.message = '登录成功'
+    result.message = Mock.mock('@TIMEFIX') + '，欢迎回来'
   }
   return result
 })

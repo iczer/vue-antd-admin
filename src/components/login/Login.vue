@@ -121,6 +121,7 @@ export default {
             const result = res.data
             if (result.code >= 0) {
               this.$router.push('/dashboard/workplace')
+              this.$message.success(result.message, 3)
             } else {
               this.error = result.message
             }
