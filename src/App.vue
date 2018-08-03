@@ -1,9 +1,6 @@
 <template>
   <div id="app">
-    <!--<img src="./assets/logo.png">-->
-    <gloabl-layout>
-      <router-view/>
-    </gloabl-layout>
+    <router-view/>
   </div>
 </template>
 

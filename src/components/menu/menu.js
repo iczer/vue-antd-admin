@@ -51,7 +51,7 @@ export default {
   },
   data () {
     return {
-      rootSubmenuKeys: ['/form', '/list', '/detail', '/exception', '/result'],
+      rootSubmenuKeys: ['/dashboard', '/form', '/list', '/detail', '/exception', '/result'],
       openKeys: [],
       selectedKeys: [],
       cachedOpenKeys: []
