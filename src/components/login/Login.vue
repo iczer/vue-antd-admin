@@ -9,16 +9,23 @@
         <div class="desc">Vue Antd 是西湖区最具影响力的 Web 设计规范</div>
       </div>
       <div class="login">
-        <a-form @submit="onSubmit">
-          <a-tabs size="large" style="text-align: center">
+        <a-form @submit="onSubmit" :autoFormCreate="(form) => this.form = form">
+          <a-tabs size="large" :tabBarStyle="{textAlign: 'center'}">
             <a-tab-pane tab="账户密码登录" key="1">
-              <a-form-item>
-                <a-input size="large" placeholder="admin/iczer" >
+              <a-alert type="error" :closable="true" v-show="error" :message="error" showIcon style="margin-bottom: 24px;" />
+              <a-form-item
+                fieldDecoratorId="name"
+                :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入账户名', whitespace: true}]}"
+              >
+                <a-input size="large" placeholder="admin" >
                   <a-icon slot="prefix" type="user" />
                 </a-input>
               </a-form-item>
-              <a-form-item>
-                <a-input size="large" placeholder="888888/123456" type="password">
+              <a-form-item
+                fieldDecoratorId="password"
+                :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入密码', whitespace: true}]}"
+              >
+                <a-input size="large" placeholder="888888" type="password">
                   <a-icon slot="prefix" type="lock" />
                 </a-input>
               </a-form-item>
@@ -48,14 +55,14 @@
             <a style="float: right">忘记密码</a>
           </div>
           <a-form-item>
-            <a-button style="width: 100%;margin-top: 24px" size="large" htmlType="submit" type="primary">登录</a-button>
+            <a-button :loading="logging" style="width: 100%;margin-top: 24px" size="large" htmlType="submit" type="primary">登录</a-button>
           </a-form-item>
           <div>
             其他登录方式
             <a-icon class="icon" type="alipay-circle" />
             <a-icon class="icon" type="taobao-circle" />
             <a-icon class="icon" type="weibo-circle" />
-            <router-link style="float: right" to="/" >注册账户</router-link>
+            <router-link style="float: right" to="/dashboard/workplace" >注册账户</router-link>
           </div>
         </a-form>
       </div>
@@ -75,17 +82,51 @@ import AInputGroup from 'vue-antd-ui/es/input/Group'
 import AButton from 'vue-antd-ui/es/button/button'
 import ACol from 'vue-antd-ui/es/grid/Col'
 import ACheckbox from 'vue-antd-ui/es/checkbox/Checkbox'
+import AAlert from 'vue-antd-ui/es/alert/index'
 
 const ATabPane = ATabs.TabPane
 
 export default {
   name: 'Login',
-  components: {ACheckbox, ACol, AButton, AInputGroup, AIcon, AInput, AFormItem, GloablFooter, ATabPane, ATabs, AForm},
+  components: {
+    AAlert,
+    ACheckbox,
+    ACol,
+    AButton,
+    AInputGroup,
+    AIcon,
+    AInput,
+    AFormItem,
+    GloablFooter,
+    ATabPane,
+    ATabs,
+    AForm},
+  data () {
+    return {
+      logging: false,
+      error: ''
+    }
+  },
   methods: {
     onSubmit (e) {
       e.preventDefault()
-      console.log('submit')
-      this.$router.push('/')
+      this.form.validateFields((err, values) => {
+        if (!err) {
+          this.logging = true
+          this.$axios.post('/login', {
+            name: this.form.getFieldValue('name'),
+            password: this.form.getFieldValue('password')
+          }).then((res) => {
+            this.logging = false
+            const result = res.data
+            if (result.code >= 0) {
+              this.$router.push('/dashboard/workplace')
+            } else {
+              this.error = result.message
+            }
+          })
+        }
+      })
     }
   }
 }

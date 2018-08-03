@@ -37,6 +37,7 @@ export default new Router({
       path: '/',
       name: 'home',
       component: MenuView,
+      redirect: '/login',
       icon: 'none',
       invisible: true,
       children: [
@@ -50,7 +51,6 @@ export default new Router({
               path: '/dashboard/workplace',
               name: '工作台',
               component: WorkPlace,
-              alias: '/',
               icon: 'none'
             },
             {
