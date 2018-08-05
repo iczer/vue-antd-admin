@@ -3,21 +3,22 @@
     <a-form>
       <a-form-item
         label="所属类目"
-        :labelCol="{span: 1}"
-        :wrapperCol="{span: 23}"
       >
         <tag-select>
-          <tag-select-option>科目一</tag-select-option>
-          <tag-select-option>科目一</tag-select-option>
-          <tag-select-option>科目一</tag-select-option>
-          <tag-select-option>科目一</tag-select-option>
-          <tag-select-option>科目一</tag-select-option>
-          <tag-select-option>科目一</tag-select-option>
-          <tag-select-option>科目一</tag-select-option>
-          <tag-select-option>科目一</tag-select-option>
-          <tag-select-option>科目一</tag-select-option>
-          <tag-select-option>科目一</tag-select-option>
-          <tag-select-option>科目一</tag-select-option>
+          <tag-select-option>类目一</tag-select-option>
+          <tag-select-option>类目二</tag-select-option>
+          <tag-select-option>类目三</tag-select-option>
+          <tag-select-option>类目四</tag-select-option>
+          <tag-select-option>类目五</tag-select-option>
+          <tag-select-option>类目六</tag-select-option>
+          <tag-select-option>类目七</tag-select-option>
+          <tag-select-option>类目八</tag-select-option>
+          <tag-select-option>类目九</tag-select-option>
+          <tag-select-option>类目十</tag-select-option>
+          <tag-select-option>类目十一</tag-select-option>
+          <tag-select-option>类目十二</tag-select-option>
+          <tag-select-option>类目十三</tag-select-option>
+          <tag-select-option>类目十四</tag-select-option>
         </tag-select>
       </a-form-item>
     </a-form>

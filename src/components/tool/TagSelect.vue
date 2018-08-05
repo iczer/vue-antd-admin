@@ -1,8 +1,8 @@
 <template>
   <div class="tag-select">
-    <tag-select-option>全部</tag-select-option>
+    <tag-select-option @click="toggleCheck">全部</tag-select-option>
     <slot></slot>
-    <a class="trigger">展开<a-icon type="down"/></a>
+    <a @click="toggle" v-show="showTrigger" ref="trigger" class="trigger">展开<a-icon style="margin-left: 5px" :type="collapsed ? 'down' : 'up'"/></a>
   </div>
 </template>
 
@@ -14,19 +14,69 @@ import AIcon from 'vue-antd-ui/es/icon/icon'
 export default {
   name: 'TagSelect',
   Option: TagSelectOption,
-  components: {AIcon, TagSelectOption, ACheckableTag, ASelect}
+  components: {AIcon, TagSelectOption, ACheckableTag, ASelect},
+  data () {
+    return {
+      showTrigger: false,
+      collapsed: true,
+      screenWidth: document.body.clientWidth,
+      checkAll: false
+    }
+  },
+  watch: {
+    screenWidth: function () {
+      this.showTrigger = this.needTrigger()
+    },
+    collapsed: function (val) {
+      this.$el.style.maxHeight = val ? '39px' : '78px'
+    }
+  },
+  mounted () {
+    let _this = this
+    // 此处延迟执行，是为解决mouted未完全完成情况下引发的trigger显示bug
+    setTimeout(() => {
+      _this.showTrigger = _this.needTrigger()
+      _this.$refs.trigger.style.display = _this.showTrigger ? 'inline' : 'none'
+    }, 1)
+    window.onresize = () => {
+      return (() => {
+        window.screenWidth = document.body.clientWidth
+        _this.screenWidth = window.screenWidth
+      })()
+    }
+  },
+  methods: {
+    needTrigger () {
+      return this.$el.clientHeight < this.$el.scrollHeight || this.$el.scrollHeight > 39
+    },
+    toggle () {
+      this.collapsed = !this.collapsed
+    },
+    getAllTags () {
+      const tagList = this.$children.filter((item) => {
+        return item.isTagSelectOption
+      })
+      return tagList
+    },
+    toggleCheck () {
+      this.checkAll = !this.checkAll
+      const tagList = this.getAllTags()
+      tagList.forEach((item) => {
+        item.checked = this.checkAll
+      })
+    }
+  }
 }
 </script>
 
 <style lang="less" scoped>
   .tag-select{
     user-select: none;
-    margin-left: -8px;
     position: relative;
     overflow: hidden;
-    max-height: 32px;
-    line-height: 32px;
+    max-height: 39px;
     padding-right: 50px;
+    display: inline-block;
   }
   .trigger{
     position: absolute;

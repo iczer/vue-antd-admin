@@ -30,25 +30,17 @@ const ATabPane = ATabs.TabPane
 export default {
   name: 'SearchLayout',
   components: {ATabPane, ATabs, AInputSearch, AButton, AInputGroup, AInput},
-  data () {
-    return {
-      activeKey: '1'
-    }
-  },
-  watch: {
-    '$route': function (val) {
-      switch (val.path) {
+  computed: {
+    activeKey () {
+      switch (this.$route.path) {
         case '/list/search/article':
-          this.activeKey = '1'
-          break
+          return '1'
         case '/list/search/application':
-          this.activeKey = '2'
-          break
+          return '2'
         case '/list/search/project':
-          this.activeKey = '3'
-          break
+          return '3'
         default:
-          this.activeKey = '2'
+          return '1'
       }
     }
   },

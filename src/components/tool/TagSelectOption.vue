@@ -1,5 +1,5 @@
 <template>
-  <a-checkable-tag class="tag-default" v-model="checked">
+  <a-checkable-tag @change="$emit('click')" class="tag-default" v-model="checked">
     <slot></slot>
   </a-checkable-tag>
 </template>
@@ -9,7 +9,7 @@ import ACheckableTag from 'vue-antd-ui/es/tag/CheckableTag'
 export default {
   name: 'TagSelectOption',
   components: {ACheckableTag},
-  options: {
+  props: {
     size: {
       type: String,
       required: false,
@@ -18,7 +18,8 @@ export default {
   },
   data () {
     return {
-      checked: false
+      checked: false,
+      isTagSelectOption: true
     }
   }
 }
