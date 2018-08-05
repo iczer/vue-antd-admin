@@ -46,7 +46,6 @@ export default {
   },
   methods: {
     navigate (key) {
-      this.activeKey = key
       switch (key) {
         case '1':
           this.$router.push('/list/search/article')

@@ -1,21 +1,114 @@
 <template>
   <div>
     <search-form />
-    <a-card :bordered="false">
-      contentB
-    </a-card>
+    <a-list
+      :grid="{ gutter: 24, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }"
+    >
+      <a-list-item style="padding: 0 12px" :key="n" v-for="n in 12">
+        <a-card>
+          <a-card-meta title="Angular">
+            <a-avatar slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png" size="small" />
+          </a-card-meta>
+          <ul class="actions" slot="actions">
+            <a-tooltip class="tool"  title="下载">
+              <a-icon type="download" />
+            </a-tooltip>
+            <a-tooltip class="tool"  title="编辑">
+              <a-icon type="edit" />
+            </a-tooltip>
+            <a-tooltip class="tool"  title="分享">
+              <a-icon type="share-alt" />
+            </a-tooltip>
+            <a-dropdown class="tool">
+              <a-icon type="ellipsis" />
+            </a-dropdown>
+          </ul>
+          <div class="content">
+            <div>
+              <p>活跃用户</p>
+              <p>18万</p>
+            </div>
+            <div>
+              <p>新增用户</p>
+              <p>1,338</p>
+            </div>
+          </div>
+        </a-card>
+      </a-list-item>
+    </a-list>
   </div>
 </template>
 
 <script>
 import ACard from 'vue-antd-ui/es/card/Card'
 import SearchForm from './SearchForm'
+import AList from 'vue-antd-ui/es/list'
+import AListItem from 'vue-antd-ui/es/list/Item'
+import ACardMeta from 'vue-antd-ui/es/card/Meta'
+import AAvatar from 'vue-antd-ui/es/avatar/Avatar'
+import ATooltip from 'vue-antd-ui/es/tooltip/Tooltip'
+import AIcon from 'vue-antd-ui/es/icon/icon'
+import ADropdown from 'vue-antd-ui/es/dropdown'
 export default {
   name: 'ApplicationList',
-  components: {SearchForm, ACard}
+  components: {ADropdown, AIcon, ATooltip, AAvatar, ACardMeta, AListItem, AList, SearchForm, ACard}
 }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+  .clearfix() {
+    zoom: 1;
+    &:before,
+    &:after {
+      content: ' ';
+      display: table;
+    }
+    &:after {
+      clear: both;
+      visibility: hidden;
+      font-size: 0;
+      height: 0;
+    }
+  }
+  .content {
+    .clearfix();
+    margin-top: 16px;
+    margin-left: 40px;
+    & > div {
+      position: relative;
+      text-align: left;
+      float: left;
+      width: 50%;
+      p {
+        line-height: 32px;
+        font-size: 24px;
+        margin: 0;
+      }
+      p:first-child {
+        color: rgba(0,0,0,.45);
+        font-size: 12px;
+        line-height: 20px;
+        margin-bottom: 4px;
+      }
+    }
+  }
+  .actions{
+    border-top: 1px solid #e8e8e8;
+    background: #f5f8fa;
+    zoom: 1;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    height: 38px;
+    .tool{
+      width: 25%;
+      float: left;
+      text-align: center;
+      margin: 12px 0;
+      color: rgba(0,0,0,.45);
+    }
+    .tool:not(:last-child) {
+      border-right: 1px solid #e8e8e8;
+    }
+  }
 </style>
