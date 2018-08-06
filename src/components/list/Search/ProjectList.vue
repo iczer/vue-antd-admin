@@ -14,7 +14,11 @@
           </a-card-meta>
           <div class="content">
             <span>4小时前</span>
-            <a-avatar size="small" src="https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png" />
+            <avatar-list>
+              <avatar-list-item size="small" tips="曲丽丽" src="https://gw.alipayobjects.com/zos/rmsportal/ZiESqWwCXBRQoaPONSJe.png" />
+              <avatar-list-item size="small" tips="周星星" src="https://gw.alipayobjects.com/zos/rmsportal/tBOxZPlITHqwlGjsJWaF.png" />
+              <avatar-list-item size="small" tips="董娜娜" src="https://gw.alipayobjects.com/zos/rmsportal/sBxjgqiuHMGRkIjqlQCd.png" />
+            </avatar-list>
           </div>
         </a-card>
       </a-list-item>
@@ -29,9 +33,14 @@ import AList from 'vue-antd-ui/es/list'
 import AListItem from 'vue-antd-ui/es/list/Item'
 import ACardMeta from 'vue-antd-ui/es/card/Meta'
 import AAvatar from 'vue-antd-ui/es/avatar/Avatar'
+import AvatarList from '../../tool/AvatarList'
+import ATooltip from 'vue-antd-ui/es/tooltip/Tooltip'
+
+const AvatarListItem = AvatarList.Item
+
 export default {
   name: 'ProjectList',
-  components: {AAvatar, ACardMeta, AListItem, AList, SearchForm, ACard}
+  components: {ATooltip, AvatarListItem, AvatarList, AAvatar, ACardMeta, AListItem, AList, SearchForm, ACard}
 }
 </script>
 

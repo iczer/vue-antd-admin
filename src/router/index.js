@@ -22,6 +22,7 @@ import ApplicationList from '@/components/list/search/ApplicationList'
 import ProjectList from '@/components/list/search/ProjectList'
 import WorkPlace from '@/components/dashboard/WorkPlace'
 import Login from '@/components/login/Login'
+import BasicDetail from '@/components/detail/BasicDetail'
 
 Vue.use(Router)
 
@@ -149,7 +150,7 @@ export default new Router({
               path: '/detail/basic',
               name: '基础详情页',
               icon: 'none',
-              component: NotFound
+              component: BasicDetail
             },
             {
               path: '/detail/advanced',

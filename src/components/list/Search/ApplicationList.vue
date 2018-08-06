@@ -21,6 +21,11 @@
             </a-tooltip>
             <a-dropdown class="tool">
               <a-icon type="ellipsis" />
+              <a-menu slot="overlay">
+                <a-menu-item>1 item</a-menu-item>
+                <a-menu-item>2 item</a-menu-item>
+                <a-menu-item>3 item</a-menu-item>
+              </a-menu>
             </a-dropdown>
           </ul>
           <div class="content">
@@ -49,9 +54,13 @@ import AAvatar from 'vue-antd-ui/es/avatar/Avatar'
 import ATooltip from 'vue-antd-ui/es/tooltip/Tooltip'
 import AIcon from 'vue-antd-ui/es/icon/icon'
 import ADropdown from 'vue-antd-ui/es/dropdown'
+import AMenu from 'vue-antd-ui/es/menu/index'
+
+const AMenuItem = AMenu.Item
+
 export default {
   name: 'ApplicationList',
-  components: {ADropdown, AIcon, ATooltip, AAvatar, ACardMeta, AListItem, AList, SearchForm, ACard}
+  components: {AMenuItem, AMenu, ADropdown, AIcon, ATooltip, AAvatar, ACardMeta, AListItem, AList, SearchForm, ACard}
 }
 </script>
 
@@ -99,16 +108,22 @@ export default {
     list-style: none;
     margin: 0;
     padding: 0;
-    height: 38px;
+    height: 47px;
     .tool{
       width: 25%;
       float: left;
       text-align: center;
       margin: 12px 0;
       color: rgba(0,0,0,.45);
-    }
-    .tool:not(:last-child) {
-      border-right: 1px solid #e8e8e8;
+      cursor: pointer;
+      font-size: 16px;
+      line-height: 22px;
+      &:hover{
+        color: #1890ff;
+      }
+      &:not(:last-child) {
+        border-right: 1px solid #e8e8e8;
+      }
     }
   }
 </style>
