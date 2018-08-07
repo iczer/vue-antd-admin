@@ -107,6 +107,7 @@ export default {
           margin-left: 56px;
           min-width: 266px;
           flex: 0 1 auto;
+          text-align: right;
         }
       }
     }
