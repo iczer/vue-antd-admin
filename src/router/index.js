@@ -23,6 +23,7 @@ import ProjectList from '@/components/list/search/ProjectList'
 import WorkPlace from '@/components/dashboard/WorkPlace'
 import Login from '@/components/login/Login'
 import BasicDetail from '@/components/detail/BasicDetail'
+import AdvancedDetail from '@/components/detail/AdvancedDetail'
 
 Vue.use(Router)
 
@@ -144,7 +145,7 @@ export default new Router({
           path: '/detail',
           name: '详情页',
           icon: 'profile',
-          component: PageView,
+          component: RouteView,
           children: [
             {
               path: '/detail/basic',
@@ -156,7 +157,7 @@ export default new Router({
               path: '/detail/advanced',
               name: '高级详情页',
               icon: 'none',
-              component: NotFound
+              component: AdvancedDetail
             }
           ]
         },
