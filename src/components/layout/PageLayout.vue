@@ -1,6 +1,7 @@
 <template>
   <div style="margin: -24px -24px 0px">
-    <page-header :breadcrumb="breadcrumb" :title="title" :logo="avatar">
+    <page-header :breadcrumb="breadcrumb" :title="title" :logo="logo" :avatar="avatar">
+      <slot name="action"  slot="action"></slot>
       <slot slot="content" name="headerContent"></slot>
       <div slot="content" v-if="!this.$slots.headerContent && desc">
         <p style="font-size: 14px;line-height: 1.5;color: rgba(0,0,0,.65)">{{desc}}</p>
@@ -24,7 +25,7 @@ import AIcon from 'vue-antd-ui/es/icon/icon'
 export default {
   name: 'PageLayout',
   components: {AIcon, PageHeader},
-  props: ['desc', 'title', 'avatar', 'linkList', 'extraImage'],
+  props: ['desc', 'logo', 'title', 'avatar', 'linkList', 'extraImage'],
   data () {
     return {
       breadcrumb: []
