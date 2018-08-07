@@ -1,5 +1,5 @@
 <template>
-  <div class="detail-list">
+  <div :class="['detail-list', size === 'small' ? 'small' : 'large', layout === 'vertical' ? 'vertical': 'horizontal']">
     <div v-if="title" class="title">{{title}}</div>
     <a-row>
       <slot></slot>
@@ -16,6 +16,11 @@ const Item = {
     term: {
       type: String,
       required: false
+    }
+  },
+  inject: {
+    col: {
+      type: Number
     }
   },
   methods: {
@@ -48,21 +53,50 @@ const Item = {
     return h(
       ACol,
       {
-        props: {
-          xs: 24,
-          sm: 12,
-          md: 8
-        }
+        props: responsive[this.col]
       },
       [term, content]
     )
   }
 }
+
+const responsive = {
+  1: { xs: 24 },
+  2: { xs: 24, sm: 12 },
+  3: { xs: 24, sm: 12, md: 8 },
+  4: { xs: 24, sm: 12, md: 6 }
+}
+
 export default {
   name: 'DetailList',
   Item: Item,
-  props: ['title'],
-  components: {ARow, ACol}
+  props: {
+    title: {
+      type: String,
+      required: false
+    },
+    col: {
+      type: Number,
+      required: false,
+      default: 3
+    },
+    size: {
+      type: String,
+      required: false,
+      default: 'large'
+    },
+    layout: {
+      type: String,
+      required: false,
+      default: 'horizontal'
+    }
+  },
+  components: {ARow, ACol},
+  provide () {
+    return {
+      col: this.col > 4 ? 4 : this.col
+    }
+  }
 }
 </script>
 
@@ -93,8 +127,26 @@ export default {
       line-height: 22px;
       width: 100%;
       padding-bottom: 16px;
-      color: rgba(0,0,0,.85);
+      color: rgba(0,0,0,.65);
       display: table-cell;
+    }
+    &.small{
+      .term,.content{
+        padding-bottom: 8px;
+      }
+    }
+    &.large{
+      .term,.content{
+        padding-bottom: 16px;
+      }
+    }
+    &.vertical{
+      .term {
+        padding-bottom: 8px;
+      }
+      .term,.content{
+        display: block;
+      }
     }
   }
 </style>
