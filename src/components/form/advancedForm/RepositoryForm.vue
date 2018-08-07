@@ -52,7 +52,7 @@
           fieldDecoratorId="repository.effectiveDate"
           :fieldDecoratorOptions="{rules: [{ required: true, message: '请选择生效日期'}]}"
         >
-          <a-range-picker />
+          <a-range-picker style="width: 100%" />
         </a-form-item>
       </a-col>
       <a-col :xl="{span: 8, offset: 2}" :lg="{span: 10}" :md="{span: 24}" :sm="24">
