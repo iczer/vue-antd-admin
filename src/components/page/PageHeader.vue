@@ -7,9 +7,10 @@
       </a-breadcrumb>
     </div>
     <div class="detail">
-      <div v-if="logo" class="logo"><a-avatar :src="logo" /></div>
+      <div v-if="avatar" class="avatar"><a-avatar :src="avatar" /></div>
       <div class="main">
         <div class="row">
+          <img v-if="logo" :src="logo" class="logo" />
           <h1 v-if="title" class="title">{{title}}</h1>
           <div class="action"><slot name="action"></slot></div>
         </div>
@@ -43,6 +44,10 @@ export default {
     logo: {
       type: String,
       required: false
+    },
+    avatar: {
+      type: String,
+      required: false
     }
   }
 }
@@ -62,7 +67,7 @@ export default {
         display: flex;
         width: 100%;
       }
-      .logo {
+      .avatar {
         flex: 0 1 72px;
         margin-bottom: 8px;
         & > span {
@@ -81,6 +86,12 @@ export default {
           font-weight: 500;
           color: rgba(0,0,0,.85);
           margin-bottom: 16px;
+        }
+        .logo{
+          width: 28px;
+          height: 28px;
+          border-radius: 4px;
+          margin-right: 16px;
         }
         .content{
           margin-bottom: 16px;
