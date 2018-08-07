@@ -175,7 +175,7 @@ const scheduleData = [
     rate: '申请审批通过',
     status: 'success',
     operator: '系统',
-    cost: '1h',
+    cost: '1h'
   },
   {
     key: '5',
