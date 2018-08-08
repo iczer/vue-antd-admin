@@ -1,5 +1,34 @@
 # vue-antd-admin
-**Ant Design Pro 的 Vue 实现（非官方）**
+**Ant Design Pro 的 Vue 实现**
+
 一个开箱即用的中后台前端/设计解决方案
 
-[预览地址](https://iczer.gitee.io/vue-antd-pro)（开发中...）
+[预览地址](https://iczer.gitee.io/vue-antd-pro)
+
+##环境
+* node -- 运行/编译
+* yarn -- 依赖管理
+* webpack -- 打包
+* eslint -- 代码规约
+* vue-cli -- 构建
+##依赖
+* @antv/data-set: ^0.8.9
+* axios: ^0.18.0
+* mockjs: ^1.0.1-beta3
+* moment: ^2.22.2
+* viser-vue: ^2.2.5
+* vue: ^2.5.2
+* vue-antd-ui: ^1.0.1
+* vue-router: ^3.0.1
+##安装
+```
+$ yarn install
+```
+##启动
+```
+$ yarn start
+```
+##文档
+编写中...
+##说明
+该项目由仓主在业余由兴趣驱动完成，如有任何疑问或功能需求，欢迎 [issue](https://github.com/iczer/vue-antd-admin/issues)。
