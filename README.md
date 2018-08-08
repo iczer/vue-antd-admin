@@ -1,5 +1,5 @@
 # vue-antd-admin
-**Ant Design Pro 的 Vue 实现**
+**[Ant Design Pro](https://github.com/ant-design/ant-design-pro) 的 Vue 实现**
 
 一个开箱即用的中后台前端/设计解决方案
 
