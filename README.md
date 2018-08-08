@@ -5,13 +5,14 @@
 
 [预览地址](https://iczer.gitee.io/vue-antd-pro)
 
-##环境
+![Image text](https://github.com/iczer/vue-antd-admin/blob/master/static/img/preview.jpg)
+## 环境
 * node -- 运行/编译
 * yarn -- 依赖管理
 * webpack -- 打包
 * eslint -- 代码规约
 * vue-cli -- 构建
-##依赖
+## 依赖
 * @antv/data-set: ^0.8.9
 * axios: ^0.18.0
 * mockjs: ^1.0.1-beta3
@@ -20,15 +21,15 @@
 * vue: ^2.5.2
 * vue-antd-ui: ^1.0.1
 * vue-router: ^3.0.1
-##安装
+## 安装
 ```
 $ yarn install
 ```
-##启动
+## 启动
 ```
 $ yarn start
 ```
-##文档
+## 文档
 编写中...
-##说明
+## 说明
 该项目由仓主在业余由兴趣驱动完成，如有任何疑问或功能需求，欢迎 [issue](https://github.com/iczer/vue-antd-admin/issues)。
