@@ -25,7 +25,7 @@ const Item = {
   },
   methods: {
     renderTerm (h, term) {
-      return h(
+      return term ? h(
         'div',
         {
           attrs: {
@@ -33,7 +33,7 @@ const Item = {
           }
         },
         [term]
-      )
+      ) : null
     },
     renderContent (h, content) {
       return h(
@@ -105,7 +105,7 @@ export default {
     .title {
       font-size: 16px;
       color: rgba(0,0,0,.85);
-      font-weight: 500;
+      font-weight: bold;
       margin-bottom: 16px;
     }
     .term {
