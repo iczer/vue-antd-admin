@@ -26,19 +26,18 @@
       </a-button-group>
       <a-button type="primary" >主操作</a-button>
     </template>
-    <a-card>
+    <a-card :bordered="false" title="流程进度">
       <a-steps :current="1" progressDot>
         <a-step title="创建项目">
           <a-step-item-group slot="description">
-            <a-step-item title="曲丽丽" icon="dingding-o"/>
-            <a-step-item title="王建豪" icon="dingding-o"/>
+            <a-step-item link="/dashboard/workplace" title="曲丽丽" icon="dingding-o"/>
             <a-step-item title="2016-12-12 12:32"/>
           </a-step-item-group>
         </a-step>
         <a-step title="部门初审">
           <a-step-item-group slot="description">
-            <a-step-item title="周毛毛" icon="dingding-o"/>
-            <a-step-item title="催一下"/>
+            <a-step-item link="/form/step" title="周毛毛" icon="dingding-o" />
+            <a-step-item link="/result/success" title="催一下" icon="bell"/>
           </a-step-item-group>
         </a-step>
         <a-step title="财务复核">
@@ -46,6 +45,77 @@
         <a-step title="完成">
         </a-step>
       </a-steps>
+    </a-card>
+    <a-card style="margin-top: 24px" :bordered="false" title="用户信息">
+      <detail-list>
+        <detail-list-item term="用户姓名">付晓晓</detail-list-item>
+        <detail-list-item term="会员卡号">32943898021309809423</detail-list-item>
+        <detail-list-item term="身份证">3321944288191034921</detail-list-item>
+        <detail-list-item term="联系方式">18112345678</detail-list-item>
+        <detail-list-item term="联系地址">浙江省杭州市西湖区黄姑山路工专路交叉路口</detail-list-item>
+      </detail-list>
+      <detail-list title="信息组">
+        <detail-list-item term="某某数据">725</detail-list-item>
+        <detail-list-item term="该数据更新时间">2018-08-08</detail-list-item>
+        <detail-list-item >&nbsp;</detail-list-item>
+        <detail-list-item term="某某数据">725</detail-list-item>
+        <detail-list-item term="该数据更新时间">2018-08-08</detail-list-item>
+        <detail-list-item >&nbsp;</detail-list-item>
+      </detail-list>
+      <a-card type="inner" title="多层信息组">
+        <detail-list title="组名称" size="small">
+          <detail-list-item term="负责人">林东东</detail-list-item>
+          <detail-list-item term="角色码">1234567</detail-list-item>
+          <detail-list-item term="所属部门">XX公司-YY部</detail-list-item>
+          <detail-list-item term="过期时间">2018-08-08</detail-list-item>
+          <detail-list-item term="描述">这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长...</detail-list-item>
+        </detail-list>
+        <a-divider style="margin: 16px 0" />
+        <detail-list title="组名称" size="small" :col="1">
+          <detail-list-item term="学名">林东东</detail-list-item>
+          <detail-list-item term="角色码">1234567</detail-list-item>
+          <detail-list-item term="所属部门">XX公司-YY部</detail-list-item>
+          <detail-list-item term="过期时间">2018-08-08</detail-list-item>
+          <detail-list-item term="描述">这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长...</detail-list-item>
+        </detail-list>
+        <a-divider style="margin: 16px 0" />
+        <detail-list title="组名称" size="small" :col="2">
+          <detail-list-item term="学名">林东东</detail-list-item>
+          <detail-list-item term="角色码">1234567</detail-list-item>
+          <detail-list-item term="所属部门">XX公司-YY部</detail-list-item>
+          <detail-list-item term="过期时间">2018-08-08</detail-list-item>
+          <detail-list-item term="描述">这段描述很长很长很长很长很长很长很长很长很长很长很长很长很长很长...</detail-list-item>
+        </detail-list>
+      </a-card>
+    </a-card>
+    <a-card style="margin-top: 24px" :bordered="false" title="用户近半年来电记录">
+      <div class="nodata"><a-icon type="frown-o"/>暂无数据</div>
+    </a-card>
+    <a-card
+      style="margin-top: 24px"
+      :bordered="false"
+      :tabList="tabList"
+      :activeTabKey="activeTabKey"
+      @tabChange="(key) => {this.activeTabKey = key}"
+    >
+      <a-table
+        v-if="activeTabKey === '1'"
+        :columns="operationColumns"
+        :dataSource="operation1"
+        :pagination="false"
+      />
+      <a-table
+        v-if="activeTabKey === '2'"
+        :columns="operationColumns"
+        :dataSource="operation2"
+        :pagination="false"
+      />
+      <a-table
+        v-if="activeTabKey === '3'"
+        :columns="operationColumns"
+        :dataSource="operation3"
+        :pagination="false"
+      />
     </a-card>
   </page-layout>
 </template>
@@ -61,14 +131,49 @@ import ACol from 'vue-antd-ui/es/grid/Col'
 import ACard from 'vue-antd-ui/es/card/Card'
 import ASteps from 'vue-antd-ui/es/steps/index'
 import AStepItem from '../tool/AStepItem'
+import ADivider from 'vue-antd-ui/es/divider/index'
+import ATable from 'vue-antd-ui/es/table'
+import {operation1, operation2, operation3, operationColumns} from '../../mock/common/tableData'
 
 const DetailListItem = DetailList.Item
 const AStep = ASteps.Step
 const AStepItemGroup = AStepItem.Group
 
+const tabList = [
+  {
+    key: '1',
+    tab: '操作日志一'
+  },
+  {
+    key: '2',
+    tab: '操作日志二'
+  },
+  {
+    key: '3',
+    tab: '操作日志三'
+  }
+]
+
 export default {
   name: 'AdvancedDetail',
+  data () {
+    return {
+      tabList,
+      operationColumns,
+      operation1,
+      operation2,
+      operation3,
+      activeTabKey: '2'
+    }
+  },
+  methods: {
+    onTabChange (key) {
+      console.log(key)
+    }
+  },
   components: {
+    ATable,
+    ADivider,
     AStepItemGroup,
     AStepItem,
     AStep,
@@ -92,5 +197,19 @@ export default {
   .heading{
     color: rgba(0,0,0,.85);
     font-size: 20px;
+  }
+  .nodata{
+    color: rgba(0,0,0,.25);
+    text-align: center;
+    line-height: 64px;
+    font-size: 16px;
+    & :global{
+      i {
+        font-size: 24px;
+        margin-right: 16px;
+        position: relative;
+        top: 3px;
+      }
+    }
   }
 </style>
