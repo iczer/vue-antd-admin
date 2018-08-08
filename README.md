@@ -5,7 +5,7 @@
 
 [预览地址](https://iczer.gitee.io/vue-antd-pro)
 
-![Image text](https://github.com/iczer/vue-antd-admin/blob/master/static/img/preview.jpg)
+![](https://github.com/iczer/vue-antd-admin/blob/master/static/img/preview.jpg)
 ## 环境
 * node -- 运行/编译
 * yarn -- 依赖管理
@@ -22,6 +22,11 @@
 * vue-antd-ui: ^1.0.1
 * vue-router: ^3.0.1
 ## 安装
+克隆项目到本地:
+```
+$ git clone https://github.com/iczer/vue-antd-admin.git
+```
+安装依赖：
 ```
 $ yarn install
 ```
