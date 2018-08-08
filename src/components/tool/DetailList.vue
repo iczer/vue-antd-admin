@@ -105,7 +105,7 @@ export default {
     .title {
       font-size: 16px;
       color: rgba(0,0,0,.85);
-      font-weight: bold;
+      font-weight: bolder;
       margin-bottom: 16px;
     }
     .term {
@@ -131,6 +131,12 @@ export default {
       display: table-cell;
     }
     &.small{
+      .title{
+        font-size: 14px;
+        color: rgba(0,0,0,.65);
+        font-weight: normal;
+        margin-bottom: 12px;
+      }
       .term,.content{
         padding-bottom: 8px;
       }
