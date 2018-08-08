@@ -1,9 +1,11 @@
 <template>
-  <div>
-    <router-link to="/" style="text-decoration:none;out-line: none; color: #000">
-      <span :style="titleStyle">{{title}}</span>
-      <a-icon :style="iconStyle" :type="icon" />
-    </router-link>
+  <div
+    :class="['step-item', link ? 'linkable' : null]"
+    @click="go"
+  >
+    <span :style="titleStyle">{{title}}</span>
+    <a-icon :style="iconStyle" :type="icon" />
+    <slot></slot>
   </div>
 </template>
 
@@ -25,10 +27,27 @@ export default {
   name: 'AStepItem',
   Group: Group,
   components: {AIcon},
-  props: ['title', 'icon', 'link', 'titleStyle', 'iconStyle']
+  props: ['title', 'icon', 'link', 'titleStyle', 'iconStyle'],
+  methods: {
+    go () {
+      const link = this.link
+      if (link) {
+        this.$router.push(link)
+      }
+    }
+  }
 }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+  .step-item{
+    cursor: pointer;
+  }
+  :global{
+    .ant-steps-item-process{
+      .linkable{
+        color: #40a9ff;
+      }
+    }
+  }
 </style>
