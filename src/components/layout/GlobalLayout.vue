@@ -23,10 +23,10 @@
 
 <script>
 import ALayout from 'vue-antd-ui/es/layout'
-import GloablHeader from './GloablHeader'
+import GlobalHeader from './GlobalHeader'
 import AIcon from 'vue-antd-ui/es/icon/icon'
 import IMenu from '../menu/menu'
-import GloablFooter from './GloablFooter'
+import GlobalFooter from './GlobalFooter'
 
 const ALayoutSider = ALayout.Sider
 const ALayoutHeader = ALayout.Header
@@ -37,11 +37,11 @@ const minHeight = window.innerHeight - 64 - 48
 let menuData = []
 
 export default {
-  name: 'GloablLayout',
+  name: 'GlobalLayout',
   components: {
-    GloablFooter,
+    GlobalFooter,
     AIcon,
-    GloablHeader,
+    GlobalHeader,
     ALayout,
     ALayoutSider,
     ALayoutHeader,

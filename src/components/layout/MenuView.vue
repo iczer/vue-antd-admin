@@ -1,14 +1,14 @@
 <template>
-  <gloabl-layout>
+  <global-layout>
     <router-view />
-  </gloabl-layout>
+  </global-layout>
 </template>
 
 <script>
-import GloablLayout from './GloablLayout'
+import GlobalLayout from './GlobalLayout'
 export default {
   name: 'MenuView',
-  components: {GloablLayout}
+  components: {GlobalLayout}
 }
 </script>
 

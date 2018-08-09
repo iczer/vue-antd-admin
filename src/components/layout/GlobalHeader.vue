@@ -26,7 +26,7 @@ import HeaderAvatar from './HeaderlAvatar'
 const ALayoutSider = ALayout.Sider
 const ALayoutHeader = ALayout.Header
 export default {
-  name: 'GloablHeader',
+  name: 'GlobalHeader',
   components: {
     HeaderAvatar,
     ATooltip,

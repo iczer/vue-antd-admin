@@ -14,7 +14,7 @@
 <script>
 import AIcon from 'vue-antd-ui/es/icon/icon'
 export default {
-  name: 'GloablFooter',
+  name: 'GlobalFooter',
   components: {AIcon}
 }
 </script>

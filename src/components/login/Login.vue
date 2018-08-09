@@ -67,14 +67,14 @@
         </a-form>
       </div>
     </div>
-    <gloabl-footer />
+    <global-footer />
   </div>
 </template>
 
 <script>
 import AForm from 'vue-antd-ui/es/form/Form'
 import ATabs from 'vue-antd-ui/es/tabs'
-import GloablFooter from '../layout/GloablFooter'
+import GlobalFooter from '../layout/GlobalFooter'
 import AFormItem from 'vue-antd-ui/es/form/FormItem'
 import AInput from 'vue-antd-ui/es/input/Input'
 import AIcon from 'vue-antd-ui/es/icon/icon'
@@ -97,7 +97,7 @@ export default {
     AIcon,
     AInput,
     AFormItem,
-    GloablFooter,
+    GlobalFooter,
     ATabPane,
     ATabs,
     AForm},
