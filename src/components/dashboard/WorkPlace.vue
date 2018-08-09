@@ -39,14 +39,12 @@
               </a-card-grid>
             </div>
           </a-card>
-          <a-card title="动态" :bordered="false">
+          <a-card :loading="loading" title="动态" :bordered="false">
             <a-list>
-              <a-list-item :key="n" v-for="n in 6">
+              <a-list-item :key="index" v-for="(item, index) in activities">
                 <a-list-item-meta>
-                  <a-avatar slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
-                  <div slot="title">
-                    曲丽丽 在 <a>高逼格设计天团</a> 新建项目 <a>六月迭代</a>
-                  </div>
+                  <a-avatar slot="avatar" :src="item.user.avatar" />
+                  <div slot="title" v-html="item.template" />
                   <div slot="description">9小时前</div>
                 </a-list-item-meta>
               </a-list-item>
@@ -70,15 +68,17 @@
               <radar />
             </div>
           </a-card>
-          <a-card title="团队" :bordered="false">
-            <a-row>
-              <a-col :span="12" v-for="n in 5" :key="n">
-                <a class="member">
-                  <a-avatar size="small" src="https://gw.alipayobjects.com/zos/rmsportal/BiazfanxmamNRoxxVxka.png" />
-                  <span>程序员日常</span>
-                </a>
-              </a-col>
-            </a-row>
+          <a-card :loading="loading" title="团队" :bordered="false">
+            <div class="members">
+              <a-row>
+                <a-col :span="12" v-for="(item, index) in teams" :key="index">
+                  <a>
+                    <a-avatar size="small" :src="item.avatar" />
+                    <span class="member">{{item.name}}</span>
+                  </a>
+                </a-col>
+              </a-row>
+            </div>
           </a-card>
         </a-col>
       </a-row>
@@ -126,12 +126,16 @@ export default {
     return {
       currUser: {},
       projects: [],
-      loading: true
+      loading: true,
+      activities: [],
+      teams: []
     }
   },
   mounted () {
     this.currentUser()
     this.getProjectList()
+    this.getActivites()
+    this.getTeams()
   },
   methods: {
     currentUser () {
@@ -149,6 +153,22 @@ export default {
       }).then(res => {
         this.projects = res.data
         this.loading = false
+      })
+    },
+    getActivites () {
+      this.$axios({
+        method: 'get',
+        url: '/work/activity'
+      }).then(res => {
+        this.activities = res.data
+      })
+    },
+    getTeams () {
+      this.$axios({
+        method: 'get',
+        url: '/work/team'
+      }).then(res => {
+        this.teams = res.data
       })
     }
   }
@@ -217,14 +237,27 @@ export default {
       width: 25%;
     }
   }
-  .member{
-    display: block;
-    margin: 12px 0;
-    line-height: 24px;
-    height: 24px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    word-break: break-all;
-    white-space: nowrap;
+  .members {
+    a {
+      display: block;
+      margin: 12px 0;
+      line-height: 24px;
+      height: 24px;
+      .member {
+        font-size: 14px;
+        color: rgba(0,0,0,.65);
+        line-height: 24px;
+        max-width: 100px;
+        vertical-align: top;
+        margin-left: 12px;
+        transition: all 0.3s;
+        display: inline-block;
+      }
+      &:hover {
+        span {
+          color: #1890ff;
+        }
+      }
+    }
   }
 </style>
