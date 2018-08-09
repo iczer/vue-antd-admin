@@ -10,12 +10,12 @@
       <i-menu :collapsed="collapsed" :menuData="menuData" />
     </a-layout-sider>
     <a-layout>
-      <gloabl-header :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
+      <global-header :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
       <a-layout-content :style="{minHeight: minHeight, margin: '24px 24px 0'}">
         <slot></slot>
       </a-layout-content>
       <a-layout-footer style="padding: 0px">
-        <gloabl-footer />
+        <global-footer />
       </a-layout-footer>
     </a-layout>
   </a-layout>
@@ -32,7 +32,7 @@ const ALayoutSider = ALayout.Sider
 const ALayoutHeader = ALayout.Header
 const ALayoutContent = ALayout.Content
 const ALayoutFooter = ALayout.Footer
-const minHeight = window.innerHeight - 64 - 48
+const minHeight = window.innerHeight - 64 - 24 - 122
 
 let menuData = []
 
