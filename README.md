@@ -37,4 +37,6 @@ $ yarn start
 ## 文档
 编写中...
 ## 说明
-该项目由仓主在业余由兴趣驱动完成，如有任何疑问或功能需求，欢迎 [issue](https://github.com/iczer/vue-antd-admin/issues)。
+该项目由仓主在业余由兴趣驱动完成，仍在不断开发完善中。
+
+如有任何疑问或功能需求，欢迎 [Issue](https://github.com/iczer/vue-antd-admin/issues)。
