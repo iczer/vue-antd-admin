@@ -8,11 +8,13 @@ import Viser from 'viser-vue'
 import axios from 'axios'
 import message from 'vue-antd-ui/es/message'
 import '@/mock'
+import Vuex from 'vuex'
 
 Vue.prototype.$axios = axios
 Vue.prototype.$message = message
 Vue.config.productionTip = false
 Vue.use(Viser)
+Vue.use(Vuex)
 
 /* eslint-disable no-new */
 new Vue({
