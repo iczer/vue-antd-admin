@@ -21,7 +21,7 @@ export default {
       extraImage: ''
     }
   },
-  mounted () {
+  beforeMount () {
     this.getPageHeaderInfo()
   },
   updated () {
@@ -31,9 +31,11 @@ export default {
     getPageHeaderInfo () {
       this.title = this.$route.name
       const page = this.$refs.page
-      this.desc = page.desc
-      this.linkList = page.linkList
-      this.extraImage = page.extraImage
+      if (page) {
+        this.desc = page.desc
+        this.linkList = page.linkList
+        this.extraImage = page.extraImage
+      }
     }
   }
 }
