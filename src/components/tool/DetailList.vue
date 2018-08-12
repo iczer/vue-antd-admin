@@ -8,8 +8,8 @@
 </template>
 
 <script>
-import ACol from 'vue-antd-ui/es/grid/Col'
-import ARow from 'vue-antd-ui/es/grid/Row'
+import ACol from 'ant-design-vue/es/grid/Col'
+import ARow from 'ant-design-vue/es/grid/Row'
 const Item = {
   name: 'DetailListItem',
   props: {

@@ -45,12 +45,12 @@
 </template>
 
 <script>
-import ATable from 'vue-antd-ui/es/table'
-import AButton from 'vue-antd-ui/es/button/button'
-import AInput from 'vue-antd-ui/es/input/Input'
-import ADivider from 'vue-antd-ui/es/divider/index'
-import APopconfirm from 'vue-antd-ui/es/popconfirm/index'
-import AFormItem from 'vue-antd-ui/es/form/FormItem'
+import ATable from 'ant-design-vue/es/table'
+import AButton from 'ant-design-vue/es/button/button'
+import AInput from 'ant-design-vue/es/input/Input'
+import ADivider from 'ant-design-vue/es/divider/index'
+import APopconfirm from 'ant-design-vue/es/popconfirm/index'
+import AFormItem from 'ant-design-vue/es/form/FormItem'
 
 const columns = [
   {

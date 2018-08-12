@@ -83,17 +83,17 @@
 </template>
 
 <script>
-import ACard from 'vue-antd-ui/es/card/Card'
-import AForm from 'vue-antd-ui/es/form/Form'
-import AFormItem from 'vue-antd-ui/es/form/FormItem'
-import AInput from 'vue-antd-ui/es/input/Input'
-import ADatePicker from 'vue-antd-ui/es/date-picker'
-import ATextarea from 'vue-antd-ui/es/input/TextArea'
-import AInputNumber from 'vue-antd-ui/es/input-number/index'
-import ARadioGroup from 'vue-antd-ui/es/radio/Group'
-import ARadio from 'vue-antd-ui/es/radio/Radio'
-import ASelect from 'vue-antd-ui/es/select/index'
-import AButton from 'vue-antd-ui/es/button/button'
+import ACard from 'ant-design-vue/es/card/Card'
+import AForm from 'ant-design-vue/es/form/Form'
+import AFormItem from 'ant-design-vue/es/form/FormItem'
+import AInput from 'ant-design-vue/es/input/Input'
+import ADatePicker from 'ant-design-vue/es/date-picker'
+import ATextarea from 'ant-design-vue/es/input/TextArea'
+import AInputNumber from 'ant-design-vue/es/input-number/index'
+import ARadioGroup from 'ant-design-vue/es/radio/Group'
+import ARadio from 'ant-design-vue/es/radio/Radio'
+import ASelect from 'ant-design-vue/es/select/index'
+import AButton from 'ant-design-vue/es/button/button'
 
 const ARangePicker = ADatePicker.RangePicker
 const ASelectOption = ASelect.Option

@@ -14,9 +14,9 @@
 </template>
 
 <script>
-import AIcon from 'vue-antd-ui/es/icon/icon'
-import AAutoComplete from 'vue-antd-ui/es/auto-complete/index'
-import AInput from 'vue-antd-ui/es/input/Input'
+import AIcon from 'ant-design-vue/es/icon/icon'
+import AAutoComplete from 'ant-design-vue/es/auto-complete/index'
+import AInput from 'ant-design-vue/es/input/Input'
 export default {
   name: 'HeaderSearch',
   components: {AInput, AAutoComplete, AIcon},

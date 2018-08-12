@@ -14,8 +14,8 @@
 </template>
 
 <script>
-import ACard from 'vue-antd-ui/es/card/Card'
-import ASteps from 'vue-antd-ui/es/steps/index'
+import ACard from 'ant-design-vue/es/card/Card'
+import ASteps from 'ant-design-vue/es/steps/index'
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'

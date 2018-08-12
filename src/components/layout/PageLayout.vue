@@ -21,7 +21,7 @@
 
 <script>
 import PageHeader from '../page/PageHeader'
-import AIcon from 'vue-antd-ui/es/icon/icon'
+import AIcon from 'ant-design-vue/es/icon/icon'
 export default {
   name: 'PageLayout',
   components: {AIcon, PageHeader},

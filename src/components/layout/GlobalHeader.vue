@@ -15,12 +15,12 @@
 </template>
 
 <script>
-import ALayout from 'vue-antd-ui/es/layout'
-import AIcon from 'vue-antd-ui/es/icon/icon'
-import AInputSearch from 'vue-antd-ui/es/input/Search'
+import ALayout from 'ant-design-vue/es/layout'
+import AIcon from 'ant-design-vue/es/icon/icon'
+import AInputSearch from 'ant-design-vue/es/input/Search'
 import HeaderSearch from './HeaderSearch'
 import HeaderNotice from './HeaderNotice'
-import ATooltip from 'vue-antd-ui/es/tooltip/Tooltip'
+import ATooltip from 'ant-design-vue/es/tooltip/Tooltip'
 import HeaderAvatar from './HeaderlAvatar'
 
 const ALayoutSider = ALayout.Sider

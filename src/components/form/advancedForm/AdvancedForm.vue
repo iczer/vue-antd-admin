@@ -16,12 +16,12 @@
 </template>
 
 <script>
-import ACard from 'vue-antd-ui/es/card/Card'
+import ACard from 'ant-design-vue/es/card/Card'
 import RepositoryForm from './RepositoryForm'
 import TaskForm from './TaskForm'
 import TableForm from './TableForm'
 import FooterToolBar from '../../tool/FooterToolBar'
-import AButton from 'vue-antd-ui/es/button/button'
+import AButton from 'ant-design-vue/es/button/button'
 
 export default {
   name: 'AdvancedForm',

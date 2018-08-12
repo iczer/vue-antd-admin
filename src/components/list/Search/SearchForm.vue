@@ -68,15 +68,15 @@
 </template>
 
 <script>
-import ACard from 'vue-antd-ui/es/card/Card'
-import AForm from 'vue-antd-ui/es/form/Form'
-import AFormItem from 'vue-antd-ui/es/form/FormItem'
-import AInput from 'vue-antd-ui/es/input/Input'
+import ACard from 'ant-design-vue/es/card/Card'
+import AForm from 'ant-design-vue/es/form/Form'
+import AFormItem from 'ant-design-vue/es/form/FormItem'
+import AInput from 'ant-design-vue/es/input/Input'
 import TagSelect from '../../tool/TagSelect'
 import FormRow from '../../form/FormRow'
-import ASelect from 'vue-antd-ui/es/select/index'
-import ARow from 'vue-antd-ui/es/grid/Row'
-import ACol from 'vue-antd-ui/es/grid/Col'
+import ASelect from 'ant-design-vue/es/select/index'
+import ARow from 'ant-design-vue/es/grid/Row'
+import ACol from 'ant-design-vue/es/grid/Col'
 
 const TagSelectOption = TagSelect.Option
 const ASelectOption = ASelect.Option

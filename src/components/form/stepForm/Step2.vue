@@ -47,10 +47,10 @@
 </template>
 
 <script>
-import AForm from 'vue-antd-ui/es/form/Form'
-import AFormItem from 'vue-antd-ui/es/form/FormItem'
-import AButton from 'vue-antd-ui/es/button/button'
-import AAlert from 'vue-antd-ui/es/alert/index'
+import AForm from 'ant-design-vue/es/form/Form'
+import AFormItem from 'ant-design-vue/es/form/FormItem'
+import AButton from 'ant-design-vue/es/button/button'
+import AAlert from 'ant-design-vue/es/alert/index'
 export default {
   name: 'Step2',
   components: {AAlert, AButton, AFormItem, AForm},

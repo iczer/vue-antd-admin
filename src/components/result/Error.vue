@@ -25,10 +25,10 @@
 
 <script>
 import Result from './Result'
-import ACard from 'vue-antd-ui/es/card/Card'
+import ACard from 'ant-design-vue/es/card/Card'
 import PageHeader from '../page/PageHeader'
-import AIcon from 'vue-antd-ui/es/icon/icon'
-import AButton from 'vue-antd-ui/es/button/button'
+import AIcon from 'ant-design-vue/es/icon/icon'
+import AButton from 'ant-design-vue/es/button/button'
 export default {
   name: 'Error',
   components: {AButton, AIcon, PageHeader, ACard, Result},

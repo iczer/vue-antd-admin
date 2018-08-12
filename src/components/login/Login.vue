@@ -72,17 +72,17 @@
 </template>
 
 <script>
-import AForm from 'vue-antd-ui/es/form/Form'
-import ATabs from 'vue-antd-ui/es/tabs'
+import AForm from 'ant-design-vue/es/form/Form'
+import ATabs from 'ant-design-vue/es/tabs'
 import GlobalFooter from '../layout/GlobalFooter'
-import AFormItem from 'vue-antd-ui/es/form/FormItem'
-import AInput from 'vue-antd-ui/es/input/Input'
-import AIcon from 'vue-antd-ui/es/icon/icon'
-import AInputGroup from 'vue-antd-ui/es/input/Group'
-import AButton from 'vue-antd-ui/es/button/button'
-import ACol from 'vue-antd-ui/es/grid/Col'
-import ACheckbox from 'vue-antd-ui/es/checkbox/Checkbox'
-import AAlert from 'vue-antd-ui/es/alert/index'
+import AFormItem from 'ant-design-vue/es/form/FormItem'
+import AInput from 'ant-design-vue/es/input/Input'
+import AIcon from 'ant-design-vue/es/icon/icon'
+import AInputGroup from 'ant-design-vue/es/input/Group'
+import AButton from 'ant-design-vue/es/button/button'
+import ACol from 'ant-design-vue/es/grid/Col'
+import ACheckbox from 'ant-design-vue/es/checkbox/Checkbox'
+import AAlert from 'ant-design-vue/es/alert/index'
 
 const ATabPane = ATabs.TabPane
 

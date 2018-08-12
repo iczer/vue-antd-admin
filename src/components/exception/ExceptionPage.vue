@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import AButton from 'vue-antd-ui/es/button/button'
+import AButton from 'ant-design-vue/es/button/button'
 import Config from './typeConfig'
 
 export default {

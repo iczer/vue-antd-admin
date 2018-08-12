@@ -103,20 +103,20 @@
 </template>
 
 <script>
-import ARow from 'vue-antd-ui/es/grid/Row'
-import ACol from 'vue-antd-ui/es/grid/Col'
-import AForm from 'vue-antd-ui/es/form/Form'
-import AFormItem from 'vue-antd-ui/es/form/FormItem'
-import AInput from 'vue-antd-ui/es/input/Input'
-import ACard from 'vue-antd-ui/es/card/Card'
-import ASelect from 'vue-antd-ui/es/select/index'
-import AInputNumber from 'vue-antd-ui/es/input-number/index'
-import ADatePicker from 'vue-antd-ui/es/date-picker/index'
-import AButton from 'vue-antd-ui/es/button/button'
-import AIcon from 'vue-antd-ui/es/icon/icon'
+import ARow from 'ant-design-vue/es/grid/Row'
+import ACol from 'ant-design-vue/es/grid/Col'
+import AForm from 'ant-design-vue/es/form/Form'
+import AFormItem from 'ant-design-vue/es/form/FormItem'
+import AInput from 'ant-design-vue/es/input/Input'
+import ACard from 'ant-design-vue/es/card/Card'
+import ASelect from 'ant-design-vue/es/select/index'
+import AInputNumber from 'ant-design-vue/es/input-number/index'
+import ADatePicker from 'ant-design-vue/es/date-picker/index'
+import AButton from 'ant-design-vue/es/button/button'
+import AIcon from 'ant-design-vue/es/icon/icon'
 import StandardTable from '../table/StandardTable'
-import ADropdown from 'vue-antd-ui/es/dropdown'
-import AMenu from 'vue-antd-ui/es/menu/index'
+import ADropdown from 'ant-design-vue/es/dropdown'
+import AMenu from 'ant-design-vue/es/menu/index'
 
 const ASelectOption = ASelect.Option
 const AMenuItem = AMenu.Item

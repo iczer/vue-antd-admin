@@ -34,11 +34,11 @@
 </template>
 
 <script>
-import ARow from 'vue-antd-ui/es/grid/Row'
-import ACol from 'vue-antd-ui/es/grid/Col'
-import AIcon from 'vue-antd-ui/es/icon/icon'
+import ARow from 'ant-design-vue/es/grid/Row'
+import ACol from 'ant-design-vue/es/grid/Col'
+import AIcon from 'ant-design-vue/es/icon/icon'
 import MiniArea from '../chart/MiniArea'
-import ATable from 'vue-antd-ui/es/table'
+import ATable from 'ant-design-vue/es/table'
 
 const searchData = []
 for (let i = 0; i < 50; i++) {

@@ -33,13 +33,13 @@
 </template>
 
 <script>
-import ACard from 'vue-antd-ui/es/card/Card'
+import ACard from 'ant-design-vue/es/card/Card'
 import SearchForm from './SearchForm'
-import AList from 'vue-antd-ui/es/list'
-import AListItem from 'vue-antd-ui/es/list/Item'
-import ATag from 'vue-antd-ui/es/tag/Tag'
-import AAvatar from 'vue-antd-ui/es/avatar/Avatar'
-import AIcon from 'vue-antd-ui/es/icon/icon'
+import AList from 'ant-design-vue/es/list'
+import AListItem from 'ant-design-vue/es/list/Item'
+import ATag from 'ant-design-vue/es/tag/Tag'
+import AAvatar from 'ant-design-vue/es/avatar/Avatar'
+import AIcon from 'ant-design-vue/es/icon/icon'
 
 const AListItemMeta = AListItem.Meta
 export default {

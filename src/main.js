@@ -3,10 +3,10 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import 'vue-antd-ui/dist/antd.css'
+import 'ant-design-vue/dist/antd.css'
 import Viser from 'viser-vue'
 import axios from 'axios'
-import message from 'vue-antd-ui/es/message'
+import message from 'ant-design-vue/es/message'
 import '@/mock'
 import Vuex from 'vuex'
 

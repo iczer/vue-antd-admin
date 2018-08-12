@@ -36,12 +36,12 @@
 </template>
 
 <script>
-import ACard from 'vue-antd-ui/es/card/Card'
-import ATooltip from 'vue-antd-ui/es/tooltip/Tooltip'
-import AAvatar from 'vue-antd-ui/es/avatar/Avatar'
+import ACard from 'ant-design-vue/es/card/Card'
+import ATooltip from 'ant-design-vue/es/tooltip/Tooltip'
+import AAvatar from 'ant-design-vue/es/avatar/Avatar'
 import DetailList from '../tool/DetailList'
-import ADivider from 'vue-antd-ui/es/divider/index'
-import ATable from 'vue-antd-ui/es/table'
+import ADivider from 'ant-design-vue/es/divider/index'
+import ATable from 'ant-design-vue/es/table'
 import PageLayout from '../layout/PageLayout'
 
 const DetailListItem = DetailList.Item

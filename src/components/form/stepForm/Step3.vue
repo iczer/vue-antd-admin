@@ -11,9 +11,9 @@
 </template>
 
 <script>
-import AForm from 'vue-antd-ui/es/form/Form'
-import AFormItem from 'vue-antd-ui/es/form/FormItem'
-import AButton from 'vue-antd-ui/es/button/button'
+import AForm from 'ant-design-vue/es/form/Form'
+import AFormItem from 'ant-design-vue/es/form/FormItem'
+import AButton from 'ant-design-vue/es/button/button'
 import Result from '../../result/Result'
 export default {
   name: 'Step3',

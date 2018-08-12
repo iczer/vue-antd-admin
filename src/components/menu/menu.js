@@ -18,8 +18,8 @@
  *  }
  * ]
  **/
-import Menu from 'vue-antd-ui/es/menu'
-import Icon from 'vue-antd-ui/es/icon/icon'
+import Menu from 'ant-design-vue/es/menu'
+import Icon from 'ant-design-vue/es/icon/icon'
 
 const {Item, SubMenu} = Menu
 

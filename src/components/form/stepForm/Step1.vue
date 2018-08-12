@@ -45,12 +45,12 @@
 </template>
 
 <script>
-import AForm from 'vue-antd-ui/es/form/Form'
-import AFormItem from 'vue-antd-ui/es/form/FormItem'
-import AButton from 'vue-antd-ui/es/button/button'
-import ASelect from 'vue-antd-ui/es/select/index'
-import AInputGroup from 'vue-antd-ui/es/input/Group'
-import AInput from 'vue-antd-ui/es/input/Input'
+import AForm from 'ant-design-vue/es/form/Form'
+import AFormItem from 'ant-design-vue/es/form/FormItem'
+import AButton from 'ant-design-vue/es/button/button'
+import ASelect from 'ant-design-vue/es/select/index'
+import AInputGroup from 'ant-design-vue/es/input/Group'
+import AInput from 'ant-design-vue/es/input/Input'
 
 const ASelectOption = ASelect.Option
 

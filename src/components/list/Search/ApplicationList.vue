@@ -45,16 +45,16 @@
 </template>
 
 <script>
-import ACard from 'vue-antd-ui/es/card/Card'
+import ACard from 'ant-design-vue/es/card/Card'
 import SearchForm from './SearchForm'
-import AList from 'vue-antd-ui/es/list'
-import AListItem from 'vue-antd-ui/es/list/Item'
-import ACardMeta from 'vue-antd-ui/es/card/Meta'
-import AAvatar from 'vue-antd-ui/es/avatar/Avatar'
-import ATooltip from 'vue-antd-ui/es/tooltip/Tooltip'
-import AIcon from 'vue-antd-ui/es/icon/icon'
-import ADropdown from 'vue-antd-ui/es/dropdown'
-import AMenu from 'vue-antd-ui/es/menu/index'
+import AList from 'ant-design-vue/es/list'
+import AListItem from 'ant-design-vue/es/list/Item'
+import ACardMeta from 'ant-design-vue/es/card/Meta'
+import AAvatar from 'ant-design-vue/es/avatar/Avatar'
+import ATooltip from 'ant-design-vue/es/tooltip/Tooltip'
+import AIcon from 'ant-design-vue/es/icon/icon'
+import ADropdown from 'ant-design-vue/es/dropdown'
+import AMenu from 'ant-design-vue/es/menu/index'
 
 const AMenuItem = AMenu.Item
 

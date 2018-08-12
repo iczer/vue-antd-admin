@@ -21,7 +21,7 @@
 </template>
 
 <script>
-import ACard from 'vue-antd-ui/es/card/Card'
+import ACard from 'ant-design-vue/es/card/Card'
 export default {
   name: 'ChartCard',
   components: {ACard},

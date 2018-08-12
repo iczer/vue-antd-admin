@@ -19,11 +19,11 @@
 </template>
 
 <script>
-import AInput from 'vue-antd-ui/es/input/Input'
-import AInputGroup from 'vue-antd-ui/es/input/Group'
-import AButton from 'vue-antd-ui/es/button/button'
-import AInputSearch from 'vue-antd-ui/es/input/Search'
-import ATabs from 'vue-antd-ui/es/tabs'
+import AInput from 'ant-design-vue/es/input/Input'
+import AInputGroup from 'ant-design-vue/es/input/Group'
+import AButton from 'ant-design-vue/es/button/button'
+import AInputSearch from 'ant-design-vue/es/input/Search'
+import ATabs from 'ant-design-vue/es/tabs'
 
 const ATabPane = ATabs.TabPane
 

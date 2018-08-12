@@ -25,8 +25,8 @@
 </template>
 
 <script>
-import ABreadcrumb from 'vue-antd-ui/es/breadcrumb'
-import AAvatar from 'vue-antd-ui/es/avatar/Avatar'
+import ABreadcrumb from 'ant-design-vue/es/breadcrumb'
+import AAvatar from 'ant-design-vue/es/avatar/Avatar'
 
 const ABreadcrumbItem = ABreadcrumb.Item
 export default {

@@ -29,13 +29,13 @@
 </template>
 
 <script>
-import AList from 'vue-antd-ui/es/list/index'
-import AListItem from 'vue-antd-ui/es/list/Item'
-import ACard from 'vue-antd-ui/es/card/Card'
-import ACardMeta from 'vue-antd-ui/es/card/Meta'
-import AAvatar from 'vue-antd-ui/es/avatar/Avatar'
-import AButton from 'vue-antd-ui/es/button/button'
-import AIcon from 'vue-antd-ui/es/icon/icon'
+import AList from 'ant-design-vue/es/list/index'
+import AListItem from 'ant-design-vue/es/list/Item'
+import ACard from 'ant-design-vue/es/card/Card'
+import ACardMeta from 'ant-design-vue/es/card/Meta'
+import AAvatar from 'ant-design-vue/es/avatar/Avatar'
+import AButton from 'ant-design-vue/es/button/button'
+import AIcon from 'ant-design-vue/es/icon/icon'
 
 const dataSource = []
 dataSource.push(null)

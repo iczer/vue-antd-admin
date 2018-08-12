@@ -16,7 +16,7 @@
 </template>
 
 <script>
-import ARadio from 'vue-antd-ui/es/radio'
+import ARadio from 'ant-design-vue/es/radio'
 const DataSet = require('@antv/data-set')
 
 const ARadioGroup = ARadio.Group

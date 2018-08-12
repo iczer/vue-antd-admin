@@ -27,14 +27,14 @@
 </template>
 
 <script>
-import ACard from 'vue-antd-ui/es/card/Card'
+import ACard from 'ant-design-vue/es/card/Card'
 import SearchForm from './SearchForm'
-import AList from 'vue-antd-ui/es/list'
-import AListItem from 'vue-antd-ui/es/list/Item'
-import ACardMeta from 'vue-antd-ui/es/card/Meta'
-import AAvatar from 'vue-antd-ui/es/avatar/Avatar'
+import AList from 'ant-design-vue/es/list'
+import AListItem from 'ant-design-vue/es/list/Item'
+import ACardMeta from 'ant-design-vue/es/card/Meta'
+import AAvatar from 'ant-design-vue/es/avatar/Avatar'
 import AvatarList from '../../tool/AvatarList'
-import ATooltip from 'vue-antd-ui/es/tooltip/Tooltip'
+import ATooltip from 'ant-design-vue/es/tooltip/Tooltip'
 
 const AvatarListItem = AvatarList.Item
 

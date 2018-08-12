@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import ATooltip from 'vue-antd-ui/es/tooltip/Tooltip'
+import ATooltip from 'ant-design-vue/es/tooltip/Tooltip'
 export default {
   name: 'MiniProgress',
   components: {ATooltip},

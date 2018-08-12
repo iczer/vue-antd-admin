@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import AIcon from 'vue-antd-ui/es/icon/icon'
+import AIcon from 'ant-design-vue/es/icon/icon'
 export default {
   name: 'Result',
   components: {AIcon},

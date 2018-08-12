@@ -122,17 +122,17 @@
 
 <script>
 import PageLayout from '../layout/PageLayout'
-import AButtonGroup from 'vue-antd-ui/es/button/button-group'
-import AButton from 'vue-antd-ui/es/button/button'
-import AIcon from 'vue-antd-ui/es/icon/icon'
+import AButtonGroup from 'ant-design-vue/es/button/button-group'
+import AButton from 'ant-design-vue/es/button/button'
+import AIcon from 'ant-design-vue/es/icon/icon'
 import DetailList from '../tool/DetailList'
-import ARow from 'vue-antd-ui/es/grid/Row'
-import ACol from 'vue-antd-ui/es/grid/Col'
-import ACard from 'vue-antd-ui/es/card/Card'
-import ASteps from 'vue-antd-ui/es/steps/index'
+import ARow from 'ant-design-vue/es/grid/Row'
+import ACol from 'ant-design-vue/es/grid/Col'
+import ACard from 'ant-design-vue/es/card/Card'
+import ASteps from 'ant-design-vue/es/steps/index'
 import AStepItem from '../tool/AStepItem'
-import ADivider from 'vue-antd-ui/es/divider/index'
-import ATable from 'vue-antd-ui/es/table'
+import ADivider from 'ant-design-vue/es/divider/index'
+import ATable from 'ant-design-vue/es/table'
 import {operation1, operation2, operation3, operationColumns} from '../../mock/common/tableData'
 
 const DetailListItem = DetailList.Item

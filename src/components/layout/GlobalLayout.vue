@@ -22,9 +22,9 @@
 </template>
 
 <script>
-import ALayout from 'vue-antd-ui/es/layout'
+import ALayout from 'ant-design-vue/es/layout'
 import GlobalHeader from './GlobalHeader'
-import AIcon from 'vue-antd-ui/es/icon/icon'
+import AIcon from 'ant-design-vue/es/icon/icon'
 import IMenu from '../menu/menu'
 import GlobalFooter from './GlobalFooter'
 

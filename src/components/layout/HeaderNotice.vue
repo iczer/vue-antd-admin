@@ -40,14 +40,14 @@
 </template>
 
 <script>
-import APopover from 'vue-antd-ui/es/popover/index'
-import AIcon from 'vue-antd-ui/es/icon/icon'
-import ABadge from 'vue-antd-ui/es/badge/Badge'
-import ATabs from 'vue-antd-ui/es/tabs'
-import AList from 'vue-antd-ui/es/list/index'
-import AListItem from 'vue-antd-ui/es/list/Item'
-import AAvatar from 'vue-antd-ui/es/avatar/Avatar'
-import ASpin from 'vue-antd-ui/es/spin/Spin'
+import APopover from 'ant-design-vue/es/popover/index'
+import AIcon from 'ant-design-vue/es/icon/icon'
+import ABadge from 'ant-design-vue/es/badge/Badge'
+import ATabs from 'ant-design-vue/es/tabs'
+import AList from 'ant-design-vue/es/list/index'
+import AListItem from 'ant-design-vue/es/list/Item'
+import AAvatar from 'ant-design-vue/es/avatar/Avatar'
+import ASpin from 'ant-design-vue/es/spin/Spin'
 
 const ATabPane = ATabs.TabPane
 const AListItemMeta = AListItem.Meta

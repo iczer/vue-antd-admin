@@ -28,8 +28,8 @@
 </template>
 
 <script>
-import AAlert from 'vue-antd-ui/es/alert/index'
-import ATable from 'vue-antd-ui/es/table'
+import AAlert from 'ant-design-vue/es/alert/index'
+import ATable from 'ant-design-vue/es/table'
 
 export default {
   name: 'StandardTable',

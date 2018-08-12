@@ -75,14 +75,14 @@
 </template>
 
 <script>
-import AForm from 'vue-antd-ui/es/form/Form'
-import AFormItem from 'vue-antd-ui/es/form/FormItem'
-import ACol from 'vue-antd-ui/es/grid/Col'
-import ARow from 'vue-antd-ui/es/grid/Row'
-import AInput from 'vue-antd-ui/es/input/Input'
-import ASelect from 'vue-antd-ui/es/select/index'
-import ADatePicker from 'vue-antd-ui/es/date-picker'
-import AButton from 'vue-antd-ui/es/button/button'
+import AForm from 'ant-design-vue/es/form/Form'
+import AFormItem from 'ant-design-vue/es/form/FormItem'
+import ACol from 'ant-design-vue/es/grid/Col'
+import ARow from 'ant-design-vue/es/grid/Row'
+import AInput from 'ant-design-vue/es/input/Input'
+import ASelect from 'ant-design-vue/es/select/index'
+import ADatePicker from 'ant-design-vue/es/date-picker'
+import AButton from 'ant-design-vue/es/button/button'
 
 const ASelectOption = ASelect.Option
 const ARangePicker = ADatePicker.RangePicker

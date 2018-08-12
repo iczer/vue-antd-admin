@@ -25,10 +25,10 @@
 </template>
 
 <script>
-import ADropdown from 'vue-antd-ui/es/dropdown'
-import AAvatar from 'vue-antd-ui/es/avatar/Avatar'
-import AIcon from 'vue-antd-ui/es/icon/icon'
-import AMenu from 'vue-antd-ui/es/menu/index'
+import ADropdown from 'ant-design-vue/es/dropdown'
+import AAvatar from 'ant-design-vue/es/avatar/Avatar'
+import AIcon from 'ant-design-vue/es/icon/icon'
+import AMenu from 'ant-design-vue/es/menu/index'
 
 const AMenuItem = AMenu.Item
 const AMenuDivider = AMenu.Divider

@@ -61,13 +61,13 @@
 
 <script>
 import Result from './Result'
-import ACard from 'vue-antd-ui/es/card/Card'
+import ACard from 'ant-design-vue/es/card/Card'
 import PageHeader from '../page/PageHeader'
-import AButton from 'vue-antd-ui/es/button/button'
-import ACol from 'vue-antd-ui/es/grid/Col'
-import ARow from 'vue-antd-ui/es/grid/Row'
-import ASteps from 'vue-antd-ui/es/steps/index'
-import AIcon from 'vue-antd-ui/es/icon/icon'
+import AButton from 'ant-design-vue/es/button/button'
+import ACol from 'ant-design-vue/es/grid/Col'
+import ARow from 'ant-design-vue/es/grid/Row'
+import ASteps from 'ant-design-vue/es/steps/index'
+import AIcon from 'ant-design-vue/es/icon/icon'
 
 const AStep = ASteps.Step
 export default {
