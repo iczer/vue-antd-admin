@@ -14,12 +14,12 @@
 * vue-cli -- 构建
 ## 依赖
 * @antv/data-set: ^0.8.9
+* ant-design-vue: ^1.0.3
 * axios: ^0.18.0
 * mockjs: ^1.0.1-beta3
 * moment: ^2.22.2
 * viser-vue: ^2.2.5
-* vue: ^2.5.2
-* vue-antd-ui: ^1.0.1
+* vue: ^2.5.17
 * vue-router: ^3.0.1
 * vuex: ^3.0.1
 ## 安装
