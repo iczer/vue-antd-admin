@@ -15,12 +15,12 @@
   },
   "dependencies": {
     "@antv/data-set": "^0.8.9",
+    "ant-design-vue": "^1.0.3",
     "axios": "^0.18.0",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.22.2",
     "viser-vue": "^2.2.5",
-    "vue": "^2.5.2",
-    "vue-antd-ui": "^1.0.1",
+    "vue": "^2.5.17",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },
@@ -78,7 +78,7 @@
     "vue-jest": "^1.0.2",
     "vue-loader": "^13.3.0",
     "vue-style-loader": "^3.0.1",
-    "vue-template-compiler": "^2.5.2",
+    "vue-template-compiler": "2.5.17",
     "webpack": "^3.6.0",
     "webpack-bundle-analyzer": "^2.9.0",
     "webpack-dev-server": "^2.9.1",
