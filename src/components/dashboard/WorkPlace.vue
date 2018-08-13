@@ -20,7 +20,7 @@
     <div>
       <a-row style="margin: 0 -12px">
         <a-col style="padding: 0 12px" :xl="16" :lg="24" :md="24" :sm="24" :xs="24">
-          <a-card :loading="loading" style="margin-bottom: 24px;" :bordered="false" title="进行中的项目" :body-style="{padding: 0}">
+          <a-card class="project-list" :loading="loading" style="margin-bottom: 24px;" :bordered="false" title="进行中的项目" :body-style="{padding: 0}">
             <a slot="extra">全部项目</a>
             <div>
               <a-card-grid :key="i" v-for="(item, i) in projects">
@@ -170,7 +170,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   .content {
     position: relative;
     top: 4px;
@@ -185,40 +185,50 @@ export default {
       margin-bottom: 12px;
     }
   }
-  .card-title {
-    font-size: 0;
-    a {
-      color: rgba(0, 0, 0, 0.85);
-      margin-left: 12px;
-      line-height: 24px;
-      height: 24px;
-      display: inline-block;
-      vertical-align: top;
-      font-size: 14px;
-      &:hover {
-        color: #1890ff;
+  .project-list {
+    .card-title {
+      font-size: 0;
+      a {
+        color: rgba(0, 0, 0, 0.85);
+        margin-left: 12px;
+        line-height: 24px;
+        height: 24px;
+        display: inline-block;
+        vertical-align: top;
+        font-size: 14px;
+        &:hover {
+          color: #1890ff;
+        }
       }
     }
-  }
-  .project-item {
-    display: flex;
-    margin-top: 8px;
-    overflow: hidden;
-    font-size: 12px;
-    height: 20px;
-    line-height: 20px;
-    a {
-      color: rgba(0, 0, 0, 0.45);
-      display: inline-block;
-      flex: 1 1 0;
-      &:hover {
-        color: #1890ff;
+    .project-item {
+      display: flex;
+      margin-top: 8px;
+      overflow: hidden;
+      font-size: 12px;
+      height: 20px;
+      line-height: 20px;
+      a {
+        color: rgba(0, 0, 0, 0.45);
+        display: inline-block;
+        flex: 1 1 0;
+        &:hover {
+          color: #1890ff;
+        }
+      }
+      .datetime {
+        color: rgba(0, 0, 0, 0.25);
+        flex: 0 0 auto;
+        float: right;
       }
     }
-    .datetime {
-      color: rgba(0, 0, 0, 0.25);
-      flex: 0 0 auto;
-      float: right;
+    :global {
+      .ant-card-meta-description {
+        color: rgba(0, 0, 0, 0.45);
+        height: 44px;
+        line-height: 22px;
+        overflow: hidden;
+      }
     }
   }
   .item-group{
