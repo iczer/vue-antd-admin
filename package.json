@@ -17,6 +17,7 @@
     "@antv/data-set": "^0.8.9",
     "ant-design-vue": "^1.0.3",
     "axios": "^0.18.0",
+    "enquire.js": "^2.1.6",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.22.2",
     "viser-vue": "^2.2.5",
