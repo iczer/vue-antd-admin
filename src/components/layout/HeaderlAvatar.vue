@@ -1,7 +1,7 @@
 <template>
   <a-dropdown style="display: inline-block; height: 100%" >
-    <span style="vertical-align: middle; cursor: pointer">
-      <a-avatar style="vertical-align: middle;" size="small" shape="circle" :src="currUser.avatar"/>
+    <span style="cursor: pointer">
+      <a-avatar class="avatar" size="small" shape="circle" :src="currUser.avatar"/>
       <span>{{currUser.name}}</span>
     </span>
     <a-menu style="width: 150px" slot="overlay">
@@ -44,6 +44,11 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="less" scoped>
+  .avatar{
+    margin: 20px 4px 20px 0;
+    color: #1890ff;
+    background: hsla(0,0%,100%,.85);
+    vertical-align: middle;
+  }
 </style>

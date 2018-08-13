@@ -1,5 +1,5 @@
 <template>
-  <span class="header-item">
+  <span class="">
     <a-icon type="search" style="font-size: 16px; cursor: pointer;" @click="enterSearchMode"/>
     <a-auto-complete
       ref="input"
@@ -68,8 +68,5 @@ export default {
   }
   .fade-leave{
     width: 0px;
-  }
-  .header-item{
-    margin: 0 12px;
   }
 </style>

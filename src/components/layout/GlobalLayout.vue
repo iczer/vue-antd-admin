@@ -1,6 +1,6 @@
 <template>
   <a-layout>
-    <a-layout-sider width="256px" style="z-index: 10" collapsible v-model="collapsed" :trigger="null">
+    <a-layout-sider class="sider" width="256px" collapsible v-model="collapsed" :trigger="null">
       <div class="logo">
         <a href="/">
           <img src="static/img/vue-antd-logo.png">
@@ -66,28 +66,32 @@ export default {
 }
 </script>
 
-<style scoped>
-  .logo{
-    height: 64px;
-    position: relative;
-    line-height: 64px;
-    padding-left: 24px;
-    -webkit-transition: all .3s;
-    transition: all .3s;
-    background: #002140;
-    overflow: hidden;
-  }
-  .logo h1{
-    color: #fff;
-    font-size: 20px;
-    margin: 0 0 0 12px;
-    font-family: "Myriad Pro","Helvetica Neue",Arial,Helvetica,sans-serif;
-    font-weight: 600;
-    display: inline-block;
-  }
-  .logo img{
-    width: 32px;
-    display: inline-block;
-    vertical-align: middle;
+<style lang="less" scoped>
+  .sider{
+    z-index: 10;
+    box-shadow: 2px 0 6px rgba(0,21,41,.35);
+    .logo{
+      height: 64px;
+      position: relative;
+      line-height: 64px;
+      padding-left: 24px;
+      -webkit-transition: all .3s;
+      transition: all .3s;
+      background: #002140;
+      overflow: hidden;
+      h1{
+        color: #fff;
+        font-size: 20px;
+        margin: 0 0 0 12px;
+        font-family: "Myriad Pro","Helvetica Neue",Arial,Helvetica,sans-serif;
+        font-weight: 600;
+        display: inline-block;
+      }
+      img{
+        width: 32px;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
   }
 </style>

@@ -2,7 +2,7 @@
   <a-layout-header class="gloabl-header">
     <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
     <div style="float: right">
-        <header-search class="header-item"/>
+        <header-search class="header-item" />
         <a-tooltip class="header-item" title="帮助文档" placement="bottom" >
           <a>
             <a-icon type="question-circle-o" />
@@ -50,7 +50,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .trigger {
     font-size: 20px;
     line-height: 64px;
@@ -64,14 +64,14 @@ export default {
   }
 
   .header-item{
-    margin: 0 12px;
+    padding: 0 12px;
     display: inline-block;
     height: 100%;
     cursor: pointer;
-  }
-  .header-item i{
-    font-size: 16px;
-    color: rgba(0,0,0,.65);
+    i{
+      font-size: 16px;
+      color: rgba(0,0,0,.65);
+    }
   }
   .gloabl-header{
     background: #fff;
