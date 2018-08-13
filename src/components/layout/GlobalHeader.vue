@@ -1,5 +1,9 @@
 <template>
-  <a-layout-header class="gloabl-header">
+  <a-layout-header class="global-header">
+    <router-link v-if="isMobile" to="/" class="logo">
+      <img width="32" src="static/img/vue-antd-logo.png" />
+    </router-link>
+    <a-divider v-if="isMobile" type="vertical" />
     <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
     <div style="float: right">
         <header-search class="header-item" />
@@ -22,12 +26,14 @@ import HeaderSearch from './HeaderSearch'
 import HeaderNotice from './HeaderNotice'
 import ATooltip from 'ant-design-vue/es/tooltip/Tooltip'
 import HeaderAvatar from './HeaderlAvatar'
+import ADivider from 'ant-design-vue/es/divider/index'
 
 const ALayoutSider = ALayout.Sider
 const ALayoutHeader = ALayout.Header
 export default {
   name: 'GlobalHeader',
   components: {
+    ADivider,
     HeaderAvatar,
     ATooltip,
     HeaderNotice,
@@ -38,8 +44,9 @@ export default {
     ALayoutSider,
     ALayoutHeader},
   props: ['collapsed'],
-  data () {
-    return {
+  computed: {
+    isMobile () {
+      return this.$store.state.setting.isMobile
     }
   },
   methods: {
@@ -73,11 +80,24 @@ export default {
       color: rgba(0,0,0,.65);
     }
   }
-  .gloabl-header{
+  .global-header{
     background: #fff;
     padding: 0 12px 0 0;
     -webkit-box-shadow: 0 1px 4px rgba(0,21,41,.08);
     box-shadow: 0 1px 4px rgba(0,21,41,.08);
     position: relative;
+    .logo {
+      height: 64px;
+      line-height: 58px;
+      vertical-align: top;
+      display: inline-block;
+      padding: 0 12px 0 24px;
+      cursor: pointer;
+      font-size: 20px;
+      img {
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
   }
 </style>
