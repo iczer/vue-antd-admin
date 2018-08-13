@@ -120,7 +120,9 @@ export default {
             this.logging = false
             const result = res.data
             if (result.code >= 0) {
+              const user = result.data.user
               this.$router.push('/dashboard/workplace')
+              this.$store.commit('account/setuser', user)
               this.$message.success(result.message, 3)
             } else {
               this.error = result.message

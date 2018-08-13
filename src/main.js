@@ -8,18 +8,18 @@ import Viser from 'viser-vue'
 import axios from 'axios'
 import message from 'ant-design-vue/es/message'
 import '@/mock'
-import Vuex from 'vuex'
+import store from './store'
 
 Vue.prototype.$axios = axios
 Vue.prototype.$message = message
 Vue.config.productionTip = false
 Vue.use(Viser)
-Vue.use(Vuex)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

@@ -124,28 +124,23 @@ export default {
     PageHeader},
   data () {
     return {
-      currUser: {},
       projects: [],
       loading: true,
       activities: [],
       teams: []
     }
   },
+  computed: {
+    currUser () {
+      return this.$store.state.account.user
+    }
+  },
   mounted () {
-    this.currentUser()
     this.getProjectList()
     this.getActivites()
     this.getTeams()
   },
   methods: {
-    currentUser () {
-      this.$axios({
-        method: 'get',
-        url: '/user/current'
-      }).then(res => {
-        this.currUser = res.data
-      })
-    },
     getProjectList () {
       this.$axios({
         method: 'get',

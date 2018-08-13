@@ -36,25 +36,9 @@ const AMenuDivider = AMenu.Divider
 export default {
   name: 'HeaderAvatar',
   components: {AMenu, AMenuItem, AMenuDivider, AIcon, AAvatar, ADropdown},
-  data () {
-    return {
-      currUser: {
-        name: 'XXXXX',
-        avatar: ''
-      }
-    }
-  },
-  mounted () {
-    this.currentUser()
-  },
-  methods: {
-    currentUser () {
-      this.$axios({
-        method: 'get',
-        url: '/user/current'
-      }).then(res => {
-        this.currUser = res.data
-      })
+  computed: {
+    currUser () {
+      return this.$store.state.account.user
     }
   }
 }
