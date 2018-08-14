@@ -164,7 +164,10 @@ export default {
         },
         on: {
           openChange: this.onOpenChange,
-          select: (obj) => { this.selectedKeys = obj.selectedKeys }
+          select: (obj) => {
+            this.selectedKeys = obj.selectedKeys
+            this.$emit('select', obj)
+          }
         }
       }, this.renderMenu(h, this.menuData)
     )

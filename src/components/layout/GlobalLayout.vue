@@ -1,6 +1,17 @@
 <template>
   <a-layout>
-    <a-layout-sider class="sider" width="256px" collapsible v-model="collapsed" :trigger="null">
+    <drawer v-if="isMobile" :openDrawer="collapsed" @change="onDrawerChange">
+      <a-layout-sider class="sider" width="256px" :trigger="null">
+        <div class="logo">
+          <a href="/">
+            <img src="static/img/vue-antd-logo.png">
+            <h1>Vue Ant Pro</h1>
+          </a>
+        </div>
+        <i-menu :collapsed="true" :menuData="menuData" @select="onMenuSelect"/>
+      </a-layout-sider>
+    </drawer>
+    <a-layout-sider v-else class="sider" width="256px" collapsible v-model="collapsed" :trigger="null">
       <div class="logo">
         <a href="/">
           <img src="static/img/vue-antd-logo.png">
@@ -27,6 +38,7 @@ import GlobalHeader from './GlobalHeader'
 import AIcon from 'ant-design-vue/es/icon/icon'
 import IMenu from '../menu/menu'
 import GlobalFooter from './GlobalFooter'
+import Drawer from '../tool/Drawer'
 
 const ALayoutSider = ALayout.Sider
 const ALayoutHeader = ALayout.Header
@@ -39,6 +51,7 @@ let menuData = []
 export default {
   name: 'GlobalLayout',
   components: {
+    Drawer,
     GlobalFooter,
     AIcon,
     GlobalHeader,
@@ -55,9 +68,21 @@ export default {
       menuData: menuData
     }
   },
+  computed: {
+    isMobile () {
+      return this.$store.state.setting.isMobile
+    }
+  },
   methods: {
     toggleCollapse () {
       this.collapsed = !this.collapsed
+    },
+    onDrawerChange (show) {
+      console.log(show)
+      this.collapsed = show
+    },
+    onMenuSelect (obj) {
+      this.toggleCollapse()
     }
   },
   beforeCreate () {
