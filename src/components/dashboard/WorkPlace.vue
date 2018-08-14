@@ -170,14 +170,13 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .content {
     position: relative;
     top: 4px;
     flex: 1 1 auto;
     color: rgba(0, 0, 0, 0.45);
     line-height: 22px;
-    margin-left: 24px;
     .title {
       font-size: 20px;
       line-height: 28px;

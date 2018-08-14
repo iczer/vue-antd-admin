@@ -31,7 +31,7 @@
         </a-tabs>
       </a-spin>
     </template>
-    <span @click="fetchNotice">
+    <span @click="fetchNotice" class="header-notice">
       <a-badge count="12">
         <a-icon style="font-size: 16px; padding: 4px" type="bell" />
       </a-badge>
@@ -75,6 +75,14 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style lang="less">
+  .header-notice{
+    display: inline-block;
+    transition: all 0.3s;
+    & :global{
+      span {
+        vertical-align: initial;
+      }
+    }
+  }
 </style>

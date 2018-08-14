@@ -69,7 +69,7 @@ export default {
       }
       .avatar {
         flex: 0 1 72px;
-        margin-bottom: 8px;
+        margin:0 24px 8px 0;
         & > span {
           border-radius: 72px;
           display: block;

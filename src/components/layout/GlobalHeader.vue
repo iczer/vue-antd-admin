@@ -75,6 +75,7 @@ export default {
     display: inline-block;
     height: 100%;
     cursor: pointer;
+    vertical-align: middle;
     i{
       font-size: 16px;
       color: rgba(0,0,0,.65);
