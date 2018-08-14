@@ -1,5 +1,5 @@
 <template>
-  <a-dropdown style="display: inline-block; height: 100%" >
+  <a-dropdown style="display: inline-block; height: 100%; vertical-align: initial" >
     <span style="cursor: pointer">
       <a-avatar class="avatar" size="small" shape="circle" :src="currUser.avatar"/>
       <span>{{currUser.name}}</span>
