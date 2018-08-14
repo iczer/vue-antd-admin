@@ -37,7 +37,7 @@ export default new Router({
     },
     {
       path: '/',
-      name: 'home',
+      name: '首页',
       component: MenuView,
       redirect: '/login',
       icon: 'none',

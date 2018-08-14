@@ -2,8 +2,10 @@
   <div class="page-header">
     <div class="breadcrumb">
       <a-breadcrumb>
-        <a-breadcrumb-item><a href="#/dashboard">首页</a></a-breadcrumb-item>
-        <a-breadcrumb-item :key="item.path" v-for="item in breadcrumb">{{item.name}}</a-breadcrumb-item>
+        <a-breadcrumb-item :key="item.path" v-for="(item, index) in breadcrumb">
+          <span v-if="index === 0"><a href="#/dashboard/workplace">{{item.name}}</a></span>
+          <span v-else>{{item.name}}</span>
+        </a-breadcrumb-item>
       </a-breadcrumb>
     </div>
     <div class="detail">
