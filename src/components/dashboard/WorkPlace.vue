@@ -1,6 +1,6 @@
 <template>
   <page-layout :avatar="currUser.avatar">
-    <div slot="headerContent" class="content">
+    <div slot="headerContent">
       <div class="title">{{currUser.timefix}}，{{currUser.name}}，{{currUser.welcome}}</div>
       <div>{{currUser.position}}</div>
     </div>
@@ -170,20 +170,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
-  .content {
-    position: relative;
-    top: 4px;
-    flex: 1 1 auto;
-    color: rgba(0, 0, 0, 0.45);
-    line-height: 22px;
-    .title {
-      font-size: 20px;
-      line-height: 28px;
-      font-weight: 500;
-      margin-bottom: 12px;
-    }
-  }
+<style lang="less">
   .project-list {
     .card-title {
       font-size: 0;
@@ -221,14 +208,12 @@ export default {
         float: right;
       }
     }
-    :global {
       .ant-card-meta-description {
         color: rgba(0, 0, 0, 0.45);
         height: 44px;
         line-height: 22px;
         overflow: hidden;
       }
-    }
   }
   .item-group{
     padding: 20px 0 8px 24px;
