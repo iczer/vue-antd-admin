@@ -148,7 +148,7 @@ export default {
       routes.forEach((item) => {
         openKeys.push(item.path)
       })
-      this.openKeys = openKeys
+      this.collapsed ? this.cachedOpenKeys = openKeys : this.openKeys = openKeys
     }
   },
   render (h) {
