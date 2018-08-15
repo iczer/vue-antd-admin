@@ -81,6 +81,7 @@ import AIcon from 'ant-design-vue/es/icon/icon'
 import AInputGroup from 'ant-design-vue/es/input/Group'
 import AButton from 'ant-design-vue/es/button/button'
 import ACol from 'ant-design-vue/es/grid/Col'
+import ARow from 'ant-design-vue/es/grid/Row'
 import ACheckbox from 'ant-design-vue/es/checkbox/Checkbox'
 import AAlert from 'ant-design-vue/es/alert/index'
 
@@ -92,6 +93,7 @@ export default {
     AAlert,
     ACheckbox,
     ACol,
+    ARow,
     AButton,
     AInputGroup,
     AIcon,
