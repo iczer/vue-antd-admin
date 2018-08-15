@@ -1,10 +1,10 @@
 <template>
   <a-layout-sider class="sider" width="256px" :collapsible="collapsible" v-model="collapsed" :trigger="null">
     <div class="logo">
-      <a href="/">
+      <router-link to="/dashboard/workplace">
         <img src="static/img/vue-antd-logo.png">
         <h1>Vue Ant Pro</h1>
-      </a>
+      </router-link>
     </div>
     <i-menu :collapsed="collapsed" :menuData="menuData" @select="onSelect"/>
   </a-layout-sider>
@@ -60,6 +60,9 @@ export default {
         font-family: "Myriad Pro","Helvetica Neue",Arial,Helvetica,sans-serif;
         font-weight: 600;
         display: inline-block;
+        height: 32px;
+        line-height: 32px;
+        vertical-align: middle;
       }
       img{
         width: 32px;
