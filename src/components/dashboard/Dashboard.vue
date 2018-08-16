@@ -1,6 +1,6 @@
 <template>
   <div>
-    <a-row style="margin: -12px">
+    <a-row style="margin: 0 -12px">
       <a-col :sm="24" :md="12" :xl="6" style="padding: 12px 12px 24px;">
         <chart-card title="总销售额" total="￥ 189,345">
           <a-tooltip title="指标说明" slot="action">
