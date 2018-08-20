@@ -21,7 +21,7 @@ export default {
       extraImage: ''
     }
   },
-  beforeMount () {
+  mounted () {
     this.getPageHeaderInfo()
   },
   updated () {
