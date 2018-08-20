@@ -20,6 +20,7 @@
     "enquire.js": "^2.1.6",
     "mockjs": "^1.0.1-beta3",
     "moment": "^2.22.2",
+    "pouchdb": "^7.0.0",
     "viser-vue": "^2.2.5",
     "vue": "^2.5.17",
     "vue-router": "^3.0.1",
