@@ -51,7 +51,8 @@ export default {
     return {
       minHeight: minHeight + 'px',
       collapsed: false,
-      menuData: menuData
+      menuData: menuData,
+      showSetting: true
     }
   },
   computed: {
@@ -68,6 +69,9 @@ export default {
     },
     onMenuSelect () {
       this.toggleCollapse()
+    },
+    onSettingDrawerChange (val) {
+      this.showSetting = val
     }
   },
   beforeCreate () {

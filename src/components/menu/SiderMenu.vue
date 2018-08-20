@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider class="sider" width="256px" :collapsible="collapsible" v-model="collapsed" :trigger="null">
+  <a-layout-sider :class="['sider', isMobile ? null : 'shadow']" width="256px" :collapsible="collapsible" v-model="collapsed" :trigger="null">
     <div class="logo">
       <router-link to="/dashboard/workplace">
         <img src="static/img/vue-antd-logo.png">
@@ -32,6 +32,11 @@ export default {
       required: true
     }
   },
+  computed: {
+    isMobile () {
+      return this.$store.state.setting.isMobile
+    }
+  },
   methods: {
     onSelect (obj) {
       this.$emit('menuSelect', obj)
@@ -41,9 +46,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  .shadow{
+    box-shadow: 2px 0 6px rgba(0,21,41,.35);
+  }
   .sider{
     z-index: 10;
-    box-shadow: 2px 0 6px rgba(0,21,41,.35);
     .logo{
       height: 64px;
       position: relative;
