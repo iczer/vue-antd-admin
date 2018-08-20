@@ -9,6 +9,7 @@ import axios from 'axios'
 import message from 'ant-design-vue/es/message'
 import '@/mock'
 import store from './store'
+import PouchDB from 'pouchdb'
 
 Vue.prototype.$axios = axios
 Vue.prototype.$message = message
@@ -21,5 +22,11 @@ new Vue({
   router,
   store,
   components: { App },
-  template: '<App/>'
+  template: '<App/>',
+  mounted () {
+    var db = new PouchDB('admindb')
+    db.get('currUser').then(doc => {
+      this.$store.commit('account/setuser', doc.user)
+    })
+  }
 })
