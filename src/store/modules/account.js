@@ -16,6 +16,15 @@ export default {
           _rev: doc._rev,
           user: user
         })
+      }).catch(e => {
+        if (e.status === 404) {
+          db.put({
+            _id: 'currUser',
+            user: user
+          })
+        } else {
+          throw e
+        }
       })
     }
   }
