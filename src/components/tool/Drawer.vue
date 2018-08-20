@@ -10,7 +10,18 @@
 <script>
 export default {
   name: 'Drawer',
-  props: ['openDrawer'],
+  props: {
+    openDrawer: {
+      type: Boolean,
+      required: false,
+      default: false
+    },
+    placement: {
+      type: String,
+      required: false,
+      default: 'left'
+    }
+  },
   methods: {
     open () {
       this.$emit('change', true)
@@ -39,15 +50,14 @@ export default {
   }
   .drawer{
     position: fixed;
-    width: 256px;
     height: 100%;
     transition: all 0.5s;
     z-index: 100;
     &.open{
-      left: 0px;
+      left: 0;
     }
     &.close{
-      left: -262px;
+      left: -100%;
     }
     .sider{
       height: 100%;
