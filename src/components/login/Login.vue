@@ -37,7 +37,7 @@
                 </a-input>
               </a-form-item>
               <a-form-item>
-                <a-row style="margin: 0 -4px">
+                <a-row :gutter="8" style="margin: 0 -4px">
                   <a-col :span="16">
                     <a-input size="large" placeholder="captcha">
                     <a-icon slot="prefix" type="mail" />
