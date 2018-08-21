@@ -10,7 +10,7 @@
       </div>
       <div class="login">
         <a-form @submit="onSubmit" :autoFormCreate="(form) => this.form = form">
-          <a-tabs size="large" :tabBarStyle="{textAlign: 'center'}">
+          <a-tabs size="large" :tabBarStyle="{textAlign: 'center'}" style="padding: 0 2px;">
             <a-tab-pane tab="账户密码登录" key="1">
               <a-alert type="error" :closable="true" v-show="error" :message="error" showIcon style="margin-bottom: 24px;" />
               <a-form-item
@@ -44,7 +44,7 @@
                   </a-input>
                   </a-col>
                   <a-col :span="8" style="padding-left: 4px">
-                    <a-button style="width: 100%" size="large">获取验证码</a-button>
+                    <a-button style="width: 100%" class="captcha-button" size="large">获取验证码</a-button>
                   </a-col>
                 </a-row>
               </a-form-item>
@@ -183,6 +183,14 @@ export default {
       .login{
         width: 368px;
         margin: 0 auto;
+        @media screen and (max-width: 576px) {
+          width: 95%;
+        }
+        @media screen and (max-width: 320px) {
+          .captcha-button{
+            font-size: 14px;
+          }
+        }
         .icon {
           font-size: 24px;
           color: rgba(0, 0, 0, 0.2);
