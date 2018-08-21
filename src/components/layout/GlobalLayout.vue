@@ -4,6 +4,12 @@
       <sider-menu :menuData="menuData" :collapsed="false" :collapsible="false" @menuSelect="onMenuSelect"/>
     </drawer>
     <sider-menu v-else :menuData="menuData" :collapsed="collapsed" :collapsible="true" />
+    <drawer :open-drawer="showSetting" placement="right"  @change="onSettingDrawerChange">
+      <div class="setting" slot="handler">
+        <a-icon :type="showSetting ? 'close' : 'setting'" />
+      </div>
+      <setting />
+    </drawer>
     <a-layout>
       <global-header :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
       <a-layout-content :style="{minHeight: minHeight, margin: '24px 24px 0'}">
@@ -24,6 +30,7 @@ import IMenu from '../menu/menu'
 import GlobalFooter from './GlobalFooter'
 import Drawer from '../tool/Drawer'
 import SiderMenu from '../menu/SiderMenu'
+import Setting from '../setting/Setting'
 
 const ALayoutSider = ALayout.Sider
 const ALayoutHeader = ALayout.Header
@@ -36,6 +43,7 @@ let menuData = []
 export default {
   name: 'GlobalLayout',
   components: {
+    Setting,
     SiderMenu,
     Drawer,
     GlobalFooter,
@@ -52,7 +60,7 @@ export default {
       minHeight: minHeight + 'px',
       collapsed: false,
       menuData: menuData,
-      showSetting: true
+      showSetting: false
     }
   },
   computed: {
@@ -81,4 +89,14 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  .setting{
+    background-color: #1890ff;
+    color: #fff;
+    border-radius: 5px 0 0 5px;
+    line-height: 40px;
+    font-size: 22px;
+    width: 40px;
+    height: 40px;
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+  }
 </style>
