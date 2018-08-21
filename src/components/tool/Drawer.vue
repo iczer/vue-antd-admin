@@ -2,11 +2,14 @@
   <div >
     <div :class="['mask', openDrawer ? 'open' : 'close']" @click="close"></div>
     <div :class="['drawer', placement, openDrawer ? 'open' : 'close']">
-      <div style="position: relative; height: 100%">
+      <div ref="drawer" style="position: relative; height: 100%;">
         <slot></slot>
       </div>
-      <div class="button" @click="handle">
-        <a-icon type="bars" />
+      <div v-if="showHandler" :class="['handler-container', placement]" ref="handler" @click="handle">
+        <slot v-if="$slots.handler" name="handler"></slot>
+        <div v-else class="handler">
+          <a-icon :type="openDrawer ? 'close'  : 'bars'" />
+        </div>
       </div>
     </div>
   </div>
@@ -17,6 +20,11 @@ import AIcon from 'ant-design-vue/es/icon/icon'
 export default {
   name: 'Drawer',
   components: {AIcon},
+  data () {
+    return {
+      drawerWidth: 0
+    }
+  },
   props: {
     openDrawer: {
       type: Boolean,
@@ -27,6 +35,23 @@ export default {
       type: String,
       required: false,
       default: 'left'
+    },
+    showHandler: {
+      type: Boolean,
+      required: false,
+      default: true
+    }
+  },
+  mounted () {
+    this.drawerWidth = this.getDrawerWidth()
+  },
+  watch: {
+    'drawerWidth': function (val) {
+      if (this.placement === 'left') {
+        this.$refs.handler.style.left = val + 'px'
+      } else {
+        this.$refs.handler.style.right = val + 'px'
+      }
     }
   },
   methods: {
@@ -38,6 +63,9 @@ export default {
     },
     handle () {
       this.$emit('change', !this.openDrawer)
+    },
+    getDrawerWidth () {
+      return this.$refs.drawer.clientWidth
     }
   }
 }
@@ -64,36 +92,50 @@ export default {
     transition: all 0.5s;
     z-index: 100;
     &.left{
+      left: 0px;
       &.open{
+        box-shadow: 2px 0 8px rgba(0,0,0,.15);
       }
       &.close{
         transform: translateX(-100%);
       }
     }
     &.right{
+      right: 0px;
       &.open{
-        right: 0;
+        box-shadow: -2px 0 8px rgba(0,0,0,.15);
       }
       &.close{
-        right: -100%;
+        transform: translateX(100%);
       }
     }
     .sider{
       height: 100%;
     }
   }
-  .button{
-    height: 40px;
-    width: 40px;
-    background-color: #fff;
-    border-radius: 0 5px 5px 0;
+  .handler-container{
     position: fixed;
-    left: 256px;
     top: 200px;
-    z-index: 100;
-    font-size: 26px;
-    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
     text-align: center;
-    line-height: 40px;
+    transition: all 0.5s;
+    .handler{
+      height: 40px;
+      width: 40px;
+      background-color: #fff;
+      z-index: 100;
+      font-size: 26px;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+      line-height: 40px;
+    }
+    &.left{
+      .handler{
+        border-radius: 0 5px 5px 0;
+      }
+    }
+    &.right{
+      .handler{
+        border-radius: 5px 0 0 5px;
+      }
+    }
   }
 </style>
