@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Dashboard from '@/components/dashboard/Dashboard'
-import Exception from '@/components/exception/Exception'
 import NotFound from '@/components/exception/404'
 import NotPermit from '@/components/exception/403'
 import ServerError from '@/components/exception/500'
@@ -185,7 +184,7 @@ export default new Router({
           path: '/exception',
           name: '异常页',
           icon: 'warning',
-          component: Exception,
+          component: RouteView,
           children: [
             {
               path: '/exception/404',
