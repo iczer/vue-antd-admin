@@ -15,10 +15,10 @@ export default {
 
 <style lang="less" scoped>
   .theme-color{
+    float: left;
     width: 20px;
     height: 20px;
     border-radius: 2px;
-    float: left;
     cursor: pointer;
     margin-right: 8px;
     text-align: center;

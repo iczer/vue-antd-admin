@@ -1,9 +1,7 @@
 <template>
   <div class="setting-item">
     <h3 class="title">{{title}}</h3>
-    <div>
-      <slot></slot>
-    </div>
+    <slot></slot>
   </div>
 </template>
 
