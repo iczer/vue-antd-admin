@@ -3,7 +3,7 @@
     <div class="logo">
       <router-link to="/dashboard/workplace">
         <img src="static/img/vue-antd-logo.png">
-        <h1>Vue Ant Pro</h1>
+        <h1>Vue Antd Admin</h1>
       </router-link>
     </div>
     <i-menu :collapsed="collapsed" :menuData="menuData" @select="onSelect"/>

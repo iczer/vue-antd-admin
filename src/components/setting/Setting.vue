@@ -7,17 +7,16 @@
       </div>
     </setting-item>
     <setting-item title="主题色">
-      <div>
-        <theme-color color="rgb(245, 34, 45)" />
-        <theme-color color="rgb(250, 84, 28)" />
-        <theme-color color="rgb(250, 173, 20)" />
-        <theme-color color="rgb(19, 194, 194)" />
-        <theme-color color="rgb(82, 196, 26)" />
-        <theme-color color="rgb(24, 144, 255)" />
-        <theme-color color="rgb(47, 84, 235)" />
-        <theme-color color="rgb(114, 46, 209)" :selected="true" />
-        <div style="clear: both" />
-      </div>
+      <color-check-box-group @change="onColorChange">
+        <color-check-box color="rgb(245, 34, 45)" value="1" />
+        <color-check-box color="rgb(250, 84, 28)" value="2" />
+        <color-check-box color="rgb(250, 173, 20)" value="3" />
+        <color-check-box color="rgb(19, 194, 194)" value="4" />
+        <color-check-box color="rgb(82, 196, 26)" value="5" />
+        <color-check-box color="rgb(24, 144, 255)" value="6" />
+        <color-check-box color="rgb(47, 84, 235)" value="7" />
+        <color-check-box color="rgb(114, 46, 209)" value="8" />
+      </color-check-box-group>
     </setting-item>
     <a-divider/>
     <setting-item title="导航设置">
@@ -75,12 +74,16 @@ import AListItem from 'ant-design-vue/es/list/Item'
 import AButton from 'ant-design-vue/es/button/button'
 import ASwitch from 'ant-design-vue/es/switch/index'
 import ASelect from 'ant-design-vue/es/select/index'
+import ColorCheckBox from '../check/ColorCheckBox'
 
 const ASelectOption = ASelect.Option
+const ColorCheckBoxGroup = ColorCheckBox.Group
 
 export default {
   name: 'Setting',
   components: {
+    ColorCheckBoxGroup,
+    ColorCheckBox,
     ASelectOption,
     ASelect,
     ASwitch,
@@ -92,7 +95,12 @@ export default {
     StyleItem,
     SettingItem,
     AIcon,
-    ALayoutSider}
+    ALayoutSider},
+  methods: {
+    onColorChange (values) {
+      console.log(values)
+    }
+  }
 }
 </script>
 
