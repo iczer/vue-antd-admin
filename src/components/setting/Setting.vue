@@ -1,10 +1,10 @@
 <template>
   <a-layout-sider class="sider" width="273">
     <setting-item title="整体风格设置">
-      <div class="flex">
-        <style-item img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :selected="true"/>
-        <style-item img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" :selected="false"/>
-      </div>
+      <img-check-box-group @change="onStyleChange">
+        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" :value="{value: 1, name: 'Dark'}"/>
+        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" :value="{value: 2, name: 'Light'}"/>
+      </img-check-box-group>
     </setting-item>
     <setting-item title="主题色">
       <color-check-box-group @change="onColorChange" :defaultValues="['1', '2', '3']" :multiple="false">
@@ -20,10 +20,10 @@
     </setting-item>
     <a-divider/>
     <setting-item title="导航设置">
-      <div class="flex">
-        <style-item img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" :selected="true"/>
-        <style-item img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" :selected="false"/>
-      </div>
+      <img-check-box-group @change="onNaviChange">
+        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" :checked="true" :value="{value: 1, name: 'Side Navigation'}"/>
+        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" :value="{value: 2, name: 'Top Navigation'}"/>
+      </img-check-box-group>
     </setting-item>
     <setting-item>
       <a-list :split="false">
@@ -58,7 +58,7 @@
       </a-list>
     </setting-item>
     <a-divider />
-    <a-button style="width: 100%" icon="copy">拷贝代码</a-button>
+    <a-button id="copyBtn" data-clipboard-text="Sorry, you copy nothing O(∩_∩)O~" @click="copyCode" style="width: 100%" icon="copy" >拷贝代码</a-button>
   </a-layout-sider>
 </template>
 
@@ -68,20 +68,24 @@ import AIcon from 'ant-design-vue/es/icon/icon'
 import SettingItem from './SettingItem'
 import StyleItem from './StyleItem'
 import ADivider from 'ant-design-vue/es/divider/index'
-import ThemeColor from './ThemeColor'
 import AList from 'ant-design-vue/es/list/index'
 import AListItem from 'ant-design-vue/es/list/Item'
 import AButton from 'ant-design-vue/es/button/button'
 import ASwitch from 'ant-design-vue/es/switch/index'
 import ASelect from 'ant-design-vue/es/select/index'
 import ColorCheckBox from '../check/ColorCheckBox'
+import ImgCheckBox from '../check/ImgCheckBox'
+import Clipboard from 'clipboard'
 
 const ASelectOption = ASelect.Option
 const ColorCheckBoxGroup = ColorCheckBox.Group
+const ImgCheckBoxGroup = ImgCheckBox.Group
 
 export default {
   name: 'Setting',
   components: {
+    ImgCheckBoxGroup,
+    ImgCheckBox,
     ColorCheckBoxGroup,
     ColorCheckBox,
     ASelectOption,
@@ -90,7 +94,6 @@ export default {
     AButton,
     AListItem,
     AList,
-    ThemeColor,
     ADivider,
     StyleItem,
     SettingItem,
@@ -99,8 +102,26 @@ export default {
   methods: {
     onColorChange (values, colors) {
       if (colors.length > 0) {
-        this.$message.info(`选择了主题色 ${colors}`)
+        this.$message.info(`您选择了主题色 ${colors}`)
       }
+    },
+    onStyleChange (values) {
+      if (values.length > 0) {
+        this.$message.info(`您选择了 ${values[0].name} 风格`)
+      }
+    },
+    onNaviChange (values) {
+      if (values.length > 0) {
+        this.$message.info(`您选择了 ${values[0].name} `)
+      }
+    },
+    copyCode () {
+      let clipboard = new Clipboard('#copyBtn')
+      const _this = this
+      clipboard.on('success', function () {
+        _this.$message.success(`复制成功`)
+        clipboard.destroy()
+      })
     }
   }
 }
