@@ -7,8 +7,8 @@
       </div>
     </setting-item>
     <setting-item title="主题色">
-      <color-check-box-group @change="onColorChange">
-        <color-check-box color="rgb(245, 34, 45)" value="1" />
+      <color-check-box-group @change="onColorChange" :defaultValues="['1', '2', '3']" :multiple="false">
+        <color-check-box ref="colorNode" color="rgb(245, 34, 45)" value="1" />
         <color-check-box color="rgb(250, 84, 28)" value="2" />
         <color-check-box color="rgb(250, 173, 20)" value="3" />
         <color-check-box color="rgb(19, 194, 194)" value="4" />
@@ -97,8 +97,10 @@ export default {
     AIcon,
     ALayoutSider},
   methods: {
-    onColorChange (values) {
-      console.log(values)
+    onColorChange (values, colors) {
+      if (colors.length > 0) {
+        this.$message.info(`选择了主题色 ${colors}`)
+      }
     }
   }
 }

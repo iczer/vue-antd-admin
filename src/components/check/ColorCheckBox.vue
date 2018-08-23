@@ -14,11 +14,28 @@ const Group = {
       type: Array,
       required: false,
       default: () => []
+    },
+    multiple: {
+      type: Boolean,
+      required: false,
+      default: false
     }
   },
   data () {
     return {
-      values: this.defaultValues
+      values: [],
+      options: []
+    }
+  },
+  computed: {
+    colors () {
+      let colors = []
+      this.options.forEach(item => {
+        if (item.sChecked) {
+          colors.push(item.color)
+        }
+      })
+      return colors
     }
   },
   provide () {
@@ -26,15 +43,30 @@ const Group = {
       groupContext: this
     }
   },
-  methods: {
-    handleChange (value) {
-      if (!value.checked) {
-        const values = this.values.filter(item => item.value !== value.value)
-        this.values = values
-      } else {
-        this.values.push(value)
+  watch: {
+    'values': function (newVal, oldVal) {
+      // 此条件是为解决单选时，触发两次chang事件问题
+      if (!(newVal.length === 1 && oldVal.length === 1 && newVal[0] === oldVal[0])) {
+        this.$emit('change', this.values, this.colors)
       }
-      this.$emit('change', this.values)
+    }
+  },
+  methods: {
+    handleChange (option) {
+      if (!option.checked) {
+        this.values = this.values.filter(item => item !== option.value)
+      } else {
+        if (!this.multiple) {
+          this.values = [option.value]
+          this.options.forEach(item => {
+            if (item.value !== option.value) {
+              item.sChecked = false
+            }
+          })
+        } else {
+          this.values.push(option.value)
+        }
+      }
     }
   },
   render (h) {
@@ -80,7 +112,17 @@ export default {
         checked: this.sChecked
       }
       this.$emit('change', value)
-      this.groupContext.handleChange(value)
+      const groupContext = this.groupContext
+      if (groupContext) {
+        groupContext.handleChange(value)
+      }
+    }
+  },
+  created () {
+    const groupContext = this.groupContext
+    if (groupContext) {
+      this.sChecked = groupContext.defaultValues.indexOf(this.value) >= 0
+      groupContext.options.push(this)
     }
   },
   methods: {
