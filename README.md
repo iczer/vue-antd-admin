@@ -1,7 +1,7 @@
 # vue-antd-admin
 **[Ant Design Pro](https://github.com/ant-design/ant-design-pro) 的 Vue 实现**
 
-一个开箱即用的中后台前端/设计解决方案
+一个开箱即用的中后台前端/设计解决方案（主要依赖组件库 [ant-design-vue](https://github.com/vueComponent/ant-design-vue) ）
 
 [预览地址](https://iczer.gitee.io/vue-antd-pro)
 
