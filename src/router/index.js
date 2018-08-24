@@ -24,6 +24,7 @@ import Login from '@/components/login/Login'
 import BasicDetail from '@/components/detail/BasicDetail'
 import AdvancedDetail from '@/components/detail/AdvancedDetail'
 import TaskCard from '@/components/task/Index'
+import ColorBox from '@/components/check/Index'
 
 Vue.use(Router)
 
@@ -211,7 +212,7 @@ export default new Router({
           path: '/components',
           redirect: '/components/taskcard',
           name: '小组件',
-          icon: 'appstore',
+          icon: 'appstore-o',
           component: PageView,
           children: [
             {
@@ -219,6 +220,12 @@ export default new Router({
               name: '任务卡片',
               icon: 'none',
               component: TaskCard
+            },
+            {
+              path: '/components/palette',
+              name: '颜色复选框',
+              icon: 'none',
+              component: ColorBox
             }
           ]
         }
