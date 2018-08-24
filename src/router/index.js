@@ -23,6 +23,7 @@ import WorkPlace from '@/components/dashboard/WorkPlace'
 import Login from '@/components/login/Login'
 import BasicDetail from '@/components/detail/BasicDetail'
 import AdvancedDetail from '@/components/detail/AdvancedDetail'
+import TaskCard from '@/components/task/Index'
 
 Vue.use(Router)
 
@@ -203,6 +204,21 @@ export default new Router({
               name: '500',
               icon: 'none',
               component: ServerError
+            }
+          ]
+        },
+        {
+          path: '/components',
+          redirect: '/components/taskcard',
+          name: '小组件',
+          icon: 'appstore',
+          component: PageView,
+          children: [
+            {
+              path: '/components/taskcard',
+              name: '任务卡片',
+              icon: 'none',
+              component: TaskCard
             }
           ]
         }
