@@ -44,9 +44,9 @@ const Group = {
     }
   },
   watch: {
-    'values': function (newVal, oldVal) {
+    values: function (newVal, oldVal) {
       // 此条件是为解决单选时，触发两次chang事件问题
-      if (!(newVal.length === 1 && oldVal.length === 1 && newVal[0] === oldVal[0])) {
+      if (!(newVal.length === 1 && oldVal.length === 1 && newVal[0] === oldVal[0]) || this.multiple) {
         this.$emit('change', this.values, this.colors)
       }
     }
