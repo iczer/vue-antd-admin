@@ -18,11 +18,20 @@ export default {
 }
 </script>
 
-<style>
-#app {
-  /*font-family: 'Avenir', Helvetica, Arial, sans-serif;*/
-  /*-webkit-font-smoothing: antialiased;*/
-  /*-moz-osx-font-smoothing: grayscale;*/
-  /*color: #2c3e50;*/
-}
+<style lang="less">
+  //拖拽控件全局样式
+  :global{
+    .dragable-ghost{
+      border: 1px dashed #aaaaaa;
+      opacity: 0.65;
+    }
+    .dragable-chose{
+      border: 1px dashed #aaaaaa;
+      opacity: 0.65;
+    }
+    .dragable-drag{
+      border: 1px dashed #aaaaaa;
+      opacity: 0.65;
+    }
+  }
 </style>
