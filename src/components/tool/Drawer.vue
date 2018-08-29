@@ -118,7 +118,8 @@ export default {
     top: 200px;
     text-align: center;
     transition: all 0.5s;
-    .handler{
+    cursor: pointer;
+    .handler {
       height: 40px;
       width: 40px;
       background-color: #fff;

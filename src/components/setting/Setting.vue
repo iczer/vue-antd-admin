@@ -2,8 +2,8 @@
   <a-layout-sider class="sider" width="273">
     <setting-item title="整体风格设置">
       <img-check-box-group @change="onStyleChange">
-        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" :value="{value: 1, name: 'Dark'}"/>
-        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" :value="{value: 2, name: 'Light'}"/>
+        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" :value="{value: 1, name: 'dark'}"/>
+        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" :value="{value: 2, name: 'light'}"/>
       </img-check-box-group>
     </setting-item>
     <setting-item title="主题色">
@@ -106,9 +106,7 @@ export default {
       }
     },
     onStyleChange (values) {
-      if (values.length > 0) {
-        this.$message.info(`您选择了 ${values[0].name} 风格`)
-      }
+      this.$store.commit('setting/setTheme', values[0].name)
     },
     onNaviChange (values) {
       if (values.length > 0) {
