@@ -51,10 +51,18 @@ export default {
   },
   data () {
     return {
-      rootSubmenuKeys: ['/dashboard', '/form', '/list', '/detail', '/exception', '/result'],
       openKeys: [],
       selectedKeys: [],
       cachedOpenKeys: []
+    }
+  },
+  computed: {
+    rootSubmenuKeys: (vm) => {
+      let keys = []
+      vm.menuData.forEach(item => {
+        keys.push(item.path)
+      })
+      return keys
     }
   },
   created () {
