@@ -166,7 +166,6 @@ export default {
         props: {
           theme: this.$props.theme,
           mode: this.$props.mode,
-          inlineCollapsed: false,
           openKeys: this.openKeys,
           selectedKeys: this.selectedKeys
         },

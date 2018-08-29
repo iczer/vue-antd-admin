@@ -1,10 +1,13 @@
 <template>
-  <a-layout-header class="global-header">
+  <a-layout-header :class="[backgroundColor, 'global-header']">
     <router-link v-if="isMobile" to="/" class="logo">
       <img width="32" src="static/img/vue-antd-logo.png" />
     </router-link>
     <a-divider v-if="isMobile" type="vertical" />
-    <a-icon class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
+    <a-icon v-if="layout === 'side'" class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
+    <div v-if="layout === 'head'" class="global-header-menu">
+      <i-menu style="height: 64px; line-height: 64px;" :theme="theme" mode="horizontal" :menuData="menuData" @select="onSelect"/>
+    </div>
     <div style="float: right">
         <header-search class="header-item" />
         <a-tooltip class="header-item" title="帮助文档" placement="bottom" >
@@ -27,12 +30,14 @@ import HeaderNotice from './HeaderNotice'
 import ATooltip from 'ant-design-vue/es/tooltip/Tooltip'
 import HeaderAvatar from './HeaderlAvatar'
 import ADivider from 'ant-design-vue/es/divider/index'
+import IMenu from '../menu/menu'
 
 const ALayoutSider = ALayout.Sider
 const ALayoutHeader = ALayout.Header
 export default {
   name: 'GlobalHeader',
   components: {
+    IMenu,
     ADivider,
     HeaderAvatar,
     ATooltip,
@@ -43,15 +48,24 @@ export default {
     ALayout,
     ALayoutSider,
     ALayoutHeader},
-  props: ['collapsed'],
+  props: ['collapsed', 'menuData', 'theme'],
   computed: {
     isMobile () {
       return this.$store.state.setting.isMobile
+    },
+    layout () {
+      return this.$store.state.setting.layout
+    },
+    backgroundColor () {
+      return this.layout === 'side' ? 'light' : this.theme
     }
   },
   methods: {
     toggleCollapse () {
       this.$emit('toggleCollapse')
+    },
+    onSelect (obj) {
+      this.$emit('menuSelect', obj)
     }
   }
 }
@@ -82,11 +96,16 @@ export default {
     }
   }
   .global-header{
-    background: #fff;
     padding: 0 12px 0 0;
     -webkit-box-shadow: 0 1px 4px rgba(0,21,41,.08);
     box-shadow: 0 1px 4px rgba(0,21,41,.08);
     position: relative;
+    &.light{
+      background: #fff;
+    }
+    &.dark{
+      background-color: #001529;
+    }
     .logo {
       height: 64px;
       line-height: 58px;
@@ -99,6 +118,9 @@ export default {
         display: inline-block;
         vertical-align: middle;
       }
+    }
+    .global-header-menu{
+      display: inline-block;
     }
   }
 </style>

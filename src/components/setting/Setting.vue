@@ -1,9 +1,9 @@
 <template>
   <a-layout-sider class="sider" width="273">
     <setting-item title="整体风格设置">
-      <img-check-box-group @change="onStyleChange">
-        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" :value="{value: 1, name: 'dark'}"/>
-        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" :value="{value: 2, name: 'light'}"/>
+      <img-check-box-group @change="setTheme">
+        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" value="dark"/>
+        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" value="light"/>
       </img-check-box-group>
     </setting-item>
     <setting-item title="主题色">
@@ -20,9 +20,9 @@
     </setting-item>
     <a-divider/>
     <setting-item title="导航设置">
-      <img-check-box-group @change="onNaviChange">
-        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" :checked="true" :value="{value: 1, name: 'Side Navigation'}"/>
-        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" :value="{value: 2, name: 'Top Navigation'}"/>
+      <img-check-box-group @change="setLayout">
+        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" :checked="true" value="side"/>
+        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" value="head"/>
       </img-check-box-group>
     </setting-item>
     <setting-item>
@@ -105,13 +105,11 @@ export default {
         this.$message.info(`您选择了主题色 ${colors}`)
       }
     },
-    onStyleChange (values) {
-      this.$store.commit('setting/setTheme', values[0].name)
+    setTheme (values) {
+      this.$store.commit('setting/setTheme', values[0])
     },
-    onNaviChange (values) {
-      if (values.length > 0) {
-        this.$message.info(`您选择了 ${values[0].name} `)
-      }
+    setLayout (values) {
+      this.$store.commit('setting/setLayout', values[0])
     },
     copyCode () {
       let clipboard = new Clipboard('#copyBtn')

@@ -51,12 +51,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .dark{
-    background-color: #002140;
-  }
-  .light{
-    background-color: #fff;
-  }
   .shadow{
     box-shadow: 2px 0 6px rgba(0,21,41,.35);
   }

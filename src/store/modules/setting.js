@@ -2,7 +2,8 @@ export default {
   namespaced: true,
   state: {
     isMobile: false,
-    theme: 'dark'
+    theme: 'dark',
+    layout: 'side'
   },
   mutations: {
     setDevice (state, isMobile) {
@@ -10,6 +11,9 @@ export default {
     },
     setTheme (state, theme) {
       state.theme = theme
+    },
+    setLayout (state, layout) {
+      state.layout = layout
     }
   }
 }

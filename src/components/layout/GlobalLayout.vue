@@ -3,7 +3,7 @@
     <drawer v-if="isMobile" :openDrawer="collapsed" @change="onDrawerChange">
       <sider-menu :theme="theme" :menuData="menuData" :collapsed="false" :collapsible="false" @menuSelect="onMenuSelect"/>
     </drawer>
-    <sider-menu :theme="theme" v-else :menuData="menuData" :collapsed="collapsed" :collapsible="true" />
+    <sider-menu :theme="theme" v-else-if="layout === 'side'" :menuData="menuData" :collapsed="collapsed" :collapsible="true" />
     <drawer :open-drawer="showSetting" placement="right"  @change="onSettingDrawerChange">
       <div class="setting" slot="handler">
         <a-icon :type="showSetting ? 'close' : 'setting'" />
@@ -11,7 +11,7 @@
       <setting />
     </drawer>
     <a-layout>
-      <global-header :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
+      <global-header :menuData="menuData" :theme="theme" :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
       <a-layout-content :style="{minHeight: minHeight, margin: '24px 24px 0'}">
         <slot></slot>
       </a-layout-content>
@@ -69,6 +69,9 @@ export default {
     },
     theme () {
       return this.$store.state.setting.theme
+    },
+    layout () {
+      return this.$store.state.setting.layout
     }
   },
   methods: {
