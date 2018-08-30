@@ -33,7 +33,7 @@
     </template>
     <span @click="fetchNotice" class="header-notice">
       <a-badge count="12">
-        <a-icon style="font-size: 16px; padding: 4px" type="bell" />
+        <a-icon :class="['header-notice-icon', theme]" type="bell" />
       </a-badge>
     </span>
   </a-popover>
@@ -60,6 +60,11 @@ export default {
       loadding: false
     }
   },
+  computed: {
+    theme () {
+      return this.$store.state.setting.layout === 'side' ? 'light' : this.$store.state.setting.theme
+    }
+  },
   methods: {
     fetchNotice () {
       if (this.loadding) {
@@ -79,9 +84,17 @@ export default {
   .header-notice{
     display: inline-block;
     transition: all 0.3s;
-    & :global{
-      span {
-        vertical-align: initial;
+    span {
+      vertical-align: initial;
+    }
+    .header-notice-icon{
+      font-size: 16px;
+      padding: 4px;
+      &.dark{
+        color: #fff;
+      }
+      &.light{
+        color: rgba(0,0,0,.65);
       }
     }
   }

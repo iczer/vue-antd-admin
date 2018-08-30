@@ -11,7 +11,7 @@
       <setting />
     </drawer>
     <a-layout>
-      <global-header :menuData="menuData" :theme="theme" :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
+      <global-header :menuData="menuData" :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
       <a-layout-content :style="{minHeight: minHeight, margin: '24px 24px 0'}">
         <slot></slot>
       </a-layout-content>

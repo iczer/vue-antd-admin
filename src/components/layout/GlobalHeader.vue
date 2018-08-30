@@ -1,22 +1,25 @@
 <template>
-  <a-layout-header :class="[backgroundColor, 'global-header']">
-    <router-link v-if="isMobile" to="/" class="logo">
-      <img width="32" src="static/img/vue-antd-logo.png" />
-    </router-link>
-    <a-divider v-if="isMobile" type="vertical" />
-    <a-icon v-if="layout === 'side'" class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
-    <div v-if="layout === 'head'" class="global-header-menu">
-      <i-menu style="height: 64px; line-height: 64px;" :theme="theme" mode="horizontal" :menuData="menuData" @select="onSelect"/>
-    </div>
-    <div style="float: right">
-        <header-search class="header-item" />
-        <a-tooltip class="header-item" title="帮助文档" placement="bottom" >
-          <a>
-            <a-icon type="question-circle-o" />
-          </a>
-        </a-tooltip>
-        <header-notice class="header-item"/>
-        <header-avatar class="header-item"/>
+  <a-layout-header :class="[theme, 'global-header']">
+    <div :class="['global-header-wide', layout]">
+      <router-link v-if="isMobile || layout === 'head'" to="/" :class="['logo', isMobile ? null : 'pc', theme]">
+        <img width="32" src="static/img/vue-antd-logo.png" />
+        <h1 v-if="!isMobile">Vue Antd Admin</h1>
+      </router-link>
+      <a-divider v-if="isMobile" type="vertical" />
+      <a-icon v-if="layout === 'side'" class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
+      <div v-if="layout === 'head'" class="global-header-menu">
+        <i-menu style="height: 64px; line-height: 64px;" :theme="theme" mode="horizontal" :menuData="menuData" @select="onSelect"/>
+      </div>
+      <div :class="['global-header-right', theme]">
+          <header-search class="header-item" />
+          <a-tooltip class="header-item" title="帮助文档" placement="bottom" >
+            <a>
+              <a-icon type="question-circle-o" />
+            </a>
+          </a-tooltip>
+          <header-notice class="header-item"/>
+          <header-avatar class="header-item"/>
+      </div>
     </div>
   </a-layout-header>
 </template>
@@ -48,7 +51,7 @@ export default {
     ALayout,
     ALayoutSider,
     ALayoutHeader},
-  props: ['collapsed', 'menuData', 'theme'],
+  props: ['collapsed', 'menuData'],
   computed: {
     isMobile () {
       return this.$store.state.setting.isMobile
@@ -56,8 +59,8 @@ export default {
     layout () {
       return this.$store.state.setting.layout
     },
-    backgroundColor () {
-      return this.layout === 'side' ? 'light' : this.theme
+    theme () {
+      return this.layout === 'side' ? 'light' : this.$store.state.setting.theme
     }
   },
   methods: {
@@ -78,12 +81,10 @@ export default {
     padding: 0 24px;
     cursor: pointer;
     transition: color .3s;
+    &:hover{
+      color: #1890ff;
+    }
   }
-
-  .trigger:hover {
-    color: #1890ff;
-  }
-
   .header-item{
     padding: 0 12px;
     display: inline-block;
@@ -104,23 +105,50 @@ export default {
       background: #fff;
     }
     &.dark{
-      background-color: #001529;
+      background: #001529;
     }
-    .logo {
-      height: 64px;
-      line-height: 58px;
-      vertical-align: top;
-      display: inline-block;
-      padding: 0 12px 0 24px;
-      cursor: pointer;
-      font-size: 20px;
-      img {
-        display: inline-block;
-        vertical-align: middle;
+    .global-header-wide{
+      &.head{
+        max-width: 1200px;
+        margin: auto;
       }
-    }
-    .global-header-menu{
-      display: inline-block;
+      &.side{
+      }
+      .logo {
+        height: 64px;
+        line-height: 58px;
+        vertical-align: top;
+        display: inline-block;
+        padding: 0 12px 0 24px;
+        cursor: pointer;
+        font-size: 20px;
+        &.pc{
+          padding: 0 12px 0 0;
+        }
+        img {
+          display: inline-block;
+          vertical-align: middle;
+        }
+        h1{
+          display: inline-block;
+          font-size: 16px;
+        }
+        &.dark h1{
+          color: #fff;
+        }
+      }
+      .global-header-menu{
+        display: inline-block;
+      }
+      .global-header-right{
+        float: right;
+        &.dark{
+          color: #fff;
+          i{
+            color: #fff;
+          }
+        }
+      }
     }
   }
 </style>

@@ -13,7 +13,7 @@
       </div>
       <slot slot="extra" name="extra"></slot>
     </page-header>
-    <div ref="page" style="margin: 24px 24px 0px">
+    <div ref="page" :class="['page-content', layout]" >
       <slot ></slot>
     </div>
   </div>
@@ -29,6 +29,11 @@ export default {
   data () {
     return {
       breadcrumb: []
+    }
+  },
+  computed: {
+    layout () {
+      return this.$store.state.setting.layout
     }
   },
   mounted () {
@@ -58,5 +63,13 @@ export default {
       }
     }
   }
-
+  .page-content{
+    &.side{
+      margin: 24px 24px 0px;
+    }
+    &.head{
+      margin: 24px auto 0;
+      max-width: 1200px;
+    }
+  }
 </style>
