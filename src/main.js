@@ -2,7 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue'
 import App from './App'
-import router from './router'
+import router from './router/lazy'
 import 'ant-design-vue/dist/antd.css'
 import Viser from 'viser-vue'
 import axios from 'axios'
