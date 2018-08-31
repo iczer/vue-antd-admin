@@ -109,7 +109,7 @@ export default {
     }
     .global-header-wide{
       &.head{
-        max-width: 1200px;
+        max-width: 1400px;
         margin: auto;
       }
       &.side{

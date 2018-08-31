@@ -69,7 +69,7 @@ export default {
     .page-header-wide{
       &.head{
         margin: auto;
-        max-width: 1200px;
+        max-width: 1400px;
       }
       &.side{
       }

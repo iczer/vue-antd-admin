@@ -69,7 +69,7 @@ export default {
     }
     &.head{
       margin: 24px auto 0;
-      max-width: 1200px;
+      max-width: 1400px;
     }
   }
 </style>
