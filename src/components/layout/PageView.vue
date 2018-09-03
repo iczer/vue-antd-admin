@@ -3,7 +3,9 @@
     <div slot="extra" class="extraImg">
       <img :src="extraImage"/>
     </div>
-    <router-view  ref="page"/>
+    <transition name="page-toggle">
+      <router-view  ref="page"/>
+    </transition>
   </page-layout>
 </template>
 
