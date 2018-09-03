@@ -1,12 +1,12 @@
 <template>
   <div class="footer">
     <div class="links">
-      <a>Pro首页</a>
-      <a><a-icon type="github" /></a>
-      <a>Ant Design</a>
+      <a target="_blank" :key="index" :href="item.link ? item.link : 'javascript: void(0)'" v-for="(item, index) in linkList">
+        <a-icon v-if="item.icon" :type="item.icon"/>{{item.name}}
+      </a>
     </div>
     <div class="copyright">
-      Copyright<a-icon type="copyright" />2018 XXXXXXXXXXXXXXXXXX出品
+      Copyright<a-icon type="copyright" />{{copyright}}
     </div>
   </div>
 </template>
@@ -15,6 +15,7 @@
 import AIcon from 'ant-design-vue/es/icon/icon'
 export default {
   name: 'GlobalFooter',
+  props: ['copyright', 'linkList'],
   components: {AIcon}
 }
 </script>

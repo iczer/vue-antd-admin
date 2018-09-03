@@ -16,7 +16,7 @@
         <slot></slot>
       </a-layout-content>
       <a-layout-footer style="padding: 0px">
-        <global-footer />
+        <global-footer :link-list="linkList" copyright="2018 ICZER出品" />
       </a-layout-footer>
     </a-layout>
   </a-layout>
@@ -72,6 +72,12 @@ export default {
     },
     layout () {
       return this.$store.state.setting.layout
+    },
+    linkList () {
+      return this.$store.state.setting.footerLinks
+    },
+    copyright () {
+      return this.$store.state.setting.copyright
     }
   },
   methods: {
