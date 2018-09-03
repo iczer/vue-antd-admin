@@ -3,7 +3,7 @@
     <div :class="['global-header-wide', layout]">
       <router-link v-if="isMobile || layout === 'head'" to="/" :class="['logo', isMobile ? null : 'pc', theme]">
         <img width="32" src="static/img/vue-antd-logo.png" />
-        <h1 v-if="!isMobile">Vue Antd Admin</h1>
+        <h1 v-if="!isMobile">{{systemName}}</h1>
       </router-link>
       <a-divider v-if="isMobile" type="vertical" />
       <a-icon v-if="layout === 'side'" class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
@@ -61,6 +61,9 @@ export default {
     },
     theme () {
       return this.layout === 'side' ? 'light' : this.$store.state.setting.theme
+    },
+    systemName () {
+      return this.$store.state.setting.systemName
     }
   },
   methods: {

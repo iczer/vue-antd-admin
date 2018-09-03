@@ -3,7 +3,7 @@
     <div :class="['logo', theme]">
       <router-link to="/dashboard/workplace">
         <img src="static/img/vue-antd-logo.png">
-        <h1>Vue Antd Admin</h1>
+        <h1>{{systemName}}</h1>
       </router-link>
     </div>
     <i-menu :theme="theme" :collapsed="collapsed" :menuData="menuData" @select="onSelect"/>
@@ -40,6 +40,9 @@ export default {
   computed: {
     isMobile () {
       return this.$store.state.setting.isMobile
+    },
+    systemName () {
+      return this.$store.state.setting.systemName
     }
   },
   methods: {

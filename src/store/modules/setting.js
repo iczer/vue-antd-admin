@@ -3,7 +3,8 @@ export default {
   state: {
     isMobile: false,
     theme: 'dark',
-    layout: 'side'
+    layout: 'side',
+    systemName: 'Vue Antd Admin'
   },
   mutations: {
     setDevice (state, isMobile) {
