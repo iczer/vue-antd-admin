@@ -1,14 +1,13 @@
 <template>
-  <span class="">
-    <a-icon type="search" style="font-size: 16px; cursor: pointer;" @click="enterSearchMode"/>
+  <span class="header-search">
+    <a-icon type="search" class="search-icon" @click="enterSearchMode"/>
     <a-auto-complete
       ref="input"
       :dataSource="dataSource"
-      :class="[searchMode ? 'enterSearch' : 'leaveSearch']"
+      :class="['search-input', searchMode ? 'enter' : 'leave']"
       placeholder="站内搜索"
       @blur="leaveSearchMode"
     >
-      <a-input style="" />
     </a-auto-complete>
   </span>
 </template>
@@ -29,7 +28,7 @@ export default {
   methods: {
     enterSearchMode () {
       this.searchMode = true
-      this.$refs.input.focus()
+      setTimeout(() => this.$refs.input.focus(), 300)
     },
     leaveSearchMode () {
       this.searchMode = false
@@ -38,35 +37,32 @@ export default {
 }
 </script>
 
-<style scoped>
-  .enterSearch {
-    width: 225px;
-    border-bottom: 1px rgba(3, 5, 6, 0.23) solid;
-    transition: width 0.3s ease-in-out;
-  }
-  .leaveSearch {
-    width: 0px;
-    border-bottom: 1px rgba(3, 5, 6, 0.23) solid;
-    transition: width 0.3s ease-in-out;
-  }
-  .enterSearch input, .leaveSearch input {
-    border: 0;
-  }
-  .enterSearch input:focus {
-    border: 0;
-    box-shadow: 0 0 0 0;
-  }
-  .leaveSearch input{
-    width: 0px;
-    border: 0;
-  }
-  .fade-enter-active, .fade-leave-active {
-    transition: width .3s;
-  }
-  .fade-enter{
-    width: 200px;
-  }
-  .fade-leave{
-    width: 0px;
+<style lang="less">
+  .header-search{
+    .search-icon{
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .search-input{
+      border: 0;
+      border-bottom: 1px rgba(3, 5, 6, 0.23) solid;
+      transition: width 0.3s ease-in-out;
+      input{
+        border: 0;
+        box-shadow: 0 0 0 0;
+      }
+      &.leave{
+        width: 0px;
+        input{
+          display: none;
+        }
+      }
+      &.enter{
+        width: 200px;
+        input:focus{
+          box-shadow: 0 0 0 0;
+        }
+      }
+    }
   }
 </style>
