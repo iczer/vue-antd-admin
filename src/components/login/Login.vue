@@ -67,7 +67,7 @@
         </a-form>
       </div>
     </div>
-    <global-footer />
+    <global-footer :link-list="linkList" :copyright="copyright" />
   </div>
 </template>
 
@@ -112,6 +112,12 @@ export default {
   computed: {
     systemName () {
       return this.$store.state.setting.systemName
+    },
+    linkList () {
+      return this.$store.state.setting.footerLinks
+    },
+    copyright () {
+      return this.$store.state.setting.copyright
     }
   },
   methods: {

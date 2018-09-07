@@ -16,7 +16,7 @@
         <slot></slot>
       </a-layout-content>
       <a-layout-footer style="padding: 0px">
-        <global-footer :link-list="linkList" copyright="2018 ICZER出品" />
+        <global-footer :link-list="linkList" :copyright="copyright" />
       </a-layout-footer>
     </a-layout>
   </a-layout>

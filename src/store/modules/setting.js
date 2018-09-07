@@ -5,7 +5,7 @@ export default {
     theme: 'dark',
     layout: 'side',
     systemName: 'Vue Antd Admin',
-    copyright: '',
+    copyright: '2018 ICZER 工作室出品',
     footerLinks: [
       {link: 'https://pro.ant.design', name: 'Pro首页'},
       {link: 'https://github.com/iczer/vue-antd-admin', icon: 'github'},
