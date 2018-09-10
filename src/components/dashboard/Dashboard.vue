@@ -7,18 +7,10 @@
             <a-icon type="info-circle-o" />
           </a-tooltip>
           <div>
-            <div style="display: inline-block; font-size: 14px; line-height: 22px; margin-right: 16px">
-              同周比
-              <span>12%</span>
-              <span style="color: #f5222d; font-size: 12px"><a-icon type="caret-up" /></span>
-            </div>
-            <div style="display: inline-block; font-size: 14px; line-height: 22px;">
-              日环比
-              <span>11%</span>
-              <span style="color: #52c41a; font-size: 12px"><a-icon type="caret-down" /></span>
-            </div>
+            <trend style="margin-right: 16px" term="同周比" :percent="12" :is-increase="true" :scale="0" />
+            <trend term="日环比" :target="100" :value="89" :scale="0" />
           </div>
-          <div slot="footer">日均销售额      <span>￥ 234.56</span></div>
+          <div slot="footer">日均销售额<span> ￥234.56</span></div>
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6" style="padding: 12px 12px 24px;">
@@ -29,7 +21,7 @@
           <div>
             <mini-area />
           </div>
-          <div slot="footer">日均销售额      <span>￥ 234.56</span></div>
+          <div slot="footer">日访问量<span> 123,4</span></div>
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6" style="padding: 12px 12px 24px;">
@@ -40,18 +32,21 @@
           <div>
             <mini-bar />
           </div>
-          <div slot="footer">日均销售额      <span>￥ 234.56</span></div>
+          <div slot="footer">转化率 <span>60%</span></div>
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6" style="padding: 12px 12px 24px;">
-        <chart-card title="营销活动说明" total="73%">
+        <chart-card title="运营活动效果" total="73%">
           <a-tooltip title="指标说明" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
           <div>
             <mini-progress target="90" percent="78" color="#13C2C2" height="8px"/>
           </div>
-          <div slot="footer">日均销售额  <span>￥ 234.56</span></div>
+          <div slot="footer">
+            <trend style="margin-right: 16px" term="同周比" :percent="12" :is-increase="true" :scale="0" />
+            <trend term="日环比" :target="100" :value="89" :scale="0" />
+          </div>
         </chart-card>
       </a-col>
     </a-row>
@@ -122,6 +117,7 @@ import Bar from '../chart/Bar'
 import RankingList from '../chart/RankingList'
 import HotSearch from '../analysis/HotSearch'
 import SalesData from '../analysis/SalesData'
+import Trend from '../chart/Trend'
 
 const rankList = []
 
@@ -142,6 +138,7 @@ export default {
     }
   },
   components: {
+    Trend,
     SalesData,
     HotSearch,
     RankingList,
