@@ -1,30 +1,30 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Dashboard from '@/components/dashboard/Dashboard'
-import NotFound from '@/components/exception/404'
-import NotPermit from '@/components/exception/403'
-import ServerError from '@/components/exception/500'
-import PageView from '@/components/layout/PageView'
-import RouteView from '@/components/layout/RouteView'
-import MenuView from '@/components/layout/MenuView'
-import BasicForm from '@/components/form/BasicForm'
-import StepForm from '@/components/form/stepForm/StepForm'
-import AdvancedForm from '@/components/form/advancedForm/AdvancedForm'
-import Success from '@/components/result/Success'
-import Error from '@/components/result/Error'
-import QueryList from '@/components/list/QueryList'
-import StandardList from '@/components/list/StandardList'
-import CardList from '@/components/list/CardList'
-import SearchLayout from '@/components/list/search/SearchLayout'
-import ArticleList from '@/components/list/search/ArticleList'
-import ApplicationList from '@/components/list/search/ApplicationList'
-import ProjectList from '@/components/list/search/ProjectList'
-import WorkPlace from '@/components/dashboard/WorkPlace'
-import Login from '@/components/login/Login'
-import BasicDetail from '@/components/detail/BasicDetail'
-import AdvancedDetail from '@/components/detail/AdvancedDetail'
-import TaskCard from '@/components/task/Index'
-import ColorBox from '@/components/check/Index'
+import Dashboard from '@/pages/dashboard/Analysis'
+import NotFound from '@/pages/exception/404'
+import NotPermit from '@/pages/exception/403'
+import ServerError from '@/pages/exception/500'
+import PageView from '@/layouts/PageView'
+import RouteView from '@/layouts/RouteView'
+import MenuView from '@/layouts/MenuView'
+import BasicForm from '@/pages/form/BasicForm'
+import StepForm from '@/pages/form/stepForm/StepForm'
+import AdvancedForm from '@/pages/form/advancedForm/AdvancedForm'
+import Success from '@/pages/result/Success'
+import Error from '@/pages/result/Error'
+import QueryList from '@/pages/list/QueryList'
+import StandardList from '@/pages/list/StandardList'
+import CardList from '@/pages/list/CardList'
+import SearchLayout from '@/pages/list/search/SearchLayout'
+import ArticleList from '@/pages/list/search/ArticleList'
+import ApplicationList from '@/pages/list/search/ApplicationList'
+import ProjectList from '@/pages/list/search/ProjectList'
+import WorkPlace from '@/pages/dashboard/WorkPlace'
+import Login from '@/pages/login/Login'
+import BasicDetail from '@/pages/detail/BasicDetail'
+import AdvancedDetail from '@/pages/detail/AdvancedDetail'
+import TaskCard from '@/pages/components/TaskCard'
+import ColorBox from '@/pages/components/Palette'
 
 Vue.use(Router)
 
@@ -209,20 +209,20 @@ export default new Router({
           ]
         },
         {
-          path: '/components',
-          redirect: '/components/taskcard',
+          path: '/pages',
+          redirect: '/pages/taskcard',
           name: '小组件',
           icon: 'appstore-o',
           component: PageView,
           children: [
             {
-              path: '/components/taskcard',
+              path: '/pages/taskcard',
               name: '任务卡片',
               icon: 'none',
               component: TaskCard
             },
             {
-              path: '/components/palette',
+              path: '/pages/palette',
               name: '颜色复选框',
               icon: 'none',
               component: ColorBox

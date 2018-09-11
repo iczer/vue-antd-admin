@@ -1,29 +1,29 @@
 <template>
   <a-layout-sider class="sider" width="273">
     <setting-item title="整体风格设置">
-      <img-check-box-group @change="setTheme">
-        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" value="dark"/>
-        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" value="light"/>
-      </img-check-box-group>
+      <img-checkbox-group @change="setTheme">
+        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" value="dark"/>
+        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" value="light"/>
+      </img-checkbox-group>
     </setting-item>
     <setting-item title="主题色">
-      <color-check-box-group @change="onColorChange" :defaultValues="['1', '2', '3']" :multiple="false">
-        <color-check-box ref="colorNode" color="rgb(245, 34, 45)" value="1" />
-        <color-check-box color="rgb(250, 84, 28)" value="2" />
-        <color-check-box color="rgb(250, 173, 20)" value="3" />
-        <color-check-box color="rgb(19, 194, 194)" value="4" />
-        <color-check-box color="rgb(82, 196, 26)" value="5" />
-        <color-check-box color="rgb(24, 144, 255)" value="6" />
-        <color-check-box color="rgb(47, 84, 235)" value="7" />
-        <color-check-box color="rgb(114, 46, 209)" value="8" />
-      </color-check-box-group>
+      <color-checkbox-group @change="onColorChange" :defaultValues="['1', '2', '3']" :multiple="false">
+        <color-checkbox ref="colorNode" color="rgb(245, 34, 45)" value="1" />
+        <color-checkbox color="rgb(250, 84, 28)" value="2" />
+        <color-checkbox color="rgb(250, 173, 20)" value="3" />
+        <color-checkbox color="rgb(19, 194, 194)" value="4" />
+        <color-checkbox color="rgb(82, 196, 26)" value="5" />
+        <color-checkbox color="rgb(24, 144, 255)" value="6" />
+        <color-checkbox color="rgb(47, 84, 235)" value="7" />
+        <color-checkbox color="rgb(114, 46, 209)" value="8" />
+      </color-checkbox-group>
     </setting-item>
     <a-divider/>
     <setting-item title="导航设置">
-      <img-check-box-group @change="setLayout">
-        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" :checked="true" value="side"/>
-        <img-check-box img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" value="head"/>
-      </img-check-box-group>
+      <img-checkbox-group @change="setLayout">
+        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" :checked="true" value="side"/>
+        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" value="head"/>
+      </img-checkbox-group>
     </setting-item>
     <setting-item>
       <a-list :split="false">
@@ -73,21 +73,21 @@ import AListItem from 'ant-design-vue/es/list/Item'
 import AButton from 'ant-design-vue/es/button/button'
 import ASwitch from 'ant-design-vue/es/switch/index'
 import ASelect from 'ant-design-vue/es/select/index'
-import ColorCheckBox from '../check/ColorCheckBox'
-import ImgCheckBox from '../check/ImgCheckBox'
+import ColorCheckbox from '../checkbox/ColorCheckbox'
+import ImgCheckbox from '../checkbox/ImgCheckbox'
 import Clipboard from 'clipboard'
 
 const ASelectOption = ASelect.Option
-const ColorCheckBoxGroup = ColorCheckBox.Group
-const ImgCheckBoxGroup = ImgCheckBox.Group
+const ColorCheckboxGroup = ColorCheckbox.Group
+const ImgCheckboxGroup = ImgCheckbox.Group
 
 export default {
   name: 'Setting',
   components: {
-    ImgCheckBoxGroup,
-    ImgCheckBox,
-    ColorCheckBoxGroup,
-    ColorCheckBox,
+    ImgCheckboxGroup,
+    ImgCheckbox,
+    ColorCheckboxGroup,
+    ColorCheckbox,
     ASelectOption,
     ASelect,
     ASwitch,
