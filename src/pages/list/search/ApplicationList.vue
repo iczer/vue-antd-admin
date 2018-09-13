@@ -9,17 +9,16 @@
           <a-card-meta title="Angular">
             <a-avatar slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png" size="small" />
           </a-card-meta>
-          <ul class="actions" slot="actions">
-            <a-tooltip class="tool"  title="下载">
+            <a-tooltip class="tool"  title="下载" slot="actions">
               <a-icon type="download" />
             </a-tooltip>
-            <a-tooltip class="tool"  title="编辑">
+            <a-tooltip class="tool"  title="编辑" slot="actions">
               <a-icon type="edit" />
             </a-tooltip>
-            <a-tooltip class="tool"  title="分享">
+            <a-tooltip class="tool"  title="分享" slot="actions">
               <a-icon type="share-alt" />
             </a-tooltip>
-            <a-dropdown class="tool">
+            <a-dropdown class="tool" slot="actions">
               <a-icon type="ellipsis" />
               <a-menu slot="overlay">
                 <a-menu-item>1 item</a-menu-item>
@@ -27,7 +26,6 @@
                 <a-menu-item>3 item</a-menu-item>
               </a-menu>
             </a-dropdown>
-          </ul>
           <div class="content">
             <div>
               <p>活跃用户</p>
@@ -98,31 +96,6 @@ export default {
         font-size: 12px;
         line-height: 20px;
         margin-bottom: 4px;
-      }
-    }
-  }
-  .actions{
-    border-top: 1px solid #e8e8e8;
-    background: #f5f8fa;
-    zoom: 1;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    height: 47px;
-    .tool{
-      width: 25%;
-      float: left;
-      text-align: center;
-      margin: 12px 0;
-      color: rgba(0,0,0,.45);
-      cursor: pointer;
-      font-size: 16px;
-      line-height: 22px;
-      &:hover{
-        color: #1890ff;
-      }
-      &:not(:last-child) {
-        border-right: 1px solid #e8e8e8;
       }
     }
   }

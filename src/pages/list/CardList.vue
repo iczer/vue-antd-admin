@@ -17,10 +17,8 @@
               <a-avatar class="card-avatar" slot="avatar" :src="item.avatar" size="large" />
               <div class="meta-content" slot="description">{{item.content}}</div>
             </a-card-meta>
-            <ul class="ant-card-actions" slot="actions">
-              <li><a >操作一</a></li>
-              <li><a >操作二</a></li>
-            </ul>
+            <a slot="actions">操作一</a>
+            <a slot="actions">操作一</a>
           </a-card>
         </template>
       </a-list-item>
@@ -70,28 +68,6 @@ export default {
     width: 48px;
     height: 48px;
     border-radius: 48px;
-  }
-  .ant-card-actions{
-    background: #f7f9fa;
-    li{
-      float: left;
-      text-align: center;
-      margin: 12px 0;
-      color: rgba(0, 0, 0, 0.45);
-      width: 50%;
-      a{
-        color: rgba(0,0,0,.45);
-        line-height: 22px;
-        display: inline-block;
-        width: 100%;
-      }
-      a:hover{
-        color: #1890ff;
-      }
-    }
-    li:not(:last-child) {
-      border-right: 1px solid #e8e8e8;
-    }
   }
   .new-btn{
     background-color: #fff;
