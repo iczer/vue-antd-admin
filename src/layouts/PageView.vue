@@ -4,7 +4,10 @@
       <img :src="extraImage"/>
     </div>
     <transition name="page-toggle">
-      <router-view  ref="page"/>
+      <keep-alive v-if="multipage">
+        <router-view ref="page" />
+      </keep-alive>
+      <router-view ref="page" v-else />
     </transition>
   </page-layout>
 </template>
@@ -21,6 +24,11 @@ export default {
       desc: '',
       linkList: [],
       extraImage: ''
+    }
+  },
+  computed: {
+    multipage () {
+      return this.$store.state.setting.multipage
     }
   },
   mounted () {

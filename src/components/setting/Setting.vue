@@ -55,6 +55,10 @@
           显示抽屉按钮
           <a-switch slot="actions" size="small" />
         </a-list-item>
+        <a-list-item>
+          多页签模式
+          <a-switch :checked="multipage" slot="actions" size="small" @change="setMultipage" />
+        </a-list-item>
       </a-list>
     </setting-item>
     <a-divider />
@@ -99,6 +103,11 @@ export default {
     SettingItem,
     AIcon,
     ALayoutSider},
+  computed: {
+    multipage () {
+      return this.$store.state.setting.multipage
+    }
+  },
   methods: {
     onColorChange (values, colors) {
       if (colors.length > 0) {
@@ -118,6 +127,9 @@ export default {
         _this.$message.success(`复制成功`)
         clipboard.destroy()
       })
+    },
+    setMultipage (checked) {
+      this.$store.commit('setting/setMultipage', checked)
     }
   }
 }
