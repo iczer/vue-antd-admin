@@ -1,7 +1,9 @@
 <template>
   <global-layout>
-    <a-tabs v-if="multipage" :active-key="activePage" style="margin-bottom: 8px" :hide-add="true" type="editable-card" @change="changePage" @edit="editPage">
-      <a-tab-pane v-on="$listeners" :key="page.fullPath" v-for="page in pageList" :tab="page.name"/>
+    <a-tabs @contextmenu.native="e => onContextmenu(e)" v-if="multipage" :active-key="activePage" style="margin-bottom: 8px" :hide-add="true" type="editable-card" @change="changePage" @edit="editPage">
+      <a-tab-pane :id="page.fullPath" :key="page.fullPath" v-for="page in pageList">
+        <span slot="tab" :pagekey="page.fullPath">{{page.name}}</span>
+      </a-tab-pane>
     </a-tabs>
     <transition name="page-toggle">
       <keep-alive v-if="multipage">
@@ -76,6 +78,23 @@ export default {
       this.linkList = this.linkList.filter(item => item !== key)
       index = index >= this.linkList.length ? this.linkList.length - 1 : index
       this.activePage = this.linkList[index]
+    },
+    onTabClick (key) {
+      console.log(key)
+    },
+    onContextmenu (e) {
+      const tab = this.findTab(e.target)
+      if (tab !== null) {
+        e.preventDefault()
+        console.log(this.getPageKey(tab))
+      }
+    },
+    findTab (target) {
+      let role = target.getAttribute('role')
+      return role === 'tab' ? target : (role === 'tablist' ? null : this.findTab(target.parentNode))
+    },
+    getPageKey (tab) {
+      return tab.childNodes[0].childNodes[0].getAttribute('pagekey')
     }
   }
 }
