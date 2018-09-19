@@ -1,6 +1,15 @@
 <template>
   <global-layout>
-    <a-tabs @contextmenu.native="e => onContextmenu(e)" v-if="multipage" :active-key="activePage" style="margin-bottom: 8px" :hide-add="true" type="editable-card" @change="changePage" @edit="editPage">
+    <contextmenu :itemList="menuItemList" :visible.sync="menuVisible" @select="onMenuSelect" />
+    <a-tabs
+      @contextmenu.native="e => onContextmenu(e)"
+      v-if="multipage"
+      :active-key="activePage"
+      style="margin-top: -8px; margin-bottom: 8px"
+      :hide-add="true"
+      type="editable-card"
+      @change="changePage"
+      @edit="editPage">
       <a-tab-pane :id="page.fullPath" :key="page.fullPath" v-for="page in pageList">
         <span slot="tab" :pagekey="page.fullPath">{{page.name}}</span>
       </a-tab-pane>
@@ -17,15 +26,25 @@
 <script>
 import GlobalLayout from './GlobalLayout'
 import ATabs from 'ant-design-vue/es/tabs'
+import AMenu from 'ant-design-vue/es/menu/index'
+import AIcon from 'ant-design-vue/es/icon/icon'
+import Contextmenu from '../components/menu/Contextmenu'
 const ATabPane = ATabs.TabPane
+const AMenuItem = AMenu.Item
 export default {
   name: 'MenuView',
-  components: {ATabPane, ATabs, GlobalLayout},
+  components: {Contextmenu, AIcon, AMenuItem, AMenu, ATabPane, ATabs, GlobalLayout},
   data () {
     return {
       pageList: [],
       linkList: [],
-      activePage: ''
+      activePage: '',
+      menuVisible: false,
+      menuItemList: [
+        { key: '1', icon: 'arrow-left', text: '关闭左侧' },
+        { key: '2', icon: 'arrow-right', text: '关闭右侧' },
+        { key: '3', icon: 'close', text: '关闭其它' }
+      ]
     }
   },
   computed: {
@@ -66,8 +85,6 @@ export default {
     editPage (key, action) {
       this[action](key)
     },
-    add () {
-    },
     remove (key) {
       if (this.pageList.length === 1) {
         this.$message.warning('这是最后一页，不能再关闭了啦')
@@ -79,22 +96,67 @@ export default {
       index = index >= this.linkList.length ? this.linkList.length - 1 : index
       this.activePage = this.linkList[index]
     },
-    onTabClick (key) {
-      console.log(key)
-    },
     onContextmenu (e) {
-      const tab = this.findTab(e.target)
-      if (tab !== null) {
+      const pagekey = this.getPageKey(e.target)
+      if (pagekey !== null) {
         e.preventDefault()
-        console.log(this.getPageKey(tab))
+        this.menuVisible = true
       }
     },
-    findTab (target) {
-      let role = target.getAttribute('role')
-      return role === 'tab' ? target : (role === 'tablist' ? null : this.findTab(target.parentNode))
+    /**
+     * 由于ant-design-vue组件库的TabPane组件暂不支持自定义监听器，无法直接获取到右键target所在标签页的 pagekey 。故增加此方法用于
+     * 查询右键target所在标签页的标识 pagekey ，以用于自定义右键菜单的事件处理。
+     * 注：TabPane组件支持自定义监听器后可去除该方法并重构 ‘自定义右键菜单的事件处理’
+     * @param target 查询开始目标
+     * @param count 查询层级深度 （查找层级最多不超过3层，超过3层深度直接返回 null）
+     * @returns {String}
+     */
+    getPageKey (target, depth) {
+      depth = depth || 0
+      if (depth > 2) {
+        return null
+      }
+      let pageKey = target.getAttribute('pagekey')
+      pageKey = pageKey || (target.previousElementSibling ? target.previousElementSibling.getAttribute('pagekey') : null)
+      return pageKey || (target.firstElementChild ? this.getPageKey(target.firstElementChild, ++depth) : null)
     },
-    getPageKey (tab) {
-      return tab.childNodes[0].childNodes[0].getAttribute('pagekey')
+    onMenuSelect (key, target) {
+      let pageKey = this.getPageKey(target)
+      switch (key) {
+        case '1':
+          this.closeLeft(pageKey)
+          break
+        case '2':
+          this.closeRight(pageKey)
+          break
+        case '3':
+          this.closeOthers(pageKey)
+          break
+        default:
+          break
+      }
+    },
+    closeOthers (pageKey) {
+      let index = this.linkList.indexOf(pageKey)
+      this.linkList = this.linkList.slice(index, index + 1)
+      this.pageList = this.pageList.slice(index, index + 1)
+      this.activePage = this.linkList[0]
+    },
+    closeLeft (pageKey) {
+      let index = this.linkList.indexOf(pageKey)
+      this.linkList = this.linkList.slice(index)
+      this.pageList = this.pageList.slice(index)
+      if (this.linkList.indexOf(this.activePage) < 0) {
+        this.activePage = this.linkList[0]
+      }
+    },
+    closeRight (pageKey) {
+      let index = this.linkList.indexOf(pageKey)
+      this.linkList = this.linkList.slice(0, index + 1)
+      this.pageList = this.pageList.slice(0, index + 1)
+      if (this.linkList.indexOf(this.activePage < 0)) {
+        this.activePage = this.linkList[this.linkList.length - 1]
+      }
     }
   }
 }
