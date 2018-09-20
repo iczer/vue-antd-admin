@@ -23,36 +23,19 @@
 </template>
 
 <script>
-import ALayout from 'ant-design-vue/es/layout'
 import GlobalHeader from './GlobalHeader'
-import AIcon from 'ant-design-vue/es/icon/icon'
 import GlobalFooter from './GlobalFooter'
 import Drawer from '../components/tool/Drawer'
 import SiderMenu from '../components/menu/SiderMenu'
 import Setting from '../components/setting/Setting'
 
-const ALayoutSider = ALayout.Sider
-const ALayoutHeader = ALayout.Header
-const ALayoutContent = ALayout.Content
-const ALayoutFooter = ALayout.Footer
 const minHeight = window.innerHeight - 64 - 24 - 122
 
 let menuData = []
 
 export default {
   name: 'GlobalLayout',
-  components: {
-    Setting,
-    SiderMenu,
-    Drawer,
-    GlobalFooter,
-    AIcon,
-    GlobalHeader,
-    ALayout,
-    ALayoutSider,
-    ALayoutHeader,
-    ALayoutContent,
-    ALayoutFooter},
+  components: {Setting, SiderMenu, Drawer, GlobalFooter, GlobalHeader},
   data () {
     return {
       minHeight: minHeight + 'px',

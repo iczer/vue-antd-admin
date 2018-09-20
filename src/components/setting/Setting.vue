@@ -67,42 +67,18 @@
 </template>
 
 <script>
-import ALayoutSider from 'ant-design-vue/es/layout/Sider'
-import AIcon from 'ant-design-vue/es/icon/icon'
 import SettingItem from './SettingItem'
 import StyleItem from './StyleItem'
-import ADivider from 'ant-design-vue/es/divider/index'
-import AList from 'ant-design-vue/es/list/index'
-import AListItem from 'ant-design-vue/es/list/Item'
-import AButton from 'ant-design-vue/es/button/button'
-import ASwitch from 'ant-design-vue/es/switch/index'
-import ASelect from 'ant-design-vue/es/select/index'
 import ColorCheckbox from '../checkbox/ColorCheckbox'
 import ImgCheckbox from '../checkbox/ImgCheckbox'
 import Clipboard from 'clipboard'
 
-const ASelectOption = ASelect.Option
 const ColorCheckboxGroup = ColorCheckbox.Group
 const ImgCheckboxGroup = ImgCheckbox.Group
 
 export default {
   name: 'Setting',
-  components: {
-    ImgCheckboxGroup,
-    ImgCheckbox,
-    ColorCheckboxGroup,
-    ColorCheckbox,
-    ASelectOption,
-    ASelect,
-    ASwitch,
-    AButton,
-    AListItem,
-    AList,
-    ADivider,
-    StyleItem,
-    SettingItem,
-    AIcon,
-    ALayoutSider},
+  components: {ImgCheckboxGroup, ImgCheckbox, ColorCheckboxGroup, ColorCheckbox, StyleItem, SettingItem},
   computed: {
     multipage () {
       return this.$store.state.setting.multipage

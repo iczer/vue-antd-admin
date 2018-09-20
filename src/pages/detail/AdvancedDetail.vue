@@ -122,21 +122,11 @@
 
 <script>
 import PageLayout from '../../layouts/PageLayout'
-import AButtonGroup from 'ant-design-vue/es/button/button-group'
-import AButton from 'ant-design-vue/es/button/button'
-import AIcon from 'ant-design-vue/es/icon/icon'
 import DetailList from '../../components/tool/DetailList'
-import ARow from 'ant-design-vue/es/grid/Row'
-import ACol from 'ant-design-vue/es/grid/Col'
-import ACard from 'ant-design-vue/es/card/Card'
-import ASteps from 'ant-design-vue/es/steps/index'
 import AStepItem from '../../components/tool/AStepItem'
-import ADivider from 'ant-design-vue/es/divider/index'
-import ATable from 'ant-design-vue/es/table'
 import {operation1, operation2, operation3, operationColumns} from '../../mock/common/tableData'
 
 const DetailListItem = DetailList.Item
-const AStep = ASteps.Step
 const AStepItemGroup = AStepItem.Group
 
 const tabList = [
@@ -171,22 +161,7 @@ export default {
       console.log(key)
     }
   },
-  components: {
-    ATable,
-    ADivider,
-    AStepItemGroup,
-    AStepItem,
-    AStep,
-    ASteps,
-    ACard,
-    ACol,
-    ARow,
-    DetailListItem,
-    DetailList,
-    AIcon,
-    AButton,
-    AButtonGroup,
-    PageLayout}
+  components: {AStepItemGroup, AStepItem, DetailListItem, DetailList, PageLayout}
 }
 </script>
 

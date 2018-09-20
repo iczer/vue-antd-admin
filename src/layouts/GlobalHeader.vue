@@ -25,32 +25,14 @@
 </template>
 
 <script>
-import ALayout from 'ant-design-vue/es/layout'
-import AIcon from 'ant-design-vue/es/icon/icon'
-import AInputSearch from 'ant-design-vue/es/input/Search'
 import HeaderSearch from './HeaderSearch'
 import HeaderNotice from './HeaderNotice'
-import ATooltip from 'ant-design-vue/es/tooltip/Tooltip'
 import HeaderAvatar from './HeaderlAvatar'
-import ADivider from 'ant-design-vue/es/divider/index'
 import IMenu from '../components/menu/menu'
 
-const ALayoutSider = ALayout.Sider
-const ALayoutHeader = ALayout.Header
 export default {
   name: 'GlobalHeader',
-  components: {
-    IMenu,
-    ADivider,
-    HeaderAvatar,
-    ATooltip,
-    HeaderNotice,
-    HeaderSearch,
-    AInputSearch,
-    AIcon,
-    ALayout,
-    ALayoutSider,
-    ALayoutHeader},
+  components: {IMenu, HeaderAvatar, HeaderNotice, HeaderSearch},
   props: ['collapsed', 'menuData'],
   computed: {
     isMobile () {

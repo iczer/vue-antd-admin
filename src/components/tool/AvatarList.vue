@@ -43,7 +43,6 @@ const Item = {
 }
 export default {
   name: 'AvatarList',
-  components: {ATooltip},
   Item: Item
 }
 </script>

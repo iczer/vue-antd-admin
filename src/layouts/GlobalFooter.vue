@@ -12,11 +12,9 @@
 </template>
 
 <script>
-import AIcon from 'ant-design-vue/es/icon/icon'
 export default {
   name: 'GlobalFooter',
-  props: ['copyright', 'linkList'],
-  components: {AIcon}
+  props: ['copyright', 'linkList']
 }
 </script>
 

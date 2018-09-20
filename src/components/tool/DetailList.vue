@@ -9,7 +9,6 @@
 
 <script>
 import ACol from 'ant-design-vue/es/grid/Col'
-import ARow from 'ant-design-vue/es/grid/Row'
 const Item = {
   name: 'DetailListItem',
   props: {
@@ -91,7 +90,6 @@ export default {
       default: 'horizontal'
     }
   },
-  components: {ARow, ACol},
   provide () {
     return {
       col: this.col > 4 ? 4 : this.col

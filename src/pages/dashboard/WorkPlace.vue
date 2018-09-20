@@ -89,39 +89,12 @@
 <script>
 import PageHeader from '../../components/page/PageHeader'
 import PageLayout from '../../layouts/PageLayout'
-import AAvatar from 'ant-design-vue/es/avatar/Avatar'
 import HeadInfo from '../../components/tool/HeadInfo'
-import ARow from 'ant-design-vue/es/grid/Row'
-import ACol from 'ant-design-vue/es/grid/Col'
-import ACard from 'ant-design-vue/es/card/Card'
-import ACardGrid from 'ant-design-vue/es/card/Grid'
-import ACardMeta from 'ant-design-vue/es/card/Meta'
-import AList from 'ant-design-vue/es/list/index'
-import AListItem from 'ant-design-vue/es/list/Item'
-import AButton from 'ant-design-vue/es/button/button'
-import AIcon from 'ant-design-vue/es/icon/icon'
 import Radar from '../../components/chart/Radar'
-
-const AListItemMeta = AListItem.Meta
 
 export default {
   name: 'WorkPlace',
-  components: {
-    Radar,
-    AIcon,
-    AButton,
-    AListItemMeta,
-    AListItem,
-    AList,
-    ACardMeta,
-    ACardGrid,
-    ACard,
-    ACol,
-    ARow,
-    HeadInfo,
-    AAvatar,
-    PageLayout,
-    PageHeader},
+  components: {Radar, HeadInfo, PageLayout, PageHeader},
   data () {
     return {
       projects: [],

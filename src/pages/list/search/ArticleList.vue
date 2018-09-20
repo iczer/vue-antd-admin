@@ -33,18 +33,10 @@
 </template>
 
 <script>
-import ACard from 'ant-design-vue/es/card/Card'
 import SearchForm from './SearchForm'
-import AList from 'ant-design-vue/es/list'
-import AListItem from 'ant-design-vue/es/list/Item'
-import ATag from 'ant-design-vue/es/tag/Tag'
-import AAvatar from 'ant-design-vue/es/avatar/Avatar'
-import AIcon from 'ant-design-vue/es/icon/icon'
-
-const AListItemMeta = AListItem.Meta
 export default {
   name: 'ArticleList',
-  components: {AIcon, ATag, AAvatar, AListItem, AListItemMeta, AList, SearchForm, ACard}
+  components: {SearchForm}
 }
 </script>
 

@@ -5,10 +5,8 @@
 </template>
 
 <script>
-import ACheckableTag from 'ant-design-vue/es/tag/CheckableTag'
 export default {
   name: 'TagSelectOption',
-  components: {ACheckableTag},
   props: {
     size: {
       type: String,

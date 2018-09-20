@@ -5,11 +5,9 @@
 </template>
 
 <script>
-import ACard from 'ant-design-vue/es/card/Card'
 export default {
   name: 'TaskItem',
-  props: ['content'],
-  components: {ACard}
+  props: ['content']
 }
 </script>
 

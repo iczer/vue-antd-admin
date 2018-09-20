@@ -10,8 +10,6 @@
 </template>
 
 <script>
-import AIcon from 'ant-design-vue/es/icon/icon'
-
 const Group = {
   name: 'AStepItemGroup',
   render (h) {
@@ -26,7 +24,6 @@ const Group = {
 export default {
   name: 'AStepItem',
   Group: Group,
-  components: {AIcon},
   props: ['title', 'icon', 'link', 'titleStyle', 'iconStyle'],
   methods: {
     go () {

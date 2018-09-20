@@ -67,50 +67,10 @@
 </template>
 
 <script>
-import ACard from 'ant-design-vue/es/card/Card'
-import ARow from 'ant-design-vue/es/grid/Row'
-import ACol from 'ant-design-vue/es/grid/Col'
 import HeadInfo from '../../components/tool/HeadInfo'
-import AButton from 'ant-design-vue/es/button/button'
-import AList from 'ant-design-vue/es/list/index'
-import AListItem from 'ant-design-vue/es/list/Item'
-import AAvatar from 'ant-design-vue/es/avatar/Avatar'
-import AProgress from 'ant-design-vue/es/progress'
-import ADropdown from 'ant-design-vue/es/dropdown'
-import AMenu from 'ant-design-vue/es/menu/index'
-import AIcon from 'ant-design-vue/es/icon/icon'
-import AButtonGroup from 'ant-design-vue/es/button/button-group'
-import AInput from 'ant-design-vue/es/input/Input'
-import AInputSearch from 'ant-design-vue/es/input/Search'
-import ARadioGroup from 'ant-design-vue/es/radio/Group'
-import ARadio from 'ant-design-vue/es/radio'
-
-const AListItemMeta = AListItem.Meta
-const AMenuItem = AMenu.Item
-const ARadioButton = ARadio.Button
 export default {
   name: 'StandardList',
-  components: {
-    ARadioButton,
-    ARadio,
-    ARadioGroup,
-    AInputSearch,
-    AInput,
-    AButtonGroup,
-    AIcon,
-    AMenuItem,
-    AMenu,
-    ADropdown,
-    AProgress,
-    AAvatar,
-    AListItemMeta,
-    AListItem,
-    AList,
-    AButton,
-    HeadInfo,
-    ACol,
-    ARow,
-    ACard}
+  components: {HeadInfo}
 }
 </script>
 

@@ -28,12 +28,8 @@
 </template>
 
 <script>
-import AAlert from 'ant-design-vue/es/alert/index'
-import ATable from 'ant-design-vue/es/table'
-
 export default {
   name: 'StandardTable',
-  components: {ATable, AAlert},
   props: ['bordered', 'loading', 'columns', 'dataSource', 'rowKey', 'pagination', 'selectedRows'],
   data () {
     return {

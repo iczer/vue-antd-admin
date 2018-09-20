@@ -28,13 +28,8 @@
 </template>
 
 <script>
-import ABreadcrumb from 'ant-design-vue/es/breadcrumb'
-import AAvatar from 'ant-design-vue/es/avatar/Avatar'
-
-const ABreadcrumbItem = ABreadcrumb.Item
 export default {
   name: 'PageHeader',
-  components: {AAvatar, ABreadcrumbItem, ABreadcrumb},
   props: {
     title: {
       type: String,

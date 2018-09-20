@@ -21,10 +21,8 @@
 </template>
 
 <script>
-import ACard from 'ant-design-vue/es/card/Card'
 export default {
   name: 'ChartCard',
-  components: {ACard},
   props: ['title', 'total']
 }
 </script>

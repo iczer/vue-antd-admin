@@ -68,22 +68,14 @@
 </template>
 
 <script>
-import ACard from 'ant-design-vue/es/card/Card'
-import AForm from 'ant-design-vue/es/form/Form'
-import AFormItem from 'ant-design-vue/es/form/FormItem'
-import AInput from 'ant-design-vue/es/input/Input'
 import TagSelect from '../../../components/tool/TagSelect'
 import FormRow from '../../../components/form/FormRow'
-import ASelect from 'ant-design-vue/es/select/index'
-import ARow from 'ant-design-vue/es/grid/Row'
-import ACol from 'ant-design-vue/es/grid/Col'
 
 const TagSelectOption = TagSelect.Option
-const ASelectOption = ASelect.Option
 
 export default {
   name: 'SearchForm',
-  components: {ACol, ARow, ASelectOption, ASelect, FormRow, TagSelectOption, TagSelect, AInput, AFormItem, AForm, ACard},
+  components: {FormRow, TagSelectOption, TagSelect},
   methods: {
     lookMyself () {
       this.form.setFieldsValue({

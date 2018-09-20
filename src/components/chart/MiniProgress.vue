@@ -13,10 +13,8 @@
 </template>
 
 <script>
-import ATooltip from 'ant-design-vue/es/tooltip/Tooltip'
 export default {
   name: 'MiniProgress',
-  components: {ATooltip},
   props: ['target', 'color', 'percent', 'height']
 }
 </script>

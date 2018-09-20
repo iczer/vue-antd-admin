@@ -11,13 +11,10 @@
 </template>
 
 <script>
-import AForm from 'ant-design-vue/es/form/Form'
-import AFormItem from 'ant-design-vue/es/form/FormItem'
-import AButton from 'ant-design-vue/es/button/button'
 import Result from '../../../components/result/Result'
 export default {
   name: 'Step3',
-  components: {Result, AButton, AFormItem, AForm},
+  components: {Result},
   methods: {
     doOnceAgin () {
       this.$emit('finish')

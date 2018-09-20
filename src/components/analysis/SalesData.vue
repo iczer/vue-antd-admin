@@ -16,11 +16,7 @@
 </template>
 
 <script>
-import ARadio from 'ant-design-vue/es/radio'
 const DataSet = require('@antv/data-set')
-
-const ARadioGroup = ARadio.Group
-const ARadioButton = ARadio.Button
 
 const sourceData = [
   { item: '事例一', count: 40 },
@@ -46,7 +42,6 @@ dv.transform({
 const data = dv.rows
 export default {
   name: 'SalesData',
-  components: {ARadioGroup, ARadioButton},
   data () {
     return {
       data,

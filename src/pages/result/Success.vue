@@ -36,33 +36,14 @@
 
 <script>
 import Result from '../../components/result/Result'
-import ACard from 'ant-design-vue/es/card/Card'
-import AButton from 'ant-design-vue/es/button/button'
-import ACol from 'ant-design-vue/es/grid/Col'
-import ARow from 'ant-design-vue/es/grid/Row'
-import ASteps from 'ant-design-vue/es/steps/index'
-import AIcon from 'ant-design-vue/es/icon/icon'
 import DetailList from '../../components/tool/DetailList'
 import AStepItem from '../../components/tool/AStepItem'
 
-const AStep = ASteps.Step
 const AStepItemGroup = AStepItem.Group
 const DetailListItem = DetailList.Item
 export default {
   name: 'Success',
-  components: {
-    AStepItemGroup,
-    AStepItem,
-    DetailListItem,
-    DetailList,
-    AIcon,
-    AStep,
-    ASteps,
-    ARow,
-    ACol,
-    AButton,
-    ACard,
-    Result},
+  components: {AStepItemGroup, AStepItem, DetailListItem, DetailList, Result},
   data () {
     return {
       title: '提交成功',

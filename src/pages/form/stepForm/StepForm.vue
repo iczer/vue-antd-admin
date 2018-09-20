@@ -14,17 +14,13 @@
 </template>
 
 <script>
-import ACard from 'ant-design-vue/es/card/Card'
-import ASteps from 'ant-design-vue/es/steps/index'
 import Step1 from './Step1'
 import Step2 from './Step2'
 import Step3 from './Step3'
 
-const AStep = ASteps.Step
-
 export default {
   name: 'StepForm',
-  components: {Step1, Step2, Step3, AStep, ASteps, ACard},
+  components: {Step1, Step2, Step3},
   data () {
     return {
       desc: '将一个冗长或用户不熟悉的表单任务分成多个步骤，指导用户完成。',

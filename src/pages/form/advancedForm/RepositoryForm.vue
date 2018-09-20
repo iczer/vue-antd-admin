@@ -75,22 +75,9 @@
 </template>
 
 <script>
-import AForm from 'ant-design-vue/es/form/Form'
-import AFormItem from 'ant-design-vue/es/form/FormItem'
-import ACol from 'ant-design-vue/es/grid/Col'
-import ARow from 'ant-design-vue/es/grid/Row'
-import AInput from 'ant-design-vue/es/input/Input'
-import ASelect from 'ant-design-vue/es/select/index'
-import ADatePicker from 'ant-design-vue/es/date-picker'
-import AButton from 'ant-design-vue/es/button/button'
-
-const ASelectOption = ASelect.Option
-const ARangePicker = ADatePicker.RangePicker
-
 export default {
   name: 'RepositoryForm',
   props: ['showSubmit'],
-  components: {AButton, ARangePicker, ASelectOption, ASelect, AInput, ARow, ACol, AFormItem, AForm},
   methods: {
     handleSubmit (e) {
       e.preventDefault()

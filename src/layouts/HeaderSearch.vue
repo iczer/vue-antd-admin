@@ -13,12 +13,8 @@
 </template>
 
 <script>
-import AIcon from 'ant-design-vue/es/icon/icon'
-import AAutoComplete from 'ant-design-vue/es/auto-complete/index'
-import AInput from 'ant-design-vue/es/input/Input'
 export default {
   name: 'HeaderSearch',
-  components: {AInput, AAutoComplete, AIcon},
   data () {
     return {
       dataSource: ['选项一', '选项二'],

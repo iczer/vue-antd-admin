@@ -19,17 +19,8 @@
 </template>
 
 <script>
-import AInput from 'ant-design-vue/es/input/Input'
-import AInputGroup from 'ant-design-vue/es/input/Group'
-import AButton from 'ant-design-vue/es/button/button'
-import AInputSearch from 'ant-design-vue/es/input/Search'
-import ATabs from 'ant-design-vue/es/tabs'
-
-const ATabPane = ATabs.TabPane
-
 export default {
   name: 'SearchLayout',
-  components: {ATabPane, ATabs, AInputSearch, AButton, AInputGroup, AInput},
   computed: {
     activeKey () {
       switch (this.$route.path) {

@@ -83,35 +83,8 @@
 </template>
 
 <script>
-import ACard from 'ant-design-vue/es/card/Card'
-import AForm from 'ant-design-vue/es/form/Form'
-import AFormItem from 'ant-design-vue/es/form/FormItem'
-import AInput from 'ant-design-vue/es/input/Input'
-import ADatePicker from 'ant-design-vue/es/date-picker'
-import ATextarea from 'ant-design-vue/es/input/TextArea'
-import AInputNumber from 'ant-design-vue/es/input-number/index'
-import ARadioGroup from 'ant-design-vue/es/radio/Group'
-import ARadio from 'ant-design-vue/es/radio/Radio'
-import ASelect from 'ant-design-vue/es/select/index'
-import AButton from 'ant-design-vue/es/button/button'
-
-const ARangePicker = ADatePicker.RangePicker
-const ASelectOption = ASelect.Option
 export default {
   name: 'BasicForm',
-  components: {
-    AButton,
-    ASelectOption,
-    ASelect,
-    ARadio,
-    ARadioGroup,
-    AInputNumber,
-    ATextarea,
-    ARangePicker,
-    AInput,
-    AFormItem,
-    AForm,
-    ACard},
   data () {
     return {
       desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',

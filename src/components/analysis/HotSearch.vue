@@ -34,11 +34,7 @@
 </template>
 
 <script>
-import ARow from 'ant-design-vue/es/grid/Row'
-import ACol from 'ant-design-vue/es/grid/Col'
-import AIcon from 'ant-design-vue/es/icon/icon'
 import MiniArea from '../chart/MiniArea'
-import ATable from 'ant-design-vue/es/table'
 
 const searchData = []
 for (let i = 0; i < 50; i++) {
@@ -79,7 +75,7 @@ const columns = [
 
 export default {
   name: 'HotSearch',
-  components: {ATable, MiniArea, AIcon, ARow, ACol},
+  components: {MiniArea},
   data () {
     return {
       searchData,

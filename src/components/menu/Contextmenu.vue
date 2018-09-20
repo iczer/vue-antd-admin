@@ -7,12 +7,8 @@
 </template>
 
 <script>
-import AMenu from 'ant-design-vue/es/menu/index'
-import AIcon from 'ant-design-vue/es/icon/icon'
-const AMenuItem = AMenu.Item
 export default {
   name: 'Contextmenu',
-  components: {AIcon, AMenuItem, AMenu},
   props: {
     visible: {
       type: Boolean,

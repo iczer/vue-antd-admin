@@ -15,10 +15,8 @@
 </template>
 
 <script>
-import AIcon from 'ant-design-vue/es/icon/icon'
 export default {
   name: 'Result',
-  components: {AIcon},
   props: ['isSuccess', 'title', 'description']
 }
 </script>

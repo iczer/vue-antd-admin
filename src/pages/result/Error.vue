@@ -25,12 +25,9 @@
 
 <script>
 import Result from '../../components/result/Result'
-import ACard from 'ant-design-vue/es/card/Card'
-import AIcon from 'ant-design-vue/es/icon/icon'
-import AButton from 'ant-design-vue/es/button/button'
 export default {
   name: 'Error',
-  components: {AButton, AIcon, ACard, Result},
+  components: {Result},
   data () {
     return {
       title: '提交失败',

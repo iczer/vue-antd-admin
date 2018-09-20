@@ -11,11 +11,10 @@
 </template>
 
 <script>
-import ALayoutSider from 'ant-design-vue/es/layout/Sider'
 import IMenu from './menu'
 export default {
   name: 'SiderMenu',
-  components: {IMenu, ALayoutSider},
+  components: {IMenu},
   props: {
     collapsible: {
       type: Boolean,

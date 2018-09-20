@@ -7,14 +7,11 @@
 </template>
 
 <script>
-import ASelect from 'ant-design-vue/es/select/index'
-import ACheckableTag from 'ant-design-vue/es/tag/CheckableTag'
 import TagSelectOption from './TagSelectOption'
-import AIcon from 'ant-design-vue/es/icon/icon'
 export default {
   name: 'TagSelect',
   Option: TagSelectOption,
-  components: {AIcon, TagSelectOption, ACheckableTag, ASelect},
+  components: {TagSelectOption},
   data () {
     return {
       showTrigger: false,

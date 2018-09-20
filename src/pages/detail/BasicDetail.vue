@@ -36,12 +36,7 @@
 </template>
 
 <script>
-import ACard from 'ant-design-vue/es/card/Card'
-import ATooltip from 'ant-design-vue/es/tooltip/Tooltip'
-import AAvatar from 'ant-design-vue/es/avatar/Avatar'
 import DetailList from '../../components/tool/DetailList'
-import ADivider from 'ant-design-vue/es/divider/index'
-import ATable from 'ant-design-vue/es/table'
 import PageLayout from '../../layouts/PageLayout'
 
 const DetailListItem = DetailList.Item
@@ -190,7 +185,7 @@ const scheduleData = [
 
 export default {
   name: 'BasicDetail',
-  components: {PageLayout, ATable, ADivider, DetailListItem, DetailList, AAvatar, ATooltip, ACard},
+  components: {PageLayout, DetailListItem, DetailList},
   data () {
     return {
       goodsColumns,

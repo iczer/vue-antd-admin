@@ -25,15 +25,10 @@
 
 <script>
 import GlobalLayout from './GlobalLayout'
-import ATabs from 'ant-design-vue/es/tabs'
-import AMenu from 'ant-design-vue/es/menu/index'
-import AIcon from 'ant-design-vue/es/icon/icon'
 import Contextmenu from '../components/menu/Contextmenu'
-const ATabPane = ATabs.TabPane
-const AMenuItem = AMenu.Item
 export default {
   name: 'MenuView',
-  components: {Contextmenu, AIcon, AMenuItem, AMenu, ATabPane, ATabs, GlobalLayout},
+  components: {Contextmenu, GlobalLayout},
   data () {
     return {
       pageList: [],

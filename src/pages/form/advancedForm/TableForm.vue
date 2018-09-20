@@ -45,13 +45,6 @@
 </template>
 
 <script>
-import ATable from 'ant-design-vue/es/table'
-import AButton from 'ant-design-vue/es/button/button'
-import AInput from 'ant-design-vue/es/input/Input'
-import ADivider from 'ant-design-vue/es/divider/index'
-import APopconfirm from 'ant-design-vue/es/popconfirm/index'
-import AFormItem from 'ant-design-vue/es/form/FormItem'
-
 const columns = [
   {
     title: '成员姓名',
@@ -107,7 +100,6 @@ const dataSource = [
 
 export default {
   name: 'TableForm',
-  components: {AFormItem, APopconfirm, ADivider, AInput, AButton, ATable},
   data () {
     return {
       columns,

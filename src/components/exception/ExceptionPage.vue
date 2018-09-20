@@ -15,13 +15,11 @@
 </template>
 
 <script>
-import AButton from 'ant-design-vue/es/button/button'
 import Config from './typeConfig'
 
 export default {
   name: 'ExceptionPage',
   props: ['type'],
-  components: {AButton},
   data () {
     return {
       config: Config

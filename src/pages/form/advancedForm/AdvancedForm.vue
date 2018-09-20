@@ -16,16 +16,14 @@
 </template>
 
 <script>
-import ACard from 'ant-design-vue/es/card/Card'
 import RepositoryForm from './RepositoryForm'
 import TaskForm from './TaskForm'
 import TableForm from './TableForm'
 import FooterToolBar from '../../../components/tool/FooterToolBar'
-import AButton from 'ant-design-vue/es/button/button'
 
 export default {
   name: 'AdvancedForm',
-  components: {AButton, FooterToolBar, TableForm, TaskForm, RepositoryForm, ACard},
+  components: {FooterToolBar, TableForm, TaskForm, RepositoryForm},
   data () {
     return {
       desc: '高级表单常见于一次性输入和提交大批量数据的场景。',

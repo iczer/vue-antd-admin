@@ -27,14 +27,6 @@
 </template>
 
 <script>
-import AList from 'ant-design-vue/es/list/index'
-import AListItem from 'ant-design-vue/es/list/Item'
-import ACard from 'ant-design-vue/es/card/Card'
-import ACardMeta from 'ant-design-vue/es/card/Meta'
-import AAvatar from 'ant-design-vue/es/avatar/Avatar'
-import AButton from 'ant-design-vue/es/button/button'
-import AIcon from 'ant-design-vue/es/icon/icon'
-
 const dataSource = []
 dataSource.push(null)
 for (let i = 0; i < 11; i++) {
@@ -47,7 +39,6 @@ for (let i = 0; i < 11; i++) {
 
 export default {
   name: 'CardList',
-  components: {AIcon, AButton, AAvatar, ACardMeta, ACard, AListItem, AList},
   data () {
     return {
       desc: '段落示意：蚂蚁金服务设计平台 ant.design，用最小的工作量，无缝接入蚂蚁金服生态， 提供跨越设计与开发的体验解决方案。',

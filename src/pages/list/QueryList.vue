@@ -103,24 +103,7 @@
 </template>
 
 <script>
-import ARow from 'ant-design-vue/es/grid/Row'
-import ACol from 'ant-design-vue/es/grid/Col'
-import AForm from 'ant-design-vue/es/form/Form'
-import AFormItem from 'ant-design-vue/es/form/FormItem'
-import AInput from 'ant-design-vue/es/input/Input'
-import ACard from 'ant-design-vue/es/card/Card'
-import ASelect from 'ant-design-vue/es/select/index'
-import AInputNumber from 'ant-design-vue/es/input-number/index'
-import ADatePicker from 'ant-design-vue/es/date-picker/index'
-import AButton from 'ant-design-vue/es/button/button'
-import AIcon from 'ant-design-vue/es/icon/icon'
 import StandardTable from '../../components/table/StandardTable'
-import ADropdown from 'ant-design-vue/es/dropdown'
-import AMenu from 'ant-design-vue/es/menu/index'
-
-const ASelectOption = ASelect.Option
-const AMenuItem = AMenu.Item
-
 const columns = [
   {
     title: '规则编号',
@@ -164,23 +147,7 @@ for (let i = 0; i < 100; i++) {
 
 export default {
   name: 'QueryList',
-  components: {
-    AMenuItem,
-    AMenu,
-    ADropdown,
-    StandardTable,
-    AIcon,
-    AButton,
-    ADatePicker,
-    AInputNumber,
-    ASelectOption,
-    ASelect,
-    ACard,
-    AInput,
-    AFormItem,
-    AForm,
-    ACol,
-    ARow},
+  components: {StandardTable},
   data () {
     return {
       advanced: true,

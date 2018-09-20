@@ -72,37 +72,11 @@
 </template>
 
 <script>
-import AForm from 'ant-design-vue/es/form/Form'
-import ATabs from 'ant-design-vue/es/tabs'
 import GlobalFooter from '../../layouts/GlobalFooter'
-import AFormItem from 'ant-design-vue/es/form/FormItem'
-import AInput from 'ant-design-vue/es/input/Input'
-import AIcon from 'ant-design-vue/es/icon/icon'
-import AInputGroup from 'ant-design-vue/es/input/Group'
-import AButton from 'ant-design-vue/es/button/button'
-import ACol from 'ant-design-vue/es/grid/Col'
-import ARow from 'ant-design-vue/es/grid/Row'
-import ACheckbox from 'ant-design-vue/es/checkbox/Checkbox'
-import AAlert from 'ant-design-vue/es/alert/index'
-
-const ATabPane = ATabs.TabPane
 
 export default {
   name: 'Login',
-  components: {
-    AAlert,
-    ACheckbox,
-    ACol,
-    ARow,
-    AButton,
-    AInputGroup,
-    AIcon,
-    AInput,
-    AFormItem,
-    GlobalFooter,
-    ATabPane,
-    ATabs,
-    AForm},
+  components: {GlobalFooter},
   data () {
     return {
       logging: false,

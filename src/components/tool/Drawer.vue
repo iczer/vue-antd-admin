@@ -16,10 +16,8 @@
 </template>
 
 <script>
-import AIcon from 'ant-design-vue/es/icon/icon'
 export default {
   name: 'Drawer',
-  components: {AIcon},
   data () {
     return {
       drawerWidth: 0

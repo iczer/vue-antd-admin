@@ -8,11 +8,9 @@
 </template>
 
 <script>
-import AIcon from 'ant-design-vue/es/icon/icon'
 export default {
   name: 'StyleItem',
-  props: ['selected', 'img'],
-  components: {AIcon}
+  props: ['selected', 'img']
 }
 </script>
 

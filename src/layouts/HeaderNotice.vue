@@ -40,21 +40,8 @@
 </template>
 
 <script>
-import APopover from 'ant-design-vue/es/popover/index'
-import AIcon from 'ant-design-vue/es/icon/icon'
-import ABadge from 'ant-design-vue/es/badge/Badge'
-import ATabs from 'ant-design-vue/es/tabs'
-import AList from 'ant-design-vue/es/list/index'
-import AListItem from 'ant-design-vue/es/list/Item'
-import AAvatar from 'ant-design-vue/es/avatar/Avatar'
-import ASpin from 'ant-design-vue/es/spin/Spin'
-
-const ATabPane = ATabs.TabPane
-const AListItemMeta = AListItem.Meta
-
 export default {
   name: 'HeaderNotice',
-  components: {ASpin, AAvatar, AListItem, AList, ATabs, ABadge, AIcon, APopover, ATabPane, AListItemMeta},
   data () {
     return {
       loadding: false

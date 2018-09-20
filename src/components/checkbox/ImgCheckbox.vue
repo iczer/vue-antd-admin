@@ -8,8 +8,6 @@
 </template>
 
 <script>
-import AIcon from 'ant-design-vue/es/icon/icon'
-
 const Group = {
   name: 'ImgCheckboxGroup',
   props: {
@@ -94,7 +92,6 @@ export default {
       sChecked: this.checked
     }
   },
-  components: {AIcon},
   inject: ['groupContext'],
   watch: {
     'sChecked': function (val) {

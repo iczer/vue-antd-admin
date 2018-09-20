@@ -16,7 +16,6 @@
 </template>
 
 <script>
-import AIcon from 'ant-design-vue/es/icon/icon'
 import Draggable from 'vuedraggable'
 
 const dragOptions = {
@@ -31,7 +30,7 @@ const dragOptions = {
 
 export default {
   name: 'TaskGroup',
-  components: {AIcon, Draggable},
+  components: {Draggable},
   props: ['title', 'group'],
   data () {
     return {

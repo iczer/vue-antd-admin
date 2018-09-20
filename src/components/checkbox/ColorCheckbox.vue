@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import AIcon from 'ant-design-vue/es/icon/icon'
-
 const Group = {
   name: 'ColorCheckboxGroup',
   props: {
@@ -82,7 +80,6 @@ const Group = {
 export default {
   name: 'ColorCheckbox',
   Group: Group,
-  components: {AIcon},
   props: {
     color: {
       type: String,

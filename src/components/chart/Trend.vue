@@ -7,10 +7,8 @@
 </template>
 
 <script>
-import AIcon from 'ant-design-vue/es/icon/icon'
 export default {
   name: 'Trend',
-  components: {AIcon},
   props: {
     term: {
       type: String,

@@ -47,13 +47,8 @@
 </template>
 
 <script>
-import AForm from 'ant-design-vue/es/form/Form'
-import AFormItem from 'ant-design-vue/es/form/FormItem'
-import AButton from 'ant-design-vue/es/button/button'
-import AAlert from 'ant-design-vue/es/alert/index'
 export default {
   name: 'Step2',
-  components: {AAlert, AButton, AFormItem, AForm},
   data () {
     return {
       loading: false

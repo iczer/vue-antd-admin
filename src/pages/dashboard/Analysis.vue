@@ -102,17 +102,10 @@
 </template>
 
 <script>
-import ACol from 'ant-design-vue/es/grid/Col'
-import ARow from 'ant-design-vue/es/grid/Row'
-import ACard from 'ant-design-vue/es/card/Card'
 import ChartCard from '../../components/card/ChartCard'
-import ATooltip from 'ant-design-vue/es/tooltip/Tooltip'
-import AIcon from 'ant-design-vue/es/icon/icon'
 import MiniArea from '../../components/chart/MiniArea'
 import MiniBar from '../../components/chart/MiniBar'
 import MiniProgress from '../../components/chart/MiniProgress'
-import ATabs from 'ant-design-vue/es/tabs'
-import ADatePicker from 'ant-design-vue/es/date-picker'
 import Bar from '../../components/chart/Bar'
 import RankingList from '../../components/chart/RankingList'
 import HotSearch from '../../components/analysis/HotSearch'
@@ -128,8 +121,6 @@ for (let i = 0; i < 8; i++) {
   })
 }
 
-const ATabPane = ATabs.TabPane
-const ARangePicker = ADatePicker.RangePicker
 export default {
   name: 'analysis',
   data () {
@@ -137,24 +128,7 @@ export default {
       rankList
     }
   },
-  components: {
-    Trend,
-    SalesData,
-    HotSearch,
-    RankingList,
-    Bar,
-    ARangePicker,
-    ATabPane,
-    ATabs,
-    MiniProgress,
-    MiniBar,
-    MiniArea,
-    AIcon,
-    ATooltip,
-    ChartCard,
-    ACard,
-    ARow,
-    ACol}
+  components: {Trend, SalesData, HotSearch, RankingList, Bar, MiniProgress, MiniBar, MiniArea, ChartCard}
 }
 </script>
 

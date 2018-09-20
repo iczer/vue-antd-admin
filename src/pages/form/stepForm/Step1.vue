@@ -45,18 +45,8 @@
 </template>
 
 <script>
-import AForm from 'ant-design-vue/es/form/Form'
-import AFormItem from 'ant-design-vue/es/form/FormItem'
-import AButton from 'ant-design-vue/es/button/button'
-import ASelect from 'ant-design-vue/es/select/index'
-import AInputGroup from 'ant-design-vue/es/input/Group'
-import AInput from 'ant-design-vue/es/input/Input'
-
-const ASelectOption = ASelect.Option
-
 export default {
   name: 'Step1',
-  components: {AInput, AInputGroup, ASelectOption, ASelect, AButton, AFormItem, AForm},
   methods: {
     nextStep () {
       this.$emit('nextStep')
