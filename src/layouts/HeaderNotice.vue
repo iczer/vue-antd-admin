@@ -1,9 +1,9 @@
 <template>
-  <a-popover trigger="click" placement="bottomRight">
-    <template slot="content">
+  <a-dropdown :trigger="['click']">
+    <template slot="overlay">
       <a-spin :spinning="loadding">
-        <a-tabs>
-          <a-tab-pane tab="通知" key="1">
+        <a-tabs :tabBarStyle="{textAlign: 'center'}" :style="{backgroundColor: 'white', width: '297px'}">
+          <a-tab-pane tab="通知" key="1" :style="{padding: '0 24px'}">
             <a-list>
               <a-list-item>
                 <a-list-item-meta title="你收到了 14 份新周报" description="一年前">
@@ -23,10 +23,10 @@
             </a-list>
           </a-tab-pane>
           <a-tab-pane tab="消息" key="2">
-            123
+            暂无消息
           </a-tab-pane>
           <a-tab-pane tab="待办" key="3">
-            123
+            暂无待办
           </a-tab-pane>
         </a-tabs>
       </a-spin>
@@ -36,7 +36,7 @@
         <a-icon :class="['header-notice-icon', theme]" type="bell" />
       </a-badge>
     </span>
-  </a-popover>
+  </a-dropdown>
 </template>
 
 <script>
@@ -84,5 +84,8 @@ export default {
         color: rgba(0,0,0,.65);
       }
     }
+  }
+  .ant-dropdown-menu-container{
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
   }
 </style>
