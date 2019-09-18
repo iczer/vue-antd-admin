@@ -6,7 +6,7 @@
         <h1>{{systemName}}</h1>
       </router-link>
     </div>
-    <i-menu :theme="theme" :collapsed="collapsed" :menuData="menuData" @select="onSelect"/>
+    <i-menu :theme="theme" :collapsed="collapsed" :menuData="menuData" @select="onSelect" class="menu"/>
   </a-layout-sider>
 </template>
 
@@ -101,5 +101,8 @@ export default {
         vertical-align: middle;
       }
     }
+  }
+  .menu{
+    padding: 16px 0;
   }
 </style>
