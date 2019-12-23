@@ -59,7 +59,7 @@ export default {
 <style lang="less" scoped>
   .page-header{
     background: #fff;
-    padding: 16px 32px 0;
+    padding: 16px 24px;
     border-bottom: 1px solid #e8e8e8;
     .page-header-wide{
       &.head{
@@ -69,7 +69,7 @@ export default {
       &.side{
       }
       .breadcrumb{
-        margin-bottom: 16px;
+        margin-bottom: 20px;
       }
       .detail{
         display: flex;

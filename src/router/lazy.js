@@ -25,7 +25,7 @@ export default new Router({
       children: [
         {
           path: '/dashboard',
-          name: 'dashboard',
+          name: 'Dashboard',
           component: RouteView,
           icon: 'dashboard',
           children: [
