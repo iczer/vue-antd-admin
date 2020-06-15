@@ -76,21 +76,21 @@ const columns = [
 
 const dataSource = [
   {
-    key: '1',
+    key: 1,
     name: '小明',
     workId: '001',
     editable: false,
     department: '行政部'
   },
   {
-    key: '2',
+    key: 2,
     name: '李莉',
     workId: '002',
     editable: false,
     department: 'IT部'
   },
   {
-    key: '3',
+    key: 3,
     name: '王小帅',
     workId: '003',
     editable: false,
@@ -112,7 +112,7 @@ export default {
     },
     newMeber () {
       this.dataSource.push({
-        key: '99',
+        key: this.dataSource.length + 1,
         name: '',
         workId: '',
         department: '',
