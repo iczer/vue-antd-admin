@@ -7,5 +7,8 @@ module.exports = {
   },
   configureWebpack: config => {
     config.entry.app = ["babel-polyfill", "whatwg-fetch", "./src/main.js"];
-  }
+  },
+  publicPath: './',
+  outputDir: 'dist',
+  assetsDir: 'static'
 }
