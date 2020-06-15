@@ -4,8 +4,8 @@
       :grid="{gutter: 24, lg: 3, md: 2, sm: 1, xs: 1}"
       :dataSource="dataSource"
     >
-      <a-list-item slot="renderItem" slot-scope="item, index">
-        <template v-if="item === null">
+      <a-list-item slot="renderItem" slot-scope="item">
+        <template v-if="item.add">
           <a-button class="new-btn" type="dashed">
             <a-icon type="plus" />新增产品
           </a-button>
@@ -28,7 +28,9 @@
 
 <script>
 const dataSource = []
-dataSource.push(null)
+dataSource.push({
+  add: true
+})
 for (let i = 0; i < 11; i++) {
   dataSource.push({
     title: 'Alipay',
@@ -64,7 +66,7 @@ export default {
     background-color: #fff;
     border-radius: 2px;
     width: 100%;
-    height: 188px;
+    height: 187px;
   }
   .meta-content{
     position: relative;

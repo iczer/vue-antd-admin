@@ -2,10 +2,10 @@
   <div >
     <div :class="['mask', openDrawer ? 'open' : 'close']" @click="close"></div>
     <div :class="['drawer', placement, openDrawer ? 'open' : 'close']">
-      <div ref="drawer" style="position: relative; height: 100%;">
+      <div ref="drawer" class="content">
         <slot></slot>
       </div>
-      <div v-if="showHandler" :class="['handler-container', placement]" ref="handler" @click="handle">
+      <div v-if="showHandler" :class="['handler-container', placement, openDrawer ? 'open' : 'close']" ref="handler" @click="handle">
         <slot v-if="$slots.handler" name="handler"></slot>
         <div v-else class="handler">
           <a-icon :type="openDrawer ? 'close'  : 'bars'" />
@@ -44,11 +44,11 @@ export default {
     this.drawerWidth = this.getDrawerWidth()
   },
   watch: {
-    'drawerWidth': function (val) {
+    'drawerWidth': function () {
       if (this.placement === 'left') {
-        this.$refs.handler.style.left = val + 'px'
+        //this.$refs.handler.style.left = val + 'px'
       } else {
-        this.$refs.handler.style.right = val + 'px'
+        //this.$refs.handler.style.right = val + 'px'
       }
     }
   },
@@ -92,36 +92,48 @@ export default {
     &.left{
       left: 0px;
       &.open{
-        box-shadow: 2px 0 8px rgba(0,0,0,.15);
+        .content{
+          box-shadow: 2px 0 8px rgba(0,0,0,.15);
+        }
       }
       &.close{
-        transform: translateX(-100%);
+        transform: translateX(-100%) translateX(40px);
       }
     }
     &.right{
       right: 0px;
+      .content{
+        float: right;
+      }
       &.open{
-        box-shadow: -2px 0 8px rgba(0,0,0,.15);
+        .content{
+          box-shadow: -2px 0 8px rgba(0,0,0,.15);
+        }
       }
       &.close{
-        transform: translateX(100%);
+        transform: translateX(100%) translateX(-40px);
       }
     }
     .sider{
       height: 100%;
     }
   }
+  .content{
+    display: inline-block;
+    height: 100%;
+  }
   .handler-container{
-    position: fixed;
-    top: 200px;
+    display: inline-block;
     text-align: center;
     transition: all 0.5s;
     cursor: pointer;
+    vertical-align: top;
+    margin-top: 200px;
+    z-index: 100;
     .handler {
       height: 40px;
       width: 40px;
       background-color: #fff;
-      z-index: 100;
       font-size: 26px;
       box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
       line-height: 40px;

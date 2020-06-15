@@ -2,7 +2,7 @@
   <a-layout-header :class="[theme, 'global-header']">
     <div :class="['global-header-wide', layout]">
       <router-link v-if="isMobile || layout === 'head'" to="/" :class="['logo', isMobile ? null : 'pc', theme]">
-        <img width="32" src="static/img/vue-antd-logo.png" />
+        <img width="32" src="@/assets/img/vue-antd-logo.png" />
         <h1 v-if="!isMobile">{{systemName}}</h1>
       </router-link>
       <a-divider v-if="isMobile" type="vertical" />

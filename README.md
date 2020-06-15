@@ -5,7 +5,10 @@
 
 [预览地址](https://iczer.gitee.io/vue-antd-pro)
 
-![](https://github.com/iczer/vue-antd-admin/blob/master/static/img/preview.jpg)
+## 重要
+该项目目前已升级至 vue-cli3 开发环境，部分依赖组件库版本也已更新至最新版本。
+vue-cli2 环境代码已封版 [v0.0.1](https://github.com/iczer/vue-antd-admin/tree/0.0.1)，如有需要，[点我查看](https://github.com/iczer/vue-antd-admin/tree/0.0.1)  
+![image](https://raw.githubusercontent.com/iczer/vue-antd-admin/master/src/assets/img/preview.jpg)
 ## 环境
 * node -- 运行/编译
 * yarn -- 依赖管理
@@ -13,19 +16,20 @@
 * eslint -- 代码规约
 * vue-cli -- 构建
 ## 依赖
-* @antv/data-set: ^0.8.9
-* ant-design-vue: ^1.0.3
-* axios: ^0.18.0
-* clipboard: ^2.0.1
-* date-fns: ^1.29.0
+* @antv/data-set: ^0.11.4
+* ant-design-vue: ^1.6.2
+* axios: ^0.19.2
+* clipboard: ^2.0.6
+* core-js: ^3.6.5,
+* date-fns: ^2.14.0
 * enquire.js: ^2.1.6
-* mockjs: ^1.0.1-beta3
-* pouchdb: ^7.0.0
-* viser-vue: ^2.2.5
-* vue: ^2.5.17
-* vue-router: ^3.0.1
-* vuedraggable: ^2.16.0
-* vuex: ^3.0.1
+* mockjs: ^1.1.0
+* pouchdb: ^7.2.1
+* viser-vue: ^2.4.8
+* vue: ^2.6.11
+* vue-router: ^3.3.4
+* vuedraggable: ^2.23.2
+* vuex: ^3.4.0
 ## 安装
 克隆项目到本地:
 ```
@@ -37,7 +41,7 @@ $ yarn install
 ```
 ## 启动
 ```
-$ yarn start
+$ yarn serve
 ```
 ## 文档
 编写中...

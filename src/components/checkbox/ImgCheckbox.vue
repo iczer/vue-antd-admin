@@ -94,7 +94,7 @@ export default {
   },
   inject: ['groupContext'],
   watch: {
-    'sChecked': function (val) {
+    'sChecked': function () {
       const option = {
         value: this.value,
         checked: this.sChecked

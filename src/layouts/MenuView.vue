@@ -53,7 +53,7 @@ export default {
     this.activePage = this.$route.fullPath
   },
   watch: {
-    '$route': function (newRoute, oldRoute) {
+    '$route': function (newRoute) {
       this.activePage = newRoute.fullPath
       if (!this.multipage) {
         this.linkList = [newRoute.fullPath]
@@ -66,7 +66,7 @@ export default {
     'activePage': function (key) {
       this.$router.push(key)
     },
-    'multipage': function (newVal, oldVal) {
+    'multipage': function (newVal) {
       if (!newVal) {
         this.linkList = [this.$route.fullPath]
         this.pageList = [this.$route]

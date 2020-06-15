@@ -3,7 +3,7 @@
     <div class="content">
       <div class="top">
         <div class="header">
-          <img alt="logo" class="logo" src="static/img/vue-antd-logo.png" />
+          <img alt="logo" class="logo" src="@/assets/img/vue-antd-logo.png" />
           <span class="title">{{systemName}}</span>
         </div>
         <div class="desc">Ant Design 是西湖区最具影响力的 Web 设计规范</div>
@@ -97,7 +97,7 @@ export default {
   methods: {
     onSubmit (e) {
       e.preventDefault()
-      this.form.validateFields((err, values) => {
+      this.form.validateFields((err) => {
         if (!err) {
           this.logging = true
           this.$axios.post('/login', {

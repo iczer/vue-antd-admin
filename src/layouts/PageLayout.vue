@@ -11,7 +11,7 @@
           </template>
         </div>
       </div>
-      <slot slot="extra" name="extra"></slot>
+      <slot v-if="this.$refs.extra" slot="extra" name="extra"></slot>
     </page-header>
     <div ref="page" :class="['page-content', layout]" >
       <slot ></slot>

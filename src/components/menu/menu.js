@@ -98,8 +98,9 @@ export default {
         },
         [
           h(
-            'a',
-            {attrs: {href: '#' + menu.path}},
+            'RouterLink',
+            // {attrs: {href: '#' + menu.path}},
+            {attrs: {to: menu.path}},
             [
               this.renderIcon(h, menu.icon),
               h('span', [menu.name])

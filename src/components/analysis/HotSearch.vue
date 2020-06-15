@@ -26,6 +26,7 @@
       :dataSource="searchData"
       :columns="columns" size="small"
       :pagination="{style: { marginBottom: 0 }, pageSize: 5}"
+      rowKey="index"
     >
       <a href="#/" slot="keyword" slot-scope="text">{{text}}</a>
       <span slot="rang" slot-scope="text">{{text}} %<a-icon type="caret-up" /> </span>

@@ -79,14 +79,13 @@
 </template>
 
 <script>
-import PageHeader from '../../components/page/PageHeader'
 import PageLayout from '../../layouts/PageLayout'
 import HeadInfo from '../../components/tool/HeadInfo'
 import Radar from '../../components/chart/Radar'
 
 export default {
   name: 'WorkPlace',
-  components: {Radar, HeadInfo, PageLayout, PageHeader},
+  components: {Radar, HeadInfo, PageLayout},
   data () {
     return {
       projects: [],

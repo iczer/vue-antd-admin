@@ -102,7 +102,7 @@ export default {
   },
   inject: ['groupContext'],
   watch: {
-    'sChecked': function (val) {
+    'sChecked': function () {
       const value = {
         value: this.value,
         color: this.color,

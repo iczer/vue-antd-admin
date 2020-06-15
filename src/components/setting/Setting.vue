@@ -68,7 +68,6 @@
 
 <script>
 import SettingItem from './SettingItem'
-import StyleItem from './StyleItem'
 import ColorCheckbox from '../checkbox/ColorCheckbox'
 import ImgCheckbox from '../checkbox/ImgCheckbox'
 import Clipboard from 'clipboard'
@@ -78,7 +77,7 @@ const ImgCheckboxGroup = ImgCheckbox.Group
 
 export default {
   name: 'Setting',
-  components: {ImgCheckboxGroup, ImgCheckbox, ColorCheckboxGroup, ColorCheckbox, StyleItem, SettingItem},
+  components: {ImgCheckboxGroup, ImgCheckbox, ColorCheckboxGroup, ColorCheckbox, SettingItem},
   computed: {
     multipage () {
       return this.$store.state.setting.multipage

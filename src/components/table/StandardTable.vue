@@ -4,12 +4,14 @@
       <a-alert type="info" :show-icon="true">
         <div slot="message">
           已选择&nbsp;<a style="font-weight: 600">{{selectedRows.length}}</a>&nbsp;项&nbsp;&nbsp;
-          <template  v-for="(item, index) in needTotalList" v-if="item.needTotal">
-            {{item.title}}总计&nbsp;
-            <a :key="index" style="font-weight: 600">
-            {{item.customRender ? item.customRender(item.total) : item.total}}
-            </a>&nbsp;&nbsp;
-          </template>
+          <div  v-for="(item, index) in needTotalList" :key="index">
+            <div v-if="item.needTotal">
+              {{item.title}}总计&nbsp;
+              <a :key="index" style="font-weight: 600">
+                {{item.customRender ? item.customRender(item.total) : item.total}}
+              </a>&nbsp;&nbsp;
+            </div>
+          </div>
           <a style="margin-left: 24px">清空</a>
         </div>
       </a-alert>
