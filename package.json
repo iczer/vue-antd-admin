@@ -24,6 +24,7 @@
     "vuex": "^3.4.0"
   },
   "devDependencies": {
+    "@ant-design/colors": "^4.0.0",
     "@vue/cli-plugin-babel": "^4.4.0",
     "@vue/cli-plugin-eslint": "^4.4.0",
     "@vue/cli-service": "^4.4.0",
@@ -35,6 +36,7 @@
     "style-resources-loader": "^1.3.2",
     "vue-cli-plugin-style-resources-loader": "^0.1.4",
     "vue-template-compiler": "^2.6.11",
+    "webpack-theme-color-replacer": "^1.3.12",
     "whatwg-fetch": "^3.0.0"
   },
   "eslintConfig": {
@@ -52,6 +54,8 @@
     "rules": {}
   },
   "browserslist": [
-    "ie 8"
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 10"
   ]
 }

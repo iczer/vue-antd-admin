@@ -7,8 +7,8 @@
       </img-checkbox-group>
     </setting-item>
     <setting-item title="主题色">
-      <color-checkbox-group @change="onColorChange" :defaultValues="['1', '2', '3']" :multiple="false">
-        <color-checkbox ref="colorNode" color="rgb(245, 34, 45)" value="1" />
+      <color-checkbox-group @change="onColorChange" :defaultValues="['6']" :multiple="false">
+        <color-checkbox color="rgb(245, 34, 45)" value="1" />
         <color-checkbox color="rgb(250, 84, 28)" value="2" />
         <color-checkbox color="rgb(250, 173, 20)" value="3" />
         <color-checkbox color="rgb(19, 194, 194)" value="4" />
@@ -62,7 +62,7 @@
       </a-list>
     </setting-item>
     <a-divider />
-    <a-button id="copyBtn" data-clipboard-text="Sorry, you copy nothing O(∩_∩)O~" @click="copyCode" style="width: 100%" icon="copy" >拷贝代码</a-button>
+    <a-button id="copyBtn" data-clipboard-text="Sorry, you have copied nothing O(∩_∩)O~" @click="copyCode" style="width: 100%" icon="copy" >拷贝代码</a-button>
   </a-layout-sider>
 </template>
 
@@ -71,6 +71,7 @@ import SettingItem from './SettingItem'
 import ColorCheckbox from '../checkbox/ColorCheckbox'
 import ImgCheckbox from '../checkbox/ImgCheckbox'
 import Clipboard from 'clipboard'
+import themeUtil from '../../utils/themeUtil';
 
 const ColorCheckboxGroup = ColorCheckbox.Group
 const ImgCheckboxGroup = ImgCheckbox.Group
@@ -86,7 +87,8 @@ export default {
   methods: {
     onColorChange (values, colors) {
       if (colors.length > 0) {
-        this.$message.info(`您选择了主题色 ${colors}`)
+        let closeMessage = this.$message.loading(`您选择了主题色 ${colors}, 正在切换...`)
+        themeUtil.changeThemeColor(colors[0]).then(closeMessage)
       }
     },
     setTheme (values) {

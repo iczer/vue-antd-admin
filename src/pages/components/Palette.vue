@@ -1,6 +1,6 @@
 <template>
   <div style="text-align: center; margin-top: 48px">
-    <color-checkbox-group :defaultValues="['1']" @change="changeColor" :multiple="true" style="display: inline-block">
+    <color-checkbox-group :defaultValues="['1', '3', '4']" @change="changeColor" :multiple="true" style="display: inline-block">
       <color-checkbox color="rgb(245, 34, 45)" value="1" />
       <color-checkbox color="rgb(250, 84, 28)" value="2" />
       <color-checkbox color="rgb(250, 173, 20)" value="3" />

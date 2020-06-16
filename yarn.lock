@@ -9,6 +9,13 @@
   dependencies:
     tinycolor2 "^1.4.1"
 
+"@ant-design/colors@^4.0.0":
+  version "4.0.0"
+  resolved "https://registry.npm.taobao.org/@ant-design/colors/download/@ant-design/colors-4.0.0.tgz#bcc1183b1fdfd1587d4e655035b3fc47bf3a4ab6"
+  integrity sha1-vMEYOx/f0Vh9TmVQNbP8R786SrY=
+  dependencies:
+    tinycolor2 "^1.4.1"
+
 "@ant-design/icons-vue@^2.0.0":
   version "2.0.0"
   resolved "https://registry.npm.taobao.org/@ant-design/icons-vue/download/@ant-design/icons-vue-2.0.0.tgz#0357f5010a404e9f34a87a4b41b2a08df691dbce"
@@ -9384,13 +9391,20 @@ webpack-merge@^4.2.2:
   dependencies:
     lodash "^4.17.15"
 
-webpack-sources@^1.1.0, webpack-sources@^1.4.0, webpack-sources@^1.4.1, webpack-sources@^1.4.3:
+webpack-sources@*, webpack-sources@^1.1.0, webpack-sources@^1.4.0, webpack-sources@^1.4.1, webpack-sources@^1.4.3:
   version "1.4.3"
   resolved "https://registry.npm.taobao.org/webpack-sources/download/webpack-sources-1.4.3.tgz#eedd8ec0b928fbf1cbfe994e22d2d890f330a933"
   integrity sha1-7t2OwLko+/HL/plOItLYkPMwqTM=
   dependencies:
     source-list-map "^2.0.0"
     source-map "~0.6.1"
+
+webpack-theme-color-replacer@^1.3.12:
+  version "1.3.12"
+  resolved "https://registry.npm.taobao.org/webpack-theme-color-replacer/download/webpack-theme-color-replacer-1.3.12.tgz#0593a3149310c0e5b6b85afeccd61925b1b8e86b"
+  integrity sha1-BZOjFJMQwOW2uFr+zNYZJbG46Gs=
+  dependencies:
+    webpack-sources "*"
 
 webpack@^4.0.0:
   version "4.43.0"

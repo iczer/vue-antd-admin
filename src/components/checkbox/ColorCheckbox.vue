@@ -42,10 +42,19 @@ const Group = {
     }
   },
   watch: {
-    values: function (newVal, oldVal) {
-      // 此条件是为解决单选时，触发两次chang事件问题
-      if (!(newVal.length === 1 && oldVal.length === 1 && newVal[0] === oldVal[0]) || this.multiple) {
-        this.$emit('change', this.values, this.colors)
+    values() {
+      this.$emit('change', this.values, this.colors)
+    },
+    defaultValues(value) {
+      if (this.multiple) {
+        this.options.forEach(item => {
+          item.sChecked = value.indexOf(item.value) > -1
+        })
+      } else {
+        this.options.forEach(item => {
+          let first = value[0]
+          item.sChecked = first && first == item.value
+        })
       }
     }
   },
@@ -55,9 +64,8 @@ const Group = {
         this.values = this.values.filter(item => item !== option.value)
       } else {
         if (!this.multiple) {
-          this.values = [option.value]
           this.options.forEach(item => {
-            if (item.value !== option.value) {
+            if (item.value != option.value) {
               item.sChecked = false
             }
           })
@@ -97,8 +105,10 @@ export default {
   },
   data () {
     return {
-      sChecked: this.checked
+      sChecked: this.initChecked()
     }
+  },
+  computed: {
   },
   inject: ['groupContext'],
   watch: {
@@ -118,13 +128,22 @@ export default {
   created () {
     const groupContext = this.groupContext
     if (groupContext) {
-      this.sChecked = groupContext.defaultValues.indexOf(this.value) >= 0
       groupContext.options.push(this)
     }
   },
   methods: {
     toggle () {
       this.sChecked = !this.sChecked
+    },
+    initChecked() {
+      let groupContext = this.groupContext
+      if (!groupContext) {
+        return this.check
+      }else if (groupContext.multiple) {
+        return groupContext.defaultValues.indexOf(this.value) > -1
+      } else {
+        return groupContext.defaultValues[0] == this.value
+      }
     }
   }
 }
