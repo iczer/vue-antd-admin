@@ -8,14 +8,14 @@
     </setting-item>
     <setting-item title="主题色">
       <color-checkbox-group @change="onColorChange" :defaultValues="['6']" :multiple="false">
-        <color-checkbox color="rgb(245, 34, 45)" value="1" />
-        <color-checkbox color="rgb(250, 84, 28)" value="2" />
-        <color-checkbox color="rgb(250, 173, 20)" value="3" />
-        <color-checkbox color="rgb(19, 194, 194)" value="4" />
-        <color-checkbox color="rgb(82, 196, 26)" value="5" />
-        <color-checkbox color="rgb(24, 144, 255)" value="6" />
-        <color-checkbox color="rgb(47, 84, 235)" value="7" />
-        <color-checkbox color="rgb(114, 46, 209)" value="8" />
+        <color-checkbox color="#f5222d" value="1" />
+        <color-checkbox color="#fa541c" value="2" />
+        <color-checkbox color="#faad14" value="3" />
+        <color-checkbox color="#13c2c2" value="4" />
+        <color-checkbox color="#52c41a" value="5" />
+        <color-checkbox color="#1d92ff" value="6" />
+        <color-checkbox color="#2f54eb" value="7" />
+        <color-checkbox color="#722ed1" value="8" />
       </color-checkbox-group>
     </setting-item>
     <a-divider/>

@@ -1,6 +1,6 @@
 // let path = require('path')
 const ThemeColorReplacer = require('webpack-theme-color-replacer')
-const generate = require('@ant-design/colors/lib/generate').default
+const getThemeColors = require('./src/utils/themeUtil').getThemeColors
 
 module.exports = {
   pluginOptions: {
@@ -15,7 +15,7 @@ module.exports = {
     config.plugins.push(
       new ThemeColorReplacer({
         fileName: 'css/theme-colors.css',
-        matchColors: generate('#1890ff')
+        matchColors: getThemeColors('#1890ff')
       })
     )
   },
