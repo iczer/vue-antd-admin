@@ -11,7 +11,7 @@ export default {
       {link: 'https://github.com/iczer/vue-antd-admin', icon: 'github'},
       {link: 'https://ant.design', name: 'Ant Design'}
     ],
-    multipage: true
+    multiPage: true
   },
   mutations: {
     setDevice (state, isMobile) {
@@ -23,8 +23,8 @@ export default {
     setLayout (state, layout) {
       state.layout = layout
     },
-    setMultipage (state, multipage) {
-      state.multipage = multipage
+    setMultiPage (state, multiPage) {
+      state.multiPage = multiPage
     }
   }
 }

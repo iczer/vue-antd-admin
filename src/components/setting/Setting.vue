@@ -57,7 +57,7 @@
         </a-list-item>
         <a-list-item>
           多页签模式
-          <a-switch :checked="multipage" slot="actions" size="small" @change="setMultipage" />
+          <a-switch :checked="multiPage" slot="actions" size="small" @change="setMultiPage" />
         </a-list-item>
       </a-list>
     </setting-item>
@@ -79,8 +79,8 @@ export default {
   name: 'Setting',
   components: {ImgCheckboxGroup, ImgCheckbox, ColorCheckboxGroup, ColorCheckbox, SettingItem},
   computed: {
-    multipage () {
-      return this.$store.state.setting.multipage
+    multiPage () {
+      return this.$store.state.setting.multiPage
     }
   },
   methods: {
@@ -103,8 +103,8 @@ export default {
         clipboard.destroy()
       })
     },
-    setMultipage (checked) {
-      this.$store.commit('setting/setMultipage', checked)
+    setMultiPage (checked) {
+      this.$store.commit('setting/setMultiPage', checked)
     }
   }
 }

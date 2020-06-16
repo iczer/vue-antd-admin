@@ -3,7 +3,7 @@
     <contextmenu :itemList="menuItemList" :visible.sync="menuVisible" @select="onMenuSelect" />
     <a-tabs
       @contextmenu.native="e => onContextmenu(e)"
-      v-if="multipage"
+      v-if="multiPage"
       :active-key="activePage"
       style="margin-top: -8px; margin-bottom: 8px"
       :hide-add="true"
@@ -15,7 +15,7 @@
       </a-tab-pane>
     </a-tabs>
     <transition name="page-toggle">
-      <keep-alive v-if="multipage">
+      <keep-alive v-if="multiPage">
         <router-view />
       </keep-alive>
       <router-view v-else />
@@ -43,8 +43,8 @@ export default {
     }
   },
   computed: {
-    multipage () {
-      return this.$store.state.setting.multipage
+    multiPage () {
+      return this.$store.state.setting.multiPage
     }
   },
   created () {
@@ -55,7 +55,7 @@ export default {
   watch: {
     '$route': function (newRoute) {
       this.activePage = newRoute.fullPath
-      if (!this.multipage) {
+      if (!this.multiPage) {
         this.linkList = [newRoute.fullPath]
         this.pageList = [newRoute]
       } else if (this.linkList.indexOf(newRoute.fullPath) < 0) {
@@ -66,7 +66,7 @@ export default {
     'activePage': function (key) {
       this.$router.push(key)
     },
-    'multipage': function (newVal) {
+    'multiPage': function (newVal) {
       if (!newVal) {
         this.linkList = [this.$route.fullPath]
         this.pageList = [this.$route]
