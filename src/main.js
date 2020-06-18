@@ -8,6 +8,7 @@ import axios from 'axios'
 import '@/mock'
 import store from './store'
 import PouchDB from 'pouchdb'
+import 'animate.css/source/animate.css'
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false

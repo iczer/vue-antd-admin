@@ -14,7 +14,7 @@
       <slot v-if="this.$refs.extra" slot="extra" name="extra"></slot>
     </page-header>
     <div ref="page" :class="['page-content', layout]" >
-      <slot ></slot>
+      <slot></slot>
     </div>
   </div>
 </template>
@@ -63,11 +63,12 @@ export default {
     }
   }
   .page-content{
+    position: relative;
     &.side{
-      margin: 24px 24px 0px;
+      padding: 24px 24px 0;
     }
     &.head{
-      margin: 24px auto 0;
+      padding: 24px 0 0;
       max-width: 1400px;
     }
   }

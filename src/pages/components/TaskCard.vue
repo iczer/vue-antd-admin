@@ -35,4 +35,16 @@ export default {
   .task-group{
     margin: 0 48px;
   }
+  .dragable-ghost{
+    border: 1px dashed red;
+    opacity: 1;
+  }
+  .dragable-chose{
+    border: 1px dashed red;
+    opacity: 0.8;
+  }
+  .dragable-drag{
+    border: 1px dashed red;
+    opacity: 1;
+  }
 </style>

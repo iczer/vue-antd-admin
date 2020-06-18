@@ -7,15 +7,8 @@
       </img-checkbox-group>
     </setting-item>
     <setting-item title="主题色">
-      <color-checkbox-group @change="onColorChange" :defaultValues="['6']" :multiple="false">
-        <color-checkbox color="#f5222d" value="1" />
-        <color-checkbox color="#fa541c" value="2" />
-        <color-checkbox color="#faad14" value="3" />
-        <color-checkbox color="#13c2c2" value="4" />
-        <color-checkbox color="#52c41a" value="5" />
-        <color-checkbox color="#1d92ff" value="6" />
-        <color-checkbox color="#2f54eb" value="7" />
-        <color-checkbox color="#722ed1" value="8" />
+      <color-checkbox-group @change="onColorChange" :defaultValues="[0]" :multiple="false">
+        <color-checkbox v-for="(color, index) in colors" :key="index" :color="color" :value="index" />
       </color-checkbox-group>
     </setting-item>
     <a-divider/>
@@ -62,6 +55,22 @@
       </a-list>
     </setting-item>
     <a-divider />
+    <setting-item title="页面切换动画">
+      <a-list :split="false">
+        <a-list-item>
+          动画效果
+          <a-select v-model="animate" @change="setAnimate" class="select-item" size="small" slot="actions">
+            <a-select-option :key="index" :value="index" v-for="(item, index) in animates">{{item.alias}}</a-select-option>
+          </a-select>
+        </a-list-item>
+        <a-list-item>
+          动画方向
+          <a-select v-model="direction" @change="setAnimate" class="select-item" size="small" slot="actions">
+            <a-select-option :key="index" :value="index" v-for="(item, index) in animateCfg.directions">{{item}}</a-select-option>
+          </a-select>
+        </a-list-item>
+      </a-list>
+    </setting-item>
     <a-button id="copyBtn" data-clipboard-text="Sorry, you have copied nothing O(∩_∩)O~" @click="copyCode" style="width: 100%" icon="copy" >拷贝代码</a-button>
   </a-layout-sider>
 </template>
@@ -72,6 +81,7 @@ import ColorCheckbox from '../checkbox/ColorCheckbox'
 import ImgCheckbox from '../checkbox/ImgCheckbox'
 import Clipboard from 'clipboard'
 import themeUtil from '../../utils/themeUtil';
+import { mapState } from 'vuex'
 
 const ColorCheckboxGroup = ColorCheckbox.Group
 const ImgCheckboxGroup = ImgCheckbox.Group
@@ -79,10 +89,18 @@ const ImgCheckboxGroup = ImgCheckbox.Group
 export default {
   name: 'Setting',
   components: {ImgCheckboxGroup, ImgCheckbox, ColorCheckboxGroup, ColorCheckbox, SettingItem},
-  computed: {
-    multiPage () {
-      return this.$store.state.setting.multiPage
+  data() {
+    return {
+      animate: 0,
+      direction: 0,
+      colors: ['#f5222d', '#fa541c', '#faad14', '#13c2c2', '#52c41a', '#1d92ff', '#2f54eb', '#722ed1'],
     }
+  },
+  computed: {
+    animateCfg() {
+      return this.animates[this.animate]
+    },
+    ...mapState('setting', ['animates', 'multiPage'])
   },
   methods: {
     onColorChange (values, colors) {
@@ -107,6 +125,14 @@ export default {
     },
     setMultiPage (checked) {
       this.$store.commit('setting/setMultiPage', checked)
+    },
+    setAnimate() {
+      let animation = this.animates[this.animate]
+      let animate = {
+        name: animation.name,
+        direction: animation.directions[this.direction]
+      }
+      this.$store.commit('setting/setAnimate', animate)
     }
   }
 }
@@ -123,6 +149,9 @@ export default {
     position: relative;
     .flex{
       display: flex;
+    }
+    .select-item{
+      width: 80px;
     }
   }
 </style>

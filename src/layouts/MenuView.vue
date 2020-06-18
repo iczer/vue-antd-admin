@@ -10,25 +10,28 @@
       type="editable-card"
       @change="changePage"
       @edit="editPage">
-      <a-tab-pane :id="page.fullPath" :key="page.fullPath" v-for="page in pageList">
+      <a-tab-pane :key="page.fullPath" v-for="page in pageList">
         <span slot="tab" :pagekey="page.fullPath">{{page.name}}</span>
       </a-tab-pane>
     </a-tabs>
-    <transition name="page-toggle">
+    <page-toggle-transition :animate="animate.name" :direction="animate.direction">
       <keep-alive v-if="multiPage">
         <router-view />
       </keep-alive>
       <router-view v-else />
-    </transition>
+    </page-toggle-transition>
   </global-layout>
 </template>
 
 <script>
 import GlobalLayout from './GlobalLayout'
 import Contextmenu from '../components/menu/Contextmenu'
+import PageToggleTransition from '../components/transition/PageToggleTransition'
+import {mapState} from 'vuex'
+
 export default {
   name: 'MenuView',
-  components: {Contextmenu, GlobalLayout},
+  components: {PageToggleTransition, Contextmenu, GlobalLayout},
   data () {
     return {
       pageList: [],
@@ -43,9 +46,7 @@ export default {
     }
   },
   computed: {
-    multiPage () {
-      return this.$store.state.setting.multiPage
-    }
+    ...mapState('setting', ['multiPage', 'animate'])
   },
   created () {
     this.pageList.push(this.$route)
@@ -63,8 +64,8 @@ export default {
         this.pageList.push(newRoute)
       }
     },
-    'activePage': function () {
-      // this.$router.push(key)
+    'activePage': function (key) {
+      this.$router.push(key)
     },
     'multiPage': function (newVal) {
       if (!newVal) {

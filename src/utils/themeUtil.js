@@ -1,9 +1,10 @@
 const ThemeColorReplacer = require('webpack-theme-color-replacer')
 const client = require('webpack-theme-color-replacer/client')
 const generate =  require('@ant-design/colors/lib/generate').default
+const themeColor = require('../config').themeColor
 
 module.exports = {
-  primaryColor: '#1890ff',
+  primaryColor: themeColor,
   getThemeColors(color) {
     const lightens = new Array(9).fill().map((t, i) => {
       return ThemeColorReplacer.varyColor.lighten(color, i / 10)

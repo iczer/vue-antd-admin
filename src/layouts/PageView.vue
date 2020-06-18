@@ -3,20 +3,23 @@
     <div slot="extra" class="extraImg">
       <img :src="extraImage"/>
     </div>
-    <transition name="page-toggle">
+    <page-toggle-transition :animate="animate.name" :direction="animate.direction">
       <keep-alive v-if="multiPage">
         <router-view ref="page" />
       </keep-alive>
       <router-view ref="page" v-else />
-    </transition>
+    </page-toggle-transition>
   </page-layout>
 </template>
 
 <script>
 import PageLayout from './PageLayout'
+import PageToggleTransition from '../components/transition/PageToggleTransition';
+import {mapState} from 'vuex'
+
 export default {
   name: 'PageView',
-  components: {PageLayout},
+  components: {PageToggleTransition, PageLayout},
   data () {
     return {
       title: '',
@@ -26,9 +29,7 @@ export default {
     }
   },
   computed: {
-    multiPage () {
-      return this.$store.state.setting.multiPage
-    }
+    ...mapState('setting', ['multiPage', 'animate'])
   },
   mounted () {
     this.getPageHeaderInfo()

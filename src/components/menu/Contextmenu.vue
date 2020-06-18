@@ -64,8 +64,8 @@ export default {
   .contextmenu{
     position: fixed;
     z-index: 1;
-    border: 1px solid #9e9e9e;
+
     border-radius: 4px;
-    box-shadow: 2px 2px 10px #aaaaaa !important;
+    box-shadow: -4px 4px 16px 1px #e6e6e6 !important;
   }
 </style>

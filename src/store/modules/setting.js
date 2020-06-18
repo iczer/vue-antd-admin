@@ -1,3 +1,4 @@
+import {footerLinks, animates} from '@/config'
 export default {
   namespaced: true,
   state: {
@@ -6,12 +7,13 @@ export default {
     layout: 'side',
     systemName: 'Vue Antd Admin',
     copyright: '2018 ICZER 工作室出品',
-    footerLinks: [
-      {link: 'https://pro.ant.design', name: 'Pro首页'},
-      {link: 'https://github.com/iczer/vue-antd-admin', icon: 'github'},
-      {link: 'https://ant.design', name: 'Ant Design'}
-    ],
-    multiPage: true
+    footerLinks: footerLinks,
+    multiPage: true,
+    animates: animates,
+    animate: {
+      name: 'back',
+      direction: 'left'
+    }
   },
   mutations: {
     setDevice (state, isMobile) {
@@ -25,6 +27,9 @@ export default {
     },
     setMultiPage (state, multiPage) {
       state.multiPage = multiPage
+    },
+    setAnimate (state, animate) {
+      state.animate = animate
     }
   }
 }
