@@ -14,12 +14,14 @@
           <span slot="tab" :pagekey="page.fullPath">{{page.name}}</span>
         </a-tab-pane>
       </a-tabs>
-      <page-toggle-transition :animate="animate.name" :direction="animate.direction">
-        <keep-alive v-if="multiPage">
-          <router-view />
-        </keep-alive>
-        <router-view v-else />
-      </page-toggle-transition>
+      <div class="menu-view-content">
+        <page-toggle-transition :animate="animate.name" :direction="animate.direction">
+          <keep-alive v-if="multiPage">
+            <router-view />
+          </keep-alive>
+          <router-view v-else />
+        </page-toggle-transition>
+      </div>
   </global-layout>
 </template>
 
@@ -160,8 +162,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-  .menu-view{
-    .menu-view-content{
-    }
+  .menu-view-content{
+    position: relative;
   }
 </style>

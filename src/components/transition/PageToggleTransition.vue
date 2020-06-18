@@ -76,12 +76,12 @@
   .page-toggle-enter-active{
     position: absolute !important;
     animation-duration: 0.6s !important;
-    width: calc(100% - 48px);
+    width: calc(100%);
   }
   .page-toggle-leave-active{
     position: absolute !important;
     animation-duration: 0.6s !important;
-    width: calc(100% - 48px);
+    width: calc(100%);
   }
   .page-toggle-enter{
   }
