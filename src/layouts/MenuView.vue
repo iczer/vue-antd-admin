@@ -1,25 +1,25 @@
 <template>
   <global-layout>
-    <contextmenu :itemList="menuItemList" :visible.sync="menuVisible" @select="onMenuSelect" />
-    <a-tabs
-      @contextmenu.native="e => onContextmenu(e)"
-      v-if="multiPage"
-      :active-key="activePage"
-      style="margin-top: -8px; margin-bottom: 8px"
-      :hide-add="true"
-      type="editable-card"
-      @change="changePage"
-      @edit="editPage">
-      <a-tab-pane :key="page.fullPath" v-for="page in pageList">
-        <span slot="tab" :pagekey="page.fullPath">{{page.name}}</span>
-      </a-tab-pane>
-    </a-tabs>
-    <page-toggle-transition :animate="animate.name" :direction="animate.direction">
-      <keep-alive v-if="multiPage">
-        <router-view />
-      </keep-alive>
-      <router-view v-else />
-    </page-toggle-transition>
+      <contextmenu :itemList="menuItemList" :visible.sync="menuVisible" @select="onMenuSelect" />
+      <a-tabs
+        @contextmenu.native="e => onContextmenu(e)"
+        v-if="multiPage"
+        :active-key="activePage"
+        style="margin-top: -8px; margin-bottom: 8px"
+        :hide-add="true"
+        type="editable-card"
+        @change="changePage"
+        @edit="editPage">
+        <a-tab-pane :key="page.fullPath" v-for="page in pageList">
+          <span slot="tab" :pagekey="page.fullPath">{{page.name}}</span>
+        </a-tab-pane>
+      </a-tabs>
+      <page-toggle-transition :animate="animate.name" :direction="animate.direction">
+        <keep-alive v-if="multiPage">
+          <router-view />
+        </keep-alive>
+        <router-view v-else />
+      </page-toggle-transition>
   </global-layout>
 </template>
 
@@ -159,6 +159,9 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+  .menu-view{
+    .menu-view-content{
+    }
+  }
 </style>

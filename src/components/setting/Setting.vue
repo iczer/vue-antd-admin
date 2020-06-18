@@ -7,7 +7,7 @@
       </img-checkbox-group>
     </setting-item>
     <setting-item title="主题色">
-      <color-checkbox-group @change="onColorChange" :defaultValues="[0]" :multiple="false">
+      <color-checkbox-group @change="onColorChange" :defaultValues="[5]" :multiple="false">
         <color-checkbox v-for="(color, index) in colors" :key="index" :color="color" :value="index" />
       </color-checkbox-group>
     </setting-item>
@@ -94,6 +94,11 @@ export default {
       animate: 0,
       direction: 0,
       colors: ['#f5222d', '#fa541c', '#faad14', '#13c2c2', '#52c41a', '#1d92ff', '#2f54eb', '#722ed1'],
+    }
+  },
+  watch: {
+    animate(){
+      this.direction = 0
     }
   },
   computed: {

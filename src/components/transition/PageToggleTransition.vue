@@ -51,9 +51,8 @@
           direction = animate.directions[0]
         } else {
           direction = animate.directions.find(item => item == this.direction)
-          direction = (direction == undefined || direction === 'default') ? '' : direction
         }
-        window.console.log(direction)
+        direction = (direction == undefined || direction === 'default') ? '' : direction
         if (direction != '') {
           direction = isLeave && this.reverse ? this.reversePosition(direction, animate.directions) : direction
           direction = direction[0].toUpperCase() + direction.substring(1)

@@ -1,14 +1,14 @@
-// let path = require('path')
+let path = require('path')
 const ThemeColorReplacer = require('webpack-theme-color-replacer')
 const getThemeColors = require('./src/utils/themeUtil').getThemeColors
 const themeColor = require('./src/config').themeColor
 
 module.exports = {
+  // transpileDependencies: ['webpack-theme-color-replacer'],
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'less',
-      // patterns: [path.resolve(__dirname, "./src/theme/theme.less")]
-      patterns: []
+      patterns: [path.resolve(__dirname, "./src/theme/theme.less")],
     }
   },
   configureWebpack: config => {

@@ -1,5 +1,5 @@
 <template>
-    <exception-page type="500" />
+  <exception-page type="500" />
 </template>
 
 <script>
@@ -9,6 +9,8 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+  .exception-page{
+    margin: -24px 0 0;
+  }
 </style>

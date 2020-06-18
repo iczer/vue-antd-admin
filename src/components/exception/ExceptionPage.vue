@@ -1,8 +1,7 @@
 <template>
-  <div class="exception">
+  <div class="exception-page" :style="{minHeight: layoutMinHeight - 64 + 'px'}">
     <div class="img">
       <img :src="config[type].img" />
-      <!--<div class="ele" :style="{backgroundImage: `url(${config[type].img})`}"/>-->
     </div>
     <div class="content">
       <h1>{{config[type].title}}</h1>
@@ -24,17 +23,18 @@ export default {
     return {
       config: Config
     }
-  }
+  },
+  inject: ['layoutMinHeight']
 }
 </script>
 
 <style lang="less" scoped>
-  .exception{
-    min-height: 500px;
-    height: 80%;
+  .exception-page{
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    text-align: center;
-    margin-top: 150px;
+    background-color: white;
     .img{
       display: inline-block;
       padding-right: 52px;
@@ -46,7 +46,6 @@ export default {
     }
     .content{
       display: inline-block;
-      flex: auto;
       h1{
         color: #434e59;
         font-size: 72px;

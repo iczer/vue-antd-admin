@@ -1,5 +1,5 @@
 <template>
-  <div style="margin: -24px -24px 0px">
+  <div class="page-layout">
     <page-header :breadcrumb="breadcrumb" :title="title" :logo="logo" :avatar="avatar">
       <slot name="action"  slot="action"></slot>
       <slot slot="content" name="headerContent"></slot>
@@ -50,6 +50,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
+  .page-header{
+    margin: -24px -24px 0;
+  }
   .link{
     margin-top: 16px;
     line-height: 24px;
@@ -64,11 +67,11 @@ export default {
   }
   .page-content{
     position: relative;
+    padding: 24px 24px 0;
     &.side{
-      padding: 24px 24px 0;
     }
     &.head{
-      padding: 24px 0 0;
+      margin: 0 auto;
       max-width: 1400px;
     }
   }

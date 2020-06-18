@@ -11,7 +11,7 @@ export default {
     multiPage: true,
     animates: animates,
     animate: {
-      name: 'back',
+      name: 'bounce',
       direction: 'left'
     }
   },

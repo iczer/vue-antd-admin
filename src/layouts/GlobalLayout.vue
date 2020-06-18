@@ -1,5 +1,5 @@
 <template>
-  <a-layout>
+  <a-layout class="global-layout">
     <drawer v-if="isMobile" :openDrawer="collapsed" @change="onDrawerChange">
       <sider-menu :theme="theme" :menuData="menuData" :collapsed="false" :collapsible="false" @menuSelect="onMenuSelect"/>
     </drawer>
@@ -10,9 +10,9 @@
       </div>
       <setting />
     </drawer>
-    <a-layout>
+    <a-layout class="global-layout-main">
       <global-header :menuData="menuData" :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
-      <a-layout-content :style="{minHeight: minHeight, padding: '24px 24px 0', position: 'relative'}">
+      <a-layout-content class="global-layout-content" :style="{minHeight: minHeight, padding: '24px 24px 0', position: 'relative'}">
         <slot></slot>
       </a-layout-content>
       <a-layout-footer style="padding: 0px">
@@ -29,7 +29,7 @@ import Drawer from '../components/tool/Drawer'
 import SiderMenu from '../components/menu/SiderMenu'
 import Setting from '../components/setting/Setting'
 
-const minHeight = window.innerHeight - 64 - 24 - 122
+const minHeight = window.innerHeight - 64 - 122
 
 let menuData = []
 
@@ -42,6 +42,11 @@ export default {
       collapsed: false,
       menuData: menuData,
       showSetting: false
+    }
+  },
+  provide() {
+    return{
+      layoutMinHeight: minHeight,
     }
   },
   computed: {
@@ -82,14 +87,38 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .setting{
-    background-color: #1890ff;
-    color: #fff;
-    border-radius: 5px 0 0 5px;
-    line-height: 40px;
-    font-size: 22px;
-    width: 40px;
-    height: 40px;
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+  .global-layout{
+    height: 100vh;
+    .global-layout-main{
+      height: 100vh;
+      overflow-y: scroll;
+      scrollbar-color: @primary-color @primary-2;
+      scrollbar-width: thin;
+      &::-webkit-scrollbar{
+        width: 3px;
+        height: 1px;
+      }
+      &::-webkit-scrollbar-thumb {
+        border-radius: 3px;
+        background: @primary;
+      }
+      &::-webkit-scrollbar-track {
+        -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0);
+        border-radius: 3px;
+        background: @primary-3;
+      }
+    }
+    .global-layout-content{
+    }
+    .setting{
+      background-color: #1890ff;
+      color: #fff;
+      border-radius: 5px 0 0 5px;
+      line-height: 40px;
+      font-size: 22px;
+      width: 40px;
+      height: 40px;
+      box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
+    }
   }
 </style>
