@@ -64,8 +64,8 @@ export default {
         this.pageList.push(newRoute)
       }
     },
-    'activePage': function (key) {
-      this.$router.push(key)
+    'activePage': function () {
+      // this.$router.push(key)
     },
     'multiPage': function (newVal) {
       if (!newVal) {
@@ -76,6 +76,7 @@ export default {
   },
   methods: {
     changePage (key) {
+      this.$router.push(key)
       this.activePage = key
     },
     editPage (key, action) {
