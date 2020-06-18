@@ -91,9 +91,10 @@ export default {
     height: 100vh;
     .global-layout-main{
       height: 100vh;
-      overflow-y: scroll;
+      overflow-y: auto;
       scrollbar-color: @primary-color @primary-2;
       scrollbar-width: thin;
+      -ms-overflow-style:none;
       &::-webkit-scrollbar{
         width: 3px;
         height: 1px;
