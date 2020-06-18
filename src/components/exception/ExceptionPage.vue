@@ -1,5 +1,5 @@
 <template>
-  <div class="exception-page" :style="{minHeight: layoutMinHeight - 64 + 'px'}">
+  <div class="exception-page" :style="{height: layoutMinHeight - 64 + 'px'}">
     <div class="img">
       <img :src="config[type].img" />
     </div>
@@ -36,16 +36,13 @@ export default {
     align-items: center;
     background-color: white;
     .img{
-      display: inline-block;
       padding-right: 52px;
       zoom: 1;
       img{
-        height: 360px;
         max-width: 430px;
       }
     }
     .content{
-      display: inline-block;
       h1{
         color: #434e59;
         font-size: 72px;
