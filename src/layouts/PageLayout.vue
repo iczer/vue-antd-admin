@@ -5,7 +5,7 @@
       <slot slot="content" name="headerContent"></slot>
       <div slot="content" v-if="!this.$slots.headerContent && desc">
         <p style="font-size: 14px;line-height: 1.5;color: rgba(0,0,0,.65)">{{desc}}</p>
-        <div class="link">
+        <div v-if="this.linkList" class="link">
           <template  v-for="(link, index) in linkList">
             <a :key="index" :href="link.href"><a-icon :type="link.icon" />{{link.title}}</a>
           </template>
@@ -54,7 +54,7 @@ export default {
     margin: -24px -24px 0;
   }
   .link{
-    margin-top: 16px;
+    /*margin-top: 16px;*/
     line-height: 24px;
     a{
       font-size: 14px;

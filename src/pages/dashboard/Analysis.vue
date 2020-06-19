@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <a-row style="margin: 0 -12px">
-      <a-col :sm="24" :md="12" :xl="6" style="padding: 12px 12px 24px;">
+  <div class="analysis">
+    <a-row :gutter="24">
+      <a-col :sm="24" :md="12" :xl="6">
         <chart-card title="总销售额" total="￥ 189,345">
           <a-tooltip title="指标说明" slot="action">
             <a-icon type="info-circle-o" />
@@ -13,7 +13,7 @@
           <div slot="footer">日均销售额<span> ￥234.56</span></div>
         </chart-card>
       </a-col>
-      <a-col :sm="24" :md="12" :xl="6" style="padding: 12px 12px 24px;">
+      <a-col :sm="24" :md="12" :xl="6">
         <chart-card title="总销售额" total="￥ 189,345">
           <a-tooltip title="指标说明" slot="action">
             <a-icon type="info-circle-o" />
@@ -24,7 +24,7 @@
           <div slot="footer">日访问量<span> 123,4</span></div>
         </chart-card>
       </a-col>
-      <a-col :sm="24" :md="12" :xl="6" style="padding: 12px 12px 24px;">
+      <a-col :sm="24" :md="12" :xl="6">
         <chart-card title="总销售额" total="￥ 189,345">
           <a-tooltip title="指标说明" slot="action">
             <a-icon type="info-circle-o" />
@@ -35,7 +35,7 @@
           <div slot="footer">转化率 <span>60%</span></div>
         </chart-card>
       </a-col>
-      <a-col :sm="24" :md="12" :xl="6" style="padding: 12px 12px 24px;">
+      <a-col :sm="24" :md="12" :xl="6">
         <chart-card title="运营活动效果" total="73%">
           <a-tooltip title="指标说明" slot="action">
             <a-icon type="info-circle-o" />
@@ -50,7 +50,7 @@
         </chart-card>
       </a-col>
     </a-row>
-    <a-card :bordered="false" :body-style="{padding: '24px'}">
+    <a-card style="margin-top: 24px" :bordered="false" :body-style="{padding: '24px'}">
       <div class="salesCard">
         <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
           <div class="extra-wrap" slot="tabBarExtraContent">

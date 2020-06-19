@@ -1,9 +1,10 @@
-import {footerLinks, animates} from '@/config'
+import {footerLinks, animates, themeColor} from '@/config'
 export default {
   namespaced: true,
   state: {
     isMobile: false,
     theme: 'dark',
+    themeColor,
     layout: 'side',
     systemName: 'Vue Antd Admin',
     copyright: '2018 ICZER 工作室出品',
@@ -30,6 +31,9 @@ export default {
     },
     setAnimate (state, animate) {
       state.animate = animate
+    },
+    setThemeColor (state, color) {
+      state.themeColor = color
     }
   }
 }

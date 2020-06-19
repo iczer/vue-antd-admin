@@ -104,7 +104,7 @@ export default {
             margin-right: 16px;
           }
           .content{
-            margin-bottom: 16px;
+            /*margin-bottom: 16px;*/
             flex: auto;
           }
           .extra{

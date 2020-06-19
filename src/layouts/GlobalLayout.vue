@@ -30,6 +30,7 @@ import GlobalFooter from './GlobalFooter'
 import Drawer from '../components/tool/Drawer'
 import SiderMenu from '../components/menu/SiderMenu'
 import Setting from '../components/setting/Setting'
+import {mapState} from 'vuex'
 
 const minHeight = window.innerHeight - 64 - 24 - 122
 
@@ -52,21 +53,7 @@ export default {
     }
   },
   computed: {
-    isMobile () {
-      return this.$store.state.setting.isMobile
-    },
-    theme () {
-      return this.$store.state.setting.theme
-    },
-    layout () {
-      return this.$store.state.setting.layout
-    },
-    linkList () {
-      return this.$store.state.setting.footerLinks
-    },
-    copyright () {
-      return this.$store.state.setting.copyright
-    }
+    ...mapState('setting', ['isMobile', 'theme', 'layout', 'footerLinks', 'copyright']),
   },
   methods: {
     toggleCollapse () {

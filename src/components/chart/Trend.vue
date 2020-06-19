@@ -66,7 +66,6 @@ export default {
   .chart-trend{
     display: inline-block;
     font-size: 14px;
-    line-height: 22px;
     .chart-trend-icon{
       font-size: 12px;
       &.up{

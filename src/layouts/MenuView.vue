@@ -5,7 +5,7 @@
         @contextmenu.native="e => onContextmenu(e)"
         v-if="multiPage"
         :active-key="activePage"
-        style="margin-top: -8px; margin-bottom: 8px"
+        :style="`margin: -16px auto 8px; ${layout == 'head' ? 'max-width: 1400px;' : ''}`"
         :hide-add="true"
         type="editable-card"
         @change="changePage"
@@ -48,7 +48,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('setting', ['multiPage', 'animate'])
+    ...mapState('setting', ['multiPage', 'animate', 'layout'])
   },
   created () {
     this.pageList.push(this.$route)

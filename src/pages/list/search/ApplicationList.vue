@@ -2,9 +2,10 @@
   <div>
     <search-form />
     <a-list
-      :grid="{ gutter: 24, xl: 4, lg: 3, md: 3, sm: 2, xs: 1 }"
+      :grid="{gutter: 16, xl: 4, lg: 3, md: 3, sm: 2, xs: 1}"
+      style="margin: 0 -8px"
     >
-      <a-list-item style="padding: 0 12px" :key="n" v-for="n in 12">
+      <a-list-item :key="n" v-for="n in 12" style="padding: 0 8px">
         <a-card>
           <a-card-meta title="Angular">
             <a-avatar slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/zOsKZmFRdUtvpqCImOVY.png" size="small" />
