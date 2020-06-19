@@ -59,14 +59,22 @@
       <a-list :split="false">
         <a-list-item>
           动画效果
-          <a-select v-model="animate" @change="setAnimate" class="select-item" size="small" slot="actions">
-            <a-select-option :key="index" :value="index" v-for="(item, index) in animates">{{item.alias}}</a-select-option>
+          <a-select
+            v-model="animate"
+            @change="setAnimate"
+            class="select-item" size="small" slot="actions"
+          >
+            <a-select-option :key="index" :value="item.name" v-for="(item, index) in animates">{{item.alias}}</a-select-option>
           </a-select>
         </a-list-item>
         <a-list-item>
           动画方向
-          <a-select v-model="direction" @change="setAnimate" class="select-item" size="small" slot="actions">
-            <a-select-option :key="index" :value="index" v-for="(item, index) in animateCfg.directions">{{item}}</a-select-option>
+          <a-select
+            v-model="direction"
+            @change="setAnimate"
+            class="select-item" size="small" slot="actions"
+          >
+            <a-select-option :key="index" :value="item" v-for="(item, index) in directions">{{item}}</a-select-option>
           </a-select>
         </a-list-item>
       </a-list>
@@ -91,26 +99,23 @@ export default {
   components: {ImgCheckboxGroup, ImgCheckbox, ColorCheckboxGroup, ColorCheckbox, SettingItem},
   data() {
     return {
-      animate: 0,
-      direction: 0,
+      animate: this.$store.state.setting.animate.name,
+      direction: this.$store.state.setting.animate.direction,
       colors: ['#f5222d', '#fa541c', '#faad14', '#13c2c2', '#52c41a', '#1d92ff', '#2f54eb', '#722ed1'],
     }
   },
   watch: {
-    animate(){
-      this.direction = 0
-    }
   },
   computed: {
-    animateCfg() {
-      return this.animates[this.animate]
+    directions() {
+      return this.animates.find(item => item.name == this.animate).directions
     },
     ...mapState('setting', ['animates', 'multiPage'])
   },
   methods: {
     onColorChange (values, colors) {
       if (colors.length > 0) {
-        let closeMessage = this.$message.loading(`您选择了主题色 ${colors}, 正在切换...`)
+        let closeMessage = this.$message.info(`您选择了主题色 ${colors}, 正在切换...`)
         themeUtil.changeThemeColor(colors[0]).then(closeMessage)
       }
     },
@@ -132,10 +137,10 @@ export default {
       this.$store.commit('setting/setMultiPage', checked)
     },
     setAnimate() {
-      let animation = this.animates[this.animate]
-      let animate = {
-        name: animation.name,
-        direction: animation.directions[this.direction]
+      this.direction = this.directions[0]
+        let animate = {
+        name: this.animate,
+        direction: this.direction
       }
       this.$store.commit('setting/setAnimate', animate)
     }

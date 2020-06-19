@@ -12,8 +12,10 @@
     </drawer>
     <a-layout class="global-layout-main">
       <global-header :menuData="menuData" :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
-      <a-layout-content class="global-layout-content" :style="{minHeight: minHeight, padding: '24px 24px 0', position: 'relative'}">
-        <slot></slot>
+      <a-layout-content class="global-layout-content">
+        <div :style="`min-height: ${minHeight}px; position: relative`">
+          <slot></slot>
+        </div>
       </a-layout-content>
       <a-layout-footer style="padding: 0px">
         <global-footer :link-list="linkList" :copyright="copyright" />
@@ -29,7 +31,7 @@ import Drawer from '../components/tool/Drawer'
 import SiderMenu from '../components/menu/SiderMenu'
 import Setting from '../components/setting/Setting'
 
-const minHeight = window.innerHeight - 64 - 122
+const minHeight = window.innerHeight - 64 - 24 - 122
 
 let menuData = []
 
@@ -38,7 +40,7 @@ export default {
   components: {Setting, SiderMenu, Drawer, GlobalFooter, GlobalHeader},
   data () {
     return {
-      minHeight: minHeight + 'px',
+      minHeight: minHeight,
       collapsed: false,
       menuData: menuData,
       showSetting: false
@@ -90,8 +92,7 @@ export default {
   .global-layout{
     height: 100vh;
     .global-layout-main{
-      height: 100vh;
-      overflow-y: auto;
+      overflow: scroll;
       scrollbar-color: @primary-color @primary-2;
       scrollbar-width: thin;
       -ms-overflow-style:none;
@@ -110,6 +111,8 @@ export default {
       }
     }
     .global-layout-content{
+      padding: 24px 24px 0;
+      min-height: auto;
     }
     .setting{
       background-color: #1890ff;

@@ -7,5 +7,4 @@ module.exports = {
     {link: 'https://github.com/iczer/vue-antd-admin', icon: 'github'},
     {link: 'https://ant.design', name: 'Ant Design'}
   ],
-
 }

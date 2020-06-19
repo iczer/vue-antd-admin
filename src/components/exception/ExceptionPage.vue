@@ -1,5 +1,5 @@
 <template>
-  <div class="exception-page" :style="{height: layoutMinHeight - 64 + 'px'}">
+  <div class="exception-page" :style="{height: layoutMinHeight - 32 + 'px'}">
     <div class="img">
       <img :src="config[type].img" />
     </div>
