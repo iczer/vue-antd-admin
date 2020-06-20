@@ -42,7 +42,7 @@
       <a-list :split="false">
         <a-list-item>
           色弱模式
-          <a-switch slot="actions" size="small" />
+          <a-switch :checked="weekMode" slot="actions" size="small" @change="setWeekMode" />
         </a-list-item>
         <a-list-item>
           显示抽屉按钮
@@ -110,7 +110,7 @@ export default {
     directions() {
       return this.animates.find(item => item.name == this.animate).directions
     },
-    ...mapState('setting', ['animates', 'multiPage'])
+    ...mapState('setting', ['animates', 'multiPage', 'weekMode'])
   },
   methods: {
     onColorChange (values, colors) {
@@ -139,6 +139,9 @@ export default {
     },
     setMultiPage (checked) {
       this.$store.commit('setting/setMultiPage', checked)
+    },
+    setWeekMode(checked) {
+      this.$store.commit('setting/setWeekMode', checked)
     },
     setAnimate() {
       this.direction = this.directions[0]

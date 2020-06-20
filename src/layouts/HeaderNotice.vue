@@ -1,7 +1,7 @@
 <template>
   <a-dropdown :trigger="['click']">
-    <template slot="overlay">
-      <a-spin :spinning="loadding">
+    <div slot="overlay">
+      <a-spin :spinning="loading">
         <a-tabs :tabBarStyle="{textAlign: 'center'}" :style="{backgroundColor: 'white', width: '297px'}">
           <a-tab-pane tab="通知" key="1" :style="{padding: '0 24px'}">
             <a-list>
@@ -30,7 +30,7 @@
           </a-tab-pane>
         </a-tabs>
       </a-spin>
-    </template>
+    </div>
     <span @click="fetchNotice" class="header-notice">
       <a-badge count="12">
         <a-icon :class="['header-notice-icon', theme]" type="bell" />
@@ -40,34 +40,36 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   name: 'HeaderNotice',
   data () {
     return {
-      loadding: false
+      loading: false
     }
   },
   computed: {
-    theme () {
-      return this.$store.state.setting.layout === 'side' ? 'light' : this.$store.state.setting.theme
-    }
+    ...mapState('setting', ['layout', 'theme']),
+    theme() {
+      return this.layout == 'side' ? 'light' : this.theme
+    },
   },
   methods: {
     fetchNotice () {
-      if (this.loadding) {
-        this.loadding = false
+      if (this.loading) {
+        this.loading = false
         return
       }
       this.loadding = true
       setTimeout(() => {
         this.loadding = false
-      }, 2000)
+      }, 1000)
     }
   }
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .header-notice{
     display: inline-block;
     transition: all 0.3s;

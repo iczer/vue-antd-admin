@@ -18,7 +18,7 @@
         </div>
       </a-layout-content>
       <a-layout-footer style="padding: 0px">
-        <global-footer :link-list="linkList" :copyright="copyright" />
+        <global-footer :link-list="footerLinks" :copyright="copyright" />
       </a-layout-footer>
     </a-layout>
   </a-layout>

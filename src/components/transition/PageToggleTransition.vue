@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import {animates} from '@/config'
+  import animates from '@/config/animates'
 
   export default {
     name: 'PageToggleTransition',
@@ -16,7 +16,7 @@
       animate: {
         type: String,
         validator(value) {
-          return animates.find(item => item.name == value) != -1
+          return animates.findIndex(item => item.name == value) != -1
         },
         default: 'bounce'
       },

@@ -1,7 +1,16 @@
 // 系统配置
 module.exports = {
   themeColor: '#1890ff',
-  animates: require('./animates'),
+  theme: 'dark',
+  layout: 'side',
+  weekMode: false,
+  multiPage: false,
+  systemName: 'Vue Antd Admin',
+  copyright: '2018 ICZER 工作室出品',
+  animate: {
+    name: 'bounce',
+    direction: 'left'
+  },
   footerLinks: [
     {link: 'https://pro.ant.design', name: 'Pro首页'},
     {link: 'https://github.com/iczer/vue-antd-admin', icon: 'github'},

@@ -1,10 +1,10 @@
 <template>
-  <a-dropdown style="display: inline-block; height: 100%; vertical-align: initial" >
+  <a-dropdown class="header-avatar">
     <span style="cursor: pointer">
-      <a-avatar class="avatar" size="small" shape="circle" :src="currUser.avatar"/>
-      <span>{{currUser.name}}</span>
+      <a-avatar class="avatar" size="small" shape="circle" :src="user.avatar"/>
+      <span>{{user.name}}</span>
     </span>
-    <a-menu style="width: 150px" slot="overlay">
+    <a-menu :class="['avatar-menu']" slot="overlay">
       <a-menu-item>
         <a-icon type="user" />
         <span>个人中心</span>
@@ -25,21 +25,30 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+
 export default {
   name: 'HeaderAvatar',
   computed: {
-    currUser () {
-      return this.$store.state.account.user
-    }
+    ...mapState('setting', ['weekMode']),
+    ...mapState('account', ['user']),
   }
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
+  .header-avatar{
+    display: inline-block;
+    height: 100%;
+    vertical-align: initial;
+  }
   .avatar{
     margin: 20px 4px 20px 0;
     color: #1890ff;
     background: hsla(0,0%,100%,.85);
     vertical-align: middle;
+  }
+  .avatar-menu{
+    width: 150px;
   }
 </style>

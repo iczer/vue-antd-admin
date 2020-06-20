@@ -1,20 +1,10 @@
-import {footerLinks, animates, themeColor} from '@/config'
+import config from '@/config'
 export default {
   namespaced: true,
   state: {
     isMobile: false,
-    theme: 'dark',
-    themeColor,
-    layout: 'side',
-    systemName: 'Vue Antd Admin',
-    copyright: '2018 ICZER 工作室出品',
-    footerLinks: footerLinks,
-    multiPage: true,
-    animates: animates,
-    animate: {
-      name: 'bounce',
-      direction: 'left'
-    }
+    animates: require('@/config/animates'),
+    ...config
   },
   mutations: {
     setDevice (state, isMobile) {
@@ -34,6 +24,9 @@ export default {
     },
     setThemeColor (state, color) {
       state.themeColor = color
+    },
+    setWeekMode(state, weekMode) {
+      state.weekMode = weekMode
     }
   }
 }
