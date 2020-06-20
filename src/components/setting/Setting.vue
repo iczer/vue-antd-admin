@@ -105,6 +105,9 @@ export default {
     }
   },
   watch: {
+    animate() {
+      this.direction = this.directions[0]
+    }
   },
   computed: {
     directions() {
@@ -144,8 +147,7 @@ export default {
       this.$store.commit('setting/setWeekMode', checked)
     },
     setAnimate() {
-      this.direction = this.directions[0]
-        let animate = {
+      let animate = {
         name: this.animate,
         direction: this.direction
       }
