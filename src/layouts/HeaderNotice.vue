@@ -33,7 +33,7 @@
     </div>
     <span @click="fetchNotice" class="header-notice">
       <a-badge count="12">
-        <a-icon :class="['header-notice-icon', theme]" type="bell" />
+        <a-icon :class="['header-notice-icon', headerTheme]" type="bell" />
       </a-badge>
     </span>
   </a-dropdown>
@@ -50,7 +50,7 @@ export default {
   },
   computed: {
     ...mapState('setting', ['layout', 'theme']),
-    theme() {
+    headerTheme() {
       return this.layout == 'side' ? 'light' : this.theme
     },
   },
