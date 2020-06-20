@@ -2,9 +2,8 @@
 **[Ant Design Pro](https://github.com/ant-design/ant-design-pro) 的 Vue 实现**
 
 一个开箱即用的中后台前端/设计解决方案（主要依赖组件库 [ant-design-vue](https://github.com/vueComponent/ant-design-vue) ）
-
-[预览地址](https://iczer.gitee.io/vue-antd-pro)
-![image](https://raw.githubusercontent.com/iczer/vue-antd-admin/master/src/assets/img/preview.jpg)
+[预览地址](https://iczer.gitee.io/vue-antd-admin)  
+![image](https://gitee.com/iczer/vue-antd-admin/raw/master/src/assets/img/preview.jpg)
 ## 重要
 该项目目前已升级至 vue-cli3 开发环境，部分依赖组件库版本也已更新至最新版本。  
 vue-cli2 环境代码已封版 [v0.0.1](https://github.com/iczer/vue-antd-admin/tree/0.0.1)，如有需要，[点我查看](https://github.com/iczer/vue-antd-admin/tree/0.0.1)  
@@ -16,10 +15,11 @@ vue-cli2 环境代码已封版 [v0.0.1](https://github.com/iczer/vue-antd-admin/
 * vue-cli -- 构建
 ## 依赖
 * @antv/data-set: ^0.11.4
+* animate.css: ^4.1.0
 * ant-design-vue: ^1.6.2
 * axios: ^0.19.2
 * clipboard: ^2.0.6
-* core-js: ^3.6.5,
+* core-js: ^3.6.5
 * date-fns: ^2.14.0
 * enquire.js: ^2.1.6
 * mockjs: ^1.1.0
