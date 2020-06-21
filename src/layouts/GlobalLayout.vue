@@ -6,12 +6,13 @@
     <sider-menu :theme="theme" v-else-if="layout === 'side'" :menuData="menuData" :collapsed="collapsed" :collapsible="true" />
     <drawer :open-drawer="showSetting" placement="right"  @change="onSettingDrawerChange">
       <div class="setting" slot="handler">
-        <a-icon :type="showSetting ? 'close' : 'setting'" />
+        <a-icon :type="showSetting ? 'close' : 'setting'"/>
       </div>
       <setting />
     </drawer>
     <a-layout class="global-layout-main">
-      <global-header :menuData="menuData" :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
+      <global-header :style="headerStyle" :menuData="menuData" :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
+      <a-layout-header v-if="fixedHeader"></a-layout-header>
       <a-layout-content class="global-layout-content">
         <div :style="`min-height: ${minHeight}px; position: relative`">
           <slot></slot>
@@ -53,7 +54,16 @@ export default {
     }
   },
   computed: {
-    ...mapState('setting', ['isMobile', 'theme', 'layout', 'footerLinks', 'copyright']),
+    ...mapState('setting', ['isMobile', 'theme', 'layout', 'footerLinks', 'copyright', 'fixedHeader']),
+    sideMenuWidth() {
+      return this.collapsed ? '80px' : '256px'
+    },
+    headerStyle() {
+      let width = (this.fixedHeader && this.layout == 'side' && !this.isMobile) ? `calc(100% - ${this.sideMenuWidth})` : '100%'
+      let position = this.fixedHeader ? 'fixed' : 'static'
+      let transition = this.fixedHeader ? 'transition: width 0.2s' : ''
+      return `width: ${width}; position: ${position}; ${transition}`
+    }
   },
   methods: {
     toggleCollapse () {
@@ -67,7 +77,7 @@ export default {
     },
     onSettingDrawerChange (val) {
       this.showSetting = val
-    }
+    },
   },
   beforeCreate () {
     menuData = this.$router.options.routes.find((item) => item.path === '/').children
@@ -83,6 +93,7 @@ export default {
       scrollbar-color: @primary-color @primary-2;
       scrollbar-width: thin;
       -ms-overflow-style:none;
+      position: relative;
       &::-webkit-scrollbar{
         width: 3px;
         height: 1px;
@@ -95,6 +106,10 @@ export default {
         -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0);
         border-radius: 3px;
         background: @primary-3;
+      }
+      .global-header{
+        top: 0;
+        right: 0;
       }
     }
     .global-layout-content{

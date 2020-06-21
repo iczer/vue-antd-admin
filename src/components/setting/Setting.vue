@@ -29,7 +29,7 @@
         </a-list-item>
         <a-list-item>
           固定Header
-          <a-switch slot="actions" size="small" />
+          <a-switch :checked="fixedHeader" slot="actions" size="small" @change="setFixedHeader" />
         </a-list-item>
         <a-list-item>
           固定Siderbar
@@ -114,7 +114,7 @@ export default {
     directions() {
       return this.animates.find(item => item.name == this.animate).directions
     },
-    ...mapState('setting', ['animates', 'multiPage', 'weekMode'])
+    ...mapState('setting', ['animates', 'multiPage', 'weekMode', 'fixedHeader'])
   },
   methods: {
     onColorChange (values, colors) {
@@ -153,6 +153,9 @@ export default {
         direction: this.direction
       }
       this.$store.commit('setting/setAnimate', animate)
+    },
+    setFixedHeader(checked) {
+      this.$store.commit('setting/setFixedHeader', checked)
     }
   }
 }

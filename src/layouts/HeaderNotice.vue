@@ -48,11 +48,9 @@ export default {
       loading: false
     }
   },
+  inject: 'headerTheme',
   computed: {
-    ...mapState('setting', ['layout', 'theme']),
-    headerTheme() {
-      return this.layout == 'side' ? 'light' : this.theme
-    },
+    ...mapState('setting', ['layout', 'theme'])
   },
   methods: {
     fetchNotice () {
