@@ -3,6 +3,7 @@ module.exports = {
   themeColor: '#1890ff',
   theme: 'dark',
   layout: 'side',
+  fixedHeader: false,
   weekMode: false,
   multiPage: false,
   systemName: 'Vue Antd Admin',

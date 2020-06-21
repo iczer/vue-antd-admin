@@ -27,6 +27,9 @@ export default {
     },
     setWeekMode(state, weekMode) {
       state.weekMode = weekMode
+    },
+    setFixedHeader(state, fixedHeader) {
+      state.fixedHeader = fixedHeader
     }
   }
 }
