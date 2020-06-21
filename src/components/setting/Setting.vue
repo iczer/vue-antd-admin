@@ -7,7 +7,7 @@
       </img-checkbox-group>
     </setting-item>
     <setting-item title="主题色">
-      <color-checkbox-group @change="onColorChange" :defaultValues="[5]" :multiple="false">
+      <color-checkbox-group @change="onColorChange" :defaultValues="themeColorIndex" :multiple="false">
         <color-checkbox v-for="(color, index) in colors" :key="index" :color="color" :value="index" />
       </color-checkbox-group>
     </setting-item>
@@ -93,7 +93,7 @@ import { mapState } from 'vuex'
 
 const ColorCheckboxGroup = ColorCheckbox.Group
 const ImgCheckboxGroup = ImgCheckbox.Group
-
+const colors = ['#f5222d', '#fa541c', '#faad14', '#13c2c2', '#52c41a', '#1890ff', '#2f54eb', '#722ed1']
 export default {
   name: 'Setting',
   components: {ImgCheckboxGroup, ImgCheckbox, ColorCheckboxGroup, ColorCheckbox, SettingItem},
@@ -101,7 +101,8 @@ export default {
     return {
       animate: this.$store.state.setting.animate.name,
       direction: this.$store.state.setting.animate.direction,
-      colors: ['#f5222d', '#fa541c', '#faad14', '#13c2c2', '#52c41a', '#1d92ff', '#2f54eb', '#722ed1'],
+      themeColorIndex: [colors.indexOf(this.$store.state.setting.themeColor)],
+      colors,
     }
   },
   watch: {
