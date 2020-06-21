@@ -1,5 +1,5 @@
 <template>
-  <a-layout class="global-layout">
+  <a-layout :class="['global-layout', fixedSider ? 'fixed-sider' : '']">
     <drawer v-if="isMobile" :openDrawer="collapsed" @change="onDrawerChange">
       <sider-menu :theme="theme" :menuData="menuData" :collapsed="false" :collapsible="false" @menuSelect="onMenuSelect"/>
     </drawer>
@@ -10,7 +10,7 @@
       </div>
       <setting />
     </drawer>
-    <a-layout class="global-layout-main">
+    <a-layout class="global-layout-main beauty-scroll">
       <global-header :style="headerStyle" :menuData="menuData" :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
       <a-layout-header v-if="fixedHeader"></a-layout-header>
       <a-layout-content class="global-layout-content">
@@ -54,7 +54,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('setting', ['isMobile', 'theme', 'layout', 'footerLinks', 'copyright', 'fixedHeader']),
+    ...mapState('setting', ['isMobile', 'theme', 'layout', 'footerLinks', 'copyright', 'fixedHeader', 'fixedSider']),
     sideMenuWidth() {
       return this.collapsed ? '80px' : '256px'
     },
@@ -87,26 +87,13 @@ export default {
 
 <style lang="less" scoped>
   .global-layout{
-    height: 100vh;
+    &.fixed-sider{
+      height: 100vh;
+      .global-layout-main{
+        overflow: scroll;
+      }
+    }
     .global-layout-main{
-      overflow: scroll;
-      scrollbar-color: @primary-color @primary-2;
-      scrollbar-width: thin;
-      -ms-overflow-style:none;
-      position: relative;
-      &::-webkit-scrollbar{
-        width: 3px;
-        height: 1px;
-      }
-      &::-webkit-scrollbar-thumb {
-        border-radius: 3px;
-        background: @primary;
-      }
-      &::-webkit-scrollbar-track {
-        -webkit-box-shadow: inset 0 0 1px rgba(0,0,0,0);
-        border-radius: 3px;
-        background: @primary-3;
-      }
       .global-header{
         top: 0;
         right: 0;

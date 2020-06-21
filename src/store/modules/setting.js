@@ -30,6 +30,9 @@ export default {
     },
     setFixedHeader(state, fixedHeader) {
       state.fixedHeader = fixedHeader
+    },
+    setFixedSider(state, fixedSider) {
+      state.fixedSider = fixedSider
     }
   }
 }
