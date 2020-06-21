@@ -2,8 +2,8 @@
   <a-layout-sider class="sider" width="273">
     <setting-item title="整体风格设置">
       <img-checkbox-group @change="setTheme">
-        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" value="dark"/>
-        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" value="light"/>
+        <img-checkbox title="暗色菜单风格" img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" value="dark"/>
+        <img-checkbox title="亮色菜单风格" img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" value="light"/>
       </img-checkbox-group>
     </setting-item>
     <setting-item title="主题色">
@@ -14,8 +14,8 @@
     <a-divider/>
     <setting-item title="导航设置">
       <img-checkbox-group @change="setLayout">
-        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" :checked="true" value="side"/>
-        <img-checkbox img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" value="head"/>
+        <img-checkbox title="侧边导航" img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" :checked="true" value="side"/>
+        <img-checkbox title="顶部导航" img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" value="head"/>
       </img-checkbox-group>
     </setting-item>
     <setting-item>
@@ -43,10 +43,6 @@
         <a-list-item>
           色弱模式
           <a-switch :checked="weekMode" slot="actions" size="small" @change="setWeekMode" />
-        </a-list-item>
-        <a-list-item>
-          显示抽屉按钮
-          <a-switch slot="actions" size="small" />
         </a-list-item>
         <a-list-item>
           多页签模式

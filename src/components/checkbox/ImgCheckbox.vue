@@ -1,10 +1,12 @@
 <template>
-  <div class="img-check-box" @click="toggle">
-    <img :src="img" />
-    <div v-if="sChecked" class="check-item">
-      <a-icon type="check" />
+  <a-tooltip :title="title">
+    <div class="img-check-box" @click="toggle">
+      <img :src="img" />
+      <div v-if="sChecked" class="check-item">
+        <a-icon type="check" />
+      </div>
     </div>
-  </div>
+  </a-tooltip>
 </template>
 
 <script>
@@ -85,7 +87,8 @@ export default {
     },
     value: {
       required: true
-    }
+    },
+    title: String
   },
   data () {
     return {
