@@ -33,14 +33,13 @@
     </div>
     <span @click="fetchNotice" class="header-notice">
       <a-badge count="12">
-        <a-icon :class="['header-notice-icon', headerTheme]" type="bell" />
+        <a-icon :class="['header-notice-icon']" type="bell" />
       </a-badge>
     </span>
   </a-dropdown>
 </template>
 
 <script>
-import {mapState} from 'vuex'
 export default {
   name: 'HeaderNotice',
   data () {
@@ -48,9 +47,7 @@ export default {
       loading: false
     }
   },
-  inject: 'headerTheme',
   computed: {
-    ...mapState('setting', ['layout', 'theme'])
   },
   methods: {
     fetchNotice () {
@@ -77,12 +74,6 @@ export default {
     .header-notice-icon{
       font-size: 16px;
       padding: 4px;
-      &.dark{
-        color: #fff;
-      }
-      &.light{
-        color: rgba(0,0,0,.65);
-      }
     }
   }
   .ant-dropdown-menu-container{
