@@ -1,9 +1,9 @@
 <template>
-  <a-dropdown class="header-avatar">
-    <span style="cursor: pointer">
-      <a-avatar class="avatar" size="small" shape="circle" :src="user.avatar"/>
-      <span>{{user.name}}</span>
-    </span>
+  <a-dropdown>
+    <div class="header-avatar" style="cursor: pointer">
+      <a-avatar class="avatar" :size="30" shape="circle" :src="user.avatar"/>
+      <span class="name">{{user.name}}</span>
+    </div>
     <a-menu :class="['avatar-menu']" slot="overlay">
       <a-menu-item>
         <a-icon type="user" />
@@ -38,17 +38,19 @@ export default {
 
 <style lang="less">
   .header-avatar{
-    display: inline-block;
-    height: 100%;
-    vertical-align: initial;
-  }
-  .avatar{
-    margin: 20px 4px 20px 0;
-    color: #1890ff;
-    background: hsla(0,0%,100%,.85);
-    vertical-align: middle;
+    display: inline-flex;
+    .avatar, .name{
+      align-self: center;
+    }
+    .avatar{
+      margin-right: 8px;
+    }
+    .name{
+      font-weight: 500;
+    }
   }
   .avatar-menu{
     width: 150px;
   }
+
 </style>

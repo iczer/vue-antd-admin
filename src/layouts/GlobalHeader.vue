@@ -68,17 +68,6 @@ export default {
       color: #1890ff;
     }
   }
-  .header-item{
-    padding: 0 12px;
-    display: inline-block;
-    height: 100%;
-    cursor: pointer;
-    vertical-align: middle;
-    i{
-      font-size: 16px;
-      color: rgba(0,0,0,.65);
-    }
-  }
   .global-header{
     padding: 0 12px 0 0;
     -webkit-box-shadow: 0 1px 4px rgba(0,21,41,.08);
@@ -129,10 +118,20 @@ export default {
       }
       .global-header-right{
         float: right;
+        display: flex;
         &.dark{
           color: #fff;
+          a, i{
+            color: #fff !important;
+          }
+        }
+        .header-item{
+          padding: 0 12px;
+          cursor: pointer;
+          align-self: center;
           i{
-            color: #fff;
+            font-size: 16px;
+            color: rgba(0,0,0,.65);
           }
         }
       }
