@@ -2,13 +2,13 @@
   <div>
     <a-card :bordered="false">
       <a-row>
-        <a-col :sm="8" :xs="24">
+        <a-col :sm="8" :xs="24" class="split-right">
           <head-info title="我的待办" content="8个任务" :bordered="true"/>
         </a-col>
-        <a-col :sm="8" :xs="24">
+        <a-col :sm="8" :xs="24" class="split-right">
           <head-info title="本周任务平均处理时间" content="32分钟" :bordered="true"/>
         </a-col>
-        <a-col :sm="8" :xs="24">
+        <a-col :sm="8" :xs="24" class="split-right">
           <head-info title="本周完成任务数" content="24个"/>
         </a-col>
       </a-row>
@@ -33,7 +33,7 @@
             description="那是一种内在的东西， 他们到达不了，也无法触及的"
           >
             <a-avatar slot="avatar" size="large" shape="square" src="https://gw.alipayobjects.com/zos/rmsportal/WdGqmHpayyMjiEhcKoVE.png"/>
-            <a slot="title">Alipay</a>
+            <a slot="title">AliPay</a>
           </a-list-item-meta>
           <div slot="actions">
             <a>编辑</a>
@@ -75,11 +75,6 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .ant-avatar-lg{
-    width: 48px;
-    height: 48px;
-    line-height: 48px;
-  }
   .list-content-item{
     color: rgba(0,0,0,.45);
     display: inline-block;
@@ -90,8 +85,7 @@ export default {
       line-height: 20px;
     }
     p{
-      margin-top: 4px;
-      margin-bottom: 0;
+      margin: 4px 0 0;
       line-height: 22px;
     }
   }

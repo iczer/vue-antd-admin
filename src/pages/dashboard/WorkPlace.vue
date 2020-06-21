@@ -4,11 +4,11 @@
       <div class="title">{{currUser.timefix}}，{{currUser.name}}，{{currUser.welcome}}</div>
       <div>{{currUser.position}}</div>
     </div>
-    <div slot="extra">
-          <head-info title="项目数" content="56" :bordered="true"/>
-          <head-info title="团队内排名" content="8/24" :bordered="true"/>
-          <head-info title="项目访问" content="2,223"/>
-    </div>
+    <template slot="extra">
+      <head-info class="split-right" title="项目数" content="56"/>
+      <head-info class="split-right" title="团队内排名" content="8/24"/>
+      <head-info class="split-right" title="项目访问" content="2,223"/>
+    </template>
     <div>
       <a-row style="margin: 0 -12px">
         <a-col style="padding: 0 12px" :xl="16" :lg="24" :md="24" :sm="24" :xs="24">

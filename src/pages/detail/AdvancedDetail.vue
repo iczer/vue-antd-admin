@@ -8,7 +8,7 @@
       <detail-list-item term="生效日期">2018-08-07 ~ 2018-12-11</detail-list-item>
       <detail-list-item term="备注">请于两个工作日内确认</detail-list-item>
     </detail-list>
-    <a-row slot="extra">
+    <a-row style="text-align: right;width: 100%;" slot="extra">
       <a-col :xs="24" :sm="12">
         <div class="text">状态</div>
         <div class="heading">待审批</div>
@@ -19,7 +19,7 @@
       </a-col>
     </a-row>
     <template slot="action">
-      <a-button-group style="margin-right: 4px;">
+      <a-button-group style="margin-right: 8px;">
         <a-button>操作</a-button>
         <a-button>操作</a-button>
         <a-button><a-icon type="ellipsis"/></a-button>
@@ -171,7 +171,7 @@ export default {
   }
   .heading{
     color: rgba(0,0,0,.85);
-    font-size: 20px;
+    font-size: 28px;
   }
   .nodata{
     color: rgba(0,0,0,.25);

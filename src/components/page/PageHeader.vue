@@ -75,7 +75,6 @@ export default {
         display: flex;
         .row {
           display: flex;
-          width: 100%;
         }
         .avatar {
           flex: 0 1 72px;
@@ -89,7 +88,6 @@ export default {
         }
         .main{
           width: 100%;
-          flex: 0 1 auto;
           .title{
             flex: auto;
             font-size: 20px;
@@ -104,14 +102,12 @@ export default {
             margin-right: 16px;
           }
           .content{
-            /*margin-bottom: 16px;*/
-            flex: auto;
+            flex: 1;
           }
           .extra{
-            flex: 0 1 auto;
+            display: flex;
             margin-left: 88px;
-            min-width: 242px;
-            text-align: right;
+            min-width: 420px;
           }
           .action{
             margin-left: 56px;

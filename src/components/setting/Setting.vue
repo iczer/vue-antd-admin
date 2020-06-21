@@ -32,7 +32,7 @@
           <a-switch :checked="fixedHeader" slot="actions" size="small" @change="setFixedHeader" />
         </a-list-item>
         <a-list-item>
-          固定Siderbar
+          固定侧边栏
           <a-switch :checked="fixedSider" slot="actions" size="small" @change="setFixedSider" />
         </a-list-item>
       </a-list>
