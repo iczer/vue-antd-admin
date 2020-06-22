@@ -57,7 +57,7 @@
           动画效果
           <a-select
             v-model="animate"
-            @change="setAnimate"
+            @change="val => setAnimate(val)"
             class="select-item" size="small" slot="actions"
           >
             <a-select-option :key="index" :value="item.name" v-for="(item, index) in animates">{{item.alias}}</a-select-option>
@@ -67,7 +67,7 @@
           动画方向
           <a-select
             v-model="direction"
-            @change="setAnimate"
+            @change="val => setAnimate(this.animate, val)"
             class="select-item" size="small" slot="actions"
           >
             <a-select-option :key="index" :value="item" v-for="(item, index) in directions">{{item}}</a-select-option>
@@ -84,7 +84,7 @@ import SettingItem from './SettingItem'
 import ColorCheckbox from '../checkbox/ColorCheckbox'
 import ImgCheckbox from '../checkbox/ImgCheckbox'
 import Clipboard from 'clipboard'
-import themeUtil from '../../utils/themeUtil';
+import themeUtil from '../../utils/themeUtil'
 import { mapState } from 'vuex'
 
 const ColorCheckboxGroup = ColorCheckbox.Group
@@ -99,11 +99,6 @@ export default {
       direction: this.$store.state.setting.animate.direction,
       themeColorIndex: [colors.indexOf(this.$store.state.setting.themeColor)],
       colors,
-    }
-  },
-  watch: {
-    animate() {
-      this.direction = this.directions[0]
     }
   },
   computed: {
@@ -143,12 +138,11 @@ export default {
     setWeekMode(checked) {
       this.$store.commit('setting/setWeekMode', checked)
     },
-    setAnimate() {
-      let animate = {
-        name: this.animate,
-        direction: this.direction
+    setAnimate(animate, direction) {
+      if (direction == undefined) {
+        this.direction = this.directions[0]
       }
-      this.$store.commit('setting/setAnimate', animate)
+      this.$store.commit('setting/setAnimate', {name: this.animate, direction: this.direction})
     },
     setFixedHeader(checked) {
       this.$store.commit('setting/setFixedHeader', checked)
