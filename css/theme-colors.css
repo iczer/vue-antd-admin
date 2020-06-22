@@ -37,9 +37,9 @@
 .beauty-scroll[data-v-25af3dac]::-webkit-scrollbar-thumb{background:#1890ff}
 .beauty-scroll[data-v-25af3dac]::-webkit-scrollbar-track{background:#91d5ff}
 .img-check-box .check-item[data-v-25af3dac]{color:#1890ff}
-.beauty-scroll[data-v-457b62ec]{scrollbar-color:#1890ff #bae7ff}
-.beauty-scroll[data-v-457b62ec]::-webkit-scrollbar-thumb{background:#1890ff}
-.beauty-scroll[data-v-457b62ec]::-webkit-scrollbar-track{background:#91d5ff}
+.beauty-scroll[data-v-33ea7120]{scrollbar-color:#1890ff #bae7ff}
+.beauty-scroll[data-v-33ea7120]::-webkit-scrollbar-thumb{background:#1890ff}
+.beauty-scroll[data-v-33ea7120]::-webkit-scrollbar-track{background:#91d5ff}
 .beauty-scroll[data-v-981dfa08]{scrollbar-color:#1890ff #bae7ff}
 .beauty-scroll[data-v-981dfa08]::-webkit-scrollbar-thumb{background:#1890ff}
 .beauty-scroll[data-v-981dfa08]::-webkit-scrollbar-track{background:#91d5ff}
@@ -307,18 +307,6 @@ html{--antd-wave-shadow-color:#1890ff}
 .ant-upload.ant-upload-drag:not(.ant-upload-disabled):hover{border-color:#40a9ff}
 .ant-upload.ant-upload-drag p.ant-upload-drag-icon .anticon{color:#40a9ff}
 .ant-upload-list-item:hover .ant-upload-list-item-info{background-color:#e6f7ff}
-.beauty-scroll[data-v-37ac67f0]{scrollbar-color:#1890ff #bae7ff}
-.beauty-scroll[data-v-37ac67f0]::-webkit-scrollbar-thumb{background:#1890ff}
-.beauty-scroll[data-v-37ac67f0]::-webkit-scrollbar-track{background:#91d5ff}
-.beauty-scroll[data-v-026688a2]{scrollbar-color:#1890ff #bae7ff}
-.beauty-scroll[data-v-026688a2]::-webkit-scrollbar-thumb{background:#1890ff}
-.beauty-scroll[data-v-026688a2]::-webkit-scrollbar-track{background:#91d5ff}
-.beauty-scroll[data-v-0990a56b]{scrollbar-color:#1890ff #bae7ff}
-.beauty-scroll[data-v-0990a56b]::-webkit-scrollbar-thumb{background:#1890ff}
-.beauty-scroll[data-v-0990a56b]::-webkit-scrollbar-track{background:#91d5ff}
-.beauty-scroll[data-v-87936dd8]{scrollbar-color:#1890ff #bae7ff}
-.beauty-scroll[data-v-87936dd8]::-webkit-scrollbar-thumb{background:#1890ff}
-.beauty-scroll[data-v-87936dd8]::-webkit-scrollbar-track{background:#91d5ff}
 .beauty-scroll[data-v-6471a849]{scrollbar-color:#1890ff #bae7ff}
 .beauty-scroll[data-v-6471a849]::-webkit-scrollbar-thumb{background:#1890ff}
 .beauty-scroll[data-v-6471a849]::-webkit-scrollbar-track{background:#91d5ff}
@@ -416,3 +404,15 @@ html{--antd-wave-shadow-color:#1890ff}
 .beauty-scroll[data-v-31708a9c]{scrollbar-color:#1890ff #bae7ff}
 .beauty-scroll[data-v-31708a9c]::-webkit-scrollbar-thumb{background:#1890ff}
 .beauty-scroll[data-v-31708a9c]::-webkit-scrollbar-track{background:#91d5ff}
+.beauty-scroll[data-v-37ac67f0]{scrollbar-color:#1890ff #bae7ff}
+.beauty-scroll[data-v-37ac67f0]::-webkit-scrollbar-thumb{background:#1890ff}
+.beauty-scroll[data-v-37ac67f0]::-webkit-scrollbar-track{background:#91d5ff}
+.beauty-scroll[data-v-026688a2]{scrollbar-color:#1890ff #bae7ff}
+.beauty-scroll[data-v-026688a2]::-webkit-scrollbar-thumb{background:#1890ff}
+.beauty-scroll[data-v-026688a2]::-webkit-scrollbar-track{background:#91d5ff}
+.beauty-scroll[data-v-0990a56b]{scrollbar-color:#1890ff #bae7ff}
+.beauty-scroll[data-v-0990a56b]::-webkit-scrollbar-thumb{background:#1890ff}
+.beauty-scroll[data-v-0990a56b]::-webkit-scrollbar-track{background:#91d5ff}
+.beauty-scroll[data-v-87936dd8]{scrollbar-color:#1890ff #bae7ff}
+.beauty-scroll[data-v-87936dd8]::-webkit-scrollbar-thumb{background:#1890ff}
+.beauty-scroll[data-v-87936dd8]::-webkit-scrollbar-track{background:#91d5ff}
