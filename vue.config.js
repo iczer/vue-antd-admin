@@ -1,6 +1,6 @@
 let path = require('path')
 const ThemeColorReplacer = require('webpack-theme-color-replacer')
-const getThemeColors = require('./src/utils/themeUtil').getThemeColors
+const {getThemeColors, changeSelector} = require('./src/utils/themeUtil')
 const themeColor = require('./src/config').themeColor
 
 module.exports = {
@@ -16,7 +16,8 @@ module.exports = {
     config.plugins.push(
       new ThemeColorReplacer({
         fileName: 'css/theme-colors.css',
-        matchColors: getThemeColors(themeColor)
+        matchColors: getThemeColors(themeColor),
+        changeSelector
       })
     )
   },
