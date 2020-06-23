@@ -8,7 +8,7 @@
       <a-divider v-if="isMobile" type="vertical" />
       <a-icon v-if="layout === 'side'" class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
       <div v-if="layout == 'head' && !isMobile" class="global-header-menu">
-        <i-menu style="height: 64px; line-height: 64px;" :i18n="menuI18n" :theme="headerTheme" mode="horizontal" :options="menuData" @select="onSelect"/>
+        <i-menu style="height: 64px; line-height: 64px;" @i18nComplete="setRoutesI18n" :i18n="menuI18n" :theme="headerTheme" mode="horizontal" :options="menuData" @select="onSelect"/>
       </div>
       <div :class="['global-header-right', headerTheme]">
           <header-search class="header-item" />
@@ -23,7 +23,7 @@
             <div>
               <a-icon type="global"/>
             </div>
-            <a-menu @click="changeLang" :selected-keys="[lang]" slot="overlay">
+            <a-menu @click="value => setLang(value.key)" :selected-keys="[lang]" slot="overlay">
               <a-menu-item key="CN"><span >cn</span> 简体中文</a-menu-item>
               <a-menu-item key="HK"><span >hk</span> 繁体中文</a-menu-item>
               <a-menu-item key="US"><span >us</span> English</a-menu-item>
@@ -39,7 +39,7 @@ import HeaderSearch from './HeaderSearch'
 import HeaderNotice from './HeaderNotice'
 import HeaderAvatar from './HeaderlAvatar'
 import IMenu from '../components/menu/menu'
-import {mapState} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 
 export default {
   name: 'GlobalHeader',
@@ -64,9 +64,7 @@ export default {
     onSelect (obj) {
       this.$emit('menuSelect', obj)
     },
-    changeLang(lang) {
-      this.$store.commit('setting/setLang', lang.key)
-    }
+    ...mapMutations('setting', ['setLang', 'setRoutesI18n'])
   }
 }
 </script>

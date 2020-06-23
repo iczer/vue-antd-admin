@@ -1,15 +1,21 @@
 <template>
-  <div id="app">
+  <a-config-provider :locale="locale">
     <router-view/>
-  </div>
+  </a-config-provider>
 </template>
 
 <script>
+import zh_CN from 'ant-design-vue/lib/locale-provider/zh_CN'
 import enquireScreen from './utils/device'
 import {mapState} from 'vuex'
 
 export default {
   name: 'App',
+  data() {
+    return {
+      locale: zh_CN
+    }
+  },
   created () {
     let _this = this
     enquireScreen(isMobile => {
@@ -25,6 +31,18 @@ export default {
     },
     lang(val) {
       this.$i18n.locale = val
+      switch (val) {
+        case 'CN':
+          this.locale = require('ant-design-vue/lib/locale-provider/zh_CN')
+          break
+        case 'HK':
+          this.locale = require('ant-design-vue/lib/locale-provider/zh_TW')
+          break
+        case 'US':
+        default:
+          this.locale = require('ant-design-vue/lib/locale-provider/en_US')
+          break
+      }
     }
   },
   computed: {

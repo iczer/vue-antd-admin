@@ -4,7 +4,8 @@ export default {
   state: {
     isMobile: false,
     animates: require('@/config/animates'),
-    ...config
+    ...config,
+    routesI18n: {}
   },
   mutations: {
     setDevice (state, isMobile) {
@@ -36,6 +37,9 @@ export default {
     },
     setLang(state, lang) {
       state.lang = lang
+    },
+    setRoutesI18n(state, i18n) {
+      state.routesI18n = i18n
     }
   }
 }

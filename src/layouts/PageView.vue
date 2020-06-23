@@ -22,14 +22,24 @@ export default {
   components: {PageToggleTransition, PageLayout},
   data () {
     return {
-      title: '',
+      path: '',
       desc: '',
       linkList: [],
       extraImage: ''
     }
   },
   computed: {
-    ...mapState('setting', ['multiPage', 'animate'])
+    title() {
+      let key = this.path.substring(1).replace(new RegExp('/', 'g'), '.') + '.name'
+      return this.$t(key)
+    },
+    ...mapState('setting', ['multiPage', 'animate', 'routesI18n'])
+  },
+  created() {
+    let i18n = this.routesI18n
+    Object.keys(i18n).forEach(key => {
+      this.$i18n.mergeLocaleMessage(key, i18n[key])
+    })
   },
   mounted () {
     this.getPageHeaderInfo()
@@ -39,7 +49,7 @@ export default {
   },
   methods: {
     getPageHeaderInfo () {
-      this.title = this.$route.name
+      this.path = this.$route.path
       const page = this.$refs.page
       if (page) {
         this.desc = page.desc

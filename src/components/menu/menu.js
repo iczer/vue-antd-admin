@@ -87,6 +87,7 @@ export default {
         this.$i18n.mergeLocaleMessage(key, this.i18n[key])
       })
     }
+    this.$emit('i18nComplete', this.$i18n._getMessages())
   },
   created () {
     this.updateMenu()

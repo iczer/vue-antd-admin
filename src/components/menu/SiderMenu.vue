@@ -6,12 +6,13 @@
         <h1>{{systemName}}</h1>
       </router-link>
     </div>
-    <i-menu :i18n="menuI18n" :theme="theme" :collapsed="collapsed" :options="menuData" @select="onSelect" class="menu"/>
+    <i-menu @i18nComplete="setRoutesI18n" :i18n="menuI18n" :theme="theme" :collapsed="collapsed" :options="menuData" @select="onSelect" class="menu"/>
   </a-layout-sider>
 </template>
 
 <script>
 import IMenu from './menu'
+import {mapState, mapMutations} from 'vuex'
 export default {
   name: 'SiderMenu',
   components: {IMenu},
@@ -38,17 +39,13 @@ export default {
     }
   },
   computed: {
-    isMobile () {
-      return this.$store.state.setting.isMobile
-    },
-    systemName () {
-      return this.$store.state.setting.systemName
-    }
+    ...mapState('setting', ['isMobile', 'systemName'])
   },
   methods: {
     onSelect (obj) {
       this.$emit('menuSelect', obj)
-    }
+    },
+    ...mapMutations('setting', ['setRoutesI18n'])
   }
 }
 </script>
