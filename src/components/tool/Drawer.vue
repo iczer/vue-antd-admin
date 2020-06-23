@@ -99,7 +99,7 @@ export default {
         }
       }
       &.close{
-        transform: translateX(-100%) translateX(40px);
+        transform: translateX(-100%);
       }
     }
     &.right{
@@ -113,7 +113,7 @@ export default {
         }
       }
       &.close{
-        transform: translateX(100%) translateX(-40px);
+        transform: translateX(100%);
       }
     }
     .sider{
@@ -125,12 +125,12 @@ export default {
     height: 100%;
   }
   .handler-container{
+    position: absolute;
     display: inline-block;
     text-align: center;
     transition: all 0.5s;
     cursor: pointer;
-    vertical-align: top;
-    margin-top: 200px;
+    top: 200px;
     z-index: 100;
     .handler {
       height: 40px;
@@ -141,11 +141,13 @@ export default {
       line-height: 40px;
     }
     &.left{
+      right: -40px;
       .handler{
         border-radius: 0 5px 5px 0;
       }
     }
     &.right{
+      left: -40px;
       .handler{
         border-radius: 5px 0 0 5px;
       }
