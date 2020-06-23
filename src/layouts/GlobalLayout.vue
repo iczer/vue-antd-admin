@@ -1,5 +1,5 @@
 <template>
-  <a-layout :class="['global-layout', fixedSider ? 'fixed-sider' : '']">
+  <a-layout :class="['global-layout', fixedSideBar ? 'fixed-side-bar' : '']">
     <drawer v-if="isMobile" :openDrawer="collapsed" @change="onDrawerChange">
       <sider-menu :theme="theme" :menuData="menuData" :collapsed="false" :collapsible="false" @menuSelect="onMenuSelect"/>
     </drawer>
@@ -55,7 +55,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('setting', ['isMobile', 'theme', 'layout', 'footerLinks', 'copyright', 'fixedHeader', 'fixedSider']),
+    ...mapState('setting', ['isMobile', 'theme', 'layout', 'footerLinks', 'copyright', 'fixedHeader', 'fixedSideBar']),
     sideMenuWidth() {
       return this.collapsed ? '80px' : '256px'
     },
@@ -88,7 +88,7 @@ export default {
 
 <style lang="less" scoped>
   .global-layout{
-    &.fixed-sider{
+    &.fixed-side-bar{
       height: 100vh;
       .global-layout-main{
         overflow: scroll;

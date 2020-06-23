@@ -5,7 +5,7 @@ module.exports = {
   theme: 'dark',
   layout: 'side',
   fixedHeader: false,
-  fixedSider: true,
+  fixedSideBar: true,
   weekMode: false,
   multiPage: false,
   systemName: 'Vue Antd Admin',

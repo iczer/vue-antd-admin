@@ -1,60 +1,60 @@
 <template>
   <a-layout-sider class="sider" width="273">
-    <setting-item title="整体风格设置">
-      <img-checkbox-group @change="setTheme">
-        <img-checkbox title="暗色菜单风格" img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" value="dark"/>
-        <img-checkbox title="亮色菜单风格" img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" value="light"/>
+    <setting-item :title="$t('theme.title')">
+      <img-checkbox-group @change="values => setTheme(values[0])">
+        <img-checkbox :title="$t('theme.dark')" img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" value="dark"/>
+        <img-checkbox :title="$t('theme.light')" img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" value="light"/>
       </img-checkbox-group>
     </setting-item>
-    <setting-item title="主题色">
+    <setting-item :title="$t('theme.color')">
       <color-checkbox-group @change="onColorChange" :defaultValues="themeColorIndex" :multiple="false">
         <color-checkbox v-for="(color, index) in colors" :key="index" :color="color" :value="index" />
       </color-checkbox-group>
     </setting-item>
     <a-divider/>
-    <setting-item title="导航设置">
-      <img-checkbox-group @change="setLayout">
-        <img-checkbox title="侧边导航" img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" :checked="true" value="side"/>
-        <img-checkbox title="顶部导航" img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" value="head"/>
+    <setting-item :title="$t('navigate.title')">
+      <img-checkbox-group @change="values => setLayout(values[0])">
+        <img-checkbox :title="$t('navigate.side')" img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" :checked="true" value="side"/>
+        <img-checkbox :title="$t('navigate.head')" img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" value="head"/>
       </img-checkbox-group>
     </setting-item>
     <setting-item>
       <a-list :split="false">
         <a-list-item>
-          栅格模式
+          {{$t('navigate.content.title')}}
           <a-select size="small" defaultValue="1" slot="actions" style="width: 80px">
-            <a-select-option value="1">流式</a-select-option>
-            <a-select-option value="2">定宽</a-select-option>
+            <a-select-option value="1">{{$t('navigate.content.fluid')}}</a-select-option>
+            <a-select-option value="2">{{$t('navigate.content.fixed')}}</a-select-option>
           </a-select>
         </a-list-item>
         <a-list-item>
-          固定Header
+          {{$t('navigate.fixedHeader')}}
           <a-switch :checked="fixedHeader" slot="actions" size="small" @change="setFixedHeader" />
         </a-list-item>
         <a-list-item>
-          固定侧边栏
-          <a-switch :checked="fixedSider" slot="actions" size="small" @change="setFixedSider" />
+          {{$t('navigate.fixedSideBar')}}
+          <a-switch :checked="fixedSideBar" slot="actions" size="small" @change="setFixedSideBar" />
         </a-list-item>
       </a-list>
     </setting-item>
     <a-divider />
-    <setting-item title="其他设置">
+    <setting-item :title="$t('other.title')">
       <a-list :split="false">
         <a-list-item>
-          色弱模式
+          {{$t('other.weekMode')}}
           <a-switch :checked="weekMode" slot="actions" size="small" @change="setWeekMode" />
         </a-list-item>
         <a-list-item>
-          多页签模式
+          {{$t('other.multiPages')}}
           <a-switch :checked="multiPage" slot="actions" size="small" @change="setMultiPage" />
         </a-list-item>
       </a-list>
     </setting-item>
     <a-divider />
-    <setting-item title="页面切换动画">
+    <setting-item :title="$t('animate.title')">
       <a-list :split="false">
         <a-list-item>
-          动画效果
+          {{$t('animate.effect')}}
           <a-select
             v-model="animate"
             @change="val => setAnimate(val)"
@@ -64,7 +64,7 @@
           </a-select>
         </a-list-item>
         <a-list-item>
-          动画方向
+          {{$t('animate.direction')}}
           <a-select
             v-model="direction"
             @change="val => setAnimate(this.animate, val)"
@@ -75,7 +75,7 @@
         </a-list-item>
       </a-list>
     </setting-item>
-    <a-button id="copyBtn" data-clipboard-text="Sorry, you have copied nothing O(∩_∩)O~" @click="copyCode" style="width: 100%" icon="copy" >拷贝代码</a-button>
+    <a-button id="copyBtn" data-clipboard-text="Sorry, you have copied nothing O(∩_∩)O~" @click="copyCode" style="width: 100%" icon="copy" >{{$t('copy')}}</a-button>
   </a-layout-sider>
 </template>
 
@@ -85,13 +85,14 @@ import ColorCheckbox from '../checkbox/ColorCheckbox'
 import ImgCheckbox from '../checkbox/ImgCheckbox'
 import Clipboard from 'clipboard'
 import themeUtil from '../../utils/themeUtil'
-import { mapState } from 'vuex'
+import { mapState, mapMutations } from 'vuex'
 
 const ColorCheckboxGroup = ColorCheckbox.Group
 const ImgCheckboxGroup = ImgCheckbox.Group
 const colors = ['#f5222d', '#fa541c', '#faad14', '#13c2c2', '#52c41a', '#1890ff', '#2f54eb', '#722ed1']
 export default {
   name: 'Setting',
+  i18n: require('./i18n'),
   components: {ImgCheckboxGroup, ImgCheckbox, ColorCheckboxGroup, ColorCheckbox, SettingItem},
   data() {
     return {
@@ -105,7 +106,7 @@ export default {
     directions() {
       return this.animates.find(item => item.name == this.animate).directions
     },
-    ...mapState('setting', ['animates', 'multiPage', 'weekMode', 'fixedHeader', 'fixedSider'])
+    ...mapState('setting', ['animates', 'multiPage', 'weekMode', 'fixedHeader', 'fixedSideBar'])
   },
   methods: {
     onColorChange (values, colors) {
@@ -118,12 +119,6 @@ export default {
         })
       }
     },
-    setTheme (values) {
-      this.$store.commit('setting/setTheme', values[0])
-    },
-    setLayout (values) {
-      this.$store.commit('setting/setLayout', values[0])
-    },
     copyCode () {
       let clipboard = new Clipboard('#copyBtn')
       const _this = this
@@ -132,24 +127,13 @@ export default {
         clipboard.destroy()
       })
     },
-    setMultiPage (checked) {
-      this.$store.commit('setting/setMultiPage', checked)
-    },
-    setWeekMode(checked) {
-      this.$store.commit('setting/setWeekMode', checked)
-    },
     setAnimate(animate, direction) {
       if (direction == undefined) {
         this.direction = this.directions[0]
       }
       this.$store.commit('setting/setAnimate', {name: this.animate, direction: this.direction})
     },
-    setFixedHeader(checked) {
-      this.$store.commit('setting/setFixedHeader', checked)
-    },
-    setFixedSider(checked) {
-      this.$store.commit('setting/setFixedSider', checked)
-    }
+    ...mapMutations('setting', ['setTheme', 'setLayout', 'setMultiPage', 'setWeekMode', 'setFixedSideBar', 'setFixedHeader'])
   }
 }
 </script>

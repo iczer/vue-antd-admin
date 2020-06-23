@@ -31,8 +31,8 @@ export default {
     setFixedHeader(state, fixedHeader) {
       state.fixedHeader = fixedHeader
     },
-    setFixedSider(state, fixedSider) {
-      state.fixedSider = fixedSider
+    setFixedSideBar(state, fixedSideBar) {
+      state.fixedSideBar = fixedSideBar
     },
     setLang(state, lang) {
       state.lang = lang
