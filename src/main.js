@@ -9,20 +9,29 @@ import '@/mock'
 import store from './store'
 import PouchDB from 'pouchdb'
 import 'animate.css/source/animate.css'
+import VueI18n from 'vue-i18n'
 
 Vue.prototype.$axios = axios
 Vue.config.productionTip = false
 Vue.use(Viser)
 Vue.use(Antd)
+Vue.use(VueI18n)
+
+const i18n = new VueI18n({
+  locale: 'CN',
+  fallbackLocale: 'US',
+  silentFallbackWarn: true
+})
 
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App),
   mounted () {
-    var db = new PouchDB('admindb')
+    let db = new PouchDB('adminDb')
     db.get('currUser').then(doc => {
-      this.$store.commit('account/setuser', doc.user)
+      this.$store.commit('account/setUser', doc.user)
     })
   },
 }).$mount('#app')

@@ -22,10 +22,13 @@ export default {
   watch: {
     weekMode(val) {
       this.setWeekModeTheme(val)
+    },
+    lang(val) {
+      this.$i18n.locale = val
     }
   },
   computed: {
-    ...mapState('setting', ['weekMode'])
+    ...mapState('setting', ['weekMode', 'lang'])
   },
   methods: {
     setWeekModeTheme(weekMode) {

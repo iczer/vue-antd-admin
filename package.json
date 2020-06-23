@@ -23,6 +23,7 @@
     "pouchdb": "^7.2.1",
     "viser-vue": "^2.4.8",
     "vue": "^2.6.11",
+    "vue-i18n": "^8.18.2",
     "vue-router": "^3.3.4",
     "vuedraggable": "^2.23.2",
     "vuex": "^3.4.0"
@@ -34,6 +35,7 @@
     "@vue/cli-service": "^4.4.0",
     "babel-eslint": "^10.1.0",
     "babel-polyfill": "^6.26.0",
+    "deepmerge": "^4.2.2",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
     "gh-pages": "^3.1.0",
