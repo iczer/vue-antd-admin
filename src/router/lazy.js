@@ -20,190 +20,180 @@ export default new Router({
       name: '首页',
       component: MenuView,
       redirect: '/login',
-      icon: 'none',
-      invisible: true,
       children: [
         {
-          path: '/dashboard',
+          path: 'dashboard',
           name: 'Dashboard',
+          meta: {
+            icon: 'dashboard'
+          },
           component: RouteView,
-          icon: 'dashboard',
           children: [
             {
-              path: '/dashboard/workplace',
+              path: 'workplace',
               name: '工作台',
               component: () => import('@/pages/dashboard/WorkPlace'),
-              icon: 'none'
             },
             {
-              path: '/dashboard/analysis',
+              path: 'analysis',
               name: '分析页',
               component: () => import('@/pages/dashboard/Analysis'),
-              icon: 'none'
             }
           ]
         },
         {
-          path: '/form',
+          path: 'form',
           name: '表单页',
+          meta: {
+            icon: 'form',
+          },
           component: PageView,
-          icon: 'form',
           children: [
             {
-              path: '/form/basic',
+              path: 'basic',
               name: '基础表单',
               component: () => import('@/pages/form/BasicForm'),
-              icon: 'none'
             },
             {
-              path: '/form/step',
+              path: 'step',
               name: '分步表单',
               component: () => import('@/pages/form/stepForm/StepForm'),
-              icon: 'none'
             },
             {
-              path: '/form/advanced',
+              path: 'advance',
               name: '高级表单',
               component: () => import('@/pages/form/advancedForm/AdvancedForm'),
-              icon: 'none'
             }
           ]
         },
         {
-          path: '/list',
+          path: 'list',
           name: '列表页',
+          meta: {
+            icon: 'table'
+          },
           component: PageView,
-          icon: 'table',
           children: [
             {
-              path: '/list/query',
+              path: 'query',
               name: '查询表格',
               component: () => import('@/pages/list/QueryList'),
-              icon: 'none'
             },
             {
-              path: '/list/primary',
+              path: 'primary',
               name: '标准列表',
               component: () => import('@/pages/list/StandardList'),
-              icon: 'none'
             },
             {
-              path: '/list/card',
+              path: 'card',
               name: '卡片列表',
               component: () => import('@/pages/list/CardList'),
-              icon: 'none'
             },
             {
-              path: '/list/search',
+              path: 'search',
               name: '搜索列表',
               component: () => import('@/pages/list/search/SearchLayout'),
-              icon: 'none',
               children: [
                 {
-                  path: '/list/search/article',
+                  path: 'article',
                   name: '文章',
                   component: () => import('@/pages/list/search/ArticleList'),
-                  icon: 'none'
                 },
                 {
-                  path: '/list/search/application',
+                  path: 'application',
                   name: '应用',
                   component: () => import('@/pages/list/search/ApplicationList'),
-                  icon: 'none'
                 },
                 {
-                  path: '/list/search/project',
+                  path: 'project',
                   name: '项目',
                   component: () => import('@/pages/list/search/ProjectList'),
-                  icon: 'none'
                 }
               ]
             }
           ]
         },
         {
-          path: '/detail',
+          path: 'details',
           name: '详情页',
-          icon: 'profile',
+          meta: {
+            icon: 'profile'
+          },
           component: RouteView,
           children: [
             {
-              path: '/detail/basic',
+              path: 'basic',
               name: '基础详情页',
-              icon: 'none',
               component: () => import('@/pages/detail/BasicDetail')
             },
             {
-              path: '/detail/advanced',
+              path: 'advance',
               name: '高级详情页',
-              icon: 'none',
               component: () => import('@/pages/detail/AdvancedDetail')
             }
           ]
         },
         {
-          path: '/result',
+          path: 'result',
           name: '结果页',
-          icon: 'check-circle-o',
+          meta: {
+            icon: 'check-circle-o',
+          },
           component: PageView,
           children: [
             {
-              path: '/result/success',
+              path: 'success',
               name: '成功',
-              icon: 'none',
               component: () => import('@/pages/result/Success')
             },
             {
-              path: '/result/error',
+              path: 'error',
               name: '失败',
-              icon: 'none',
               component: () => import('@/pages/result/Error')
             }
           ]
         },
         {
-          path: '/exception',
+          path: 'exception',
           name: '异常页',
-          icon: 'warning',
+          meta: {
+            icon: 'warning',
+          },
           component: RouteView,
           children: [
             {
-              path: '/exception/404',
+              path: '404',
               name: '404',
-              icon: 'none',
               component: () => import('@/pages/exception/404')
             },
             {
-              path: '/exception/403',
+              path: '403',
               name: '403',
-              icon: 'none',
               component: () => import('@/pages/exception/403')
             },
             {
-              path: '/exception/500',
+              path: '500',
               name: '500',
-              icon: 'none',
               component: () => import('@/pages/exception/500')
             }
           ]
         },
         {
-          path: '/components',
-          redirect: '/components/taskcard',
+          path: 'components',
           name: '小组件',
-          icon: 'appstore-o',
+          meta: {
+            icon: 'appstore-o'
+          },
           component: PageView,
           children: [
             {
-              path: '/components/taskcard',
+              path: 'taskCard',
               name: '任务卡片',
-              icon: 'none',
               component: () => import('@/pages/components/TaskCard')
             },
             {
-              path: '/components/palette',
+              path: 'palette',
               name: '颜色复选框',
-              icon: 'none',
               component: () => import('@/pages/components/Palette')
             }
           ]

@@ -1,5 +1,5 @@
 <template>
-  <span class="header-search">
+  <div class="header-search">
     <a-icon type="search" class="search-icon" @click="enterSearchMode"/>
     <a-auto-complete
       ref="input"
@@ -9,7 +9,7 @@
       @blur="leaveSearchMode"
     >
     </a-auto-complete>
-  </span>
+  </div>
 </template>
 
 <script>

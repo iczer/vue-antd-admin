@@ -109,7 +109,7 @@ export default {
             if (result.code >= 0) {
               const user = result.data.user
               this.$router.push('/dashboard/workplace')
-              this.$store.commit('account/setuser', user)
+              this.$store.commit('account/setUser', user)
               this.$message.success(result.message, 3)
             } else {
               this.error = result.message

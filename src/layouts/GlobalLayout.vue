@@ -51,6 +51,7 @@ export default {
   provide() {
     return{
       layoutMinHeight: minHeight,
+      menuI18n: require('@/router/i18n').default
     }
   },
   computed: {

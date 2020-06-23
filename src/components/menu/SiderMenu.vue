@@ -6,7 +6,7 @@
         <h1>{{systemName}}</h1>
       </router-link>
     </div>
-    <i-menu :theme="theme" :collapsed="collapsed" :menuData="menuData" @select="onSelect" class="menu"/>
+    <i-menu :i18n="menuI18n" :theme="theme" :collapsed="collapsed" :options="menuData" @select="onSelect" class="menu"/>
   </a-layout-sider>
 </template>
 
@@ -15,6 +15,7 @@ import IMenu from './menu'
 export default {
   name: 'SiderMenu',
   components: {IMenu},
+  inject: ['menuI18n'],
   props: {
     collapsible: {
       type: Boolean,

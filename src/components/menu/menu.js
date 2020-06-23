@@ -1,35 +1,46 @@
 /**
  * 该插件可根据菜单配置自动生成 ANTD menu组件
- * menuData示例：
+ * menuOptions示例：
  * [
  *  {
  *    title: '菜单标题',
- *    icon: '菜单图标',
  *    path: '菜单路由',
- *    invisible: 'boolean, 是否不可见',
+ *    meta: {
+ *      icon: '菜单图标',
+ *      invisible: 'boolean, 是否不可见, 默认 false',
+ *    },
  *    children: [子菜单配置]
  *  },
  *  {
  *    title: '菜单标题',
- *    icon: '菜单图标',
  *    path: '菜单路由',
- *    invisible: 'boolean, 是否不可见',
+ *    meta: {
+ *      icon: '菜单图标',
+ *      invisible: 'boolean, 是否不可见, 默认 false',
+ *    },
  *    children: [子菜单配置]
  *  }
  * ]
+ *
+ * i18n: 国际化配置。组件默认会根据 options route配置的 path 和 name 生成英文以及中文的国际化配置，如需自定义或增加其他语言，配置
+ * 此项即可。如：
+ * i18n: {
+ *   CN: {dashboard: {name: '监控中心'}}
+ *   HK: {dashboard: {name: '監控中心'}}
+ * }
  **/
 import Menu from 'ant-design-vue/es/menu'
 import Icon from 'ant-design-vue/es/icon'
+import '@/utils/Objects'
 
 const {Item, SubMenu} = Menu
 
-// 默认菜单图标数组，如果菜单没配置图标，则会设置从该数组随机取一个图标配置
-const iconArr = ['dashboard', 'user', 'form', 'setting', 'message', 'safety', 'bell', 'delete', 'code-o', 'poweroff', 'eye-o', 'hourglass']
-
 export default {
   name: 'IMenu',
+  i18n: {
+  },
   props: {
-    menuData: {
+    options: {
       type: Array,
       required: true
     },
@@ -47,7 +58,8 @@ export default {
       type: Boolean,
       required: false,
       default: false
-    }
+    },
+    i18n: Object
   },
   data () {
     return {
@@ -59,14 +71,26 @@ export default {
   computed: {
     rootSubmenuKeys: (vm) => {
       let keys = []
-      vm.menuData.forEach(item => {
+      vm.options.forEach(item => {
         keys.push(item.path)
       })
       return keys
     }
   },
+  beforeMount() {
+    let CN = this.generateI18n(new Object(), this.options, 'name')
+    let US = this.generateI18n(new Object(), this.options, 'path')
+    this.$i18n.setLocaleMessage('CN', CN)
+    this.$i18n.setLocaleMessage('US', US)
+    if(this.i18n) {
+      Object.keys(this.i18n).forEach(key => {
+        this.$i18n.mergeLocaleMessage(key, this.i18n[key])
+      })
+    }
+  },
   created () {
     this.updateMenu()
+    this.formatOptions(this.options, '')
   },
   watch: {
     collapsed (val) {
@@ -83,64 +107,71 @@ export default {
   },
   methods: {
     renderIcon: function (h, icon) {
-      return icon === 'none' ? null
-        : h(
-          Icon,
-          {
-            props: {type: icon !== undefined ? icon : iconArr[Math.floor((Math.random() * iconArr.length))]}
-          })
+      return !icon || icon == 'none' ? null : h(Icon, {props: {type:  icon}})
     },
-    renderMenuItem: function (h, menu, pIndex, index) {
+    renderMenuItem: function (h, menu) {
       return h(
-        Item,
-        {
-          key: menu.path ? menu.path : 'item_' + pIndex + '_' + index
-        },
+        Item, {key: menu.fullPath},
         [
-          h(
-            'RouterLink',
-            // {attrs: {href: '#' + menu.path}},
-            {attrs: {to: menu.path}},
+          h('a', {attrs: {href: '#' + menu.fullPath}},
             [
-              this.renderIcon(h, menu.icon),
-              h('span', [menu.name])
+              this.renderIcon(h, menu.meta ? menu.meta.icon : 'none'),
+              h('span', [this.$t(menu.fullPath.substring(1).replace(new RegExp('/', 'g'), '.') + '.name')])
             ]
           )
         ]
       )
     },
-    renderSubMenu: function (h, menu, pIndex, index) {
-      var this2_ = this
-      var subItem = [h('span',
-        {slot: 'title'},
+    renderSubMenu: function (h, menu) {
+      let this_ = this
+      let subItem = [h('span', {slot: 'title'},
         [
-          this.renderIcon(h, menu.icon),
-          h('span', [menu.name])
+          this.renderIcon(h, menu.meta ? menu.meta.icon : 'none'),
+          h('span', [this.$t(menu.fullPath.substring(1).replace(new RegExp('/', 'g'), '.') + '.name')])
         ]
       )]
-      var itemArr = []
-      var pIndex_ = pIndex + '_' + index
-      menu.children.forEach(function (item, i) {
-        itemArr.push(this2_.renderItem(h, item, pIndex_, i))
+      let itemArr = []
+      menu.children.forEach(function (item) {
+        itemArr.push(this_.renderItem(h, item))
       })
-      return h(
-        SubMenu,
-        {key: menu.path ? menu.path : 'submenu_' + pIndex + '_' + index},
+      return h(SubMenu, {key: menu.fullPath},
         subItem.concat(itemArr)
       )
     },
-    renderItem: function (h, menu, pIndex, index) {
-      if (!menu.invisible) {
-        return menu.children ? this.renderSubMenu(h, menu, pIndex, index) : this.renderMenuItem(h, menu, pIndex, index)
+    renderItem: function (h, menu) {
+      const meta = menu.meta
+      if (!meta || !meta.invisible) {
+        let renderChildren = false
+        const children = menu.children
+        if (children != undefined) {
+          for (let i = 0; i < children.length; i++) {
+            const childMeta = children[i].meta
+            if (!childMeta || !childMeta.invisible) {
+              renderChildren = true
+              break
+            }
+          }
+        }
+        return (menu.children && renderChildren) ? this.renderSubMenu(h, menu) : this.renderMenuItem(h, menu)
       }
     },
     renderMenu: function (h, menuTree) {
-      var this2_ = this
-      var menuArr = []
+      let this_ = this
+      let menuArr = []
       menuTree.forEach(function (menu, i) {
-        menuArr.push(this2_.renderItem(h, menu, '0', i))
+        menuArr.push(this_.renderItem(h, menu, '0', i))
       })
       return menuArr
+    },
+    formatOptions(options, parentPath) {
+      let this_ = this
+      options.forEach(route => {
+        let isFullPath = route.path.substring(0, 1) == '/'
+        route.fullPath = isFullPath ? route.path : parentPath + '/' + route.path
+        if (route.children) {
+          this_.formatOptions(route.children, route.fullPath)
+        }
+      })
     },
     onOpenChange (openKeys) {
       const latestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1)
@@ -152,12 +183,29 @@ export default {
     },
     updateMenu () {
       let routes = this.$route.matched.concat()
-      this.selectedKeys = [routes.pop().path]
+      const route = routes.pop()
+      this.selectedKeys = [this.getSelectedKey(route)]
       let openKeys = []
       routes.forEach((item) => {
         openKeys.push(item.path)
       })
       this.collapsed || this.mode === 'horizontal' ? this.cachedOpenKeys = openKeys : this.openKeys = openKeys
+    },
+    getSelectedKey (route) {
+      if (route.meta.invisible && route.parent) {
+        return this.getSelectedKey(route.parent)
+      }
+      return route.path
+    },
+    generateI18n(lang, options, valueKey) {
+      options.forEach(menu => {
+        let keys = menu.fullPath.substring(1).split('/').concat('name')
+        lang.assignProps(keys, menu[valueKey])
+        if (menu.children) {
+          this.generateI18n(lang, menu.children, valueKey)
+        }
+      })
+      return lang
     }
   },
   render (h) {
@@ -177,7 +225,7 @@ export default {
             this.$emit('select', obj)
           }
         }
-      }, this.renderMenu(h, this.menuData)
+      }, this.renderMenu(h, this.options)
     )
   }
 }

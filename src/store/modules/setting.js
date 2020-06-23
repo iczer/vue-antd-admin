@@ -33,6 +33,9 @@ export default {
     },
     setFixedSider(state, fixedSider) {
       state.fixedSider = fixedSider
+    },
+    setLang(state, lang) {
+      state.lang = lang
     }
   }
 }

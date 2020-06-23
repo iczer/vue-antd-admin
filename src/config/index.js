@@ -1,5 +1,6 @@
 // 系统配置
 module.exports = {
+  lang: 'CN',
   themeColor: '#1890ff',
   theme: 'dark',
   layout: 'side',

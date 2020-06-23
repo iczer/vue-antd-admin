@@ -1,6 +1,6 @@
 import PouchDB from 'pouchdb'
 
-var db = new PouchDB('admindb')
+let db = new PouchDB('adminDb')
 
 export default {
   namespaced: true,
@@ -8,7 +8,7 @@ export default {
     user: {}
   },
   mutations: {
-    setuser (state, user) {
+    setUser (state, user) {
       state.user = user
       db.get('currUser').then(doc => {
         db.put({

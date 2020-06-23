@@ -8,7 +8,7 @@
       <a-divider v-if="isMobile" type="vertical" />
       <a-icon v-if="layout === 'side'" class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
       <div v-if="layout == 'head' && !isMobile" class="global-header-menu">
-        <i-menu style="height: 64px; line-height: 64px;" :theme="headerTheme" mode="horizontal" :menuData="menuData" @select="onSelect"/>
+        <i-menu style="height: 64px; line-height: 64px;" :i18n="menuI18n" :theme="headerTheme" mode="horizontal" :options="menuData" @select="onSelect"/>
       </div>
       <div :class="['global-header-right', headerTheme]">
           <header-search class="header-item" />
@@ -19,6 +19,16 @@
           </a-tooltip>
           <header-notice class="header-item"/>
           <header-avatar class="header-item"/>
+          <a-dropdown class="lang header-item">
+            <div>
+              <a-icon type="global"/>
+            </div>
+            <a-menu @click="changeLang" :selected-keys="[lang]" slot="overlay">
+              <a-menu-item key="CN"><span >cn</span> 简体中文</a-menu-item>
+              <a-menu-item key="HK"><span >hk</span> 繁体中文</a-menu-item>
+              <a-menu-item key="US"><span >us</span> English</a-menu-item>
+            </a-menu>
+          </a-dropdown>
       </div>
     </div>
   </a-layout-header>
@@ -40,8 +50,9 @@ export default {
       headerTheme: this.theme
     }
   },
+  inject: ['menuI18n'],
   computed: {
-    ...mapState('setting', ['theme', 'isMobile', 'layout', 'systemName']),
+    ...mapState('setting', ['theme', 'isMobile', 'layout', 'systemName', 'lang']),
     headerTheme () {
       return (this.layout == 'side' && !this.isMobile) ? 'light' : this.theme
     }
@@ -52,6 +63,9 @@ export default {
     },
     onSelect (obj) {
       this.$emit('menuSelect', obj)
+    },
+    changeLang(lang) {
+      this.$store.commit('setting/setLang', lang.key)
     }
   }
 }
@@ -69,7 +83,7 @@ export default {
     }
   }
   .global-header{
-    padding: 0 12px 0 0;
+    padding: 0;
     -webkit-box-shadow: 0 1px 4px rgba(0,21,41,.08);
     box-shadow: 0 1px 4px rgba(0,21,41,.08);
     z-index: 1;
@@ -124,11 +138,17 @@ export default {
           a, i{
             color: #fff !important;
           }
+          .header-item:hover{
+            background-color: @primary-color;
+          }
         }
         .header-item{
           padding: 0 12px;
           cursor: pointer;
           align-self: center;
+          &:hover{
+            background-color: @gray-3;
+          }
           i{
             font-size: 16px;
             color: rgba(0,0,0,.65);
