@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider class="sider" width="273">
+  <a-layout-sider class="sider" width="300">
     <setting-item :title="$t('theme.title')">
       <img-checkbox-group @change="values => setTheme(values[0])">
         <img-checkbox :title="$t('theme.dark')" img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" value="dark"/>
@@ -114,7 +114,7 @@ export default {
         let closeMessage = this.$message.info(`您选择了主题色 ${colors}, 正在切换...`)
         let _this = this
         themeUtil.changeThemeColor(colors[0]).then(() => {
-          _this.$store.commit('setting/setThemeColor', colors[0])
+          _this.setThemeColor(colors[0])
           closeMessage()
         })
       }
@@ -131,9 +131,9 @@ export default {
       if (direction == undefined) {
         this.direction = this.directions[0]
       }
-      this.$store.commit('setting/setAnimate', {name: this.animate, direction: this.direction})
+      this.setAnimate({name: this.animate, direction: this.direction})
     },
-    ...mapMutations('setting', ['setTheme', 'setLayout', 'setMultiPage', 'setWeekMode', 'setFixedSideBar', 'setFixedHeader'])
+    ...mapMutations('setting', ['setTheme', 'setThemeColor', 'setLayout', 'setMultiPage', 'setWeekMode', 'setFixedSideBar', 'setFixedHeader', 'setAnimate'])
   }
 }
 </script>
