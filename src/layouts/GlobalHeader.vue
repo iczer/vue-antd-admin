@@ -21,12 +21,10 @@
           <header-avatar class="header-item"/>
           <a-dropdown class="lang header-item">
             <div>
-              <a-icon type="global"/>
+              <a-icon type="global"/> {{langAlias}}
             </div>
-            <a-menu @click="value => setLang(value.key)" :selected-keys="[lang]" slot="overlay">
-              <a-menu-item key="CN"><span >cn</span> 简体中文</a-menu-item>
-              <a-menu-item key="HK"><span >hk</span> 繁体中文</a-menu-item>
-              <a-menu-item key="US"><span >us</span> English</a-menu-item>
+            <a-menu @click="val => setLang(val.key)" :selected-keys="[lang]" slot="overlay">
+              <a-menu-item v-for=" lang in langList" :key="lang.key">{{lang.key.toLowerCase() + ' ' + lang.name}}</a-menu-item>
             </a-menu>
           </a-dropdown>
       </div>
@@ -45,16 +43,24 @@ export default {
   name: 'GlobalHeader',
   components: {IMenu, HeaderAvatar, HeaderNotice, HeaderSearch},
   props: ['collapsed', 'menuData'],
-  provide() {
+  inject: ['menuI18n'],
+  data() {
     return {
-      headerTheme: this.theme
+      langList: [
+        {key: 'CN', name: '简体中文', alias: '简体'},
+        {key: 'HK', name: '繁体中文', alias: '繁体'},
+        {key: 'US', name: 'English', alias: 'English'}
+      ]
     }
   },
-  inject: ['menuI18n'],
   computed: {
     ...mapState('setting', ['theme', 'isMobile', 'layout', 'systemName', 'lang']),
     headerTheme () {
       return (this.layout == 'side' && !this.isMobile) ? 'light' : this.theme
+    },
+    langAlias() {
+      let lang = this.langList.find(item => item.key == this.lang)
+      return lang.alias
     }
   },
   methods: {
@@ -101,6 +107,7 @@ export default {
         margin: auto;
       }
       &.side{
+        padding-right: 12px;
       }
       .logo {
         height: 64px;
