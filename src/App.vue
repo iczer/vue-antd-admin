@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import zh_CN from 'ant-design-vue/lib/locale-provider/zh_CN'
+import zh_CN from 'ant-design-vue/es/locale-provider/zh_CN'
 import enquireScreen from './utils/device'
 import {mapState} from 'vuex'
 
@@ -33,14 +33,14 @@ export default {
       this.$i18n.locale = val
       switch (val) {
         case 'CN':
-          this.locale = require('ant-design-vue/lib/locale-provider/zh_CN')
+          this.locale = require('ant-design-vue/es/locale-provider/zh_CN').default
           break
         case 'HK':
-          this.locale = require('ant-design-vue/lib/locale-provider/zh_TW')
+          this.locale = require('ant-design-vue/es/locale-provider/zh_TW').default
           break
         case 'US':
         default:
-          this.locale = require('ant-design-vue/lib/locale-provider/en_US')
+          this.locale = require('ant-design-vue/es/locale-provider/en_US').default
           break
       }
     }
