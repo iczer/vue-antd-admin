@@ -1,6 +1,6 @@
 <template>
   <div class="analysis">
-    <a-row :gutter="24">
+    <a-row :gutter="[24, 24]">
       <a-col :sm="24" :md="12" :xl="6">
         <chart-card :title="$t('totalSales')" total="￥ 189,345">
           <a-tooltip :title="$t('introduce')" slot="action">
@@ -43,7 +43,7 @@
           <div>
             <mini-progress target="90" percent="78" color="#13C2C2" height="8px"/>
           </div>
-          <div slot="footer">
+          <div slot="footer" style="white-space: nowrap;overflow: hidden">
             <trend style="margin-right: 16px" :term="$t('wow')" :percent="12" :is-increase="true" :scale="0" />
             <trend :term="$t('dod')" :target="100" :value="89" :scale="0" />
           </div>
@@ -137,13 +137,23 @@ export default {
 
 <style lang="less" scoped>
   .extra-wrap{
-
-  }
-  .extra-item{
-    display: inline-block;
-    margin-right: 24px;
-    a{
-      margin-left: 24px;
+    .extra-item{
+      display: inline-block;
+      margin-right: 24px;
+      a:not(:first-child){
+        margin-left: 24px;
+      }
     }
   }
+  @media screen and (max-width: 992px){
+    .extra-item{
+      display: none;
+    }
+  }
+  @media screen and (max-width: 576px){
+    .extra-wrap{
+      display: none;
+    }
+  }
+
 </style>
