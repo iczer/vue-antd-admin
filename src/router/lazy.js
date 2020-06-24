@@ -37,7 +37,7 @@ export default new Router({
             {
               path: 'analysis',
               name: '分析页',
-              component: () => import('@/pages/dashboard/Analysis'),
+              component: () => import('@/pages/dashboard/analysis/Analysis'),
             }
           ]
         },

@@ -3,7 +3,12 @@
     <a-row style="margin: 0 -34px">
       <a-col style="padding: 0 34px; margin-bottom: 24px" :sm="12" :xs="24">
         <div class="num-info">
-          <span class="title">搜索用户数</span>
+          <span class="title">
+            {{$t('search')}}
+            <a-tooltip :title="$t('introduce')">
+              <a-icon type="info-circle" style="font-size: 14px; margin-left: 8px" />
+            </a-tooltip>
+          </span>
           <div class="value">
             <span class="total">12321</span>
             <span class="subtotal">71.2<a-icon type="caret-up" /></span>
@@ -13,7 +18,12 @@
       </a-col>
       <a-col style="padding: 0 34px; margin-bottom: 24px" :sm="12" :xs="24">
         <div class="num-info">
-          <span class="title">搜索用户数</span>
+          <span class="title">
+            {{$t('capita')}}
+            <a-tooltip :title="$t('introduce')">
+              <a-icon type="info-circle" style="font-size: 14px; margin-left: 8px" />
+            </a-tooltip>
+          </span>
           <div class="value">
             <span class="total">2.7</span>
             <span class="subtotal">71.2<a-icon type="caret-down" /></span>
@@ -24,8 +34,9 @@
     </a-row>
     <a-table
       :dataSource="searchData"
-      :columns="columns" size="small"
+      :columns="tableColumns"
       :pagination="{style: { marginBottom: 0 }, pageSize: 5}"
+      size="small"
       rowKey="index"
     >
       <a href="#/" slot="keyword" slot-scope="text">{{text}}</a>
@@ -35,7 +46,7 @@
 </template>
 
 <script>
-import MiniArea from '../chart/MiniArea'
+import MiniArea from '../../../components/chart/MiniArea'
 
 const searchData = []
 for (let i = 0; i < 50; i++) {
@@ -50,20 +61,17 @@ for (let i = 0; i < 50; i++) {
 
 const columns = [
   {
-    title: '排名',
     dataIndex: 'index',
-    key: 'index'
+    key: 'rank'
   },
   {
-    title: '搜索关键词',
     dataIndex: 'keyword',
     key: 'keyword',
     scopedSlots: {customRender: 'keyword'}
   },
   {
-    title: '用户数',
     dataIndex: 'count',
-    key: 'count',
+    key: 'users',
     sorter: (a, b) => a.count - b.count
   },
   {
@@ -77,10 +85,20 @@ const columns = [
 export default {
   name: 'HotSearch',
   components: {MiniArea},
+  i18n: require('./i18n-search'),
   data () {
     return {
       searchData,
       columns
+    }
+  },
+  computed: {
+    tableColumns() {
+      let columns = this.columns
+      return columns.map(item => {
+       item.title = this.$t(item.key)
+        return item
+      })
     }
   }
 }

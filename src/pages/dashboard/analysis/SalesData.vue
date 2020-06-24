@@ -1,10 +1,5 @@
 <template>
   <div style="">
-    <a-radio-group>
-      <a-radio-button value="a">全渠道</a-radio-button>
-      <a-radio-button value="b">线上</a-radio-button>
-      <a-radio-button value="c">门店</a-radio-button>
-    </a-radio-group>
     <v-chart :forceFit="true" :height="height" :data="data" :scale="scale">
       <v-tooltip :showTitle="false" dataKey="item*percent" />
       <v-axis />
@@ -46,7 +41,7 @@ export default {
     return {
       data,
       scale,
-      height: 356,
+      height: 385,
       pieStyle: {
         stroke: '#fff',
         lineWidth: 1

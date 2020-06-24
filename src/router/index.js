@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Dashboard from '@/pages/dashboard/Analysis'
+import Dashboard from '@/pages/dashboard/analysis/Analysis'
 import NotFound from '@/pages/exception/404'
 import NotPermit from '@/pages/exception/403'
 import ServerError from '@/pages/exception/500'
