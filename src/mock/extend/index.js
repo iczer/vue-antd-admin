@@ -3,17 +3,60 @@ import {logos, sayings, positions, avatars, admins} from '../common'
 
 const Random = Mock.Random
 
+const timeList = [
+  {
+    CN: '早上好',
+    HK: '早晨啊',
+    US: 'Good morning',
+  },{
+    CN: '上午好',
+    HK: '上午好',
+    US: 'Good morning',
+  },{
+    CN: '中午好',
+    HK: '中午好',
+    US: 'Good afternoon',
+  },{
+    CN: '晚上好',
+    HK: '晚上好',
+    US: 'Good evening',
+  },
+]
+
+const welcomeMessages = [
+  {
+    CN: '休息一会儿吧',
+    HK: '休息一會兒吧',
+    US: 'you may need a break',
+  },
+  {
+    CN: '准备吃什么呢',
+    HK: '準備吃什麼呢',
+    US: 'what are you going to eat',
+  },
+  {
+    CN: '要不要打一把 DOTA',
+    HK: '要不要打一把 DOTA',
+    US: 'how about a game of DOTA',
+  },
+  {
+    CN: '我猜你可能累了',
+    HK: '我猜你可能累了',
+    US: 'i guess you might be tired',
+  }
+]
+
 Random.extend({
   admin () {
     return this.pick(admins)
   },
   welcome () {
-    return this.pick(['休息一会儿吧', '准备吃什么呢', '要不要打一把DOTA', '我猜你可能累了'])
+    return this.pick(welcomeMessages)
   },
-  timefix () {
+  timeFix () {
     const time = new Date()
     const hour = time.getHours()
-    return hour < 9 ? '早上好' : (hour <= 11 ? '上午好' : (hour <= 13 ? '中午好' : (hour <= 20 ? '下午好' : '晚上好')))
+    return hour < 9 ? timeList[0] : (hour <= 11 ? timeList[1] : (hour <= 13 ? timeList[2] : (hour <= 20 ? timeList[3] : timeList[4])))
   },
   avatar () {
     return this.pick(avatars)

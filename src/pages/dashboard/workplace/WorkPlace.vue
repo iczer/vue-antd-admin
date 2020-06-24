@@ -1,19 +1,19 @@
 <template>
   <page-layout :avatar="currUser.avatar">
     <div slot="headerContent">
-      <div class="title">{{currUser.timefix}}，{{currUser.name}}，{{currUser.welcome}}</div>
-      <div>{{currUser.position}}</div>
+      <div class="title">{{$t('timeFix')}}，{{currUser.name}}，{{$t('welcome')}}</div>
+      <div>{{$t('position')}}</div>
     </div>
     <template slot="extra">
-      <head-info class="split-right" title="项目数" content="56"/>
-      <head-info class="split-right" title="团队内排名" content="8/24"/>
-      <head-info class="split-right" title="项目访问" content="2,223"/>
+      <head-info class="split-right" :title="$t('project')" content="56"/>
+      <head-info class="split-right" :title="$t('ranking')" content="8/24"/>
+      <head-info class="split-right" :title="$t('visit')" content="2,223"/>
     </template>
     <div>
       <a-row style="margin: 0 -12px">
         <a-col style="padding: 0 12px" :xl="16" :lg="24" :md="24" :sm="24" :xs="24">
-          <a-card class="project-list" :loading="loading" style="margin-bottom: 24px;" :bordered="false" title="进行中的项目" :body-style="{padding: 0}">
-            <a slot="extra">全部项目</a>
+          <a-card class="project-list" :loading="loading" style="margin-bottom: 24px;" :bordered="false" :title="$t('progress')" :body-style="{padding: 0}">
+            <a slot="extra">{{$t('all')}}</a>
             <div>
               <a-card-grid :key="i" v-for="(item, i) in projects">
                 <a-card :bordered="false" :body-style="{padding: 0}">
@@ -31,7 +31,7 @@
               </a-card-grid>
             </div>
           </a-card>
-          <a-card :loading="loading" title="动态" :bordered="false">
+          <a-card :loading="loading" :title="$t('dynamic')" :bordered="false">
             <a-list>
               <a-list-item :key="index" v-for="(item, index) in activities">
                 <a-list-item-meta>
@@ -44,7 +44,7 @@
           </a-card>
         </a-col>
         <a-col style="padding: 0 12px" :xl="8" :lg="24" :md="24" :sm="24" :xs="24">
-          <a-card title="快速开始 / 便捷导航" style="margin-bottom: 24px" :bordered="false" :body-style="{padding: 0}">
+          <a-card :title="$t('access')" style="margin-bottom: 24px" :bordered="false" :body-style="{padding: 0}">
             <div class="item-group">
               <a>操作一</a>
               <a>操作二</a>
@@ -52,15 +52,15 @@
               <a>操作四</a>
               <a>操作五</a>
               <a>操作六</a>
-              <a-button size="small" type="primary" ghost icon="plus">添加</a-button>
+              <a-button size="small" type="primary" ghost icon="plus">{{$t('add')}}</a-button>
             </div>
           </a-card>
-          <a-card title="XX指数" style="margin-bottom: 24px" :bordered="false" :body-style="{padding: 0}">
+          <a-card :title="`XX ${$t('degree')}`" style="margin-bottom: 24px" :bordered="false" :body-style="{padding: 0}">
             <div style="min-height: 400px;">
               <radar />
             </div>
           </a-card>
-          <a-card :loading="loading" title="团队" :bordered="false">
+          <a-card :loading="loading" :title="$t('team')" :bordered="false">
             <div class="members">
               <a-row>
                 <a-col :span="12" v-for="(item, index) in teams" :key="index">
@@ -79,13 +79,15 @@
 </template>
 
 <script>
-import PageLayout from '../../layouts/PageLayout'
-import HeadInfo from '../../components/tool/HeadInfo'
-import Radar from '../../components/chart/Radar'
+import PageLayout from '../../../layouts/PageLayout'
+import HeadInfo from '../../../components/tool/HeadInfo'
+import Radar from '../../../components/chart/Radar'
+import {mapState} from 'vuex'
 
 export default {
   name: 'WorkPlace',
   components: {Radar, HeadInfo, PageLayout},
+  i18n: require('./i18n'),
   data () {
     return {
       projects: [],
@@ -94,10 +96,19 @@ export default {
       teams: []
     }
   },
+  created() {
+    let user = this.currUser
+    let langList = ['CN', 'HK', 'US']
+    langList.forEach(lang => {
+      this.$i18n.mergeLocaleMessage(lang, {
+        timeFix: user.timeFix[lang],
+        welcome: user.welcome[lang],
+        position: user.position[lang]
+      })
+    })
+  },
   computed: {
-    currUser () {
-      return this.$store.state.account.user
-    }
+    ...mapState('account', {currUser: 'user'})
   },
   mounted () {
     this.getProjectList()

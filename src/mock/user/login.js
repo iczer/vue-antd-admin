@@ -6,7 +6,7 @@ const user = Mock.mock({
   avatar: '@AVATAR',
   address: '@CITY',
   welcome: '@WELCOME',
-  timefix: '@TIMEFIX',
+  timeFix: '@TIMEFIX',
   position: '@POSITION'
 })
 

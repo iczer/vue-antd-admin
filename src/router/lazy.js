@@ -32,7 +32,7 @@ export default new Router({
             {
               path: 'workplace',
               name: '工作台',
-              component: () => import('@/pages/dashboard/WorkPlace'),
+              component: () => import('@/pages/dashboard/workplace/WorkPlace'),
             },
             {
               path: 'analysis',
