@@ -21,8 +21,8 @@ module.exports = {
       type: '倉庫類型',
     },
     US: {
-      input: 'Please enter ',
-      select: 'Please select ',
+      input: 'Please enter',
+      select: 'Please select',
       name: 'Repository Name',
       domain: 'Repository Domain',
       manager: 'Repository Manager',

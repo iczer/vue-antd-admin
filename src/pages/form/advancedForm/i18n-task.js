@@ -21,8 +21,8 @@ module.exports = {
       type: '任務類型',
     },
     US: {
-      input: 'Please enter ',
-      select: 'Please select ',
+      input: 'Please enter',
+      select: 'Please select',
       name: 'Task Name',
       describe: 'Task Describe',
       executor: 'Executor',
