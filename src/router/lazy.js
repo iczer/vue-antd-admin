@@ -52,17 +52,17 @@ export default new Router({
             {
               path: 'basic',
               name: '基础表单',
-              component: () => import('@/pages/form/BasicForm'),
+              component: () => import('@/pages/form/basic/BasicForm'),
             },
             {
               path: 'step',
               name: '分步表单',
-              component: () => import('@/pages/form/stepForm/StepForm'),
+              component: () => import('@/pages/form/step/StepForm'),
             },
             {
               path: 'advance',
               name: '高级表单',
-              component: () => import('@/pages/form/advancedForm/AdvancedForm'),
+              component: () => import('@/pages/form/advance/AdvancedForm'),
             }
           ]
         },

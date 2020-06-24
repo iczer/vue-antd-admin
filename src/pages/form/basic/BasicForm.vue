@@ -2,51 +2,51 @@
   <a-card :body-style="{padding: '24px 32px'}" :bordered="false">
     <a-form>
       <a-form-item
-        label="标题"
+        :label="$t('title')"
         :labelCol="{span: 7}"
         :wrapperCol="{span: 10}"
       >
-        <a-input placeholder="给目标起个名字" />
+        <a-input :placeholder="$t('titleInput')" />
       </a-form-item>
       <a-form-item
-        label="起止日期"
+        :label="$t('date')"
         :labelCol="{span: 7}"
         :wrapperCol="{span: 10}"
       >
         <a-range-picker style="width: 100%" />
       </a-form-item>
       <a-form-item
-        label="目标描述"
+        :label="$t('describe')"
         :labelCol="{span: 7}"
         :wrapperCol="{span: 10}"
       >
-        <a-textarea rows="4" placeholder="请输入你阶段性工作目标"/>
+        <a-textarea rows="4" :placeholder="$t('describeInput')"/>
       </a-form-item>
       <a-form-item
-        label="衡量标准"
+        :label="$t('metrics')"
         :labelCol="{span: 7}"
         :wrapperCol="{span: 10}"
       >
-        <a-textarea rows="4" placeholder="请输入衡量标准"/>
+        <a-textarea rows="4" :placeholder="$t('metricsInput')"/>
       </a-form-item>
       <a-form-item
-        label="客户"
-        :labelCol="{span: 7}"
-        :wrapperCol="{span: 10}"
-        :required="false"
-      >
-        <a-input placeholder="请描述你服务的客户，内部客户直接 @姓名／工号"/>
-      </a-form-item>
-      <a-form-item
-        label="邀评人"
+        :label="$t('customer')"
         :labelCol="{span: 7}"
         :wrapperCol="{span: 10}"
         :required="false"
       >
-        <a-input placeholder="请直接 @姓名／工号，最多可邀请 5 人"/>
+        <a-input :placeholder="$t('customerInput')"/>
       </a-form-item>
       <a-form-item
-        label="权重"
+        :label="$t('critics')"
+        :labelCol="{span: 7}"
+        :wrapperCol="{span: 10}"
+        :required="false"
+      >
+        <a-input :placeholder="$t('criticsInput')"/>
+      </a-form-item>
+      <a-form-item
+        :label="$t('weight')"
         :labelCol="{span: 7}"
         :wrapperCol="{span: 10}"
         :required="false"
@@ -55,28 +55,26 @@
         <span>%</span>
       </a-form-item>
       <a-form-item
-        label="目标公开"
+        :label="$t('disclosure')"
         :labelCol="{span: 7}"
         :wrapperCol="{span: 10}"
         :required="false"
-        help="客户、邀评人默认被分享"
+        :help="$t('disclosureDesc')"
       >
         <a-radio-group v-model="value">
-          <a-radio :value="1">公开</a-radio>
-          <a-radio :value="2">部分公开</a-radio>
-          <a-radio :value="3">不公开</a-radio>
+          <a-radio :value="1">{{$t('public')}}</a-radio>
+          <a-radio :value="2">{{$t('partially')}}</a-radio>
+          <a-radio :value="3">{{$t('private')}}</a-radio>
         </a-radio-group>
-        <a-form-item>
-          <a-select mode="multiple" v-if="value === 2">
-            <a-select-option value="4">同事一</a-select-option>
-            <a-select-option value="5">同事二</a-select-option>
-            <a-select-option value="6">同事三</a-select-option>
-          </a-select>
-        </a-form-item>
+        <a-select mode="multiple" v-if="value === 2">
+          <a-select-option value="4">{{$t('colleague1')}}</a-select-option>
+          <a-select-option value="5">{{$t('colleague2')}}</a-select-option>
+          <a-select-option value="6">{{$t('colleague3')}}</a-select-option>
+        </a-select>
       </a-form-item>
-      <a-form-item :wrapperCol="{span: 10, offset: 7}">
-        <a-button type="primary">提交</a-button>
-        <a-button style="margin-left: 8px">保存</a-button>
+      <a-form-item style="margin-top: 24px" :wrapperCol="{span: 10, offset: 7}">
+        <a-button type="primary">{{$t('submit')}}</a-button>
+        <a-button style="margin-left: 8px">{{$t('save')}}</a-button>
       </a-form-item>
     </a-form>
   </a-card>
@@ -85,10 +83,15 @@
 <script>
 export default {
   name: 'BasicForm',
+  i18n: require('./i18n'),
   data () {
     return {
-      desc: '表单页用于向用户收集或验证信息，基础表单常见于数据项较少的表单场景。',
       value: 1
+    }
+  },
+  computed: {
+    desc() {
+      return this.$t('pageDesc')
     }
   }
 }
