@@ -1,10 +1,10 @@
 <template>
-  <a-dropdown :trigger="['click']">
+  <a-dropdown :trigger="['click']" v-model="show">
     <div slot="overlay">
       <a-spin :spinning="loading">
-        <a-tabs :tabBarStyle="{textAlign: 'center'}" :style="{backgroundColor: 'white', width: '297px'}">
-          <a-tab-pane tab="通知" key="1" :style="{padding: '0 24px'}">
-            <a-list>
+        <a-tabs class="dropdown-tabs" :tabBarStyle="{textAlign: 'center'}" :style="{backgroundColor: 'white', width: '297px'}">
+          <a-tab-pane tab="通知" key="1">
+            <a-list class="tab-pane">
               <a-list-item>
                 <a-list-item-meta title="你收到了 14 份新周报" description="一年前">
                   <a-avatar style="background-color: white" slot="avatar" src="https://gw.alipayobjects.com/zos/rmsportal/ThXAXghbEsBCCSDihZxY.png"/>
@@ -23,10 +23,10 @@
             </a-list>
           </a-tab-pane>
           <a-tab-pane tab="消息" key="2">
-            暂无消息
+            <div class="tab-pane">暂无消息</div>
           </a-tab-pane>
           <a-tab-pane tab="待办" key="3">
-            暂无待办
+            <div class="tab-pane">暂无消息</div>
           </a-tab-pane>
         </a-tabs>
       </a-spin>
@@ -44,7 +44,8 @@ export default {
   name: 'HeaderNotice',
   data () {
     return {
-      loading: false
+      loading: false,
+      show: false
     }
   },
   computed: {
@@ -76,7 +77,12 @@ export default {
       padding: 4px;
     }
   }
-  .ant-dropdown-menu-container{
-    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  .dropdown-tabs{
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    .tab-pane{
+      padding: 0 24px 12px;
+      min-height: 250px;
+    }
   }
 </style>
