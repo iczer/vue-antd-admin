@@ -146,7 +146,7 @@ export default {
     }
   }
   @media screen and (max-width: 992px){
-    .extra-item{
+    .extra-wrap .extra-item{
       display: none;
     }
   }
