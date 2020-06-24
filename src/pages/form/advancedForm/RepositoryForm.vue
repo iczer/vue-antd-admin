@@ -3,29 +3,29 @@
     <a-row class="form-row">
       <a-col :lg="6" :md="12" :sm="24">
         <a-form-item
-          label="仓库名"
+          :label="$t('name')"
           fieldDecoratorId="repository.name"
-          :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入仓库名称', whitespace: true}]}"
+          :fieldDecoratorOptions="{rules: [{ required: true, message: $ta('input|name'), whitespace: true}]}"
         >
-          <a-input placeholder="请输入仓库名称" />
+          <a-input :placeholder="$ta('input|name')" />
         </a-form-item>
       </a-col>
       <a-col :xl="{span: 6, offset: 2}" :lg="{span: 8}" :md="{span: 12}" :sm="24">
         <a-form-item
-          label="仓库域名"
+          :label="$t('domain')"
           fieldDecoratorId="repository.domain"
-          :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入仓库域名', whitespace: true}, {validator: validate}]}"
+          :fieldDecoratorOptions="{rules: [{ required: true, message: $ta('input|domain'), whitespace: true}, {validator: validate}]}"
         >
-          <a-input addonBefore="http://" addonAfter=".github.io" placeholder="请输入"/>
+          <a-input addonBefore="http://" addonAfter=".github.io" :placeholder="$ta('input|domain')"/>
         </a-form-item>
       </a-col>
       <a-col :xl="{span: 8, offset: 2}" :lg="{span: 10}" :md="{span: 24}" :sm="24">
         <a-form-item
-          label="仓库管理员"
+          :label="$t('manager')"
           fieldDecoratorId="repository.manager"
-          :fieldDecoratorOptions="{rules: [{ required: true, message: '请选择管理员'}]}"
+          :fieldDecoratorOptions="{rules: [{ required: true, message: $ta('select|manager')}]}"
         >
-          <a-select placeholder="请选择管理员">
+          <a-select :placeholder="$ta('select|manager')">
             <a-select-option value="王同学">王同学</a-select-option>
             <a-select-option value="李同学">李同学</a-select-option>
             <a-select-option value="黄同学">黄同学</a-select-option>
@@ -36,11 +36,11 @@
     <a-row class="form-row">
       <a-col :lg="6" :md="12" :sm="24">
         <a-form-item
-          label="审批人"
+          :label="$t('approval')"
           fieldDecoratorId="repository.auditor"
-          :fieldDecoratorOptions="{rules: [{ required: true, message: '请选择审批员'}]}"
+          :fieldDecoratorOptions="{rules: [{ required: true, message: $ta('select|approval')}]}"
         >
-          <a-select placeholder="请选择审批员">
+          <a-select :placeholder="$ta('select|approval')">
             <a-select-option value="王晓丽">王晓丽</a-select-option>
             <a-select-option value="李军">李军</a-select-option>
           </a-select>
@@ -48,20 +48,20 @@
       </a-col>
       <a-col :xl="{span: 6, offset: 2}" :lg="{span: 8}" :md="{span: 12}" :sm="24">
         <a-form-item
-          label="生效日期"
+          :label="$t('date')"
           fieldDecoratorId="repository.effectiveDate"
-          :fieldDecoratorOptions="{rules: [{ required: true, message: '请选择生效日期'}]}"
+          :fieldDecoratorOptions="{rules: [{ required: true, message: $ta('select|date')}]}"
         >
           <a-range-picker style="width: 100%" />
         </a-form-item>
       </a-col>
       <a-col :xl="{span: 8, offset: 2}" :lg="{span: 10}" :md="{span: 24}" :sm="24">
         <a-form-item
-          label="仓库类型"
+          :label="$t('type')"
           fieldDecoratorId="repository.type"
-          :fieldDecoratorOptions="{rules: [{ required: true, message: '请选择仓库类型'}]}"
+          :fieldDecoratorOptions="{rules: [{ required: true, message: $ta('select|type')}]}"
         >
-          <a-select placeholder="请选择仓库类型">
+          <a-select :placeholder="$ta('select|type')">
             <a-select-option value="公开">公开</a-select-option>
             <a-select-option value="私密">私密</a-select-option>
           </a-select>
@@ -78,6 +78,7 @@
 export default {
   name: 'RepositoryForm',
   props: ['showSubmit'],
+  i18n: require('./i18n-repository'),
   methods: {
     handleSubmit (e) {
       e.preventDefault()

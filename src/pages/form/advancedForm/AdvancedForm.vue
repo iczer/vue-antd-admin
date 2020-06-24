@@ -1,16 +1,16 @@
 <template>
   <div>
-    <a-card class="card" title="仓库管理" :bordered="false">
+    <a-card class="card" :title="$t('repository')" :bordered="false">
       <repository-form ref="repository" :showSubmit="false" />
     </a-card>
-    <a-card class="card" title="任务管理" :bordered="false">
+    <a-card class="card" :title="$t('task')" :bordered="false">
       <task-form ref="task" :showSubmit="false" />
     </a-card>
-    <a-card title="用户管理" :bordered="false">
-      <table-form />
+    <a-card :title="$t('user')" :bordered="false">
+      <user-form />
     </a-card>
     <footer-tool-bar>
-      <a-button type="primary" @click="validate" :loading="loading">提交</a-button>
+      <a-button type="primary" @click="validate" :loading="loading">{{$t('submit')}}</a-button>
     </footer-tool-bar>
   </div>
 </template>
@@ -18,16 +18,21 @@
 <script>
 import RepositoryForm from './RepositoryForm'
 import TaskForm from './TaskForm'
-import TableForm from './TableForm'
+import UserForm from './UserForm'
 import FooterToolBar from '../../../components/tool/FooterToolBar'
 
 export default {
   name: 'AdvancedForm',
-  components: {FooterToolBar, TableForm, TaskForm, RepositoryForm},
+  components: {FooterToolBar, UserForm, TaskForm, RepositoryForm},
+  i18n: require('./i18n'),
   data () {
     return {
-      desc: '高级表单常见于一次性输入和提交大批量数据的场景。',
       loading: false
+    }
+  },
+  computed: {
+    desc() {
+      return this.$t('desc')
     }
   },
   methods: {
