@@ -2,7 +2,7 @@
   <div class="analysis">
     <a-row :gutter="[24, 24]">
       <a-col :sm="24" :md="12" :xl="6">
-        <chart-card :title="$t('totalSales')" total="￥ 189,345">
+        <chart-card :loading="loading" :title="$t('totalSales')" total="￥ 189,345">
           <a-tooltip :title="$t('introduce')" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
@@ -14,7 +14,7 @@
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6">
-        <chart-card :title="$t('visits')" total="￥ 189,345">
+        <chart-card :loading="loading" :title="$t('visits')" total="￥ 189,345">
           <a-tooltip :title="$t('introduce')" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
@@ -25,7 +25,7 @@
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6">
-        <chart-card :title="$t('payments')" total="￥ 189,345">
+        <chart-card :loading="loading" :title="$t('payments')" total="￥ 189,345">
           <a-tooltip :title="$t('introduce')" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
@@ -36,7 +36,7 @@
         </chart-card>
       </a-col>
       <a-col :sm="24" :md="12" :xl="6">
-        <chart-card :title="$t('operating')" total="73%">
+        <chart-card :loading="loading" :title="$t('operating')" total="73%">
           <a-tooltip :title="$t('introduce')" slot="action">
             <a-icon type="info-circle-o" />
           </a-tooltip>
@@ -50,7 +50,7 @@
         </chart-card>
       </a-col>
     </a-row>
-    <a-card style="margin-top: 24px" :bordered="false" :body-style="{padding: '24px'}">
+    <a-card :loading="loading" style="margin-top: 24px" :bordered="false" :body-style="{padding: '24px'}">
       <div class="salesCard">
         <a-tabs default-active-key="1" size="large" :tab-bar-style="{marginBottom: '24px', paddingLeft: '16px'}">
           <div class="extra-wrap" slot="tabBarExtraContent">
@@ -85,12 +85,12 @@
     </a-card>
     <a-row style="margin: 0 -12px">
       <a-col style="padding: 0 12px" :xl="12" :lg="24" :md="24" :sm="24" :xs="24">
-        <a-card :bordered="false" style="margin-top: 24px" :title="$t('search')">
+        <a-card :loading="loading" :bordered="false" style="margin-top: 24px" :title="$t('search')">
           <hot-search />
         </a-card>
       </a-col>
       <a-col style="padding: 0 12px" :xl="12" :lg="24" :md="24" :sm="24" :xs="24">
-        <a-card :bordered="false" style="margin-top: 24px;" :title="$t('proportion')">
+        <a-card :loading="loading" :bordered="false" style="margin-top: 24px;" :title="$t('proportion')">
           <sales-data />
           <a-radio-group slot="extra" style="margin: -12px 0">
             <a-radio-button value="a">{{$t('all')}}</a-radio-button>
@@ -128,8 +128,12 @@ export default {
   i18n: require('./i18n'),
   data () {
     return {
-      rankList
+      rankList,
+      loading: true
     }
+  },
+  created() {
+    setTimeout(() => this.loading = !this.loading, 500)
   },
   components: {Trend, SalesData, HotSearch, RankingList, Bar, MiniProgress, MiniBar, MiniArea, ChartCard}
 }

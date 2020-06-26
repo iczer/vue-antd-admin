@@ -55,7 +55,7 @@
               <a-button size="small" type="primary" ghost icon="plus">{{$t('add')}}</a-button>
             </div>
           </a-card>
-          <a-card :title="`XX ${$t('degree')}`" style="margin-bottom: 24px" :bordered="false" :body-style="{padding: 0}">
+          <a-card :loading="loading" :title="`XX ${$t('degree')}`" style="margin-bottom: 24px" :bordered="false" :body-style="{padding: 0}">
             <div style="min-height: 400px;">
               <radar />
             </div>
@@ -93,7 +93,7 @@ export default {
       projects: [],
       loading: true,
       activities: [],
-      teams: []
+      teams: [],
     }
   },
   created() {

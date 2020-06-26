@@ -1,11 +1,13 @@
 <template>
-  <div >
+  <div class="bar">
     <h4>{{title}}</h4>
-    <v-chart :force-fit="true" height="251" :data="data">
-      <v-tooltip />
-      <v-axis />
-      <v-bar position="x*y"/>
-    </v-chart>
+    <div class="chart">
+      <v-chart :force-fit="true" height="312" :data="data" :padding="[24, 0, 0, 0]">
+        <v-tooltip />
+        <v-axis />
+        <v-bar position="x*y"/>
+      </v-chart>
+    </div>
   </div>
 </template>
 
@@ -48,6 +50,10 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+  .bar{
+    position: relative;
+    .chart{
+    }
+  }
 </style>
