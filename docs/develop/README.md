@@ -1,5 +1,5 @@
 ---
 title: 开发
-lang: zh_CN
+lang: zh-CN
 ---
 # 开发
