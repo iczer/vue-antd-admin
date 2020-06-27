@@ -23,10 +23,10 @@
             </a-list>
           </a-tab-pane>
           <a-tab-pane tab="消息" key="2">
-            <div class="tab-pane">暂无消息</div>
+            <a-list class="tab-pane"></a-list>
           </a-tab-pane>
           <a-tab-pane tab="待办" key="3">
-            <div class="tab-pane">暂无消息</div>
+            <a-list class="tab-pane"></a-list>
           </a-tab-pane>
         </a-tabs>
       </a-spin>

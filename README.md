@@ -3,10 +3,7 @@
 
 一个开箱即用的中后台前端/设计解决方案（主要依赖组件库 [ant-design-vue](https://github.com/vueComponent/ant-design-vue) ）
 [预览地址](https://iczer.gitee.io/vue-antd-admin)  
-![image](https://gitee.com/iczer/vue-antd-admin/raw/master/src/assets/img/preview.png)
-## 重要
-该项目目前已升级至 vue-cli3 开发环境，部分依赖组件库版本也已更新至最新版本。  
-vue-cli2 环境代码已封版 [v0.0.1](https://github.com/iczer/vue-antd-admin/tree/0.0.1)，如有需要，[点我查看](https://github.com/iczer/vue-antd-admin/tree/0.0.1)  
+![image](https://gitee.com/iczer/vue-antd-admin/raw/master/src/assets/img/preview.png) 
 ## 环境
 * node -- 运行/编译
 * yarn -- 依赖管理
@@ -43,7 +40,7 @@ $ yarn install
 $ yarn serve
 ```
 ## 文档
-编写中...
+[中文文档](https://iczer.github.io/vue-antd-admin/)
 ## 说明
 该项目由仓主在业余由兴趣驱动完成，仍在不断开发完善中。详见：[开发进度](https://github.com/iczer/vue-antd-admin/projects/1)
 
