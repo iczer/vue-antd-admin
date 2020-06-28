@@ -3,7 +3,7 @@
 
 一个开箱即用的中后台前端/设计解决方案（主要依赖组件库 [ant-design-vue](https://github.com/vueComponent/ant-design-vue) ）
 [预览地址](https://iczer.gitee.io/vue-antd-admin)  
-![image](/src/assets/img/preview.png) 
+![image](./src/assets/img/preview.png) 
 ## 环境
 * node -- 运行/编译
 * yarn -- 依赖管理
