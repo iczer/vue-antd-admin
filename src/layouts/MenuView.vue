@@ -78,8 +78,8 @@ export default {
   },
   methods: {
     changePage (key) {
-      this.$router.push(key)
       this.activePage = key
+      this.$router.push(key)
     },
     editPage (key, action) {
       this[action](key)
@@ -92,8 +92,11 @@ export default {
       this.pageList = this.pageList.filter(item => item.fullPath !== key)
       let index = this.linkList.indexOf(key)
       this.linkList = this.linkList.filter(item => item !== key)
-      index = index >= this.linkList.length ? this.linkList.length - 1 : index
-      this.activePage = this.linkList[index]
+      if (key == this.activePage) {
+        index = index >= this.linkList.length ? this.linkList.length - 1 : index
+        this.activePage = this.linkList[index]
+        this.$router.push(this.activePage)
+      }
     },
     onContextmenu (e) {
       const pagekey = this.getPageKey(e.target)
