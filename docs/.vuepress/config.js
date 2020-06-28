@@ -16,7 +16,6 @@ module.exports = {
     sidebar: [
       {
         title: '开始',
-        path: '/start/',
         collapsable: false,
         children: [
           '/start/use', '/start/faq'
@@ -24,7 +23,6 @@ module.exports = {
       },
       {
         title: '开发',
-        path: '/develop/',
         collapsable: false,
         children: [
           '/develop/block', '/develop/layout', '/develop/router', '/develop/page', '/develop/theme', '/develop/service', '/develop/mock'
@@ -32,7 +30,6 @@ module.exports = {
       },
       {
         title: '进阶',
-        path: '/advance/',
         collapsable: false,
         children: [
           '/advance/i18n', '/advance/chart', '/advance/theme', '/advance/error', '/advance/authority'
@@ -40,7 +37,6 @@ module.exports = {
       },
       {
         title: '其它',
-        path: '/other/',
         collapsable: false,
         children: [
           '/other/upgrade', '/other/community'

@@ -5,7 +5,7 @@ heroImage: /logo.png
 heroText: Vue Antd Admin
 tagline: 开箱即用的中台前端/设计解决方案
 actionText: 快速上手 →
-actionLink: /start/
+actionLink: /start/use
 features:
 - title: 简洁
   details: 以 Markdown 为中心的项目结构，以最少的配置帮助你专注于写作。
