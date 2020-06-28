@@ -6,10 +6,9 @@ lang: zh-CN
 ### 为什么不是 Ant Design Pro Vue ？
 
 [Ant Design Pro Vue](https://github.com/vueComponent/ant-design-vue-pro) 是 [Ant Design Pro](https://github.com/ant-design/ant-design-pro) 的 Vue 版本，其中项目结构、组件、
-布局和使用方法等基本与 Ant Design Pro 的 react 版本保持一致。
-如果你正在使用它，这确实是一个不错的选择。 
+布局和使用方法等基本与 Ant Design Pro 的 react 版本保持一致。如果你比较熟悉 react 版，或者你已经在使用它，这确实是一个不错的选择。 
 
-[Vue Antd Admin](https://github.com/iczer/vue-antd-admin) 同样实现了 Ant Design Pro 的所有功能。但与此同时，我们还针对 Vue 的特性，对 Ant Design Pro 的一些组件、布局作出相应的优化及修改，同时并不影响保持与 Ant Design Pro 的一致性。 
+[Vue Antd Admin](https://github.com/iczer/vue-antd-admin) 同样实现了 Ant Design Pro 的所有功能。但与此同时，我们还根据 Vue 的特性，对 Ant Design Pro 的一些组件和布局作出了相应的修改及优化，同时并不影响保持与 Ant Design Pro 的一致性。 
 
 另外，我们还在添加一些 Ant Design Pro 没有的功能，比如全局动画、多页签模式等。  
 
