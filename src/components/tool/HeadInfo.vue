@@ -15,8 +15,10 @@ export default {
 <style lang="less" scoped>
   .head-info{
     text-align: center;
-    padding: 0 32px;
-    width: 100%;
+    padding: 0 24px;
+    flex-grow: 1;
+    flex-shrink: 0;
+    align-self: center;
     span{
       color: rgba(0,0,0,.45);
       display: inline-block;

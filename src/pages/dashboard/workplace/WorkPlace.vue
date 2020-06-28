@@ -224,7 +224,4 @@ export default {
       }
     }
   }
-  .head-info{
-    display: inline-block;
-  }
 </style>

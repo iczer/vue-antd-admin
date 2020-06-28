@@ -10,15 +10,16 @@
         </a-breadcrumb>
       </div>
       <div class="detail">
-        <div v-if="avatar" class="avatar"><a-avatar :src="avatar" /></div>
         <div class="main">
           <div class="row">
-            <img v-if="logo" :src="logo" class="logo" />
             <h1 v-if="title" class="title">{{title}}</h1>
             <div class="action"><slot name="action"></slot></div>
           </div>
           <div class="row">
-            <div v-if="this.$slots.content" class="content"><slot name="content"></slot></div>
+            <div v-if="this.$slots.content" class="content">
+              <div v-if="avatar" class="avatar"><a-avatar :src="avatar" :size="72" /></div>
+              <slot name="content"></slot>
+            </div>
             <div v-if="this.$slots.extra" class="extra"><slot name="extra"></slot></div>
           </div>
         </div>
@@ -82,45 +83,25 @@ export default {
         display: flex;
         .row {
           display: flex;
+          flex-wrap: wrap;
+          justify-content: space-between;
         }
         .avatar {
-          flex: 0 1 72px;
-          margin:0 24px 8px 0;
-          & > span {
-            border-radius: 72px;
-            display: block;
-            width: 72px;
-            height: 72px;
-          }
+          margin:0 24px 0 0;
         }
         .main{
           width: 100%;
           .title{
-            flex: auto;
             font-size: 20px;
-            font-weight: 500;
             color: rgba(0,0,0,.85);
             margin-bottom: 16px;
           }
-          .logo{
-            width: 28px;
-            height: 28px;
-            border-radius: 4px;
-            margin-right: 16px;
-          }
           .content{
-            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
           }
           .extra{
             display: flex;
-            margin-left: 88px;
-            min-width: 420px;
-          }
-          .action{
-            margin-left: 56px;
-            min-width: 266px;
-            flex: 0 1 auto;
-            text-align: right;
           }
         }
       }

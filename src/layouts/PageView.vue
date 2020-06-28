@@ -1,6 +1,6 @@
 <template>
   <page-layout :desc="desc" :title="title" :linkList="linkList">
-    <div slot="extra" class="extraImg">
+    <div v-if="this.extraImage && !isMobile" slot="extra" class="extraImg">
       <img :src="extraImage"/>
     </div>
     <page-toggle-transition :animate="animate.name" :direction="animate.direction">
@@ -33,7 +33,7 @@ export default {
       let key = this.path.substring(1).replace(new RegExp('/', 'g'), '.') + '.name'
       return this.$t(key)
     },
-    ...mapState('setting', ['multiPage', 'animate', 'routesI18n'])
+    ...mapState('setting', ['isMobile', 'multiPage', 'animate', 'routesI18n'])
   },
   created() {
     let i18n = this.routesI18n

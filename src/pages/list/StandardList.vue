@@ -1,17 +1,11 @@
 <template>
   <div>
     <a-card :bordered="false">
-      <a-row>
-        <a-col :sm="8" :xs="24" class="split-right">
+      <div style="display: flex; flex-wrap: wrap">
           <head-info title="我的待办" content="8个任务" :bordered="true"/>
-        </a-col>
-        <a-col :sm="8" :xs="24" class="split-right">
           <head-info title="本周任务平均处理时间" content="32分钟" :bordered="true"/>
-        </a-col>
-        <a-col :sm="8" :xs="24" class="split-right">
           <head-info title="本周完成任务数" content="24个"/>
-        </a-col>
-      </a-row>
+      </div>
     </a-card>
     <a-card
       style="margin-top: 24px"
