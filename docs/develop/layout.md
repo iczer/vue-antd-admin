@@ -80,6 +80,6 @@ lang: zh-CN
 ### Layout 组件
 如果你需要辅助页面框架级别的布局设计，那么 Layout 则是你最佳的选择，它抽象了大部分框架布局结构，使得只需要填空就可以开发规范专业的页面整体布局，详情查看：[Layout](https://www.antdv.com/components/layout-cn/)。
 ### 根据不同场景区分抽离布局组件
-在大部分场景下，我们需要基于上面两个组件封装一些适用于当下具体业务的组件，包含了通用的导航、侧边栏、顶部通知、页面标题等元素。例如 Vue Antd Admin 的 AdminLayout。  
+在大部分场景下，我们需要基于上面两个组件封装一些适用于当下具体业务的组件，包含了通用的导航、侧边栏、顶部通知、页面标题等元素。例如 Vue Antd Admin 的 [AdminLayout](https://github.com/iczer/vue-antd-admin/blob/master/src/layouts/AdminLayout.vue)。  
  
 通常，我们会把抽象出来的布局组件，放到 layouts 文件夹中方便管理。需要注意的是，这些布局组件和我们平时使用的其它组件并没有什么不同，只不过功能性上是为了处理布局问题而单独归类。
