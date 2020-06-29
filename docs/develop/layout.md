@@ -6,7 +6,7 @@ lang: zh-CN
 页面整体布局是一个产品最外层的框架结构，往往会包含导航、页脚、侧边栏、通知栏以及内容等。在页面之中，也有很多区块的布局结构。在真实项目中，页面布局通常统领整个应用的界面，有非常重要的作用。
 
 ## Vue Antd Admin 的布局
-在 Vue Antd Admin 中，我们抽离了使用过程中的通用布局，其中分为结构布局都放在 layouts 目录中，分别为：
+在 Vue Antd Admin 中，我们抽离了使用过程中一些常用的布局，其中分为结构布局都放在 layouts 目录中，分别为：
 * [AdminLayout](https://github.com/iczer/vue-antd-admin/blob/master/src/layouts/AdminLayout.vue) / **管理后台布局**，包含了头部导航，侧边导航、内容区和页脚，一般用于后台系统的整体布局
 
 <img :src="$withBase('/admin-layout.png')" alt="admin-layout">
