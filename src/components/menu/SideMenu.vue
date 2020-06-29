@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider :class="[theme, 'sider', isMobile ? null : 'shadow']" width="256px" :collapsible="collapsible" v-model="collapsed" :trigger="null">
+  <a-layout-sider :class="[theme, 'side', isMobile ? null : 'shadow']" width="256px" :collapsible="collapsible" v-model="collapsed" :trigger="null">
     <div :class="['logo', theme]">
       <router-link to="/dashboard/workplace">
         <img src="@/assets/img/logo.png">
@@ -14,7 +14,7 @@
 import IMenu from './menu'
 import {mapState, mapMutations} from 'vuex'
 export default {
-  name: 'SiderMenu',
+  name: 'SideMenu',
   components: {IMenu},
   inject: ['menuI18n'],
   props: {
@@ -54,7 +54,7 @@ export default {
   .shadow{
     box-shadow: 2px 0 6px rgba(0,21,41,.35);
   }
-  .sider{
+  .side{
     z-index: 10;
     &.light{
       background-color: #fff;

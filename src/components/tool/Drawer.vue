@@ -116,9 +116,6 @@ export default {
         transform: translateX(100%);
       }
     }
-    .sider{
-      height: 100%;
-    }
   }
   .content{
     display: inline-block;

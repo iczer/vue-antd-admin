@@ -13,7 +13,7 @@
 
 <script>
 export default {
-  name: 'GlobalFooter',
+  name: 'PageFooter',
   props: ['copyright', 'linkList']
 }
 </script>

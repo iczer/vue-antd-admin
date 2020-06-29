@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import router from './router/lazy'
+import router from './router'
 import './theme/index.less'
 import Antd from 'ant-design-vue'
 import Viser from 'viser-vue'

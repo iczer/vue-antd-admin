@@ -1,39 +1,39 @@
 <template>
-  <global-layout>
-      <contextmenu :itemList="menuItemList" :visible.sync="menuVisible" @select="onMenuSelect" />
-      <a-tabs
-        @contextmenu.native="e => onContextmenu(e)"
-        v-if="multiPage"
-        :active-key="activePage"
-        :style="`margin: -16px auto 8px; ${layout == 'head' ? 'max-width: 1400px;' : ''}`"
-        :hide-add="true"
-        type="editable-card"
-        @change="changePage"
-        @edit="editPage">
-        <a-tab-pane :key="page.fullPath" v-for="page in pageList">
-          <span slot="tab" :pagekey="page.fullPath">{{page.name}}</span>
-        </a-tab-pane>
-      </a-tabs>
-      <div class="menu-view-content">
-        <page-toggle-transition :animate="animate.name" :direction="animate.direction">
-          <keep-alive v-if="multiPage">
-            <router-view />
-          </keep-alive>
-          <router-view v-else />
-        </page-toggle-transition>
-      </div>
-  </global-layout>
+  <admin-layout>
+    <contextmenu :itemList="menuItemList" :visible.sync="menuVisible" @select="onMenuSelect" />
+    <a-tabs
+      @contextmenu.native="e => onContextmenu(e)"
+      v-if="multiPage"
+      :active-key="activePage"
+      :style="`margin: -16px auto 8px; ${layout == 'head' ? 'max-width: 1400px;' : ''}`"
+      :hide-add="true"
+      type="editable-card"
+      @change="changePage"
+      @edit="editPage">
+      <a-tab-pane :key="page.fullPath" v-for="page in pageList">
+        <span slot="tab" :pagekey="page.fullPath">{{page.name}}</span>
+      </a-tab-pane>
+    </a-tabs>
+    <div class="tabs-view-content">
+      <page-toggle-transition :animate="animate.name" :direction="animate.direction">
+        <keep-alive v-if="multiPage">
+          <router-view />
+        </keep-alive>
+        <router-view v-else />
+      </page-toggle-transition>
+    </div>
+  </admin-layout>
 </template>
 
 <script>
-import GlobalLayout from './GlobalLayout'
+import AdminLayout from './AdminLayout'
 import Contextmenu from '../components/menu/Contextmenu'
 import PageToggleTransition from '../components/transition/PageToggleTransition'
 import {mapState} from 'vuex'
 
 export default {
-  name: 'MenuView',
-  components: {PageToggleTransition, Contextmenu, GlobalLayout},
+  name: 'TabsView',
+  components: {PageToggleTransition, Contextmenu, AdminLayout},
   data () {
     return {
       pageList: [],
@@ -165,7 +165,7 @@ export default {
 </script>
 
 <style scoped lang="less">
-  .menu-view-content{
+  .tabs-view-content{
     position: relative;
   }
 </style>

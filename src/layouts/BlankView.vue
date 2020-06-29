@@ -12,7 +12,7 @@ import PageToggleTransition from '../components/transition/PageToggleTransition'
 import {mapState} from 'vuex'
 
 export default {
-  name: 'RouteView',
+  name: 'BlankView',
   components: {PageToggleTransition},
   computed: {
     ...mapState('setting', ['multiPage', 'animate'])

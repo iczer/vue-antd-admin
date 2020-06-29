@@ -1,16 +1,16 @@
 <template>
-  <a-layout-header :class="[headerTheme, 'global-header']">
-    <div :class="['global-header-wide', layout]">
+  <a-layout-header :class="[headerTheme, 'admin-header']">
+    <div :class="['admin-header-wide', layout]">
       <router-link v-if="isMobile || layout === 'head'" to="/" :class="['logo', isMobile ? null : 'pc', headerTheme]">
         <img width="32" src="@/assets/img/logo.png" />
         <h1 v-if="!isMobile">{{systemName}}</h1>
       </router-link>
       <a-divider v-if="isMobile" type="vertical" />
       <a-icon v-if="layout === 'side'" class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
-      <div v-if="layout == 'head' && !isMobile" class="global-header-menu">
+      <div v-if="layout == 'head' && !isMobile" class="admin-header-menu">
         <i-menu style="height: 64px; line-height: 64px;" @i18nComplete="setRoutesI18n" :i18n="menuI18n" :theme="headerTheme" mode="horizontal" :options="menuData" @select="onSelect"/>
       </div>
-      <div :class="['global-header-right', headerTheme]">
+      <div :class="['admin-header-right', headerTheme]">
           <header-search class="header-item" />
           <a-tooltip class="header-item" title="帮助文档" placement="bottom" >
             <a>
@@ -36,11 +36,11 @@
 import HeaderSearch from './HeaderSearch'
 import HeaderNotice from './HeaderNotice'
 import HeaderAvatar from './HeaderlAvatar'
-import IMenu from '../components/menu/menu'
+import IMenu from '@/components/menu/menu'
 import {mapState, mapMutations} from 'vuex'
 
 export default {
-  name: 'GlobalHeader',
+  name: 'AdminHeader',
   components: {IMenu, HeaderAvatar, HeaderNotice, HeaderSearch},
   props: ['collapsed', 'menuData'],
   inject: ['menuI18n'],
@@ -86,7 +86,7 @@ export default {
       color: #1890ff;
     }
   }
-  .global-header{
+  .admin-header{
     padding: 0;
     -webkit-box-shadow: 0 1px 4px rgba(0,21,41,.08);
     box-shadow: 0 1px 4px rgba(0,21,41,.08);
@@ -101,7 +101,7 @@ export default {
         color: white;
       }
     }
-    .global-header-wide{
+    .admin-header-wide{
       &.head{
         max-width: 1400px;
         margin: auto;
@@ -132,10 +132,10 @@ export default {
           color: #fff;
         }
       }
-      .global-header-menu{
+      .admin-header-menu{
         display: inline-block;
       }
-      .global-header-right{
+      .admin-header-right{
         float: right;
         display: flex;
         &.dark{

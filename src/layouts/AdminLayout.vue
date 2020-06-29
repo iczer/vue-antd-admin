@@ -1,35 +1,35 @@
 <template>
-  <a-layout :class="['global-layout', fixedSideBar ? 'fixed-side-bar' : '']">
+  <a-layout :class="['admin-layout', fixedSideBar ? 'fixed-side-bar' : '']">
     <drawer v-if="isMobile" :openDrawer="collapsed" @change="onDrawerChange">
-      <sider-menu :theme="theme" :menuData="menuData" :collapsed="false" :collapsible="false" @menuSelect="onMenuSelect"/>
+      <side-menu :theme="theme" :menuData="menuData" :collapsed="false" :collapsible="false" @menuSelect="onMenuSelect"/>
     </drawer>
-    <sider-menu :theme="theme" v-else-if="layout === 'side'" :menuData="menuData" :collapsed="collapsed" :collapsible="true" />
+    <side-menu :theme="theme" v-else-if="layout === 'side'" :menuData="menuData" :collapsed="collapsed" :collapsible="true" />
     <drawer :open-drawer="showSetting" placement="right"  @change="onSettingDrawerChange">
       <div class="setting" slot="handler">
         <a-icon :type="showSetting ? 'close' : 'setting'"/>
       </div>
       <setting />
     </drawer>
-    <a-layout class="global-layout-main beauty-scroll">
-      <global-header :style="headerStyle" :menuData="menuData" :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
+    <a-layout class="admin-layout-main beauty-scroll">
+      <admin-header :style="headerStyle" :menuData="menuData" :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
       <a-layout-header v-if="fixedHeader"></a-layout-header>
-      <a-layout-content class="global-layout-content">
+      <a-layout-content class="admin-layout-content">
         <div :style="`min-height: ${minHeight}px; position: relative`">
           <slot></slot>
         </div>
       </a-layout-content>
       <a-layout-footer style="padding: 0px">
-        <global-footer :link-list="footerLinks" :copyright="copyright" />
+        <page-footer :link-list="footerLinks" :copyright="copyright" />
       </a-layout-footer>
     </a-layout>
   </a-layout>
 </template>
 
 <script>
-import GlobalHeader from './GlobalHeader'
-import GlobalFooter from './GlobalFooter'
+import AdminHeader from './header/AdminHeader'
+import PageFooter from './footer/PageFooter'
 import Drawer from '../components/tool/Drawer'
-import SiderMenu from '../components/menu/SiderMenu'
+import SideMenu from '../components/menu/SideMenu'
 import Setting from '../components/setting/Setting'
 import {mapState} from 'vuex'
 
@@ -38,8 +38,8 @@ const minHeight = window.innerHeight - 64 - 24 - 122
 let menuData = []
 
 export default {
-  name: 'GlobalLayout',
-  components: {Setting, SiderMenu, Drawer, GlobalFooter, GlobalHeader},
+  name: 'AdminLayout',
+  components: {Setting, SideMenu, Drawer, PageFooter, AdminHeader},
   data () {
     return {
       minHeight: minHeight,
@@ -87,20 +87,20 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .global-layout{
+  .admin-layout{
     &.fixed-side-bar{
       height: 100vh;
-      .global-layout-main{
+      .admin-layout-main{
         overflow: scroll;
       }
     }
-    .global-layout-main{
-      .global-header{
+    .admin-layout-main{
+      .admin-header{
         top: 0;
         right: 0;
       }
     }
-    .global-layout-content{
+    .admin-layout-content{
       padding: 24px 24px 0;
       min-height: auto;
     }

@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider class="sider" width="300">
+  <a-layout-sider class="side" width="300">
     <setting-item :title="$t('theme.title')">
       <img-checkbox-group @change="values => setTheme(values[0])">
         <img-checkbox :title="$t('theme.dark')" img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" value="dark"/>
@@ -139,7 +139,7 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .sider{
+  .side{
     background-color: #fff;
     height: 100%;
     padding: 24px;
