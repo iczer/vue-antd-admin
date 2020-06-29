@@ -2,6 +2,9 @@ module.exports = {
   title: 'Vue Antd Admin',
   description: 'Vue Antd Admin',
   base: '/vue-antd-admin/',
+  head: [
+    ['link', { rel: 'icon', href: '/favicon.ico' }]
+  ],
   themeConfig: {
     logo: '/logo.png',
     repo: 'iczer/vue-antd-admin',
@@ -25,7 +28,7 @@ module.exports = {
         title: '开发',
         collapsable: false,
         children: [
-          '/develop/block', '/develop/layout', '/develop/router', '/develop/page', '/develop/theme', '/develop/service', '/develop/mock'
+          '/develop/layout', '/develop/router', '/develop/page', '/develop/theme', '/develop/service', '/develop/mock'
         ]
       },
       {
