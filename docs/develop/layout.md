@@ -9,25 +9,31 @@ lang: zh-CN
 在 Vue Antd Admin 中，我们抽离了使用过程中的通用布局，其中分为结构布局都放在 layouts 目录中，分别为：
 * [AdminLayout](https://github.com/iczer/vue-antd-admin/blob/master/src/layouts/AdminLayout.vue) / **管理后台布局**，包含了头部导航，侧边导航、内容区和页脚，一般用于后台系统的整体布局
 
-![image](/admin-layout.png)
+<img :src="$withBase('/admin-layout.png')" alt="admin-layout">
+
 * [PageLayout](https://github.com/iczer/vue-antd-admin/blob/master/src/layouts/PageLayout.vue) / **页面布局**，包含了页头和内容区，常用于需要页头(一般包含面包屑、标题、额外操作等)的页面
 
-![image](/page-layout.png)
+<img :src="$withBase('/page-layout.png')" alt="page-layout">
+
 * [CommonLayout](https://github.com/iczer/vue-antd-admin/blob/master/src/layouts/CommonLayout.vue) / **通用布局**，仅包含页脚的简单布局，项目中常用于注册、登录或展示页面
 
-![image](/common-layout.png)
+<img :src="$withBase('/common-layout.png')" alt="common-layout">
+
 ## Vue Antd Admin 的视图
 在 Vue Antd Admin 中，除了基本布局外，通常有很多页面的结构是相似的。因此，我们把这部分结构抽离为视图组件。  
 一个视图组件通常包含一个基本布局组件、视图公共区块、路由视图内容区、页脚等，常常结合路由配置使用。它们也被放入了 layouts 目录中，分别为：
 * [TabsView](https://github.com/iczer/vue-antd-admin/blob/master/src/layouts/TabsView.vue) / **多页签视图**，包含了 AdminLayout 布局、多页签头和路由视图内容区
 
-![image](/tabs-view.png)
+<img :src="$withBase('/tabs-view.png')" alt="tabs-view">
+
 * [PageView](https://github.com/iczer/vue-antd-admin/blob/master/src/layouts/PageView.vue) / **页面视图**，包含了 PageLayout 布局和路由视图内容区
 
-![image](/page-view.png)
+<img :src="$withBase('/page-view.png')" alt="page-view">
+
 * [BlankView](https://github.com/iczer/vue-antd-admin/blob/master/src/layouts/BlankView.vue) / **空白视图**，仅包含一个路由视图内容区
 
-![image](/blank-view.png)
+<img :src="$withBase('/blank-view.png')" alt="blank-view">
+
 ## 如何使用
 通常我们会把视图组件和路由配置结合一起使用，我们把配置信息抽离在路由配置文件中 [router/index.js](https://github.com/iczer/vue-antd-admin/blob/master/src/router/index.js) 。如下：
 ```jsx
