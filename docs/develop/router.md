@@ -107,7 +107,7 @@ export default {
 更多细节可查看 [components/menu/menu.js](https://github.com/iczer/vue-antd-admin/blob/master/src/components/menu/menu.js)
 
 ## 面包屑
-面包屑由 [PageHeader](https://github.com/iczer/vue-antd-admin/blob/master/src/components/page/PageHeader.vue) 实现，PageLayout 组件会从当前页面路由提取面包屑配置（如未设置，则从当前路由逐级提取路由名称生成面包屑）。所以只要页面中使用了 PageLayout 布局或者它的父级组件使用了 PageLayout 布局，面包屑都将自动生成。  
+面包屑由 [PageHeader](https://github.com/iczer/vue-antd-admin/blob/master/src/components/page/PageHeader.vue) 实现，PageLayout 组件会从当前页面路由提取面包屑配置（如未设置，则根据当前路由层次关系生成面包屑）。所以只要页面中使用了 PageLayout 布局或者它的父级组件使用了 PageLayout 布局，面包屑都将自动生成。  
 
 当然，如果你想在某个页面自定义面包屑配置，只需在对应的路由元数据 meta 中定义 page.breadcrumb 属性即可。Vue Antd Admin 会优先使用路由元数据 meta 中定义的面包屑配置。  
 
