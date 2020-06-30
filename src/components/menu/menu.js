@@ -3,7 +3,7 @@
  * menuOptions示例：
  * [
  *  {
- *    title: '菜单标题',
+ *    name: '菜单名称',
  *    path: '菜单路由',
  *    meta: {
  *      icon: '菜单图标',
@@ -12,7 +12,7 @@
  *    children: [子菜单配置]
  *  },
  *  {
- *    title: '菜单标题',
+ *    name: '菜单名称',
  *    path: '菜单路由',
  *    meta: {
  *      icon: '菜单图标',
@@ -37,8 +37,6 @@ const {Item, SubMenu} = Menu
 
 export default {
   name: 'IMenu',
-  i18n: {
-  },
   props: {
     options: {
       type: Array,

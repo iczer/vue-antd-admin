@@ -1,5 +1,5 @@
 <template>
-  <page-layout :desc="desc" :title="title" :linkList="linkList">
+  <page-layout :desc="desc" :linkList="linkList">
     <div v-if="this.extraImage && !isMobile" slot="extra" class="extraImg">
       <img :src="extraImage"/>
     </div>
@@ -22,41 +22,26 @@ export default {
   components: {PageToggleTransition, PageLayout},
   data () {
     return {
-      path: '',
-      desc: '',
-      linkList: [],
-      extraImage: ''
+      page: {}
     }
   },
   computed: {
-    title() {
-      let key = this.path.substring(1).replace(new RegExp('/', 'g'), '.') + '.name'
-      return this.$t(key)
+    ...mapState('setting', ['isMobile', 'multiPage', 'animate', 'routesI18n']),
+    desc() {
+      return this.page.desc
     },
-    ...mapState('setting', ['isMobile', 'multiPage', 'animate', 'routesI18n'])
-  },
-  created() {
-    let i18n = this.routesI18n
-    Object.keys(i18n).forEach(key => {
-      this.$i18n.mergeLocaleMessage(key, i18n[key])
-    })
+    linkList() {
+      return this.page.linkList
+    },
+    extraImage() {
+      return this.page.extraImage
+    }
   },
   mounted () {
-    this.getPageHeaderInfo()
+    this.page = this.$refs.page
   },
   updated () {
-    this.getPageHeaderInfo()
-  },
-  methods: {
-    getPageHeaderInfo () {
-      this.path = this.$route.path
-      const page = this.$refs.page
-      if (page) {
-        this.desc = page.desc
-        this.linkList = page.linkList
-        this.extraImage = page.extraImage
-      }
-    }
+    this.page = this.$refs.page
   }
 }
 </script>

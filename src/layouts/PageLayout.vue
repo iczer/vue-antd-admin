@@ -1,6 +1,6 @@
 <template>
   <div class="page-layout">
-    <page-header :i18n="routesI18n" :breadcrumb="breadcrumb" :title="title" :logo="logo" :avatar="avatar">
+    <page-header :i18n="routesI18n" :breadcrumb="breadcrumb" :title="pageTitle" :logo="logo" :avatar="avatar">
       <slot name="action"  slot="action"></slot>
       <slot slot="content" name="headerContent"></slot>
       <div slot="content" v-if="!this.$slots.headerContent && desc">
@@ -28,22 +28,55 @@ export default {
   props: ['desc', 'logo', 'title', 'avatar', 'linkList', 'extraImage'],
   data () {
     return {
-      breadcrumb: []
+      page: {}
     }
   },
+  watch: {
+    $route() {
+      this.page = this.$route.meta.page
+    }
+  },
+  created() {
+    let i18n = this.routesI18n
+    Object.keys(i18n).forEach(key => {
+      this.$i18n.mergeLocaleMessage(key, i18n[key])
+    })
+    this.page = this.$route.meta.page
+  },
   computed: {
-    ...mapState('setting', ['layout', 'routesI18n'])
-  },
-  created () {
-    this.getBreadcrumb()
-  },
-  updated () {
-    this.getBreadcrumb()
+    ...mapState('setting', ['layout', 'routesI18n']),
+    pageTitle() {
+      let pageTitle = this.page && this.page.title
+      return this.title || this.$t(pageTitle) || this.routeName
+    },
+    routeName() {
+      return this.$t(this.$route.path.substring(1).replace(new RegExp('/', 'g'), '.') + '.name')
+    },
+    breadcrumb() {
+      let page = this.page
+      let breadcrumb = page && page.breadcrumb
+      if (breadcrumb) {
+        let i18nBreadcrumb = []
+        breadcrumb.forEach(item => {
+          i18nBreadcrumb.push(this.$t(item))
+        })
+        return i18nBreadcrumb
+      } else {
+        return this.getRouteBreadcrumb()
+      }
+    }
   },
   methods: {
-    getBreadcrumb () {
-      this.breadcrumb = this.$route.matched
-    },
+    getRouteBreadcrumb() {
+      let routes = this.$route.matched
+      let breadcrumb = []
+      routes.forEach(route => {
+        let path = route.path
+        let key = path.length == 0 ? '/home' : path
+        breadcrumb.push(this.$t(key.substring(1).replace(new RegExp('/', 'g'), '.') + '.name'))
+      })
+      return breadcrumb
+    }
   }
 }
 </script>

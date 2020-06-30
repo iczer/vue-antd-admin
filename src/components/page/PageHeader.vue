@@ -3,9 +3,8 @@
     <div :class="['page-header-wide', layout]">
       <div class="breadcrumb">
         <a-breadcrumb>
-          <a-breadcrumb-item :key="item.path" v-for="(item, index) in breadcrumb">
-            <span v-if="index === 0"><a href="#/dashboard/workplace">{{$t('home.name')}}</a></span>
-            <span v-else>{{$t(item.path.substring(1).replace(new RegExp('/', 'g'), '.') + '.name')}}</span>
+          <a-breadcrumb-item :key="index" v-for="(item, index) in breadcrumb">
+            <span>{{item}}</span>
           </a-breadcrumb-item>
         </a-breadcrumb>
       </div>
@@ -48,13 +47,6 @@ export default {
       type: String,
       required: false
     },
-    i18n: Object
-  },
-  created() {
-    let i18n = this.i18n
-    Object.keys(i18n).forEach(key => {
-      this.$i18n.mergeLocaleMessage(key, i18n[key])
-    })
   },
   computed: {
     layout () {
