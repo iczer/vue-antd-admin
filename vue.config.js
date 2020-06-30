@@ -14,7 +14,7 @@ module.exports = {
     config.entry.app = ["babel-polyfill", "whatwg-fetch", "./src/main.js"];
     config.plugins.push(
       new ThemeColorReplacer({
-        fileName: 'css/theme-colors.css',
+        fileName: 'css/theme-colors-[contenthash:8].css',
         matchColors: getThemeColors(themeColor),
         changeSelector
       })

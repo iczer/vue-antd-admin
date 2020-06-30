@@ -18,7 +18,9 @@ module.exports = {
   changeThemeColor (newColor) {
     let lastColor = this.lastColor || this.primaryColor
     let options = {
-      cssUrl: '/css/theme-colors.css',
+      changeUrl (cssUrl) {
+        return `/${cssUrl}` // while router is not `hash` mode, it needs absolute path
+      },
       oldColors: this.getThemeColors(lastColor),
       newColors: this.getThemeColors(newColor)
     }
