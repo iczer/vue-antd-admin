@@ -9,10 +9,10 @@
   dependencies:
     tinycolor2 "^1.4.1"
 
-"@ant-design/colors@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.npm.taobao.org/@ant-design/colors/download/@ant-design/colors-4.0.0.tgz#bcc1183b1fdfd1587d4e655035b3fc47bf3a4ab6"
-  integrity sha1-vMEYOx/f0Vh9TmVQNbP8R786SrY=
+"@ant-design/colors@^4.0.1":
+  version "4.0.1"
+  resolved "https://registry.npm.taobao.org/@ant-design/colors/download/@ant-design/colors-4.0.1.tgz?cache=0&sync_timestamp=1592447143244&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2F%40ant-design%2Fcolors%2Fdownload%2F%40ant-design%2Fcolors-4.0.1.tgz#6edab85c6d1ba51accaed4ae64fa934dd5ebb498"
+  integrity sha1-btq4XG0bpRrMrtSuZPqTTdXrtJg=
   dependencies:
     tinycolor2 "^1.4.1"
 

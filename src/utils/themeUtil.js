@@ -2,6 +2,7 @@ const varyColor = require('webpack-theme-color-replacer/client/varyColor')
 const client = require('webpack-theme-color-replacer/client')
 const generate =  require('@ant-design/colors/lib/generate').default
 const themeColor = require('../config').themeColor
+const getDarkColors = require('../utils/colors').getDarkColors
 
 module.exports = {
   primaryColor: themeColor,
@@ -11,7 +12,8 @@ module.exports = {
     })
     const palettes = generate(color)
     const rgb = varyColor.toNum3(color.replace('#', '')).join(',')
-    return palettes.concat(lightens).concat(rgb)
+    let darkBgColors = getDarkColors(color, 'dark')
+    return palettes.concat(lightens).concat(rgb).concat(darkBgColors)
   },
   changeThemeColor (newColor) {
     let lastColor = this.lastColor || this.primaryColor

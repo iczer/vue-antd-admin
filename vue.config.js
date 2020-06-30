@@ -4,7 +4,6 @@ const {getThemeColors, changeSelector} = require('./src/utils/themeUtil')
 const themeColor = require('./src/config').themeColor
 
 module.exports = {
-  // transpileDependencies: ['webpack-theme-color-replacer'],
   pluginOptions: {
     'style-resources-loader': {
       preProcessor: 'less',

@@ -89,7 +89,7 @@ import { mapState, mapMutations } from 'vuex'
 
 const ColorCheckboxGroup = ColorCheckbox.Group
 const ImgCheckboxGroup = ImgCheckbox.Group
-const colors = ['#f5222d', '#fa541c', '#faad14', '#13c2c2', '#52c41a', '#1890ff', '#2f54eb', '#722ed1']
+const colors = ['#f5222d', '#fa541c', '#fadb14', '#49aa19', '#13c2c2', '#1890ff', '#722ed1', '#eb2f96']
 export default {
   name: 'Setting',
   i18n: require('./i18n'),
