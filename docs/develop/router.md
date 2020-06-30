@@ -109,7 +109,7 @@ export default {
 ## 面包屑
 面包屑由 [PageHeader](https://github.com/iczer/vue-antd-admin/blob/master/src/components/page/PageHeader.vue) 实现，PageLayout 组件会从当前页面路由提取面包屑配置（如未设置，则根据当前路由层次关系生成面包屑）。所以只要页面中使用了 PageLayout 布局或者它的父级组件使用了 PageLayout 布局，面包屑都将自动生成。  
 
-当然，如果你想在某个页面自定义面包屑配置，只需在对应的路由元数据 meta 中定义 page.breadcrumb 属性即可。Vue Antd Admin 会优先使用路由元数据 meta 中定义的面包屑配置。  
+当然，如果你想在某个页面自定义面包屑，只需在对应的路由元数据 meta 中定义 page.breadcrumb 属性即可。Vue Antd Admin 将会优先使用路由元数据 meta 中定义的面包屑配置。  
 
 比如，想自定义工作台页面面包屑，可以在工作台的 route 配置中如下设置：
 ```jsx {5,6,7}
@@ -126,7 +126,7 @@ export default {
 ```
 更多细节可查看 [layouts/PageLayout.vue#L55](https://github.com/iczer/vue-antd-admin/blob/master/src/layouts/PageLayout.vue#L55)
 ## 页面标题
-页面标题的实现方式与面包屑基本一致，也是由 PageLayout 组件从当前页面路由提取标题（如未设置，则提取当前路由名称作为标题），然后自动注入的。 
+页面标题的实现方式与面包屑基本一致，也是由 PageLayout 组件从当前页面路由提取标题（如未设置，则提取当前路由名称作为标题）。 
  
 如果你想自定义页面标题，在页面对应的路由元数据 meta 中定义 page.title 属性即可，如下示例，定义了工作台页面的标题：
 ```jsx {5,6,7}

@@ -10,7 +10,6 @@ module.exports = {
     repo: 'iczer/vue-antd-admin',
     docsDir: 'docs',
     editLinks: true,
-    smoothScroll: true,
     nav: [
       {text: '指南', link: '/'},
       {text: '配置', link: '/develop/'},
