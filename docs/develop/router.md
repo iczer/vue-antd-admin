@@ -3,9 +3,9 @@ title: 路由和菜单
 lang: zh-CN
 ---
 # 路由和菜单
-路由和菜单是组织起到一个应用的关键骨架作用，Vue Antd Admin 使用 [vue-router](https://router.vuejs.org/zh/) 来配置和管理我们的路由和菜单。
+路由和菜单起到组织一个应用的关键骨架的作用，Vue Antd Admin 使用 [vue-router](https://router.vuejs.org/zh/) 来配置和管理我们的路由和菜单。
 ## 基本结构
-得益于 vue-router 路由配置的可扩展性，Vue Antd Admin 通过结合 router 配置文件、基本算法及 [menu.js]() 菜单生成工具，搭建了路由和菜单的基本框架，主要涉及以下几个模块/功能：
+得益于 vue-router 路由配置的可扩展性，Vue Antd Admin 通过结合 router 配置文件、基本算法及 [menu.js](https://github.com/iczer/vue-antd-admin/blob/master/src/components/menu/menu.js) 菜单生成工具，搭建了路由和菜单的基本框架，主要涉及以下几个模块/功能：
 
 |功能        |配置                            |
 |:----------|:-------------------------------|
