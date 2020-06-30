@@ -30,7 +30,7 @@ lang: zh-CN
 ![blank-view](../assets/blank-view.png)
 ## 如何使用
 通常我们会把视图组件和路由配置结合一起使用，我们把配置信息抽离在路由配置文件中 [router/index.js](https://github.com/iczer/vue-antd-admin/blob/master/src/router/index.js) 。如下：
-```jsx{7,12}
+```jsx {7,12}
 {
   path: 'form',
   name: '表单页',
@@ -49,7 +49,7 @@ lang: zh-CN
 ```
 当然，如果这满足不了你的需求，你也可以自定义一些视图组件，或者直接在页面组件中使用布局。参考
 [workplace](https://github.com/iczer/vue-antd-admin/blob/master/src/pages/dashboard/workplace/WorkPlace.vue) 页面:
-```vue{2,13}
+```vue {2,13}
 <template>
   <page-layout :avatar="currUser.avatar">
     <div slot="headerContent">
