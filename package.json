@@ -36,6 +36,7 @@
     "@vue/cli-plugin-babel": "^4.4.0",
     "@vue/cli-plugin-eslint": "^4.4.0",
     "@vue/cli-service": "^4.4.0",
+    "@vuepress/plugin-back-to-top": "^1.5.2",
     "babel-eslint": "^10.1.0",
     "babel-polyfill": "^6.26.0",
     "deepmerge": "^4.2.2",
