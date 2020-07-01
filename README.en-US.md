@@ -1,4 +1,4 @@
-简体中文 | [English](./README.en-US.md)
+[简体中文](./README.md) | English
 <h1 align="center">Vue Antd Admin</h1>
 
 <div align="center">
@@ -26,19 +26,24 @@
 | IE10, Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
 
 ## 使用
-克隆项目到本地
+### clone
 ```bash
 $ git clone https://github.com/iczer/vue-antd-admin.git
 ```
-安装依赖
+### yarn
 ```bash
 $ yarn install
-```
-启动
-```
 $ yarn serve
+```
+### or npm
+```
+$ npm install
+$ npm start
 ```
 更多信息参考 [使用文档](https://iczer.github.io/vue-antd-admin)
 
-## 说明
-如有任何疑问或功能需求，欢迎 [Issue](https://github.com/iczer/vue-antd-admin/issues)。
+## 参与贡献
+我们非常欢迎你的贡献，你可以通过以下方式和我们一起共建 :star2:：
+- 在你的公司或个人项目中使用 Vue Antd Admin。
+- 通过 [Issue](https://github.com/iczer/vue-antd-admin/issues) 报告:bug:或进行咨询。
+- 提交 [Pull Request](https://github.com/iczer/vue-antd-admin/pulls) 改进 Admin 的代码。
