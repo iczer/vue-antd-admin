@@ -17,6 +17,7 @@
 - 预览地址：https://iczer.gitee.io/vue-antd-admin
 - 使用文档：https://iczer.github.io/vue-antd-admin
 - 常见问题：https://iczer.github.io/vue-antd-admin/start/faq.html
+- 国内镜像：https://gitee.com/iczer/vue-antd-admin
 
 ## 浏览器支持
 现代浏览器及 IE10
