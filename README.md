@@ -26,10 +26,19 @@
 | IE10, Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
 
 ## 使用 bash
+### clone
 ```bash
 $ git clone https://github.com/iczer/vue-antd-admin.git
+```
+### yarn
+```bash
 $ yarn install
 $ yarn serve
+```
+### or npm
+```
+$ npm install
+$ npm start
 ```
 更多信息参考 [使用文档](https://iczer.github.io/vue-antd-admin)
 
