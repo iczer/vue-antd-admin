@@ -25,20 +25,13 @@
 | --- | --- | --- | --- | --- |
 | IE10, Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
 
-## 使用
-克隆项目到本地
+## 使用 bash
 ```bash
 $ git clone https://github.com/iczer/vue-antd-admin.git
-```
-安装依赖
-```bash
 $ yarn install
-```
-启动
-```
 $ yarn serve
 ```
 更多信息参考 [使用文档](https://iczer.github.io/vue-antd-admin)
 
-## 说明
+## 其它
 如有任何疑问或功能需求，欢迎 [Issue](https://github.com/iczer/vue-antd-admin/issues)。
