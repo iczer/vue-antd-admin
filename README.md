@@ -25,7 +25,7 @@
 | --- | --- | --- | --- | --- |
 | IE10, Edge | last 2 versions | last 2 versions | last 2 versions | last 2 versions |
 
-## 使用 bash
+## 使用
 ### clone
 ```bash
 $ git clone https://github.com/iczer/vue-antd-admin.git
