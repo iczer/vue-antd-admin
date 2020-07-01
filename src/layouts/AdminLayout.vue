@@ -105,7 +105,7 @@ export default {
       min-height: auto;
     }
     .setting{
-      background-color: #1890ff;
+      background-color: @primary-color;
       color: #fff;
       border-radius: 5px 0 0 5px;
       line-height: 40px;

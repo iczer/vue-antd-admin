@@ -32,7 +32,7 @@ export default {
       margin-bottom: 24px;
     }
     .success {
-      color: green;
+      color: @success-color;
     }
     .error {
       color: red;

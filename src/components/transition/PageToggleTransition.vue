@@ -8,7 +8,7 @@
 </template>
 
 <script>
-  import animates from '@/config/animates'
+  import {animates} from '@/config/default'
 
   export default {
     name: 'PageToggleTransition',

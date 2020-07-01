@@ -1,4 +1,4 @@
-const varyColor = require('webpack-theme-color-replacer/client/varyColor')
+// const varyColor = require('webpack-theme-color-replacer/client/varyColor')
 const client = require('webpack-theme-color-replacer/client')
 const generate =  require('@ant-design/colors/lib/generate').default
 const themeColor = require('../config').themeColor
@@ -7,13 +7,9 @@ const getDarkColors = require('../utils/colors').getDarkColors
 module.exports = {
   primaryColor: themeColor,
   getThemeColors(color) {
-    const lightens = new Array(9).fill().map((t, i) => {
-      return varyColor.lighten(color, i / 10)
-    })
     const palettes = generate(color)
-    const rgb = varyColor.toNum3(color.replace('#', '')).join(',')
-    let darkBgColors = getDarkColors(color, 'dark')
-    return palettes.concat(lightens).concat(rgb).concat(darkBgColors)
+    const darkBgColors = getDarkColors(color)
+    return palettes.concat(darkBgColors)
   },
   changeThemeColor (newColor) {
     let lastColor = this.lastColor || this.primaryColor
@@ -47,6 +43,17 @@ module.exports = {
         return '.ant-menu-horizontal:not(ant-menu-light):not(.ant-menu-dark) > .ant-menu-item > a:hover'
       default :
         return selector
+    }
+  },
+  modifyVars(color) {
+    let darkColors = getDarkColors(color)
+    return {
+      'primary-color': color,
+      'info-color': color,
+      'processing-color': color,
+      'menu-dark-submenu-bg': darkColors[0],
+      'layout-header-background': darkColors[1],
+      'layout-trigger-background': darkColors[2]
     }
   }
 }

@@ -158,7 +158,7 @@ export default {
         vertical-align: top;
         font-size: 14px;
         &:hover {
-          color: #1890ff;
+          color: @primary-color;
         }
       }
     }
@@ -174,7 +174,7 @@ export default {
         display: inline-block;
         flex: 1 1 0;
         &:hover {
-          color: #1890ff;
+          color: @primary-color;
         }
       }
       .datetime {
@@ -219,7 +219,7 @@ export default {
       }
       &:hover {
         span {
-          color: #1890ff;
+          color: @primary-color;
         }
       }
     }

@@ -1,6 +1,6 @@
 let path = require('path')
 const ThemeColorReplacer = require('webpack-theme-color-replacer')
-const {getThemeColors, changeSelector} = require('./src/utils/themeUtil')
+const {getThemeColors, changeSelector, modifyVars} = require('./src/utils/themeUtil')
 const themeColor = require('./src/config').themeColor
 
 module.exports = {
@@ -24,12 +24,7 @@ module.exports = {
     loaderOptions: {
       less: {
         lessOptions: {
-          modifyVars: {
-            // 'link-color': '#ff4d85',
-            // 'processing-color': '#ff4d85',
-            // 'primary-color': '#ff4d85',
-            // 'primary': '#1890ff',
-          },
+          modifyVars: modifyVars(themeColor),
           javascriptEnabled: true
         }
       }

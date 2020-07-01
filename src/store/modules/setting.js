@@ -3,7 +3,7 @@ export default {
   namespaced: true,
   state: {
     isMobile: false,
-    animates: require('@/config/animates'),
+    animates: require('@/config/default/animates'),
     ...config,
     routesI18n: {}
   },

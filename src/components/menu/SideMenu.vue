@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider :class="[theme, 'side', isMobile ? null : 'shadow']" width="256px" :collapsible="collapsible" v-model="collapsed" :trigger="null">
+  <a-layout-sider :theme="theme" :class="['side', isMobile ? null : 'shadow']" width="256px" :collapsible="collapsible" v-model="collapsed" :trigger="null">
     <div :class="['logo', theme]">
       <router-link to="/dashboard/workplace">
         <img src="@/assets/img/logo.png">
@@ -56,12 +56,6 @@ export default {
   }
   .side{
     z-index: 10;
-    &.light{
-      background-color: #fff;
-    }
-    &.dark{
-      background-color: #001529;
-    }
     .logo{
       height: 64px;
       position: relative;
@@ -70,32 +64,22 @@ export default {
       -webkit-transition: all .3s;
       transition: all .3s;
       overflow: hidden;
+      background-color: @layout-trigger-background;
       &.light{
         background-color: #fff;
         h1{
-          color: #1890ff;
-        }
-      }
-      &.dark{
-        background-color: #002140;
-        h1{
-          color: #fff;
+          color: @primary-color;
         }
       }
       h1{
         color: #fff;
         font-size: 20px;
         margin: 0 0 0 12px;
-        font-family: "Myriad Pro","Helvetica Neue",Arial,Helvetica,sans-serif;
-        font-weight: 600;
         display: inline-block;
-        height: 32px;
-        line-height: 32px;
         vertical-align: middle;
       }
       img{
         width: 32px;
-        display: inline-block;
         vertical-align: middle;
       }
     }

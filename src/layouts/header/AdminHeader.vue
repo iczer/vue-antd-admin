@@ -83,7 +83,7 @@ export default {
     cursor: pointer;
     transition: color .3s;
     &:hover{
-      color: #1890ff;
+      color: @primary-color;
     }
   }
   .admin-header{
