@@ -111,7 +111,7 @@ export default {
   methods: {
     onColorChange (values, colors) {
       if (colors.length > 0) {
-        let closeMessage = this.$message.info(`您选择了主题色 ${colors}, 正在切换...`)
+        let closeMessage = this.$message.loading(`您选择了主题色 ${colors}, 正在切换...`)
         let _this = this
         themeUtil.changeThemeColor(colors[0]).then(() => {
           _this.setThemeColor(colors[0])
