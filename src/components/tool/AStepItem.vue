@@ -4,7 +4,7 @@
     @click="go"
   >
     <span :style="titleStyle">{{title}}</span>
-    <a-icon :style="iconStyle" :type="icon" />
+    <a-icon v-if="icon" :style="iconStyle" :type="icon" />
     <slot></slot>
   </div>
 </template>
