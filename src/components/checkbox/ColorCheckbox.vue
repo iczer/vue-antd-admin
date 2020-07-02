@@ -42,8 +42,8 @@ const Group = {
     }
   },
   watch: {
-    values() {
-      this.$emit('change', this.values, this.colors)
+    values(value) {
+      this.$emit('change', value, this.colors)
     },
     defaultValues(value) {
       if (this.multiple) {
@@ -61,9 +61,12 @@ const Group = {
   methods: {
     handleChange (option) {
       if (!option.checked) {
-        this.values = this.values.filter(item => item !== option.value)
+        if (this.values.indexOf(option.value) > -1) {
+          this.values = this.values.filter(item => item != option.value)
+        }
       } else {
         if (!this.multiple) {
+          this.values = [option.value]
           this.options.forEach(item => {
             if (item.value != option.value) {
               item.sChecked = false
@@ -133,7 +136,9 @@ export default {
   },
   methods: {
     toggle () {
-      this.sChecked = !this.sChecked
+      if (this.groupContext.multiple || !this.sChecked) {
+        this.sChecked = !this.sChecked
+      }
     },
     initChecked() {
       let groupContext = this.groupContext
