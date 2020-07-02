@@ -84,7 +84,6 @@ import SettingItem from './SettingItem'
 import ColorCheckbox from '../checkbox/ColorCheckbox'
 import ImgCheckbox from '../checkbox/ImgCheckbox'
 import Clipboard from 'clipboard'
-import themeUtil from '../../utils/themeUtil'
 import { mapState, mapMutations } from 'vuex'
 
 const ColorCheckboxGroup = ColorCheckbox.Group
@@ -112,12 +111,7 @@ export default {
   methods: {
     onColorChange (values, colors) {
       if (colors.length > 0) {
-        let closeMessage = this.$message.loading(`您选择了主题色 ${colors}, 正在切换...`)
-        let _this = this
-        themeUtil.changeThemeColor(colors[0]).then(() => {
-          _this.setThemeColor(colors[0])
-          closeMessage()
-        })
+        this.setThemeColor(colors[0])
       }
     },
     copyCode () {

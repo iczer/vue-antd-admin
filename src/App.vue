@@ -7,6 +7,7 @@
 <script>
 import enquireScreen from './utils/device'
 import {mapState} from 'vuex'
+import themeUtil from '@/utils/themeUtil';
 
 export default {
   name: 'App',
@@ -31,10 +32,16 @@ export default {
     },
     lang(val) {
       this.setLanguage(val)
+    },
+    themeColor(val) {
+      let closeMessage = this.$message.loading(`您选择了主题色 ${val}, 正在切换...`)
+      themeUtil.changeThemeColor(val).then(() => {
+        setTimeout(closeMessage, 1000)
+      })
     }
   },
   computed: {
-    ...mapState('setting', ['weekMode', 'lang'])
+    ...mapState('setting', ['theme', 'themeColor', 'weekMode', 'lang'])
   },
   methods: {
     setWeekModeTheme(weekMode) {
