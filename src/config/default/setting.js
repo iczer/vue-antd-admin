@@ -1,19 +1,20 @@
+// 此配置为系统默认设置，需修改的设置项，在src/config/config.js中添加修改项即可。也可直接在此文件中修改。
 module.exports = {
-  lang: 'CN',
-  themeColor: '#1890ff',
-  theme: 'dark',
-  layout: 'side',
-  fixedHeader: false,
-  fixedSideBar: true,
-  weekMode: false,
-  multiPage: false,
-  systemName: 'Vue Antd Admin',
-  copyright: '2018 ICZER 工作室出品',
-  animate: {
-    name: 'bounce',
-    direction: 'left'
+  lang: 'CN',                           //语言，可选 CN(简体)、HK(繁体)、US(英语)，也可扩展其它语言
+  themeColor: '#1890ff',                //主题色
+  theme: 'dark',                        //主题模式，可选 dark 和 light，用于设置导航栏是亮色还是暗色
+  layout: 'side',                       //导航布局，可选 side 和 head，分别为侧边导航和顶部导航
+  fixedHeader: false,                   //固定头部状态栏，true:固定，false:不固定
+  fixedSideBar: true,                   //固定侧边栏，true:固定，false:不固定
+  weekMode: false,                      //色弱模式，true:开启，false:不开启
+  multiPage: false,                     //多页签模式，true:开启，false:不开启
+  systemName: 'Vue Antd Admin',         //系统名称
+  copyright: '2018 ICZER 工作室出品',    //copyright
+  animate: {                            //动画设置
+    name: 'bounce',                     //动画效果，支持的动画效果可参考 ./animates.js
+    direction: 'left'                   //动画方向，切换页面时动画的方向，参考 ./animates.js
   },
-  footerLinks: [
+  footerLinks: [                        //页面底部链接，{link: '链接地址', name: '名称/显示文字', icon: '图标，支持 ant design vue 图标库'}
     {link: 'https://pro.ant.design', name: 'Pro首页'},
     {link: 'https://github.com/iczer/vue-antd-admin', icon: 'github'},
     {link: 'https://ant.design', name: 'Ant Design'}
