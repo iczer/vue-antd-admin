@@ -1,8 +1,8 @@
 <template>
   <div class="side-setting">
     <setting-item :title="$t('theme.title')">
-      <img-checkbox-group @change="values => setTheme(values[0])">
-        <img-checkbox :title="$t('theme.dark')" img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" value="dark"/>
+      <img-checkbox-group @change="values => setTheme(values[0])" :default-values="[theme]">
+        <img-checkbox :title="$t('theme.dark')" img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" value="dark"/>
         <img-checkbox :title="$t('theme.light')" img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" value="light"/>
       </img-checkbox-group>
     </setting-item>
@@ -13,8 +13,8 @@
     </setting-item>
     <a-divider/>
     <setting-item :title="$t('navigate.title')">
-      <img-checkbox-group @change="values => setLayout(values[0])">
-        <img-checkbox :title="$t('navigate.side')" img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" :checked="true" value="side"/>
+      <img-checkbox-group @change="values => setLayout(values[0])" :default-values="[layout]">
+        <img-checkbox :title="$t('navigate.side')" img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" value="side"/>
         <img-checkbox :title="$t('navigate.head')" img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" value="head"/>
       </img-checkbox-group>
     </setting-item>
@@ -89,7 +89,6 @@ import { mapState, mapMutations } from 'vuex'
 
 const ColorCheckboxGroup = ColorCheckbox.Group
 const ImgCheckboxGroup = ImgCheckbox.Group
-const colors = ['#f5222d', '#fa541c', '#fadb14', '#49aa19', '#13c2c2', '#1890ff', '#722ed1', '#eb2f96']
 export default {
   name: 'Setting',
   i18n: require('./i18n'),
@@ -98,15 +97,17 @@ export default {
     return {
       animate: this.$store.state.setting.animate.name,
       direction: this.$store.state.setting.animate.direction,
-      themeColorIndex: [colors.indexOf(this.$store.state.setting.themeColor)],
-      colors,
+      colors: ['#f5222d', '#fa541c', '#fadb14', '#49aa19', '#13c2c2', '#1890ff', '#722ed1', '#eb2f96'],
     }
   },
   computed: {
     directions() {
       return this.animates.find(item => item.name == this.animate).directions
     },
-    ...mapState('setting', ['animates', 'multiPage', 'weekMode', 'fixedHeader', 'fixedSideBar'])
+    themeColorIndex() {
+      return [this.colors.indexOf(this.themeColor)]
+    },
+    ...mapState('setting', ['theme', 'themeColor', 'layout', 'animates', 'multiPage', 'weekMode', 'fixedHeader', 'fixedSideBar'])
   },
   methods: {
     onColorChange (values, colors) {
