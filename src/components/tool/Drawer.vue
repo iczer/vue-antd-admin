@@ -2,7 +2,7 @@
   <div >
     <div :class="['mask', openDrawer ? 'open' : 'close']" @click="close"></div>
     <div :class="['drawer', placement, openDrawer ? 'open' : 'close']">
-      <div ref="drawer" class="content">
+      <div ref="drawer" class="content beauty-scroll">
         <slot></slot>
       </div>
       <div v-if="showHandler" :class="['handler-container', placement, openDrawer ? 'open' : 'close']" ref="handler" @click="handle">
@@ -88,8 +88,8 @@ export default {
   }
   .drawer{
     position: fixed;
-    height: 100%;
     transition: all 0.5s;
+    height: 100vh;
     z-index: 100;
     &.left{
       left: 0px;
@@ -119,7 +119,8 @@ export default {
   }
   .content{
     display: inline-block;
-    height: 100%;
+    height: 100vh;
+    overflow-y: auto;
   }
   .handler-container{
     position: absolute;

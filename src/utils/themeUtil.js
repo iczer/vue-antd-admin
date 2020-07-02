@@ -23,6 +23,8 @@ module.exports = {
   },
   changeSelector (selector) {
     switch (selector) {
+      case '.ant-layout-sider':
+        return '.ant-layout-sider-dark'
       case '.ant-calendar-today .ant-calendar-date':
         return ':not(.ant-calendar-selected-date):not(.ant-calendar-selected-day)' + selector
       case '.ant-btn:focus,.ant-btn:hover':

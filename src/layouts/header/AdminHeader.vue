@@ -96,7 +96,6 @@ export default {
       background: #fff;
     }
     &.dark{
-      background: #001529;
       .trigger{
         color: white;
       }

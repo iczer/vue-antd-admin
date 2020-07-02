@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider class="side" width="300">
+  <div class="side-setting">
     <setting-item :title="$t('theme.title')">
       <img-checkbox-group @change="values => setTheme(values[0])">
         <img-checkbox :title="$t('theme.dark')" img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" :checked="true" value="dark"/>
@@ -76,7 +76,7 @@
       </a-list>
     </setting-item>
     <a-button id="copyBtn" data-clipboard-text="Sorry, you have copied nothing O(∩_∩)O~" @click="copyCode" style="width: 100%" icon="copy" >{{$t('copy')}}</a-button>
-  </a-layout-sider>
+  </div>
 </template>
 
 <script>
@@ -139,9 +139,9 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .side{
+  .side-setting{
+    min-height: 100%;
     background-color: #fff;
-    height: 100%;
     padding: 24px;
     font-size: 14px;
     line-height: 1.5;

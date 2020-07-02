@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider :theme="theme" :class="['side', isMobile ? null : 'shadow']" width="256px" :collapsible="collapsible" v-model="collapsed" :trigger="null">
+  <a-layout-sider :theme="theme" :class="['side-menu', isMobile ? null : 'shadow']" width="256px" :collapsible="collapsible" v-model="collapsed" :trigger="null">
     <div :class="['logo', theme]">
       <router-link to="/dashboard/workplace">
         <img src="@/assets/img/logo.png">
@@ -52,9 +52,10 @@ export default {
 
 <style lang="less" scoped>
   .shadow{
-    box-shadow: 2px 0 6px rgba(0,21,41,.35);
+    box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
   }
-  .side{
+  .side-menu{
+    min-height: 100%;
     z-index: 10;
     .logo{
       height: 64px;
