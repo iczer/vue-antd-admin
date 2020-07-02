@@ -12,7 +12,7 @@ module.exports = {
     editLinks: true,
     nav: [
       {text: '指南', link: '/'},
-      {text: '配置', link: '/develop/'},
+      {text: '配置', link: '/develop/layout'},
       {text: '主题', link: '/advance/theme'},
     ],
     lastUpdated: 'Last Updated',
