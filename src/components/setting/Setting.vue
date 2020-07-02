@@ -57,7 +57,7 @@
           {{$t('animate.effect')}}
           <a-select
             v-model="animate"
-            @change="val => setAnimate(val)"
+            @change="val => setAnimation(val)"
             class="select-item" size="small" slot="actions"
           >
             <a-select-option :key="index" :value="item.name" v-for="(item, index) in animates">{{item.alias}}</a-select-option>
@@ -67,7 +67,7 @@
           {{$t('animate.direction')}}
           <a-select
             v-model="direction"
-            @change="val => setAnimate(this.animate, val)"
+            @change="val => setAnimation(this.animate, val)"
             class="select-item" size="small" slot="actions"
           >
             <a-select-option :key="index" :value="item" v-for="(item, index) in directions">{{item}}</a-select-option>
@@ -127,7 +127,7 @@ export default {
         clipboard.destroy()
       })
     },
-    setAnimate(animate, direction) {
+    setAnimation(animate, direction) {
       if (direction == undefined) {
         this.direction = this.directions[0]
       }
