@@ -112,7 +112,7 @@ export default {
       return h(
         Item, {key: menu.fullPath},
         [
-          h('a', {attrs: {href: '#' + menu.fullPath}},
+          h('router-link', {props: {to: menu.fullPath}},
             [
               this.renderIcon(h, menu.meta ? menu.meta.icon : 'none'),
               h('span', [this.$t(menu.fullPath.substring(1).replace(new RegExp('/', 'g'), '.') + '.name')])
