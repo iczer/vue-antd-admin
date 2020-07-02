@@ -44,18 +44,6 @@ const Group = {
   watch: {
     values(value) {
       this.$emit('change', value, this.colors)
-    },
-    defaultValues(value) {
-      if (this.multiple) {
-        this.options.forEach(item => {
-          item.sChecked = value.indexOf(item.value) > -1
-        })
-      } else {
-        this.options.forEach(item => {
-          let first = value[0]
-          item.sChecked = first && first == item.value
-        })
-      }
     }
   },
   methods: {
@@ -143,7 +131,7 @@ export default {
     initChecked() {
       let groupContext = this.groupContext
       if (!groupContext) {
-        return this.check
+        return this.checked
       }else if (groupContext.multiple) {
         return groupContext.defaultValues.indexOf(this.value) > -1
       } else {
