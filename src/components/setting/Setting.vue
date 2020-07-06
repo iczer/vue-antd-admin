@@ -4,6 +4,7 @@
       <img-checkbox-group @change="values => setTheme(values[0])" :default-values="[theme]">
         <img-checkbox :title="$t('theme.dark')" img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" value="dark"/>
         <img-checkbox :title="$t('theme.light')" img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" value="light"/>
+        <img-checkbox :title="$t('theme.night')" img="https://gw.alipayobjects.com/zos/antfincdn/hmKaLQvmY2/LCkqqYNmvBEbokSDscrm.svg" value="night"/>
       </img-checkbox-group>
     </setting-item>
     <setting-item :title="$t('theme.color')">
@@ -136,7 +137,7 @@ export default {
 <style lang="less" scoped>
   .side-setting{
     min-height: 100%;
-    background-color: #fff;
+    background-color: @base-bg-color;
     padding: 24px;
     font-size: 14px;
     line-height: 1.5;

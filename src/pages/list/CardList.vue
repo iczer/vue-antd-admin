@@ -63,7 +63,6 @@ export default {
     border-radius: 48px;
   }
   .new-btn{
-    background-color: #fff;
     border-radius: 2px;
     width: 100%;
     height: 187px;

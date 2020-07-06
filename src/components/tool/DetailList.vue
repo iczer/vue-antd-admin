@@ -102,7 +102,7 @@ export default {
   .detail-list{
     .title {
       font-size: 16px;
-      color: rgba(0,0,0,.85);
+      color: @title-color;
       font-weight: bolder;
       margin-bottom: 16px;
     }
@@ -111,7 +111,7 @@ export default {
       line-height: 20px;
       padding-bottom: 16px;
       margin-right: 8px;
-      color: rgba(0,0,0,.85);
+      color: @title-color;
       white-space: nowrap;
       display: table-cell;
       &:after {
@@ -125,13 +125,13 @@ export default {
       line-height: 22px;
       width: 100%;
       padding-bottom: 16px;
-      color: rgba(0,0,0,.65);
+      color: @text-color;
       display: table-cell;
     }
     &.small{
       .title{
         font-size: 14px;
-        color: rgba(0,0,0,.65);
+        color: @text-color;
         font-weight: normal;
         margin-bottom: 12px;
       }

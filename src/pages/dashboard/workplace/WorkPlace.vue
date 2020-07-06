@@ -9,7 +9,7 @@
       <head-info class="split-right" :title="$t('ranking')" content="8/24"/>
       <head-info class="split-right" :title="$t('visit')" content="2,223"/>
     </template>
-    <div>
+    <template>
       <a-row style="margin: 0 -12px">
         <a-col style="padding: 0 12px" :xl="16" :lg="24" :md="24" :sm="24" :xs="24">
           <a-card class="project-list" :loading="loading" style="margin-bottom: 24px;" :bordered="false" :title="$t('progress')" :body-style="{padding: 0}">
@@ -20,11 +20,11 @@
                   <a-card-meta :description="item.desc">
                     <div slot="title" class="card-title">
                       <a-avatar size="small" :src="item.logo" />
-                      <a>Alipay</a>
+                      <span>Alipay</span>
                     </div>
                   </a-card-meta>
                   <div class="project-item">
-                    <a href="/#/">科学搬砖组</a>
+                    <a class="group" href="/#/">科学搬砖组</a>
                     <span class="datetime">9小时前</span>
                   </div>
                 </a-card>
@@ -74,7 +74,7 @@
           </a-card>
         </a-col>
       </a-row>
-    </div>
+    </template>
   </page-layout>
 </template>
 
@@ -146,82 +146,5 @@ export default {
 </script>
 
 <style lang="less">
-  .project-list {
-    .card-title {
-      font-size: 0;
-      a {
-        color: rgba(0, 0, 0, 0.85);
-        margin-left: 12px;
-        line-height: 24px;
-        height: 24px;
-        display: inline-block;
-        vertical-align: top;
-        font-size: 14px;
-        &:hover {
-          color: @primary-color;
-        }
-      }
-    }
-    .project-item {
-      display: flex;
-      margin-top: 8px;
-      overflow: hidden;
-      font-size: 12px;
-      height: 20px;
-      line-height: 20px;
-      a {
-        color: rgba(0, 0, 0, 0.45);
-        display: inline-block;
-        flex: 1 1 0;
-        &:hover {
-          color: @primary-color;
-        }
-      }
-      .datetime {
-        color: rgba(0, 0, 0, 0.25);
-        flex: 0 0 auto;
-        float: right;
-      }
-    }
-      .ant-card-meta-description {
-        color: rgba(0, 0, 0, 0.45);
-        height: 44px;
-        line-height: 22px;
-        overflow: hidden;
-      }
-  }
-  .item-group{
-    padding: 20px 0 8px 24px;
-    font-size: 0;
-    a{
-      color: rgba(0, 0, 0, 0.65);
-      display: inline-block;
-      font-size: 14px;
-      margin-bottom: 13px;
-      width: 25%;
-    }
-  }
-  .members {
-    a {
-      display: block;
-      margin: 12px 0;
-      line-height: 24px;
-      height: 24px;
-      .member {
-        font-size: 14px;
-        color: rgba(0,0,0,.65);
-        line-height: 24px;
-        max-width: 100px;
-        vertical-align: top;
-        margin-left: 12px;
-        transition: all 0.3s;
-        display: inline-block;
-      }
-      &:hover {
-        span {
-          color: @primary-color;
-        }
-      }
-    }
-  }
+@import "index";
 </style>

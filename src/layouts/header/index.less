@@ -1,0 +1,84 @@
+.admin-header{
+  padding: 0;
+  z-index: 2;
+  box-shadow: @shadow-down;
+  position: relative;
+  background: @base-bg-color;
+  &.dark{
+    background: @header-bg-color-dark;
+    color: white;
+  }
+  &.night{
+    .head-menu{
+      background: @base-bg-color;
+    }
+  }
+  .admin-header-wide{
+    &.head{
+      max-width: 1400px;
+      margin: auto;
+    }
+    &.side{
+      padding-right: 12px;
+    }
+    .logo {
+      height: 64px;
+      line-height: 58px;
+      vertical-align: top;
+      display: inline-block;
+      padding: 0 12px 0 24px;
+      cursor: pointer;
+      font-size: 20px;
+      color: inherit;
+      &.pc{
+        padding: 0 12px 0 0;
+      }
+      img {
+        vertical-align: middle;
+      }
+      h1{
+        color: inherit;
+        display: inline-block;
+        font-size: 16px;
+      }
+    }
+    .trigger {
+      font-size: 20px;
+      line-height: 64px;
+      padding: 0 24px;
+      cursor: pointer;
+      transition: color .3s;
+      &:hover{
+        color: @primary-color;
+      }
+    }
+    .admin-header-menu{
+      display: inline-block;
+    }
+    .admin-header-right{
+      float: right;
+      display: flex;
+      color: inherit;
+      .header-item{
+        color: inherit;
+        padding: 0 12px;
+        cursor: pointer;
+        align-self: center;
+        a{
+          color: inherit;
+          i{
+            font-size: 16px;
+          }
+        }
+      }
+      each(@theme-list, {
+        &.@{value} .header-item{
+          &:hover{
+            @class: ~'hover-bg-color-@{value}';
+            background-color: @@class;
+          }
+        }
+      })
+    }
+  }
+}

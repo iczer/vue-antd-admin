@@ -73,6 +73,9 @@ export default {
         keys.push(item.path)
       })
       return keys
+    },
+    menuTheme() {
+      return this.theme == 'light' ? this.theme : 'dark'
     }
   },
   beforeMount() {
@@ -212,7 +215,7 @@ export default {
       Menu,
       {
         props: {
-          theme: this.$props.theme,
+          theme: this.menuTheme,
           mode: this.$props.mode,
           openKeys: this.openKeys,
           selectedKeys: this.selectedKeys

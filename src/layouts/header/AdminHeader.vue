@@ -8,7 +8,7 @@
       <a-divider v-if="isMobile" type="vertical" />
       <a-icon v-if="layout === 'side'" class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
       <div v-if="layout == 'head' && !isMobile" class="admin-header-menu">
-        <i-menu style="height: 64px; line-height: 64px;" @i18nComplete="setRoutesI18n" :i18n="menuI18n" :theme="headerTheme" mode="horizontal" :options="menuData" @select="onSelect"/>
+        <i-menu class="head-menu" style="height: 64px; line-height: 64px;box-shadow: none" @i18nComplete="setRoutesI18n" :i18n="menuI18n" :theme="headerTheme" mode="horizontal" :options="menuData" @select="onSelect"/>
       </div>
       <div :class="['admin-header-right', headerTheme]">
           <header-search class="header-item" />
@@ -56,7 +56,11 @@ export default {
   computed: {
     ...mapState('setting', ['theme', 'isMobile', 'layout', 'systemName', 'lang']),
     headerTheme () {
-      return (this.layout == 'side' && !this.isMobile) ? 'light' : this.theme
+      if (this.layout == 'side' && this.theme == 'dark' && !this.isMobile) {
+        return 'light'
+      }
+      return this.theme
+      // return (this.layout == 'side' && !this.isMobile && this.theme != 'night') ? 'light' : this.theme
     },
     langAlias() {
       let lang = this.langList.find(item => item.key == this.lang)
@@ -76,89 +80,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .trigger {
-    font-size: 20px;
-    line-height: 64px;
-    padding: 0 24px;
-    cursor: pointer;
-    transition: color .3s;
-    &:hover{
-      color: @primary-color;
-    }
-  }
-  .admin-header{
-    padding: 0;
-    -webkit-box-shadow: 0 1px 4px rgba(0,21,41,.08);
-    box-shadow: 0 1px 4px rgba(0,21,41,.08);
-    z-index: 1;
-    position: relative;
-    &.light{
-      background: #fff;
-    }
-    &.dark{
-      .trigger{
-        color: white;
-      }
-    }
-    .admin-header-wide{
-      &.head{
-        max-width: 1400px;
-        margin: auto;
-      }
-      &.side{
-        padding-right: 12px;
-      }
-      .logo {
-        height: 64px;
-        line-height: 58px;
-        vertical-align: top;
-        display: inline-block;
-        padding: 0 12px 0 24px;
-        cursor: pointer;
-        font-size: 20px;
-        &.pc{
-          padding: 0 12px 0 0;
-        }
-        img {
-          display: inline-block;
-          vertical-align: middle;
-        }
-        h1{
-          display: inline-block;
-          font-size: 16px;
-        }
-        &.dark h1{
-          color: #fff;
-        }
-      }
-      .admin-header-menu{
-        display: inline-block;
-      }
-      .admin-header-right{
-        float: right;
-        display: flex;
-        &.dark{
-          color: #fff;
-          a, i{
-            color: #fff !important;
-          }
-          .header-item:hover{
-            background-color: @primary-color;
-          }
-        }
-        .header-item{
-          padding: 0 12px;
-          cursor: pointer;
-          align-self: center;
-          &:hover{
-            background-color: @gray-3;
-          }
-          i{
-            font-size: 16px;
-            color: rgba(0,0,0,.65);
-          }
-        }
-      }
-    }
-  }
+@import "index";
 </style>

@@ -19,7 +19,7 @@
 import RepositoryForm from './RepositoryForm'
 import TaskForm from './TaskForm'
 import UserForm from './UserForm'
-import FooterToolBar from '../../../components/tool/FooterToolBar'
+import FooterToolBar from '@/components/tool/FooterToolBar'
 
 export default {
   name: 'AdvancedForm',

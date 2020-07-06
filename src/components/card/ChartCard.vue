@@ -27,7 +27,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
   .chart-card-header{
     position: relative;
     overflow: hidden;
@@ -52,7 +52,6 @@ export default {
     text-overflow: ellipsis;
     word-break: break-all;
     white-space: nowrap;
-    color: #000;
     margin-top: 4px;
     margin-bottom: 0;
     font-size: 30px;

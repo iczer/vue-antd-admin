@@ -20,13 +20,13 @@ export default {
     flex-shrink: 0;
     align-self: center;
     span{
-      color: rgba(0,0,0,.45);
+      color: @text-color-second;
       display: inline-block;
       font-size: 14px;
       margin-bottom: 4px;
     }
     p{
-      color: rgba(0,0,0,.85);
+      color: @text-color;
       font-size: 24px;
       margin: 0;
     }

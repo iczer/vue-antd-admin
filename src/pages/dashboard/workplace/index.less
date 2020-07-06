@@ -1,0 +1,59 @@
+.project-list {
+  .card-title {
+    span{
+      vertical-align: middle;
+      &:last-child{
+        margin-left: 12px;
+      }
+    }
+  }
+  .project-item {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+    overflow: hidden;
+    font-size: 12px;
+    color: inherit;
+    .group{
+      color: @text-color;
+      flex: 1 1 0;
+      &:hover {
+        color: @primary-color;
+      }
+    }
+    .datetime {
+      color: @text-color-second;
+      flex: 0 0 auto;
+    }
+  }
+  .ant-card-meta-description {
+    height: 44px;
+    line-height: 22px;
+    overflow: hidden;
+  }
+}
+.item-group{
+  padding: 20px 0 8px 24px;
+  font-size: 0;
+  a{
+    color: inherit;
+    display: inline-block;
+    font-size: 14px;
+    margin-bottom: 13px;
+    width: 25%;
+  }
+}
+.members {
+  a {
+    display: block;
+    margin: 12px 0;
+    color: @text-color;
+    &:hover {
+      color: @primary-color;
+    }
+    .member {
+      vertical-align: middle;
+      margin-left: 12px;
+    }
+  }
+}

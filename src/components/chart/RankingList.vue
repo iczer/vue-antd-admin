@@ -30,12 +30,12 @@ export default {
       li {
         margin-top: 16px;
         span {
-          color: rgba(0,0,0,.65);
+          color: @text-color-second;
           font-size: 14px;
           line-height: 22px;
         }
         span:first-child {
-          background-color: #f5f5f5;
+          background-color: @bg-color;
           border-radius: 20px;
           display: inline-block;
           font-size: 12px;
@@ -47,8 +47,8 @@ export default {
           text-align: center;
         }
         span.active {
-          background-color: #314659;
-          color: #fff;
+          background-color: #314659 !important;
+          color: #fff !important;
         }
         span:last-child {
           float: right;

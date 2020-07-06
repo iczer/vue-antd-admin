@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import PageHeader from '../components/page/PageHeader'
+import PageHeader from '@/components/page/header/PageHeader'
 import {mapState} from 'vuex'
 export default {
   name: 'PageLayout',
@@ -81,7 +81,7 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   .page-header{
     margin: -24px -24px 0;
   }

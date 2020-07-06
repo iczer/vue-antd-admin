@@ -34,7 +34,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: white;
+    background-color: @base-bg-color;
     .img{
       padding-right: 52px;
       zoom: 1;

@@ -5,6 +5,7 @@ module.exports = {
         title: '整体风格设置',
         light: '亮色菜单风格',
         dark: '暗色菜单风格',
+        night: '深夜模式',
         color: '主题色'
       },
       navigate: {
@@ -36,6 +37,7 @@ module.exports = {
         title: '整體風格設置',
         light: '亮色菜單風格',
         dark: '暗色菜單風格',
+        night: '深夜模式',
         color: '主題色'
       },
       navigate: {
@@ -67,6 +69,7 @@ module.exports = {
         title: 'Page Style Setting',
         light: 'Light Style',
         dark: 'Dark Style',
+        night: 'Night Style',
         color: 'Theme Color'
       },
       navigate: {

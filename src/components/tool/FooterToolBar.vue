@@ -22,8 +22,8 @@ export default {
     bottom: 0;
     right: 0;
     box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.03);
-    background: #fff;
-    border-top: 1px solid #e8e8e8;
+    background: @base-bg-color;
+    border-top: 1px solid @border-color-split;
     padding: 12px 24px;
     z-index: 9;
   }

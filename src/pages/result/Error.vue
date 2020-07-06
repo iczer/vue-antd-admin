@@ -5,7 +5,7 @@
           <a-button type="primary" >返回修改</a-button>
         </template>
         <div>
-          <div style="fontSize: 16px; color: rgba(0, 0, 0, 0.85); fontWeight: 500; marginBottom: 16px">
+          <div style="fontSize: 16px; fontWeight: 500; marginBottom: 16px">
             您提交的内容有如下错误：
           </div>
           <div style="margin-bottom: 16px">

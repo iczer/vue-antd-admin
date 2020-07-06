@@ -1,5 +1,5 @@
 <template>
-  <a-layout-sider :theme="theme" :class="['side-menu', isMobile ? null : 'shadow']" width="256px" :collapsible="collapsible" v-model="collapsed" :trigger="null">
+  <a-layout-sider :theme="sideTheme" :class="['side-menu', isMobile ? null : 'shadow']" width="256px" :collapsible="collapsible" v-model="collapsed" :trigger="null">
     <div :class="['logo', theme]">
       <router-link to="/dashboard/workplace">
         <img src="@/assets/img/logo.png">
@@ -39,6 +39,9 @@ export default {
     }
   },
   computed: {
+    sideTheme() {
+      return this.theme == 'light' ? this.theme : 'dark'
+    },
     ...mapState('setting', ['isMobile', 'systemName'])
   },
   methods: {
@@ -51,41 +54,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .shadow{
-    box-shadow: 2px 0 6px rgba(0, 21, 41, .35);
-  }
-  .side-menu{
-    min-height: 100%;
-    z-index: 10;
-    .logo{
-      height: 64px;
-      position: relative;
-      line-height: 64px;
-      padding-left: 24px;
-      -webkit-transition: all .3s;
-      transition: all .3s;
-      overflow: hidden;
-      background-color: @layout-trigger-background;
-      &.light{
-        background-color: #fff;
-        h1{
-          color: @primary-color;
-        }
-      }
-      h1{
-        color: #fff;
-        font-size: 20px;
-        margin: 0 0 0 12px;
-        display: inline-block;
-        vertical-align: middle;
-      }
-      img{
-        width: 32px;
-        vertical-align: middle;
-      }
-    }
-  }
-  .menu{
-    padding: 16px 0;
-  }
+@import "index";
 </style>

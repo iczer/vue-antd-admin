@@ -130,7 +130,7 @@ export default {
         }
         .title {
           font-size: 33px;
-          color: rgba(0,0,0,.85);
+          color: @title-color;
           font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
           font-weight: 600;
           position: relative;
@@ -139,7 +139,7 @@ export default {
       }
       .desc {
         font-size: 14px;
-        color: rgba(0,0,0,.45);
+        color: @text-color-second;
         margin-top: 12px;
         margin-bottom: 40px;
       }
@@ -157,7 +157,7 @@ export default {
       }
       .icon {
         font-size: 24px;
-        color: rgba(0, 0, 0, 0.2);
+        color: @text-color-second;
         margin-left: 16px;
         vertical-align: middle;
         cursor: pointer;

@@ -76,7 +76,7 @@ export default {
     right: 0;
     bottom: 0;
     top: 0;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: @shadow-color;
     transition: all 0.5s;
     z-index: 100;
     &.open{
@@ -133,9 +133,9 @@ export default {
     .handler {
       height: 40px;
       width: 40px;
-      background-color: #fff;
+      background-color: @base-bg-color;
       font-size: 26px;
-      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 2px 8px @shadow-color;
       line-height: 40px;
     }
     &.left{

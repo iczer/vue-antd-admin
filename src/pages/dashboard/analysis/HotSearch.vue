@@ -107,7 +107,7 @@ export default {
 <style lang="less" scoped>
   .num-info{
     .title{
-      color: rgba(0,0,0,.45);
+      color: @text-color-second;
       font-size: 14px;
       height: 22px;
       line-height: 22px;
@@ -118,7 +118,7 @@ export default {
     }
     .value{
       .total{
-        color: rgba(0,0,0,.85);
+        color: @title-color;
         display: inline-block;
         line-height: 32px;
         height: 32px;
@@ -126,7 +126,7 @@ export default {
         margin-right: 32px;
       }
       .subtotal{
-        color: rgba(0,0,0,.45);
+        color: @text-color-second;
         font-size: 16px;
         vertical-align: top;
         margin-right: 0;

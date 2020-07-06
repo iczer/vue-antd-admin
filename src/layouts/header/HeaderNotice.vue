@@ -2,7 +2,7 @@
   <a-dropdown :trigger="['click']" v-model="show">
     <div slot="overlay">
       <a-spin :spinning="loading">
-        <a-tabs class="dropdown-tabs" :tabBarStyle="{textAlign: 'center'}" :style="{backgroundColor: 'white', width: '297px'}">
+        <a-tabs class="dropdown-tabs" :tabBarStyle="{textAlign: 'center'}" :style="{width: '297px'}">
           <a-tab-pane tab="通知" key="1">
             <a-list class="tab-pane">
               <a-list-item>
@@ -32,7 +32,7 @@
       </a-spin>
     </div>
     <span @click="fetchNotice" class="header-notice">
-      <a-badge count="12">
+      <a-badge class="notice-badge" count="12">
         <a-icon :class="['header-notice-icon']" type="bell" />
       </a-badge>
     </span>
@@ -65,20 +65,24 @@ export default {
 }
 </script>
 
-<style lang="less" scoped>
+<style lang="less">
   .header-notice{
     display: inline-block;
     transition: all 0.3s;
     span {
       vertical-align: initial;
     }
-    .header-notice-icon{
-      font-size: 16px;
-      padding: 4px;
+    .notice-badge{
+      color: inherit;
+      .header-notice-icon{
+        font-size: 16px;
+        padding: 4px;
+      }
     }
   }
   .dropdown-tabs{
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    background-color: @base-bg-color;
+    box-shadow: 0 2px 8px @shadow-color;
     border-radius: 4px;
     .tab-pane{
       padding: 0 24px 12px;

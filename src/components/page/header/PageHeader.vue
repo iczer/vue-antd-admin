@@ -57,46 +57,5 @@ export default {
 </script>
 
 <style lang="less" scoped>
-  .page-header{
-    background: #fff;
-    padding: 16px 24px;
-    border-bottom: 1px solid #e8e8e8;
-    .page-header-wide{
-      &.head{
-        margin: auto;
-        max-width: 1400px;
-      }
-      &.side{
-      }
-      .breadcrumb{
-        margin-bottom: 20px;
-      }
-      .detail{
-        display: flex;
-        .row {
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: space-between;
-        }
-        .avatar {
-          margin:0 24px 0 0;
-        }
-        .main{
-          width: 100%;
-          .title{
-            font-size: 20px;
-            color: rgba(0,0,0,.85);
-            margin-bottom: 16px;
-          }
-          .content{
-            display: flex;
-            flex-wrap: wrap;
-          }
-          .extra{
-            display: flex;
-          }
-        }
-      }
-    }
-  }
+  @import "index";
 </style>

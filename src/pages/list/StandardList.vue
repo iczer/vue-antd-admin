@@ -70,7 +70,7 @@ export default {
 
 <style lang="less" scoped>
   .list-content-item{
-    color: rgba(0,0,0,.45);
+    color: @text-color-second;
     display: inline-block;
     vertical-align: middle;
     font-size: 14px;

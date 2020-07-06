@@ -33,9 +33,15 @@ export default {
     lang(val) {
       this.setLanguage(val)
     },
+    theme(val) {
+      let closeMessage = this.$message.loading(`您选择了主题模式 ${val}, 正在切换...`)
+      themeUtil.changeThemeColor(this.themeColor, val).then(() => {
+        setTimeout(closeMessage, 1000)
+      })
+    },
     themeColor(val) {
       let closeMessage = this.$message.loading(`您选择了主题色 ${val}, 正在切换...`)
-      themeUtil.changeThemeColor(val).then(() => {
+      themeUtil.changeThemeColor(val, this.theme).then(() => {
         setTimeout(closeMessage, 1000)
       })
     }
