@@ -1,25 +1,47 @@
 const varyColor = require('webpack-theme-color-replacer/client/varyColor')
+const generate =  require('@ant-design/colors/lib/generate').default
+const {theme} = require('../config/default')
+const themeMode = theme.mode
+
 // ant design vue 默认主题色
-const antPrimaryColor = '#1890ff'
-// ant design vue 默认dark主题色，若主题色为默认主题色则返回此 dark 主题色系
-const antDarkColors = ['#000c17', '#001529', '#002140']
-const nightColors = ['#151515', '#1f1f1f', '#1f1f1f']
+const antdPrimary = '#1890ff'
 
-
-function getDarkColors(color, theme) {
-  if (theme == 'night') {
-    return nightColors
-  }
-  if (color == antPrimaryColor) {
-    return antDarkColors
-  }
-  const darkColors = []
-  darkColors.push(varyColor.darken(color, 0.93), varyColor.darken(color, 0.83), varyColor.darken(color, 0.73))
-  return darkColors
+// 获取 ant design 色系
+function getAntdColors(color, mode) {
+  let options = mode && (mode == themeMode.NIGHT) ? {theme: 'dark'} : undefined
+  return generate(color, options)
 }
 
-function getBgColors(theme) {
-  return theme == 'light' ? ['#f0f2f5', '#ffffff'] : ['#000000', '#141414']
+// 获取菜单色系
+function getMenuColors(color, mode) {
+  if (mode == themeMode.NIGHT) {
+    return ['#151515', '#1f1f1f', '#1e1e1e']
+  } else if (color == antdPrimary) {
+    return ['#000c17', '#001529', '#002140']
+  } else {
+    return [varyColor.darken(color, 0.93), varyColor.darken(color, 0.83), varyColor.darken(color, 0.73)]
+  }
+}
+
+// 获取主题模式切换色系
+function getThemeToggleColors(color, mode) {
+  //主色系
+  const mainColors = getAntdColors(color, mode)
+  const primary = mainColors[5]
+  //辅助色系，因为 antd 目前没针对夜间模式设计，所以增加辅助色系以保证夜间模式的正常切换
+  const subColors = getAntdColors(primary, themeMode.LIGHT)
+  //菜单色系
+  const menuColors = getMenuColors(color, mode)
+  //内容色系（包含背景色、文字颜色等）
+  const themeCfg = theme[mode]
+  let contentColors = Object.keys(themeCfg)
+    .map(key => themeCfg[key])
+    .map(color => isHex(color) ? color : toNum3(color).join(','))
+  // 内容色去重
+  // contentColors = [...new Set(contentColors)]
+  // rgb 格式的主题色
+  let rgbColors = [toNum3(primary).join(',')]
+  return {primary, mainColors, subColors, menuColors, contentColors, rgbColors}
 }
 
 function toNum3(color) {
@@ -51,4 +73,12 @@ function isRgba(color) {
   return color.length >= 13 && color.slice(0, 4) == 'rgba'
 }
 
-module.exports = {getDarkColors, getBgColors, isHex, isRgb, isRgba, toNum3}
+module.exports = {
+  isHex,
+  isRgb,
+  isRgba,
+  toNum3,
+  getAntdColors,
+  getMenuColors,
+  getThemeToggleColors
+}

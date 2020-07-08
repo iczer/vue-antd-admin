@@ -48,7 +48,7 @@ export default {
         }
         span.active {
           background-color: #314659 !important;
-          color: #fff !important;
+          color: @text-color-inverse !important;
         }
         span:last-child {
           float: right;

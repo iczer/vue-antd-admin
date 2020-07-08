@@ -1,3 +1,9 @@
+// 主题模式
+const mode = {
+  LIGHT: 'light',
+  DARK: 'dark',
+  NIGHT: 'night',
+}
 // 亮色模式
 const light = {
   'layout-body-background': '#f0f2f5',
@@ -61,4 +67,4 @@ const night = {
   'btn-primary-color': '#141414',
 }
 
-module.exports = {light, dark, night}
+module.exports = {light, dark, night, mode}
