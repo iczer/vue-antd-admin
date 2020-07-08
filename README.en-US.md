@@ -10,8 +10,10 @@ An out-of-box UI solution for enterprise applications as a React boilerplate.
 [![Dependence](https://img.shields.io/david/iczer/vue-antd-admin)](https://david-dm.org/iczer/vue-antd-admin)
 [![DevDependencies](https://img.shields.io/david/dev/iczer/vue-antd-admin)](https://david-dm.org/iczer/vue-antd-admin?type=dev)
 [![Release](https://img.shields.io/github/v/release/iczer/vue-antd-admin)](https://github.com/iczer/vue-antd-admin/releases/latest)
-![image](./src/assets/img/preview.png) 
+![image](./src/assets/img/preview.png)   
 
+Multiple theme modes available：  
+![image](./src/assets/img/preview-nine.png)
 </div>
 
 - Preview：https://iczer.gitee.io/vue-antd-admin

@@ -97,7 +97,7 @@ export default {
     return {
       animate: this.$store.state.setting.animate.name,
       direction: this.$store.state.setting.animate.direction,
-      colors: ['#f5222d', '#fa541c', '#fadb14', '#42b983', '#13c2c2', '#1890ff', '#722ed1', '#eb2f96'],
+      colors: ['#f5222d', '#fa541c', '#fadb14', '#3eaf7c', '#13c2c2', '#1890ff', '#722ed1', '#eb2f96'],
     }
   },
   computed: {
