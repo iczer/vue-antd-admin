@@ -41,7 +41,7 @@ export default {
     }
     .search-input{
       border: 0;
-      border-bottom: 1px rgba(3, 5, 6, 0.23) solid;
+      border-bottom: 1px solid @border-color-split;
       transition: width 0.3s ease-in-out;
       input{
         border: 0;

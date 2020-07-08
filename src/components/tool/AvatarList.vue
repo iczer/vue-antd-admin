@@ -1,9 +1,7 @@
 <template>
   <div class="avatar-list">
-    <ul>
-      <slot>
-      </slot>
-    </ul>
+    <slot>
+    </slot>
   </div>
 </template>
 
@@ -47,10 +45,9 @@ export default {
 }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .avatar-list {
     display: inline-block;
-    ul {
       display: inline-block;
       margin-left: 8px;
       font-size: 0;
@@ -68,6 +65,5 @@ export default {
           }
         }
       }
-    }
   }
 </style>

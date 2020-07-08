@@ -51,7 +51,7 @@ export default {
       max-width: 720px;
     }
     .author {
-      color: rgba(0,0,0,.45);
+      color: @text-color-second;
       margin-top: 16px;
       line-height: 22px;
       & > :global(.ant-avatar) {
@@ -63,7 +63,7 @@ export default {
           top: 1px;
         }
       & > em {
-          color: rgba(0,0,0,.25);
+          color: @disabled-color;
           font-style: normal;
           margin-left: 16px;
         }

@@ -81,7 +81,7 @@ export default {
         margin: 0;
       }
       p:first-child {
-        color: rgba(0,0,0,.45);
+        color: @text-color-second;
         font-size: 12px;
         line-height: 20px;
         margin-bottom: 4px;

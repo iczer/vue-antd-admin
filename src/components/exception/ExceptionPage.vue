@@ -51,7 +51,7 @@ export default {
         margin-bottom: 24px;
       }
       .desc{
-        color: rgba(0,0,0,.45);
+        color: @text-color-second;
         font-size: 20px;
         line-height: 28px;
         margin-bottom: 16px;

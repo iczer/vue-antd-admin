@@ -24,7 +24,7 @@ export default {
     margin: 48px 0 24px;
     text-align: center;
     .copyright{
-      color: rgba(0,0,0,.45);
+      color: @text-color-second;
       font-size: 14px;
     }
     .links{
@@ -33,7 +33,7 @@ export default {
         margin-right: 40px;
       }
       a{
-        color: rgba(0,0,0,.45);
+        color: @text-color-second;
         -webkit-transition: all .3s;
         transition: all .3s;
       }

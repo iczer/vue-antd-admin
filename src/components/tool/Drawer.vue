@@ -95,7 +95,7 @@ export default {
       left: 0px;
       &.open{
         .content{
-          box-shadow: 2px 0 8px rgba(0,0,0,.15);
+          box-shadow: 2px 0 8px @shadow-color;
         }
       }
       &.close{
@@ -109,7 +109,7 @@ export default {
       }
       &.open{
         .content{
-          box-shadow: -2px 0 8px rgba(0,0,0,.15);
+          box-shadow: -2px 0 8px @shadow-color;
         }
       }
       &.close{
