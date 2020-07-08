@@ -13,7 +13,6 @@ module.exports = {
     let palettes = generate(color, opts)
     const primary = palettes[5]
     palettes = palettes.concat(generate(primary))
-    console.log(palettes)
     const darkBgColors = getDarkColors(color, _theme)
     const _themeCfg = themeCfg[_theme]
     const bgColors = Object.keys(_themeCfg)

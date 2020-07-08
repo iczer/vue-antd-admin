@@ -21,12 +21,14 @@ module.exports = {
     )
   },
   chainWebpack: config => {
-    config
-      .plugin('optimize-css')
-      .tap(args => {
-        args[0].cssnanoOptions.preset[1].colormin = false
-        return args
-      })
+    // 生产环境下关闭css压缩的 colormin 项，因为此项优化与主题色替换功能冲突
+    if (process.env.NODE_ENV === 'production') {
+      config.plugin('optimize-css')
+        .tap(args => {
+            args[0].cssnanoOptions.preset[1].colormin = false
+          return args
+        })
+    }
   },
   css: {
     loaderOptions: {
