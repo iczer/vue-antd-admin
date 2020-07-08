@@ -13,7 +13,12 @@
  * 注意: value 不能设置为 true
  */
 const cssResolve = {
-  '.ant-checkbox-checked .ant-checkbox-inner::after': false,
+  '.ant-checkbox-checked .ant-checkbox-inner::after': {
+    resolve(cssText, cssObj) {
+      cssObj.rules.push('border-top:0', 'border-left:0')
+      return cssObj.toText()
+    }
+  },
   '.ant-menu-dark .ant-menu-inline.ant-menu-sub': {
     resolve(cssText, cssObj) {
       cssObj.rules = cssObj.rules.filter(rule => rule.indexOf('box-shadow') == -1)

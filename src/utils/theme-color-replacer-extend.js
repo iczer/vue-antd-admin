@@ -26,8 +26,11 @@ function resolveCss(output, srcArr) {
     // 转换为 css 对象
     let cssObj = parseCssObj(text)
     // 根据selector匹配配置，匹配成功，则按配置处理 css
-    if (cssResolve[cssObj.selector]) {
-      outArr.push(cssResolve[cssObj.selector].resolve(text, cssObj))
+    if (cssResolve[cssObj.selector] != undefined) {
+      let cfg = cssResolve[cssObj.selector]
+      if (cfg) {
+        outArr.push(cfg.resolve(text, cssObj))
+      }
     } else {
       let cssText = ''
       // 匹配不成功，则测试是否有匹配的正则配置，有则按正则对应的配置处理
