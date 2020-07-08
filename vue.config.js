@@ -20,6 +20,14 @@ module.exports = {
       })
     )
   },
+  chainWebpack: config => {
+    config
+      .plugin('optimize-css')
+      .tap(args => {
+        args[0].cssnanoOptions.preset[1].colormin = false
+        return args
+      })
+  },
   css: {
     loaderOptions: {
       less: {
