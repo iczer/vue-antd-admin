@@ -37,7 +37,7 @@ export default {
     position: relative;
     overflow: hidden;
     width: 100%;
-    color: rgba(0,0,0,.45);
+    color: @text-color-second;
     font-size: 14px;
     line-height: 22px;
   }
@@ -59,7 +59,7 @@ export default {
     height: 38px;
   }
   .chart-card-footer{
-    border-top: 1px solid #e8e8e8;
+    border-top: 1px solid @border-color-base;
     padding-top: 9px;
     margin-top: 8px;
   }

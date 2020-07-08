@@ -21,7 +21,7 @@ export default {
     width: 100%;
     bottom: 0;
     right: 0;
-    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.03);
+    box-shadow: 0 -1px 2px @shadow-color;
     background: @base-bg-color;
     border-top: 1px solid @border-color-split;
     padding: 12px 24px;

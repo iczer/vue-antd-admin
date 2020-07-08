@@ -19,10 +19,10 @@ export default {
 <style lang="less" scoped>
   .form-row{
     display: flex;
-    border-bottom: 1px dashed #e8e8e8;
+    border-bottom: 1px dashed @border-color-base;
     margin-bottom: 16px;
     .label {
-      color: rgba(0, 0, 0, 0.85);
+      color: @title-color;
       font-size: 14px;
       margin-right: 24px;
       flex: 0 0 auto;

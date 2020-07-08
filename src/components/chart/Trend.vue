@@ -69,10 +69,10 @@ export default {
     .chart-trend-icon{
       font-size: 12px;
       &.up{
-        color: #f5222d;
+        color: @red-6;
       }
       &.down{
-        color: #52c41a;
+        color: @green-6;
       }
     }
   }

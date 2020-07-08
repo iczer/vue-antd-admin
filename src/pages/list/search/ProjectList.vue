@@ -47,7 +47,7 @@ export default {
     line-height: 20px;
     height: 20px;
     & > span {
-      color: rgba(0,0,0,.45);
+      color: @text-color-second;
       flex: 1;
       font-size: 12px;
     }

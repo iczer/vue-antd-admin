@@ -62,7 +62,7 @@ export default {
           margin: 0 8px;
           font-size: 12px;
           padding: 2px 6px;
-          background-color: rgba(27,31,35,0.15);
+          background-color: @base-bg-color;
         }
       }
       .actions{

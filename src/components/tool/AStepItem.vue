@@ -52,7 +52,7 @@ export default {
   :global{
     .ant-steps-item-process{
       .linkable{
-        color: #40a9ff;
+        color: @primary-color;
       }
     }
   }

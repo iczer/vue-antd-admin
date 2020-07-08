@@ -66,6 +66,6 @@ export default {
     z-index: 1;
 
     border-radius: 4px;
-    box-shadow: -4px 4px 16px 1px #e6e6e6 !important;
+    box-shadow: -4px 4px 16px 1px @shadow-color !important;
   }
 </style>
