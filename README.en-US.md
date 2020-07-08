@@ -1,4 +1,4 @@
-[简体中文](./) | English
+[简体中文](./README.md) | English
 <h1 align="center">Vue Antd Admin</h1>
 
 <div align="center">
