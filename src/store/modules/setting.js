@@ -40,6 +40,9 @@ export default {
     },
     setRoutesI18n(state, i18n) {
       state.routesI18n = i18n
+    },
+    setHideSetting(state, hideSetting) {
+      state.hideSetting = hideSetting
     }
   }
 }

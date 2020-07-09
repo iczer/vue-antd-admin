@@ -49,6 +49,10 @@
           {{$t('other.multiPages')}}
           <a-switch :checked="multiPage" slot="actions" size="small" @change="setMultiPage" />
         </a-list-item>
+        <a-list-item>
+          {{$t('other.hideSetting')}}
+          <a-switch :checked="hideSetting" slot="actions" size="small" @change="setHideSetting" />
+        </a-list-item>
       </a-list>
     </setting-item>
     <a-divider />
@@ -107,7 +111,7 @@ export default {
     themeColorIndex() {
       return [this.colors.indexOf(this.themeColor)]
     },
-    ...mapState('setting', ['theme', 'themeColor', 'layout', 'animates', 'multiPage', 'weekMode', 'fixedHeader', 'fixedSideBar'])
+    ...mapState('setting', ['theme', 'themeColor', 'layout', 'animates', 'multiPage', 'weekMode', 'fixedHeader', 'fixedSideBar', 'hideSetting'])
   },
   methods: {
     onColorChange (values, colors) {
@@ -129,7 +133,8 @@ export default {
       }
       this.setAnimate({name: this.animate, direction: this.direction})
     },
-    ...mapMutations('setting', ['setTheme', 'setThemeColor', 'setLayout', 'setMultiPage', 'setWeekMode', 'setFixedSideBar', 'setFixedHeader', 'setAnimate'])
+    ...mapMutations('setting', ['setTheme', 'setThemeColor', 'setLayout', 'setMultiPage', 'setWeekMode',
+      'setFixedSideBar', 'setFixedHeader', 'setAnimate', 'setHideSetting'])
   }
 }
 </script>

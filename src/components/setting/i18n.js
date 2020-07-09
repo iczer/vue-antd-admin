@@ -23,7 +23,8 @@ module.exports = {
       other: {
         title: '其他设置',
         weekMode: '色弱模式',
-        multiPages: '多页签模式'
+        multiPages: '多页签模式',
+        hideSetting: '隐藏设置抽屉'
       },
       animate: {
         title: '页面切换动画',
@@ -55,7 +56,8 @@ module.exports = {
       other: {
         title: '其他設置',
         weekMode: '色弱模式',
-        multiPages: '多頁簽模式'
+        multiPages: '多頁簽模式',
+        hideSetting: '隱藏設置抽屜'
       },
       animate: {
         title: '頁面切換動畫',
@@ -87,7 +89,8 @@ module.exports = {
       other: {
         title: 'Other Setting',
         weekMode: 'Week Mode',
-        multiPages: 'Multi Pages'
+        multiPages: 'Multi Pages',
+        hideSetting: 'Hide Setting Drawer'
       },
       animate: {
         title: 'Page Toggle Animation',
