@@ -36,22 +36,25 @@ const Group = {
     }
   },
   watch: {
-    'values': function (newVal, oldVal) {
-      // 此条件是为解决单选时，触发两次chang事件问题
-      if (!(newVal.length === 1 && oldVal.length === 1 && newVal[0] === oldVal[0])) {
-        this.$emit('change', this.values)
-      }
+    'values': function (value) {
+      this.$emit('change', value)
+      // // 此条件是为解决单选时，触发两次chang事件问题
+      // if (!(newVal.length === 1 && oldVal.length === 1 && newVal[0] === oldVal[0])) {
+      //   this.$emit('change', this.values)
+      // }
     }
   },
   methods: {
     handleChange (option) {
       if (!option.checked) {
-        this.values = this.values.filter(item => item !== option.value)
+        if (this.values.indexOf(option.value) > -1) {
+          this.values = this.values.filter(item => item != option.value)
+        }
       } else {
         if (!this.multiple) {
           this.values = [option.value]
           this.options.forEach(item => {
-            if (item.value !== option.value) {
+            if (item.value != option.value) {
               item.sChecked = false
             }
           })
@@ -92,7 +95,7 @@ export default {
   },
   data () {
     return {
-      sChecked: this.checked
+      sChecked: this.initChecked()
     }
   },
   inject: ['groupContext'],
@@ -118,7 +121,19 @@ export default {
   },
   methods: {
     toggle () {
-      this.sChecked = !this.sChecked
+      if (this.groupContext.multiple || !this.sChecked) {
+        this.sChecked = !this.sChecked
+      }
+    },
+    initChecked() {
+      let groupContext = this.groupContext
+      if (!groupContext) {
+        return this.checked
+      }else if (groupContext.multiple) {
+        return groupContext.defaultValues.indexOf(this.value) > -1
+      } else {
+        return groupContext.defaultValues[0] == this.value
+      }
     }
   }
 }
