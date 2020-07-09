@@ -151,7 +151,7 @@ export default {
     cursor: pointer;
     margin-right: 8px;
     text-align: center;
-    color: #fff;
+    color: @base-bg-color;
     font-weight: bold;
   }
 </style>

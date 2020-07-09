@@ -106,7 +106,7 @@ export default {
     }
     .setting{
       background-color: @primary-color;
-      color: #fff;
+      color: @base-bg-color;
       border-radius: 5px 0 0 5px;
       line-height: 40px;
       font-size: 22px;
