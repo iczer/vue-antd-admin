@@ -1,6 +1,6 @@
 const client = require('webpack-theme-color-replacer/client')
 const {theme} = require('../config')
-const {getMenuColors, getAntdColors, getThemeToggleColors} = require('../utils/colors')
+const {getMenuColors, getAntdColors, getThemeToggleColors, getFunctionalColors} = require('../utils/colors')
 const {ANTD} = require('../config/default')
 
 module.exports = {
@@ -13,7 +13,10 @@ module.exports = {
       ...replaceColors.subColors,
       ...replaceColors.menuColors,
       ...replaceColors.contentColors,
-      ...replaceColors.rgbColors
+      ...replaceColors.rgbColors,
+      ...replaceColors.functionalColors.success,
+      ...replaceColors.functionalColors.warning,
+      ...replaceColors.functionalColors.error,
     ]
     return themeColors
   },
@@ -25,6 +28,7 @@ module.exports = {
     let _color = color || theme.color
     const palettes = getAntdColors(_color, theme.mode)
     const menuColors = getMenuColors(_color, theme.mode)
+    const {success, warning, error} = getFunctionalColors(theme.mode)
     const primary = palettes[5]
     return {
       'primary-color': primary,
@@ -39,8 +43,17 @@ module.exports = {
       'primary-9': palettes[8],
       'primary-10': palettes[9],
       'info-color': primary,
+      'success-color': success[3],
+      'warning-color': warning[3],
+      'error-color': error[3],
       'alert-info-bg-color': palettes[0],
-      'alert-info-border-color': palettes[3],
+      'alert-info-border-color': palettes[2],
+      'alert-success-bg-color': success[0],
+      'alert-success-border-color': success[2],
+      'alert-warning-bg-color': warning[0],
+      'alert-warning-border-color': warning[2],
+      'alert-error-bg-color': error[0],
+      'alert-error-border-color': error[2],
       'processing-color': primary,
       'menu-dark-submenu-bg': menuColors[0],
       'layout-header-background': menuColors[1],

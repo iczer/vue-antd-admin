@@ -10,6 +10,20 @@ function getAntdColors(color, mode) {
   return generate(color, options)
 }
 
+// 获取功能性颜色
+function getFunctionalColors(mode) {
+  let options = mode && (mode == themeMode.NIGHT) ? {theme: 'dark'} : undefined
+  const {success, warning, error} = ANTD.primary
+  const successColors = generate(success, options)
+  const warningColors = generate(warning, options)
+  const errorColors = generate(error, options)
+  return {
+    success: [...successColors.slice(0, 3), successColors[5]],
+    warning: [...warningColors.slice(0, 3), warningColors[5]],
+    error: [...errorColors.slice(0, 3), errorColors[5]]
+  }
+}
+
 // 获取菜单色系
 function getMenuColors(color, mode) {
   if (mode == themeMode.NIGHT) {
@@ -39,7 +53,8 @@ function getThemeToggleColors(color, mode) {
   contentColors = [...new Set(contentColors)]
   // rgb 格式的主题色
   let rgbColors = [toNum3(primary).join(',')]
-  return {primary, mainColors, subColors, menuColors, contentColors, rgbColors}
+  let functionalColors = getFunctionalColors(mode)
+  return {primary, mainColors, subColors, menuColors, contentColors, rgbColors, functionalColors}
 }
 
 function toNum3(color) {
@@ -78,5 +93,6 @@ module.exports = {
   toNum3,
   getAntdColors,
   getMenuColors,
-  getThemeToggleColors
+  getThemeToggleColors,
+  getFunctionalColors
 }

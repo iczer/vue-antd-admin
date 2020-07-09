@@ -2,6 +2,9 @@
 const ANTD = {
   primary: {
     color: '#1890ff',
+    warning: '#faad14',
+    success: '#52c41a',
+    error: '#f5222d',
     light: {
       menuColors: ['#000c17', '#001529', '#002140']
     },
