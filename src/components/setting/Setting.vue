@@ -1,20 +1,29 @@
 <template>
   <div class="side-setting">
     <setting-item :title="$t('theme.title')">
-      <img-checkbox-group @change="values => setTheme(values[0])" :default-values="[theme]">
+      <img-checkbox-group
+        @change="values => setTheme({...theme, mode: values[0]})"
+        :default-values="[theme.mode]"
+      >
         <img-checkbox :title="$t('theme.dark')" img="https://gw.alipayobjects.com/zos/rmsportal/LCkqqYNmvBEbokSDscrm.svg" value="dark"/>
         <img-checkbox :title="$t('theme.light')" img="https://gw.alipayobjects.com/zos/rmsportal/jpRkZQMyYRryryPNtyIC.svg" value="light"/>
         <img-checkbox :title="$t('theme.night')" img="https://gw.alipayobjects.com/zos/antfincdn/hmKaLQvmY2/LCkqqYNmvBEbokSDscrm.svg" value="night"/>
       </img-checkbox-group>
     </setting-item>
     <setting-item :title="$t('theme.color')">
-      <color-checkbox-group @change="onColorChange" :defaultValues="themeColorIndex" :multiple="false">
-        <color-checkbox v-for="(color, index) in colors" :key="index" :color="color" :value="index" />
+      <color-checkbox-group
+        @change="(values, colors) => setTheme({...theme, color: colors[0]})"
+        :defaultValues="[palettes.indexOf(theme.color)]" :multiple="false"
+      >
+        <color-checkbox v-for="(color, index) in palettes" :key="index" :color="color" :value="index" />
       </color-checkbox-group>
     </setting-item>
     <a-divider/>
     <setting-item :title="$t('navigate.title')">
-      <img-checkbox-group @change="values => setLayout(values[0])" :default-values="[layout]">
+      <img-checkbox-group
+        @change="values => setLayout(values[0])"
+        :default-values="[layout]"
+      >
         <img-checkbox :title="$t('navigate.side')" img="https://gw.alipayobjects.com/zos/rmsportal/JopDzEhOqwOjeNTXkoje.svg" value="side"/>
         <img-checkbox :title="$t('navigate.head')" img="https://gw.alipayobjects.com/zos/rmsportal/KDNDBbriJhLwuqMoxcAr.svg" value="head"/>
       </img-checkbox-group>
@@ -61,8 +70,8 @@
         <a-list-item>
           {{$t('animate.effect')}}
           <a-select
-            v-model="animate"
-            @change="val => setAnimation(val)"
+            :value="animate.name"
+            @change="val => setAnimate({...animate, name: val})"
             class="select-item" size="small" slot="actions"
           >
             <a-select-option :key="index" :value="item.name" v-for="(item, index) in animates">{{item.alias}}</a-select-option>
@@ -71,8 +80,8 @@
         <a-list-item>
           {{$t('animate.direction')}}
           <a-select
-            v-model="direction"
-            @change="val => setAnimation(this.animate, val)"
+            :value="animate.direction"
+            @change="val => setAnimate({...animate, direction: val})"
             class="select-item" size="small" slot="actions"
           >
             <a-select-option :key="index" :value="item" v-for="(item, index) in directions">{{item}}</a-select-option>
@@ -99,26 +108,20 @@ export default {
   components: {ImgCheckboxGroup, ImgCheckbox, ColorCheckboxGroup, ColorCheckbox, SettingItem},
   data() {
     return {
-      animate: this.$store.state.setting.animate.name,
-      direction: this.$store.state.setting.animate.direction,
-      colors: ['#f5222d', '#fa541c', '#fadb14', '#3eaf7c', '#13c2c2', '#1890ff', '#722ed1', '#eb2f96'],
     }
   },
   computed: {
     directions() {
-      return this.animates.find(item => item.name == this.animate).directions
+      return this.animates.find(item => item.name == this.animate.name).directions
     },
-    themeColorIndex() {
-      return [this.colors.indexOf(this.themeColor)]
-    },
-    ...mapState('setting', ['theme', 'themeColor', 'layout', 'animates', 'multiPage', 'weekMode', 'fixedHeader', 'fixedSideBar', 'hideSetting'])
+    ...mapState('setting', ['theme', 'layout', 'animate', 'animates', 'palettes', 'multiPage', 'weekMode', 'fixedHeader', 'fixedSideBar', 'hideSetting'])
+  },
+  watch: {
+    'animate.name': function(val) {
+      this.setAnimate({name: val, direction: this.directions[0]})
+    }
   },
   methods: {
-    onColorChange (values, colors) {
-      if (colors.length > 0) {
-        this.setThemeColor(colors[0])
-      }
-    },
     copyCode () {
       let clipboard = new Clipboard('#copyBtn')
       const _this = this
@@ -127,13 +130,7 @@ export default {
         clipboard.destroy()
       })
     },
-    setAnimation(animate, direction) {
-      if (direction == undefined) {
-        this.direction = this.directions[0]
-      }
-      this.setAnimate({name: this.animate, direction: this.direction})
-    },
-    ...mapMutations('setting', ['setTheme', 'setThemeColor', 'setLayout', 'setMultiPage', 'setWeekMode',
+    ...mapMutations('setting', ['setTheme', 'setLayout', 'setMultiPage', 'setWeekMode',
       'setFixedSideBar', 'setFixedHeader', 'setAnimate', 'setHideSetting'])
   }
 }

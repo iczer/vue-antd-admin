@@ -1,10 +1,8 @@
 const varyColor = require('webpack-theme-color-replacer/client/varyColor')
 const generate =  require('@ant-design/colors/lib/generate').default
-const {theme} = require('../config/default')
-const themeMode = theme.mode
+const {ADMIN, ANTD} = require('../config/default')
 
-// ant design vue 默认主题色
-const antdPrimary = '#1890ff'
+const themeMode = ADMIN.theme.mode
 
 // 获取 ant design 色系
 function getAntdColors(color, mode) {
@@ -15,9 +13,9 @@ function getAntdColors(color, mode) {
 // 获取菜单色系
 function getMenuColors(color, mode) {
   if (mode == themeMode.NIGHT) {
-    return ['#151515', '#1f1f1f', '#1e1e1e']
-  } else if (color == antdPrimary) {
-    return ['#000c17', '#001529', '#002140']
+    return ANTD.primary.night.menuColors
+  } else if (color == ANTD.primary.color) {
+    return ANTD.primary.dark.menuColors
   } else {
     return [varyColor.darken(color, 0.93), varyColor.darken(color, 0.83), varyColor.darken(color, 0.73)]
   }
@@ -33,12 +31,12 @@ function getThemeToggleColors(color, mode) {
   //菜单色系
   const menuColors = getMenuColors(color, mode)
   //内容色系（包含背景色、文字颜色等）
-  const themeCfg = theme[mode]
+  const themeCfg = ANTD.theme[mode]
   let contentColors = Object.keys(themeCfg)
     .map(key => themeCfg[key])
     .map(color => isHex(color) ? color : toNum3(color).join(','))
   // 内容色去重
-  // contentColors = [...new Set(contentColors)]
+  contentColors = [...new Set(contentColors)]
   // rgb 格式的主题色
   let rgbColors = [toNum3(primary).join(',')]
   return {primary, mainColors, subColors, menuColors, contentColors, rgbColors}

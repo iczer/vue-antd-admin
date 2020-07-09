@@ -1,11 +1,13 @@
 import config from '@/config'
+import {ADMIN} from '@/config/default'
 export default {
   namespaced: true,
   state: {
     isMobile: false,
-    animates: require('@/config/default/animates'),
+    animates: ADMIN.animates,
+    palettes: ADMIN.palettes,
+    routesI18n: {},
     ...config,
-    routesI18n: {}
   },
   mutations: {
     setDevice (state, isMobile) {
@@ -22,9 +24,6 @@ export default {
     },
     setAnimate (state, animate) {
       state.animate = animate
-    },
-    setThemeColor (state, color) {
-      state.themeColor = color
     },
     setWeekMode(state, weekMode) {
       state.weekMode = weekMode

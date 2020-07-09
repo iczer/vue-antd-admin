@@ -56,10 +56,10 @@ export default {
   computed: {
     ...mapState('setting', ['theme', 'isMobile', 'layout', 'systemName', 'lang']),
     headerTheme () {
-      if (this.layout == 'side' && this.theme == 'dark' && !this.isMobile) {
+      if (this.layout == 'side' && this.theme.mode == 'dark' && !this.isMobile) {
         return 'light'
       }
-      return this.theme
+      return this.theme.mode
     },
     langAlias() {
       let lang = this.langList.find(item => item.key == this.lang)

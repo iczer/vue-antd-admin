@@ -33,21 +33,21 @@ export default {
     lang(val) {
       this.setLanguage(val)
     },
-    theme(val) {
+    'theme.mode': function(val) {
       let closeMessage = this.$message.loading(`您选择了主题模式 ${val}, 正在切换...`)
-      themeUtil.changeThemeColor(this.themeColor, val).then(() => {
+      themeUtil.changeThemeColor(this.theme.color, val).then(() => {
         setTimeout(closeMessage, 1000)
       })
     },
-    themeColor(val) {
+    'theme.color': function(val) {
       let closeMessage = this.$message.loading(`您选择了主题色 ${val}, 正在切换...`)
-      themeUtil.changeThemeColor(val, this.theme).then(() => {
+      themeUtil.changeThemeColor(val, this.theme.mode).then(() => {
         setTimeout(closeMessage, 1000)
       })
     }
   },
   computed: {
-    ...mapState('setting', ['theme', 'themeColor', 'weekMode', 'lang'])
+    ...mapState('setting', ['theme', 'weekMode', 'lang'])
   },
   methods: {
     setWeekModeTheme(weekMode) {

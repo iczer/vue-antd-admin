@@ -1,13 +1,13 @@
 const client = require('webpack-theme-color-replacer/client')
-const {theme, themeColor} = require('../config')
+const {theme} = require('../config')
 const {getMenuColors, getAntdColors, getThemeToggleColors} = require('../utils/colors')
-const {theme: themeCfg} = require('../config/default')
+const {ANTD} = require('../config/default')
 
 module.exports = {
   getThemeColors(color, $theme) {
-    const _color = color || themeColor
-    const _theme = $theme || theme
-    const replaceColors = getThemeToggleColors(_color, _theme)
+    const _color = color || theme.color
+    const mode = $theme || theme.mode
+    const replaceColors = getThemeToggleColors(_color, mode)
     const themeColors = [
       ...replaceColors.mainColors,
       ...replaceColors.subColors,
@@ -22,9 +22,9 @@ module.exports = {
     return promise
   },
   modifyVars(color) {
-    let _color = color || themeColor
-    const palettes = getAntdColors(_color, theme)
-    const menuColors = getMenuColors(_color, theme)
+    let _color = color || theme.color
+    const palettes = getAntdColors(_color, theme.mode)
+    const menuColors = getMenuColors(_color, theme.mode)
     const primary = palettes[5]
     return {
       'primary-color': primary,
@@ -45,7 +45,7 @@ module.exports = {
       'menu-dark-submenu-bg': menuColors[0],
       'layout-header-background': menuColors[1],
       'layout-trigger-background': menuColors[2],
-      ...themeCfg[theme]
+      ...ANTD.theme[theme.mode]
     }
   }
 }
