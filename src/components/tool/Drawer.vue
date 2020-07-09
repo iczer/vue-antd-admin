@@ -1,14 +1,14 @@
 <template>
   <div >
-    <div :class="['mask', openDrawer ? 'open' : 'close']" @click="close"></div>
-    <div :class="['drawer', placement, openDrawer ? 'open' : 'close']">
+    <div :class="['mask', visible ? 'open' : 'close']" @click="close"></div>
+    <div :class="['drawer', placement, visible ? 'open' : 'close']">
       <div ref="drawer" class="content beauty-scroll">
         <slot></slot>
       </div>
-      <div v-if="showHandler" :class="['handler-container', placement, openDrawer ? 'open' : 'close']" ref="handler" @click="handle">
+      <div v-if="showHandler" :class="['handler-container', placement, visible ? 'open' : 'close']" ref="handler" @click="toggle">
         <slot v-if="$slots.handler" name="handler"></slot>
         <div v-else class="handler">
-          <a-icon :type="openDrawer ? 'close'  : 'bars'" />
+          <a-icon :type="visible ? 'close'  : 'bars'" />
         </div>
       </div>
     </div>
@@ -20,11 +20,14 @@ export default {
   name: 'Drawer',
   data () {
     return {
-      drawerWidth: 0
     }
   },
+  model: {
+    prop: 'visible',
+    event: 'change'
+  },
   props: {
-    openDrawer: {
+    visible: {
       type: Boolean,
       required: false,
       default: false
@@ -40,18 +43,6 @@ export default {
       default: true
     }
   },
-  mounted () {
-    this.drawerWidth = this.getDrawerWidth()
-  },
-  watch: {
-    'drawerWidth': function () {
-      if (this.placement === 'left') {
-        //this.$refs.handler.style.left = val + 'px'
-      } else {
-        //this.$refs.handler.style.right = val + 'px'
-      }
-    }
-  },
   methods: {
     open () {
       this.$emit('change', true)
@@ -59,11 +50,8 @@ export default {
     close () {
       this.$emit('change', false)
     },
-    handle () {
-      this.$emit('change', !this.openDrawer)
-    },
-    getDrawerWidth () {
-      return this.$refs.drawer.clientWidth
+    toggle () {
+      this.$emit('change', !this.visible)
     }
   }
 }

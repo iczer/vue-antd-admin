@@ -60,7 +60,6 @@ export default {
         return 'light'
       }
       return this.theme
-      // return (this.layout == 'side' && !this.isMobile && this.theme != 'night') ? 'light' : this.theme
     },
     langAlias() {
       let lang = this.langList.find(item => item.key == this.lang)

@@ -1,10 +1,10 @@
 <template>
   <a-layout :class="['admin-layout', fixedSideBar ? 'fixed-side-bar' : '']">
-    <drawer v-if="isMobile" :openDrawer="collapsed" @change="onDrawerChange">
+    <drawer v-if="isMobile" v-model="collapsed">
       <side-menu :theme="theme" :menuData="menuData" :collapsed="false" :collapsible="false" @menuSelect="onMenuSelect"/>
     </drawer>
     <side-menu :theme="theme" v-else-if="layout === 'side'" :menuData="menuData" :collapsed="collapsed" :collapsible="true" />
-    <drawer v-if="!hideSetting" :open-drawer="showSetting" placement="right"  @change="onSettingDrawerChange">
+    <drawer v-if="!hideSetting" v-model="showSetting" placement="right">
       <div class="setting" slot="handler">
         <a-icon :type="showSetting ? 'close' : 'setting'"/>
       </div>
@@ -70,14 +70,8 @@ export default {
     toggleCollapse () {
       this.collapsed = !this.collapsed
     },
-    onDrawerChange (show) {
-      this.collapsed = show
-    },
     onMenuSelect () {
       this.toggleCollapse()
-    },
-    onSettingDrawerChange (val) {
-      this.showSetting = val
     },
   },
   beforeCreate () {
