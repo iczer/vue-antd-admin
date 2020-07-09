@@ -16,6 +16,7 @@ const light = {
   'shadow-color': 'rgba(0, 0, 0, 0.15)',
   'border-color-split': '#f0f0f0',
   'background-color-light': '#fafafa',
+  'background-color-base': '#f5f5f5',
   'table-selected-row-bg': '#fafafa',
   'checkbox-check-color': '#fff',
   'disabled-color': 'rgba(0, 0, 0, 0.25)',
@@ -37,13 +38,14 @@ const dark = {
   'shadow-color': 'rgba(0, 0, 0, 0.15)',
   'border-color-split': '#f0f0f0',
   'background-color-light': '#fafafa',
+  'background-color-base': '#f5f5f5',
   'table-selected-row-bg': '#fafafa',
   'checkbox-check-color': '#fff',
   'disabled-color': 'rgba(0, 0, 0, 0.25)',
   'menu-dark-color': 'rgba(254, 254, 254, 0.65)',
   'menu-dark-highlight-color': '#fefefe',
   'menu-dark-arrow-color': '#fefefe',
-  'btn-primary-color': '#fff',
+  'btn-primary-color': '#fff'
 }
 
 // 黑夜模式
@@ -57,8 +59,9 @@ const night = {
   'text-color-secondary': 'rgba(255, 255, 255, 0.45)',
   'shadow-color': 'rgba(255, 255, 255, 0.15)',
   'border-color-split': '#303030',
-  'background-color-light': '#404040',
-  'table-selected-row-bg': '#404040',
+  'background-color-light': '#ffffff0a',
+  'background-color-base': '#2a2a2a',
+  'table-selected-row-bg': '#ffffff0a',
   'checkbox-check-color': '#141414',
   'disabled-color': 'rgba(255, 255, 255, 0.25)',
   'menu-dark-color': 'rgba(254, 254, 254, 0.65)',
