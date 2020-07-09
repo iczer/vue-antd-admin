@@ -89,7 +89,13 @@
         </a-list-item>
       </a-list>
     </setting-item>
-    <a-button id="copyBtn" data-clipboard-text="Sorry, you have copied nothing O(∩_∩)O~" @click="copyCode" style="width: 100%" icon="copy" >{{$t('copy')}}</a-button>
+    <a-alert
+      style="max-width: 224px; margin: -16px 0 8px"
+      message="拷贝配置后，直接覆盖文件 src/config/config.js 中的全部内容即可"
+      type="warning"
+      :closable="true"
+    />
+    <a-button id="copyBtn" :data-clipboard-text="copyConfig" @click="copyCode" style="width: 100%" icon="copy" >{{$t('copy')}}</a-button>
   </div>
 </template>
 
@@ -99,6 +105,8 @@ import ColorCheckbox from '../checkbox/ColorCheckbox'
 import ImgCheckbox from '../checkbox/ImgCheckbox'
 import Clipboard from 'clipboard'
 import { mapState, mapMutations } from 'vuex'
+import {formatConfig} from '@/utils/formatter'
+import {setting} from '@/config/default'
 
 const ColorCheckboxGroup = ColorCheckbox.Group
 const ImgCheckboxGroup = ImgCheckbox.Group
@@ -108,6 +116,7 @@ export default {
   components: {ImgCheckboxGroup, ImgCheckbox, ColorCheckboxGroup, ColorCheckbox, SettingItem},
   data() {
     return {
+      copyConfig: 'Sorry, you have copied nothing O(∩_∩)O~'
     }
   },
   computed: {
@@ -123,6 +132,17 @@ export default {
   },
   methods: {
     copyCode () {
+      let config = {}
+      // 提取配置
+      let mySetting = this.$store.state.setting
+      Object.keys(mySetting).forEach(key => {
+        if (setting[key]) {
+          config[key] = mySetting[key]
+        }
+      })
+      this.copyConfig = '// 自定义配置，参考 ./default/setting.js，需要自定义的属性在这里配置即可\n'
+      this.copyConfig += 'module.exports = '
+      this.copyConfig += formatConfig(config)
       let clipboard = new Clipboard('#copyBtn')
       const _this = this
       clipboard.on('success', function () {
