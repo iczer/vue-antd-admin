@@ -16,7 +16,7 @@
     </a-tabs>
     <div class="tabs-view-content">
       <page-toggle-transition :disabled="animate.disabled" :animate="animate.name" :direction="animate.direction">
-        <keep-alive v-if="multiPage">
+        <keep-alive :exclude="dustbins" v-if="multiPage">
           <router-view />
         </keep-alive>
         <router-view v-else />
@@ -29,7 +29,7 @@
 import AdminLayout from './AdminLayout'
 import Contextmenu from '../components/menu/Contextmenu'
 import PageToggleTransition from '../components/transition/PageToggleTransition'
-import {mapState} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 
 export default {
   name: 'TabsView',
@@ -37,7 +37,6 @@ export default {
   data () {
     return {
       pageList: [],
-      linkList: [],
       activePage: '',
       menuVisible: false,
       menuItemList: [
@@ -48,31 +47,25 @@ export default {
     }
   },
   computed: {
-    ...mapState('setting', ['multiPage', 'animate', 'layout'])
+    ...mapState('setting', ['multiPage', 'animate', 'layout', 'dustbins'])
   },
   created () {
     const route = this.$route
     this.pageList.push(route)
-    this.linkList.push(route.fullPath)
     this.activePage = route.fullPath
   },
   watch: {
     '$route': function (newRoute) {
       this.activePage = newRoute.fullPath
+      this.putCache(newRoute)
       if (!this.multiPage) {
-        this.linkList = [newRoute.fullPath]
         this.pageList = [newRoute]
-      } else if (this.linkList.indexOf(newRoute.fullPath) == -1) {
-        this.linkList.push(newRoute.fullPath)
+      } else if (this.pageList.findIndex(item => item.fullPath == newRoute.fullPath) == -1) {
         this.pageList.push(newRoute)
       }
     },
-    'activePage': function () {
-      // this.$router.push(key)
-    },
     'multiPage': function (newVal) {
       if (!newVal) {
-        this.linkList = [this.$route.fullPath]
         this.pageList = [this.$route]
       }
     }
@@ -90,12 +83,13 @@ export default {
         this.$message.warning('这是最后一页，不能再关闭了啦')
         return
       }
-      let index = this.linkList.indexOf(key)
+      let index = this.pageList.findIndex(item => item.fullPath == key)
+      let pageRoute = this.pageList[index]
+      this.clearCache(pageRoute)
       this.pageList = this.pageList.filter(item => item.fullPath !== key)
-      this.linkList = this.linkList.filter(item => item !== key)
       if (key == this.activePage) {
-        index = index >= this.linkList.length ? this.linkList.length - 1 : index
-        this.activePage = this.linkList[index]
+        index = index >= this.pageList.length ? this.pageList.length - 1 : index
+        this.activePage = this.pageList[index].fullPath
         this.$router.push(this.activePage)
       }
     },
@@ -140,29 +134,59 @@ export default {
       }
     },
     closeOthers (pageKey) {
-      let index = this.linkList.indexOf(pageKey)
-      this.linkList = this.linkList.slice(index, index + 1)
+      const index = this.pageList.findIndex(item => item.fullPath == pageKey)
+      // 要关闭的页面清除缓存
+      this.pageList.forEach(item => {
+        if (item.fullPath != pageKey){
+          this.clearCache(item)
+        }
+      })
       this.pageList = this.pageList.slice(index, index + 1)
-      this.activePage = this.linkList[0]
+      this.activePage = this.pageList[0].fullPath
+      this.$router.push(this.activePage)
     },
     closeLeft (pageKey) {
-      let index = this.linkList.indexOf(pageKey)
-      this.linkList = this.linkList.slice(index)
+      const index = this.pageList.findIndex(item => item.fullPath == pageKey)
+      // 清除缓存
+      this.pageList.forEach((item, i) => {
+        if (i < index) {
+          this.clearCache(item)
+        }
+      })
       this.pageList = this.pageList.slice(index)
-      if (this.linkList.indexOf(this.activePage) == -1) {
-        this.activePage = this.linkList[0]
+      if (this.pageList.findIndex(item => item.fullPath == this.activePage) == -1) {
+        this.activePage = this.pageList[0].fullPath
         this.$router.push(this.activePage)
       }
     },
     closeRight (pageKey) {
-      let index = this.linkList.indexOf(pageKey)
-      this.linkList = this.linkList.slice(0, index + 1)
+      const index = this.pageList.findIndex(item => item.fullPath == pageKey)
+      // 清除缓存
+      this.pageList.forEach((item, i) => {
+        if (i > index) {
+          this.clearCache(item)
+        }
+      })
       this.pageList = this.pageList.slice(0, index + 1)
-      if (this.linkList.indexOf(this.activePage) == -1) {
-        this.activePage = this.linkList[this.linkList.length - 1]
+      if (this.pageList.findIndex(item => item.fullPath == this.activePage) == -1) {
+        this.activePage = this.pageList[this.pageList.length - 1].fullPath
         this.$router.push(this.activePage)
       }
-    }
+    },
+    clearCache(route) {
+      const componentName = route.matched.slice(-1)[0].components.default.name
+      if (this.dustbins.findIndex(item => item == componentName) == -1) {
+        this.setDustbins(this.dustbins.concat(componentName))
+      }
+    },
+    putCache(route) {
+      const componentName = route.matched.slice(-1)[0].components.default.name
+      if (this.dustbins.findIndex(item => item == componentName) != -1) {
+        this.setDustbins(this.dustbins.filter(item => item != componentName))
+      }
+
+    },
+    ...mapMutations('setting', ['setDustbins'])
   }
 }
 </script>

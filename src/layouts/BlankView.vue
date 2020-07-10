@@ -1,6 +1,6 @@
 <template>
   <page-toggle-transition :disabled="animate.disabled" :animate="animate.name" :direction="animate.direction">
-    <keep-alive v-if="multiPage">
+    <keep-alive :exclude="dustbins" v-if="multiPage">
       <router-view />
     </keep-alive>
     <router-view v-else />
@@ -15,7 +15,7 @@ export default {
   name: 'BlankView',
   components: {PageToggleTransition},
   computed: {
-    ...mapState('setting', ['multiPage', 'animate'])
+    ...mapState('setting', ['multiPage', 'animate', 'dustbins'])
   }
 }
 </script>

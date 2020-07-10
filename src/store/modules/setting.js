@@ -7,6 +7,7 @@ export default {
     animates: ADMIN.animates,
     palettes: ADMIN.palettes,
     routesI18n: {},
+    dustbins: [],
     ...config,
   },
   mutations: {
@@ -42,6 +43,9 @@ export default {
     },
     setHideSetting(state, hideSetting) {
       state.hideSetting = hideSetting
+    },
+    setDustbins(state, dustbins) {
+      state.dustbins = dustbins
     }
   }
 }

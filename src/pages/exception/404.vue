@@ -6,6 +6,7 @@
 import ExceptionPage from '@/components/exception/ExceptionPage'
 import {mapState} from 'vuex'
 export default {
+  name: 'Exp404',
   components: {ExceptionPage},
   inject: ['layoutMinHeight'],
   computed: {
