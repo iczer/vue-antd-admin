@@ -124,7 +124,7 @@ for (let i = 0; i < 8; i++) {
 }
 
 export default {
-  name: 'analysis',
+  name: 'Analysis',
   i18n: require('./i18n'),
   data () {
     return {
@@ -133,7 +133,7 @@ export default {
     }
   },
   created() {
-    setTimeout(() => this.loading = !this.loading, 500)
+    setTimeout(() => this.loading = !this.loading, 1000)
   },
   components: {Trend, SalesData, HotSearch, RankingList, Bar, MiniProgress, MiniBar, MiniArea, ChartCard}
 }

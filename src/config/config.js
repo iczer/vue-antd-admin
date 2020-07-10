@@ -4,8 +4,9 @@ module.exports = {
     color: '#13c2c2',
     mode: 'night'
   },
+  multiPage: true,
   animate: {
-    name: 'zoom',
-    direction: 'left'
+    name: 'roll',
+    direction: 'default'
   }
 }

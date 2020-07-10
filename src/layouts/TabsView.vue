@@ -51,9 +51,10 @@ export default {
     ...mapState('setting', ['multiPage', 'animate', 'layout'])
   },
   created () {
-    this.pageList.push(this.$route)
-    this.linkList.push(this.$route.fullPath)
-    this.activePage = this.$route.fullPath
+    const route = this.$route
+    this.pageList.push(route)
+    this.linkList.push(route.fullPath)
+    this.activePage = route.fullPath
   },
   watch: {
     '$route': function (newRoute) {
@@ -61,7 +62,7 @@ export default {
       if (!this.multiPage) {
         this.linkList = [newRoute.fullPath]
         this.pageList = [newRoute]
-      } else if (this.linkList.indexOf(newRoute.fullPath) < 0) {
+      } else if (this.linkList.indexOf(newRoute.fullPath) == -1) {
         this.linkList.push(newRoute.fullPath)
         this.pageList.push(newRoute)
       }
@@ -89,8 +90,8 @@ export default {
         this.$message.warning('这是最后一页，不能再关闭了啦')
         return
       }
-      this.pageList = this.pageList.filter(item => item.fullPath !== key)
       let index = this.linkList.indexOf(key)
+      this.pageList = this.pageList.filter(item => item.fullPath !== key)
       this.linkList = this.linkList.filter(item => item !== key)
       if (key == this.activePage) {
         index = index >= this.linkList.length ? this.linkList.length - 1 : index
@@ -99,8 +100,8 @@ export default {
       }
     },
     onContextmenu (e) {
-      const pagekey = this.getPageKey(e.target)
-      if (pagekey !== null) {
+      const pageKey = this.getPageKey(e.target)
+      if (pageKey !== null) {
         e.preventDefault()
         this.menuVisible = true
       }
@@ -148,16 +149,18 @@ export default {
       let index = this.linkList.indexOf(pageKey)
       this.linkList = this.linkList.slice(index)
       this.pageList = this.pageList.slice(index)
-      if (this.linkList.indexOf(this.activePage) < 0) {
+      if (this.linkList.indexOf(this.activePage) == -1) {
         this.activePage = this.linkList[0]
+        this.$router.push(this.activePage)
       }
     },
     closeRight (pageKey) {
       let index = this.linkList.indexOf(pageKey)
       this.linkList = this.linkList.slice(0, index + 1)
       this.pageList = this.pageList.slice(0, index + 1)
-      if (this.linkList.indexOf(this.activePage < 0)) {
+      if (this.linkList.indexOf(this.activePage) == -1) {
         this.activePage = this.linkList[this.linkList.length - 1]
+        this.$router.push(this.activePage)
       }
     }
   }
