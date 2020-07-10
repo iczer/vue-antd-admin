@@ -90,23 +90,23 @@
       </a-list>
     </setting-item>
     <a-alert
-      style="max-width: 224px; margin: -16px 0 8px"
-      message="拷贝配置后，直接覆盖文件 src/config/config.js 中的全部内容即可"
+      style="max-width: 240px; margin: -16px 0 8px; word-break: break-all"
       type="warning"
-      :closable="true"
-    />
+      :message="$t('alert')"
+    >
+    </a-alert>
     <a-button id="copyBtn" :data-clipboard-text="copyConfig" @click="copyCode" style="width: 100%" icon="copy" >{{$t('copy')}}</a-button>
   </div>
 </template>
 
 <script>
 import SettingItem from './SettingItem'
-import ColorCheckbox from '../checkbox/ColorCheckbox'
-import ImgCheckbox from '../checkbox/ImgCheckbox'
+import {ColorCheckbox, ImgCheckbox} from '@/components/checkbox'
 import Clipboard from 'clipboard'
 import { mapState, mapMutations } from 'vuex'
 import {formatConfig} from '@/utils/formatter'
 import {setting} from '@/config/default'
+import fastEqual from 'fast-deep-equal'
 
 const ColorCheckboxGroup = ColorCheckbox.Group
 const ImgCheckboxGroup = ImgCheckbox.Group
@@ -136,8 +136,11 @@ export default {
       // 提取配置
       let mySetting = this.$store.state.setting
       Object.keys(mySetting).forEach(key => {
-        if (setting[key]) {
-          config[key] = mySetting[key]
+        const dftValue = setting[key], myValue = mySetting[key]
+        // 只提取与默认配置不同的配置项
+        if (dftValue != undefined && !fastEqual(dftValue, myValue)) {
+          console.log(myValue)
+          config[key] = myValue
         }
       })
       this.copyConfig = '// 自定义配置，参考 ./default/setting.js，需要自定义的属性在这里配置即可\n'

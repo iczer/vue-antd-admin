@@ -24,7 +24,7 @@ function formatConfig(obj, dep) {
       } else if (typeof item == 'object') {
         arrayLastIsObj = true
         format = `${LN}${indent}${formatConfig(item,dep + 1)},`
-      } else if (typeof item == 'number' && !isNaN(item)) {
+      } else if ((typeof item == 'number' && !isNaN(item)) || typeof item == 'boolean') {
         format = `${item},`
       } else if (typeof item == 'string') {
         format = `'${item}',`
@@ -44,7 +44,7 @@ function formatConfig(obj, dep) {
         //
       } else if (typeof val == 'object') {
         format = `${LN}${indent}${key}: ${formatConfig(val,dep + 1)},`
-      } else if (typeof val == 'number' && !isNaN(val)) {
+      } else if ((typeof val == 'number' && !isNaN(val)) || typeof val == 'boolean') {
         format = `${LN}${indent}${key}: ${val},`
       } else if (typeof val == 'string') {
         format = `${LN}${indent}${key}: '${val}',`

@@ -2,10 +2,10 @@
 module.exports = {
   theme: {
     color: '#13c2c2',
-    mode: 'dark',
+    mode: 'night'
   },
   animate: {
-    name: 'rotate',
-    direction: 'downLeft'
+    name: 'zoom',
+    direction: 'left'
   }
 }
