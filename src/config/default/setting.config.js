@@ -14,6 +14,7 @@ module.exports = {
   systemName: 'Vue Antd Admin',         //系统名称
   copyright: '2018 ICZER 工作室出品',    //copyright
   animate: {                            //动画设置
+    disabled: false,                    //禁用动画，true:禁用，false:启用
     name: 'bounce',                     //动画效果，支持的动画效果可参考 ./animate.config.js
     direction: 'left'                   //动画方向，切换页面时动画的方向，参考 ./animate.config.js
   },

@@ -1,7 +1,7 @@
 <template>
   <transition
-    :enter-active-class="`animated ${enterAnimate} page-toggle-enter-active`"
-    :leave-active-class="`animated ${leaveAnimate} page-toggle-leave-active`"
+    :enter-active-class="disabled ? 'animate-disabled' : `animated ${enterAnimate} page-toggle-enter-active`"
+    :leave-active-class="disabled ? 'animate-disabled' : `animated ${leaveAnimate} page-toggle-leave-active`"
   >
     <slot></slot>
   </transition>
@@ -13,6 +13,10 @@
   export default {
     name: 'PageToggleTransition',
     props: {
+      disabled: {
+        type: Boolean,
+        default: false
+      },
       animate: {
         type: String,
         validator(value) {

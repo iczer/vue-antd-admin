@@ -1,5 +1,5 @@
 <template>
-  <page-toggle-transition :animate="animate.name" :direction="animate.direction">
+  <page-toggle-transition :disabled="animate.disabled" :animate="animate.name" :direction="animate.direction">
     <keep-alive v-if="multiPage">
       <router-view />
     </keep-alive>

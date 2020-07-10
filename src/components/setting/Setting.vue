@@ -68,6 +68,10 @@
     <setting-item :title="$t('animate.title')">
       <a-list :split="false">
         <a-list-item>
+          {{$t('animate.disable')}}
+          <a-switch :checked="animate.disabled" slot="actions" size="small" @change="val => setAnimate({...animate, disabled: val})" />
+        </a-list-item>
+        <a-list-item>
           {{$t('animate.effect')}}
           <a-select
             :value="animate.name"
@@ -139,17 +143,17 @@ export default {
         const dftValue = setting[key], myValue = mySetting[key]
         // 只提取与默认配置不同的配置项
         if (dftValue != undefined && !fastEqual(dftValue, myValue)) {
-          console.log(myValue)
           config[key] = myValue
         }
       })
-      this.copyConfig = '// 自定义配置，参考 ./default/setting.js，需要自定义的属性在这里配置即可\n'
+      this.copyConfig = '// 自定义配置，参考 ./default/setting.config.js，需要自定义的属性在这里配置即可\n'
       this.copyConfig += 'module.exports = '
       this.copyConfig += formatConfig(config)
+
       let clipboard = new Clipboard('#copyBtn')
       const _this = this
       clipboard.on('success', function () {
-        _this.$message.success(`复制成功`)
+        _this.$message.success(`复制成功，覆盖文件 src/config/config.js 然后重启项目即可生效`)
         clipboard.destroy()
       })
     },

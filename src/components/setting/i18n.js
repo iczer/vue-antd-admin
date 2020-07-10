@@ -28,6 +28,7 @@ module.exports = {
       },
       animate: {
         title: '页面切换动画',
+        disable: '禁用动画',
         effect: '动画效果',
         direction: '动画方向'
       },
@@ -62,6 +63,7 @@ module.exports = {
       },
       animate: {
         title: '頁面切換動畫',
+        disable: '禁用動畫',
         effect: '動畫效果',
         direction: '動畫方向'
       },
@@ -96,6 +98,7 @@ module.exports = {
       },
       animate: {
         title: 'Page Toggle Animation',
+        disable: 'Disable',
         effect: 'Effect',
         direction: 'Direction'
       },
