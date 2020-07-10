@@ -1,10 +1,12 @@
 <template>
   <transition
-    :enter-active-class="disabled ? 'animate-disabled' : `animated ${enterAnimate} page-toggle-enter-active`"
-    :leave-active-class="disabled ? 'animate-disabled' : `animated ${leaveAnimate} page-toggle-leave-active`"
+    v-if="!disabled"
+    :enter-active-class="`animated ${enterAnimate} page-toggle-enter-active`"
+    :leave-active-class="`animated ${leaveAnimate} page-toggle-leave-active`"
   >
     <slot></slot>
   </transition>
+  <div v-else><slot></slot></div>
 </template>
 
 <script>
