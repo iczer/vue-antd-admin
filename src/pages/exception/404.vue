@@ -1,16 +1,24 @@
 <template>
-  <exception-page type="404" />
+  <exception-page :style="`margin-top: ${marginTop}px; min-height: ${minHeight}px`" type="404" />
 </template>
 
 <script>
-import ExceptionPage from '../../components/exception/ExceptionPage'
+import ExceptionPage from '@/components/exception/ExceptionPage'
+import {mapState} from 'vuex'
 export default {
-  components: {ExceptionPage}
+  components: {ExceptionPage},
+  inject: ['layoutMinHeight'],
+  computed: {
+    ...mapState('setting', ['multiPage']),
+    marginTop() {
+      return this.multiPage ? -24 : 0
+    },
+    minHeight() {
+      return this.multiPage ? this.layoutMinHeight - 32 : this.layoutMinHeight
+    }
+  }
 }
 </script>
 
 <style scoped lang="less">
-  .exception-page{
-    margin: -24px 0 0;
-  }
 </style>

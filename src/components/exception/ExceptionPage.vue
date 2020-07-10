@@ -1,5 +1,5 @@
 <template>
-  <div class="exception-page" :style="{height: layoutMinHeight - 32 + 'px'}">
+  <div class="exception-page">
     <div class="img">
       <img :src="config[type].img" />
     </div>
@@ -23,8 +23,7 @@ export default {
     return {
       config: Config
     }
-  },
-  inject: ['layoutMinHeight']
+  }
 }
 </script>
 
