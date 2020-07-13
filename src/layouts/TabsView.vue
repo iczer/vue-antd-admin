@@ -2,14 +2,15 @@
   <admin-layout>
     <contextmenu :itemList="menuItemList" :visible.sync="menuVisible" @select="onMenuSelect" />
     <a-tabs
-      @contextmenu.native="e => onContextmenu(e)"
       v-if="multiPage"
+      type="editable-card"
       :active-key="activePage"
       :style="`margin: -16px auto 8px; ${layout == 'head' ? 'max-width: 1400px;' : ''}`"
       :hide-add="true"
-      type="editable-card"
       @change="changePage"
-      @edit="editPage">
+      @edit="editPage"
+      @contextmenu="onContextmenu"
+    >
       <a-tab-pane :key="page.fullPath" v-for="page in pageList">
         <span slot="tab" :pagekey="page.fullPath">{{page.name}}</span>
       </a-tab-pane>
@@ -33,7 +34,7 @@ import {mapState, mapMutations} from 'vuex'
 
 export default {
   name: 'TabsView',
-  components: {PageToggleTransition, Contextmenu, AdminLayout},
+  components: { PageToggleTransition, Contextmenu, AdminLayout },
   data () {
     return {
       pageList: [],
@@ -76,68 +77,43 @@ export default {
       this.$router.push(key)
     },
     editPage (key, action) {
-      this[action](key)
+      this[action](key) // remove
     },
     remove (key) {
       if (this.pageList.length === 1) {
-        this.$message.warning('这是最后一页，不能再关闭了啦')
-        return
+        return this.$message.warning('这是最后一页，不能再关闭了啦')
       }
-      let index = this.pageList.findIndex(item => item.fullPath == key)
+      let index = this.pageList.findIndex(item => item.fullPath === key)
       let pageRoute = this.pageList[index]
       this.clearCache(pageRoute)
       this.pageList = this.pageList.filter(item => item.fullPath !== key)
-      if (key == this.activePage) {
+      if (key === this.activePage) {
         index = index >= this.pageList.length ? this.pageList.length - 1 : index
         this.activePage = this.pageList[index].fullPath
         this.$router.push(this.activePage)
       }
     },
     onContextmenu (e) {
-      const pageKey = this.getPageKey(e.target)
-      if (pageKey !== null) {
+      const pageKey = getPageKey(e.target)
+      if (pageKey) {
         e.preventDefault()
         this.menuVisible = true
       }
     },
-    /**
-     * 由于ant-design-vue组件库的TabPane组件暂不支持自定义监听器，无法直接获取到右键target所在标签页的 pagekey 。故增加此方法用于
-     * 查询右键target所在标签页的标识 pagekey ，以用于自定义右键菜单的事件处理。
-     * 注：TabPane组件支持自定义监听器后可去除该方法并重构 ‘自定义右键菜单的事件处理’
-     * @param target 查询开始目标
-     * @param count 查询层级深度 （查找层级最多不超过3层，超过3层深度直接返回 null）
-     * @returns {String}
-     */
-    getPageKey (target, depth) {
-      depth = depth || 0
-      if (depth > 2) {
-        return null
-      }
-      let pageKey = target.getAttribute('pagekey')
-      pageKey = pageKey || (target.previousElementSibling ? target.previousElementSibling.getAttribute('pagekey') : null)
-      return pageKey || (target.firstElementChild ? this.getPageKey(target.firstElementChild, ++depth) : null)
-    },
     onMenuSelect (key, target) {
-      let pageKey = this.getPageKey(target)
+      let pageKey = getPageKey(target)
       switch (key) {
-        case '1':
-          this.closeLeft(pageKey)
-          break
-        case '2':
-          this.closeRight(pageKey)
-          break
-        case '3':
-          this.closeOthers(pageKey)
-          break
-        default:
-          break
+        case '1': this.closeLeft(pageKey); break
+        case '2': this.closeRight(pageKey); break
+        case '3': this.closeOthers(pageKey); break
+        default: break
       }
     },
     closeOthers (pageKey) {
-      const index = this.pageList.findIndex(item => item.fullPath == pageKey)
+      const index = this.pageList.findIndex(item => item.fullPath === pageKey)
       // 要关闭的页面清除缓存
       this.pageList.forEach(item => {
-        if (item.fullPath != pageKey){
+        if (item.fullPath !== pageKey){
           this.clearCache(item)
         }
       })
@@ -146,7 +122,7 @@ export default {
       this.$router.push(this.activePage)
     },
     closeLeft (pageKey) {
-      const index = this.pageList.findIndex(item => item.fullPath == pageKey)
+      const index = this.pageList.findIndex(item => item.fullPath === pageKey)
       // 清除缓存
       this.pageList.forEach((item, i) => {
         if (i < index) {
@@ -154,13 +130,13 @@ export default {
         }
       })
       this.pageList = this.pageList.slice(index)
-      if (this.pageList.findIndex(item => item.fullPath == this.activePage) == -1) {
+      if (this.pageList.findIndex(item => item.fullPath === this.activePage) === -1) {
         this.activePage = this.pageList[0].fullPath
         this.$router.push(this.activePage)
       }
     },
     closeRight (pageKey) {
-      const index = this.pageList.findIndex(item => item.fullPath == pageKey)
+      const index = this.pageList.findIndex(item => item.fullPath === pageKey)
       // 清除缓存
       this.pageList.forEach((item, i) => {
         if (i > index) {
@@ -168,26 +144,39 @@ export default {
         }
       })
       this.pageList = this.pageList.slice(0, index + 1)
-      if (this.pageList.findIndex(item => item.fullPath == this.activePage) == -1) {
+      if (this.pageList.findIndex(item => item.fullPath === this.activePage) === -1) {
         this.activePage = this.pageList[this.pageList.length - 1].fullPath
         this.$router.push(this.activePage)
       }
     },
     clearCache(route) {
       const componentName = route.matched.slice(-1)[0].components.default.name
-      if (this.dustbins.findIndex(item => item == componentName) == -1) {
+      if (this.dustbins.findIndex(item => item === componentName) === -1) {
         this.setDustbins(this.dustbins.concat(componentName))
       }
     },
     putCache(route) {
       const componentName = route.matched.slice(-1)[0].components.default.name
-      if (this.dustbins.findIndex(item => item == componentName) != -1) {
-        this.setDustbins(this.dustbins.filter(item => item != componentName))
+      if (this.dustbins.includes(componentName)) {
+        this.setDustbins(this.dustbins.filter(item => item !== componentName))
       }
-
     },
     ...mapMutations('setting', ['setDustbins'])
   }
+}
+/**
+ * 由于ant-design-vue组件库的TabPane组件暂不支持自定义监听器，无法直接获取到右键target所在标签页的 pagekey 。故增加此方法用于
+ * 查询右键target所在标签页的标识 pagekey ，以用于自定义右键菜单的事件处理。
+ * 注：TabPane组件支持自定义监听器后可去除该方法并重构 ‘自定义右键菜单的事件处理’
+ * @param target 查询开始目标
+ * @param depth 查询层级深度 （查找层级最多不超过3层，超过3层深度直接返回 null）
+ * @returns {String}
+ */
+function getPageKey (target, depth = 0) {
+  if (depth > 2 || !target) {
+    return null
+  }
+  return target.getAttribute('pagekey') || getPageKey(target.firstElementChild, ++depth)
 }
 </script>
 
