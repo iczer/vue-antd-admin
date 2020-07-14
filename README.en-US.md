@@ -50,3 +50,4 @@ Any type of contribution is welcome, here are some examples of how you may contr
 - Use Vue Antd Admin in your daily work.
 - Submit [Issue](https://github.com/iczer/vue-antd-admin/issues) to report :bug: or ask questions.
 - Propose [Pull Request](https://github.com/iczer/vue-antd-admin/pulls) to improve our code.
+- Join the community and share your experiences with us. QQ Group: 610090280
