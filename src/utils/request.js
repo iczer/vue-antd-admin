@@ -6,7 +6,7 @@ const METHOD = {
 }
 
 /**
- * axios请求函数
+ * axios请求
  * @param url 请求地址
  * @param method {METHOD} http method
  * @param params 请求参数

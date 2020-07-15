@@ -100,22 +100,21 @@ export default {
           this.logging = true
           const name = this.form.getFieldValue('name')
           const password = this.form.getFieldValue('password')
-          // 登录
-          login(name, password)
-          .then((res) => {
-            this.logging = false
-            const result = res.data
-            if (result.code >= 0) {
-              const user = result.data.user
-              this.$router.push('/dashboard/workplace')
-              this.$store.commit('account/setUser', user)
-              this.$message.success(result.message, 3)
-            } else {
-              this.error = result.message
-            }
-          })
+          login(name, password).then(this.afterLogin)
         }
       })
+    },
+    afterLogin(res) {
+      this.logging = false
+      const result = res.data
+      if (result.code >= 0) {
+        const user = result.data.user
+        this.$router.push('/dashboard/workplace')
+        this.$store.commit('account/setUser', user)
+        this.$message.success(result.message, 3)
+      } else {
+        this.error = result.message
+      }
     }
   }
 }

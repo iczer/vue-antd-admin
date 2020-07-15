@@ -7,7 +7,7 @@ import {request, METHOD} from '@/utils/request'
  * @param password 账户密码
  * @returns {Promise<AxiosResponse<T>>}
  */
-function login(name, password) {
+async function login(name, password) {
   return request(LOGIN, METHOD.POST, {
     name: name,
     password: password
