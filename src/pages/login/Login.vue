@@ -75,6 +75,7 @@
 
 <script>
 import CommonLayout from '@/layouts/CommonLayout'
+import {login} from '@/services'
 
 export default {
   name: 'Login',
@@ -97,10 +98,11 @@ export default {
       this.form.validateFields((err) => {
         if (!err) {
           this.logging = true
-          this.$axios.post('/login', {
-            name: this.form.getFieldValue('name'),
-            password: this.form.getFieldValue('password')
-          }).then((res) => {
+          const name = this.form.getFieldValue('name')
+          const password = this.form.getFieldValue('password')
+          // 登录
+          login(name, password)
+          .then((res) => {
             this.logging = false
             const result = res.data
             if (result.code >= 0) {
