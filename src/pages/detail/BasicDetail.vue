@@ -18,6 +18,7 @@
         <a-divider style="margin-bottom: 32px"/>
         <div class="title">退货商品</div>
         <a-table
+          row-key="id"
           style="margin-bottom: 24px"
           :columns="goodsColumns"
           :dataSource="goodsData"

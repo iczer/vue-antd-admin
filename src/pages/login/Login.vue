@@ -8,23 +8,28 @@
       <div class="desc">Ant Design 是西湖区最具影响力的 Web 设计规范</div>
     </div>
     <div class="login">
-      <a-form @submit="onSubmit" :autoFormCreate="(form) => this.form = form">
+      <a-form @submit="onSubmit" :form="form">
         <a-tabs size="large" :tabBarStyle="{textAlign: 'center'}" style="padding: 0 2px;">
           <a-tab-pane tab="账户密码登录" key="1">
             <a-alert type="error" :closable="true" v-show="error" :message="error" showIcon style="margin-bottom: 24px;" />
-            <a-form-item
-              fieldDecoratorId="name"
-              :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入账户名', whitespace: true}]}"
-            >
-              <a-input size="large" placeholder="admin" >
+            <a-form-item>
+              <a-input
+                autocomplete="autocomplete"
+                size="large"
+                placeholder="admin"
+                v-decorator="['name', {rules: [{ required: true, message: '请输入账户名', whitespace: true}]}]"
+              >
                 <a-icon slot="prefix" type="user" />
               </a-input>
             </a-form-item>
-            <a-form-item
-              fieldDecoratorId="password"
-              :fieldDecoratorOptions="{rules: [{ required: true, message: '请输入密码', whitespace: true}]}"
-            >
-              <a-input size="large" placeholder="888888" type="password">
+            <a-form-item>
+              <a-input
+                size="large"
+                placeholder="888888"
+                autocomplete="autocomplete"
+                type="password"
+                v-decorator="['password', {rules: [{ required: true, message: '请输入密码', whitespace: true}]}]"
+              >
                 <a-icon slot="prefix" type="lock" />
               </a-input>
             </a-form-item>
@@ -77,7 +82,8 @@ export default {
   data () {
     return {
       logging: false,
-      error: ''
+      error: '',
+      form: this.$form.createForm(this)
     }
   },
   computed: {
