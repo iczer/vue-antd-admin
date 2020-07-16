@@ -97,7 +97,14 @@
         :dataSource="dataSource"
         :selectedRows="selectedRows"
         @change="onchange"
-      />
+      >
+        <div slot="description" slot-scope="{text}">
+          {{text}}
+        </div>
+        <div slot="action" slot-scope="{text, record, index}">
+          <a-icon type="edit" />{{index}}
+        </div>
+      </standard-table>
     </div>
   </a-card>
 </template>
@@ -111,7 +118,8 @@ const columns = [
   },
   {
     title: '描述',
-    dataIndex: 'description'
+    dataIndex: 'description',
+    scopedSlots: { customRender: 'description' }
   },
   {
     title: '服务调用次数',
@@ -129,6 +137,10 @@ const columns = [
     title: '更新时间',
     dataIndex: 'updatedAt',
     sorter: true
+  },
+  {
+    title: '操作',
+    scopedSlots: { customRender: 'action' }
   }
 ]
 

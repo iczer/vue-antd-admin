@@ -25,6 +25,9 @@
       :pagination="pagination"
       :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: updateSelect}"
     >
+      <template slot-scope="text, record, index" :slot="slot" v-for="slot in scopedSlots">
+        <slot :name="slot" v-bind="{text, record, index}"></slot>
+      </template>
     </a-table>
   </div>
 </template>
@@ -36,7 +39,8 @@ export default {
   data () {
     return {
       needTotalList: [],
-      selectedRowKeys: []
+      selectedRowKeys: [],
+      scopedSlots: []
     }
   },
   methods: {
@@ -61,9 +65,14 @@ export default {
         }
       })
       return totalList
+    },
+    getScopedSlots(columns) {
+      return columns.filter(item => item.scopedSlots && item.scopedSlots.customRender)
+        .map(item => item.scopedSlots.customRender)
     }
   },
   created () {
+    this.scopedSlots = this.getScopedSlots(this.columns)
     this.needTotalList = this.initTotalList(this.columns)
   },
   watch: {
