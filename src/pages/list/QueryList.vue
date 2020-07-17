@@ -95,8 +95,8 @@
       <standard-table
         :columns="columns"
         :dataSource="dataSource"
-        :selectedRows="selectedRows"
-        @change="onchange"
+        :selectedRows.sync="selectedRows"
+        @clear="onClear"
       >
         <div slot="description" slot-scope="{text}">
           {{text}}
@@ -110,7 +110,7 @@
 </template>
 
 <script>
-import StandardTable from '../../components/table/StandardTable'
+import StandardTable from '@/components/table/StandardTable'
 const columns = [
   {
     title: '规则编号',
@@ -165,7 +165,6 @@ export default {
       advanced: true,
       columns: columns,
       dataSource: dataSource,
-      selectedRowKeys: [],
       selectedRows: []
     }
   },
@@ -173,13 +172,12 @@ export default {
     toggleAdvanced () {
       this.advanced = !this.advanced
     },
-    onchange (selectedRowKeys, selectedRows) {
-      this.selectedRowKeys = selectedRowKeys
-      this.selectedRows = selectedRows
-    },
     remove () {
-      this.dataSource = this.dataSource.filter(item => this.selectedRowKeys.indexOf(item.key) < 0)
-      this.selectedRows = this.selectedRows.filter(item => this.selectedRowKeys.indexOf(item.key) < 0)
+      this.dataSource = this.dataSource.filter(item => this.selectedRows.findIndex(row => row.key === item.key) === -1)
+      this.selectedRows = []
+    },
+    onClear() {
+      this.$message.info('您清空了勾选的所有行')
     },
     addNew () {
       this.dataSource.unshift({

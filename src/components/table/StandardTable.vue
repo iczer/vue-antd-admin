@@ -2,17 +2,14 @@
   <div class="standard-table">
     <div class="alert">
       <a-alert type="info" :show-icon="true">
-        <div slot="message">
-          已选择&nbsp;<a style="font-weight: 600">{{selectedRows.length}}</a>&nbsp;项&nbsp;&nbsp;
-          <div  v-for="(item, index) in needTotalList" :key="index">
-            <div v-if="item.needTotal">
+        <div class="message" slot="message">
+          已选择&nbsp;<a>{{selectedRows.length}}</a>&nbsp;项 <a class="clear" @click="onClear">清空</a>
+          <template  v-for="(item, index) in needTotalList" >
+            <div v-if="item.needTotal" :key="index">
               {{item.title}}总计&nbsp;
-              <a :key="index" style="font-weight: 600">
-                {{item.customRender ? item.customRender(item.total) : item.total}}
-              </a>&nbsp;&nbsp;
+              <a>{{item.customRender ? item.customRender(item.total) : item.total}}</a>
             </div>
-          </div>
-          <a style="margin-left: 24px">清空</a>
+          </template>
         </div>
       </a-alert>
     </div>
@@ -39,22 +36,12 @@ export default {
   data () {
     return {
       needTotalList: [],
-      selectedRowKeys: [],
       scopedSlots: []
     }
   },
   methods: {
     updateSelect (selectedRowKeys, selectedRows) {
-      this.selectedRowKeys = selectedRowKeys
-      let list = this.needTotalList
-      this.needTotalList = list.map(item => {
-        return {
-          ...item,
-          total: selectedRows.reduce((sum, val) => {
-            return sum + val[item.dataIndex]
-          }, 0)
-        }
-      })
+      this.$emit('update:selectedRows', selectedRows)
       this.$emit('change', selectedRowKeys, selectedRows)
     },
     initTotalList (columns) {
@@ -69,6 +56,10 @@ export default {
     getScopedSlots(columns) {
       return columns.filter(item => item.scopedSlots && item.scopedSlots.customRender)
         .map(item => item.scopedSlots.customRender)
+    },
+    onClear() {
+      this.updateSelect([], [])
+      this.$emit('clear')
     }
   },
   created () {
@@ -76,7 +67,7 @@ export default {
     this.needTotalList = this.initTotalList(this.columns)
   },
   watch: {
-    'selectedRows': function (selectedRows) {
+    selectedRows (selectedRows) {
       this.needTotalList = this.needTotalList.map(item => {
         return {
           ...item,
@@ -86,12 +77,27 @@ export default {
         }
       })
     }
+  },
+  computed: {
+    selectedRowKeys() {
+      return this.selectedRows.map(row => row.key)
+    }
   }
 }
 </script>
 
-<style scoped>
+<style scoped lang="less">
+.standard-table{
   .alert{
     margin-bottom: 16px;
+    .message{
+      a{
+        font-weight: 600;
+      }
+    }
+    .clear{
+      float: right;
+    }
   }
+}
 </style>
