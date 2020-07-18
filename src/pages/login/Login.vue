@@ -76,6 +76,7 @@
 <script>
 import CommonLayout from '@/layouts/CommonLayout'
 import {login} from '@/services'
+import Cookie from 'js-cookie'
 
 export default {
   name: 'Login',
@@ -111,6 +112,7 @@ export default {
         const user = result.data.user
         this.$router.push('/dashboard/workplace')
         this.$store.commit('account/setUser', user)
+        Cookie.set('token', result.data.token)
         this.$message.success(result.message, 3)
       } else {
         this.error = result.message

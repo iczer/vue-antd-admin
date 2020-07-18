@@ -1,4 +1,12 @@
 import axios from 'axios'
+import Cookie from 'js-cookie'
+axios.defaults.timeout = 5000
+axios.defaults.withCredentials= true
+
+const cookies = Cookie.get()
+Object.keys(cookies).forEach(key => {
+  axios.defaults.headers.common[key] = cookies[key]
+})
 
 const METHOD = {
   GET: 'get',

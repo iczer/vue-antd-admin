@@ -22,6 +22,7 @@
     "core-js": "^3.6.5",
     "date-fns": "^2.14.0",
     "enquire.js": "^2.1.6",
+    "js-cookie": "^2.2.1",
     "mockjs": "^1.1.0",
     "pouchdb": "^7.2.1",
     "viser-vue": "^2.4.8",

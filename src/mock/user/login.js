@@ -22,6 +22,7 @@ Mock.mock('/login', 'post', ({body}) => {
     result.message = Mock.mock('@TIMEFIX').CN + '，欢迎回来'
     result.data = {}
     result.data.user = user
+    result.data.token = 'Authorization'
   }
   return result
 })
