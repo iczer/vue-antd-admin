@@ -12,7 +12,7 @@
       @contextmenu="onContextmenu"
     >
       <a-tab-pane :key="page.fullPath" v-for="page in pageList">
-        <span slot="tab" :pagekey="page.fullPath">{{page.name}}</span>
+        <span slot="tab" :pagekey="page.fullPath">{{pageName(page.path)}}</span>
       </a-tab-pane>
     </a-tabs>
     <div class="tabs-view-content">
@@ -27,13 +27,14 @@
 </template>
 
 <script>
-import AdminLayout from './AdminLayout'
-import Contextmenu from '../components/menu/Contextmenu'
-import PageToggleTransition from '../components/transition/PageToggleTransition'
+import AdminLayout from '@/layouts/AdminLayout'
+import Contextmenu from '@/components/menu/Contextmenu'
+import PageToggleTransition from '@/components/transition/PageToggleTransition'
 import {mapState, mapMutations} from 'vuex'
 
 export default {
   name: 'TabsView',
+  i18n: require('./i18n'),
   components: { PageToggleTransition, Contextmenu, AdminLayout },
   data () {
     return {
@@ -48,12 +49,16 @@ export default {
     }
   },
   computed: {
-    ...mapState('setting', ['multiPage', 'animate', 'layout', 'dustbins'])
+    ...mapState('setting', ['multiPage', 'animate', 'layout', 'dustbins', 'routesI18n'])
   },
   created () {
     const route = this.$route
     this.pageList.push(route)
     this.activePage = route.fullPath
+    let i18n = this.routesI18n
+    Object.keys(i18n).forEach(key => {
+      this.$i18n.mergeLocaleMessage(key, i18n[key])
+    })
   },
   watch: {
     '$route': function (newRoute) {
@@ -81,7 +86,7 @@ export default {
     },
     remove (key) {
       if (this.pageList.length === 1) {
-        return this.$message.warning('这是最后一页，不能再关闭了啦')
+        return this.$message.warning(this.$t('warn'))
       }
       let index = this.pageList.findIndex(item => item.fullPath === key)
       let pageRoute = this.pageList[index]
@@ -160,6 +165,9 @@ export default {
       if (this.dustbins.includes(componentName)) {
         this.setDustbins(this.dustbins.filter(item => item !== componentName))
       }
+    },
+    pageName(path) {
+      return this.$t(path.substring(1).replace(new RegExp('/', 'g'), '.') + '.name')
     },
     ...mapMutations('setting', ['setDustbins'])
   }

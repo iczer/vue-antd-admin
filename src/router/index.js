@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import PageView from '@/layouts/PageView'
 import BlankView from '@/layouts/BlankView'
-import TabsView from '@/layouts/TabsView'
+import TabsView from '@/layouts/tabs/TabsView'
 import Login from '@/pages/login/Login'
 
 Vue.use(Router)
