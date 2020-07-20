@@ -40,16 +40,18 @@ export default {
     return {
       pageList: [],
       activePage: '',
-      menuVisible: false,
-      menuItemList: [
-        { key: '1', icon: 'arrow-left', text: '关闭左侧' },
-        { key: '2', icon: 'arrow-right', text: '关闭右侧' },
-        { key: '3', icon: 'close', text: '关闭其它' }
-      ]
+      menuVisible: false
     }
   },
   computed: {
-    ...mapState('setting', ['multiPage', 'animate', 'layout', 'dustbins', 'routesI18n'])
+    ...mapState('setting', ['multiPage', 'animate', 'layout', 'dustbins', 'routesI18n']),
+    menuItemList() {
+      return [
+        { key: '1', icon: 'vertical-right', text: this.$t('closeLeft') },
+        { key: '2', icon: 'vertical-left', text: this.$t('closeRight') },
+        { key: '3', icon: 'close', text: this.$t('closeOthers') }
+      ]
+    }
   },
   created () {
     const route = this.$route
