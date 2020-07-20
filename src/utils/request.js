@@ -1,13 +1,23 @@
 import axios from 'axios'
 import Cookie from 'js-cookie'
+
+// 跨域认证信息 header 名
+const xsrfHeaderName = 'Authorization'
+
 axios.defaults.timeout = 5000
 axios.defaults.withCredentials= true
+axios.defaults.xsrfHeaderName= xsrfHeaderName
+axios.defaults.xsrfCookieName= xsrfHeaderName
 
-// const cookies = Cookie.get()
-// Object.keys(cookies).forEach(key => {
-//   axios.defaults.headers.common[key] = cookies[key]
-// })
+// 认证类型
+const AUTH_TYPE = {
+  BEARER: 'Bearer',
+  BASIC: 'basic',
+  AUTH1: 'auth1',
+  AUTH2: 'auth2',
+}
 
+// http method
 const METHOD = {
   GET: 'get',
   POST: 'post'
@@ -21,20 +31,37 @@ const METHOD = {
  * @returns {Promise<AxiosResponse<T>>}
  */
 async function request(url, method, params) {
-  // header 加入 token
-  const token = Cookie.get('Authorization')
-  const config = token ? {headers: {Authorization: token}} : {}
   switch (method) {
     case METHOD.GET:
-      return axios.get(url, {params, ...config})
+      return axios.get(url, {params})
     case METHOD.POST:
-      return axios.post(url, params, config)
+      return axios.post(url, params)
     default:
-      return axios.get(url, {params, ...config})
+      return axios.get(url, {params})
+  }
+}
+
+/**
+ * 设置认证信息
+ * @param token {Object}
+ * @param authType {AUTH_TYPE} 认证类型，默认：{AUTH_TYPE.BEARER}
+ */
+function setAuthorization(auth, authType = AUTH_TYPE.BEARER) {
+  switch (authType) {
+    case AUTH_TYPE.BEARER:
+      Cookie.set(xsrfHeaderName, 'Bearer ' + auth.token)
+      break
+    case AUTH_TYPE.BASIC:
+    case AUTH_TYPE.AUTH1:
+    case AUTH_TYPE.AUTH2:
+    default:
+      break
   }
 }
 
 export {
   METHOD,
-  request
+  AUTH_TYPE,
+  request,
+  setAuthorization
 }
