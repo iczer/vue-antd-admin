@@ -1,5 +1,5 @@
 import {LOGIN} from '@/services/api'
-import {request, METHOD} from '@/utils/request'
+import {request, METHOD, removeAuthorization} from '@/utils/request'
 
 /**
  * 登录服务
@@ -14,4 +14,11 @@ async function login(name, password) {
   })
 }
 
-export {login}
+/**
+ * 退出登录
+ */
+function logout() {
+  removeAuthorization()
+}
+
+export {login, logout}

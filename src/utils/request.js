@@ -43,13 +43,13 @@ async function request(url, method, params) {
 
 /**
  * 设置认证信息
- * @param token {Object}
+ * @param auth {Object}
  * @param authType {AUTH_TYPE} 认证类型，默认：{AUTH_TYPE.BEARER}
  */
 function setAuthorization(auth, authType = AUTH_TYPE.BEARER) {
   switch (authType) {
     case AUTH_TYPE.BEARER:
-      Cookie.set(xsrfHeaderName, 'Bearer ' + auth.token)
+      Cookie.set(xsrfHeaderName, 'Bearer ' + auth.token, {expires: auth.expireAt})
       break
     case AUTH_TYPE.BASIC:
     case AUTH_TYPE.AUTH1:
@@ -59,9 +59,49 @@ function setAuthorization(auth, authType = AUTH_TYPE.BEARER) {
   }
 }
 
+/**
+ * 移出认证信息
+ * @param authType {AUTH_TYPE} 认证类型
+ */
+function removeAuthorization(authType = AUTH_TYPE.BEARER) {
+  switch (authType) {
+    case AUTH_TYPE.BEARER:
+      Cookie.remove(xsrfHeaderName)
+      break
+    case AUTH_TYPE.BASIC:
+    case AUTH_TYPE.AUTH1:
+    case AUTH_TYPE.AUTH2:
+    default:
+      break
+  }
+}
+
+/**
+ * 检查认证信息
+ * @param authType
+ * @returns {boolean}
+ */
+function checkAuthorization(authType = AUTH_TYPE.BEARER) {
+  switch (authType) {
+    case AUTH_TYPE.BEARER:
+      if (Cookie.get(xsrfHeaderName)) {
+        return true
+      }
+      break
+    case AUTH_TYPE.BASIC:
+    case AUTH_TYPE.AUTH1:
+    case AUTH_TYPE.AUTH2:
+    default:
+      break
+  }
+  return false
+}
+
 export {
   METHOD,
   AUTH_TYPE,
   request,
-  setAuthorization
+  setAuthorization,
+  removeAuthorization,
+  checkAuthorization
 }

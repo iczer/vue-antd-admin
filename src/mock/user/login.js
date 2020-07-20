@@ -21,6 +21,7 @@ Mock.mock('/login', 'post', ({body}) => {
     result.data = {}
     result.data.user = user
     result.data.token = 'Authorization:' + Math.random()
+    result.data.expireAt = new Date(new Date().getTime() + 30 * 60 * 1000)
   }
   return result
 })

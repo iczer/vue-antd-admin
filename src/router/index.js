@@ -1,4 +1,5 @@
 import Vue from 'vue'
+import {checkAuthorization} from '@/utils/request'
 import Router from 'vue-router'
 import PageView from '@/layouts/PageView'
 import BlankView from '@/layouts/BlankView'
@@ -7,7 +8,7 @@ import Login from '@/pages/login/Login'
 
 Vue.use(Router)
 
-export default new Router({
+const router =  new Router({
   routes: [
     {
       path: '/login',
@@ -201,3 +202,14 @@ export default new Router({
     }
   ]
 })
+
+// 登录拦截
+router.beforeEach((to, from, next) => {
+  if (to.path !== '/login' && !checkAuthorization()) {
+    next({path: '/login'})
+  } else {
+    next()
+  }
+})
+
+export default router

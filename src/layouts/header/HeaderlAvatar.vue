@@ -15,10 +15,10 @@
       </a-menu-item>
       <a-menu-divider />
       <a-menu-item>
-        <router-link to="/login">
+        <a @click="logout">
           <a-icon type="poweroff" />
           <span>退出登录</span>
-        </router-link>
+        </a>
       </a-menu-item>
     </a-menu>
   </a-dropdown>
@@ -26,12 +26,18 @@
 
 <script>
 import {mapState} from 'vuex'
+import {logout} from '@/services'
 
 export default {
   name: 'HeaderAvatar',
   computed: {
-    ...mapState('setting', ['weekMode']),
     ...mapState('account', ['user']),
+  },
+  methods: {
+    logout() {
+      logout()
+      this.$router.push('/login')
+    }
   }
 }
 </script>
