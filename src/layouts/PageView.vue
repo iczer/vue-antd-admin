@@ -26,7 +26,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('setting', ['isMobile', 'multiPage', 'animate', 'routesI18n', 'dustbins']),
+    ...mapState('setting', ['isMobile', 'multiPage', 'animate', 'dustbins']),
     desc() {
       return this.page.desc
     },

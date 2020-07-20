@@ -8,7 +8,7 @@
       <a-divider v-if="isMobile" type="vertical" />
       <a-icon v-if="layout === 'side'" class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
       <div v-if="layout == 'head' && !isMobile" class="admin-header-menu">
-        <i-menu class="head-menu" style="height: 64px; line-height: 64px;box-shadow: none" @i18nComplete="setRoutesI18n" :i18n="menuI18n" :theme="headerTheme" mode="horizontal" :options="menuData" @select="onSelect"/>
+        <i-menu class="head-menu" style="height: 64px; line-height: 64px;box-shadow: none" :theme="headerTheme" mode="horizontal" :options="menuData" @select="onSelect"/>
       </div>
       <div :class="['admin-header-right', headerTheme]">
           <header-search class="header-item" />
@@ -43,7 +43,6 @@ export default {
   name: 'AdminHeader',
   components: {IMenu, HeaderAvatar, HeaderNotice, HeaderSearch},
   props: ['collapsed', 'menuData'],
-  inject: ['menuI18n'],
   data() {
     return {
       langList: [
@@ -73,7 +72,7 @@ export default {
     onSelect (obj) {
       this.$emit('menuSelect', obj)
     },
-    ...mapMutations('setting', ['setLang', 'setRoutesI18n'])
+    ...mapMutations('setting', ['setLang'])
   }
 }
 </script>

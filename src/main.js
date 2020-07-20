@@ -7,22 +7,15 @@ import Viser from 'viser-vue'
 import '@/mock'
 import store from './store'
 import 'animate.css/source/animate.css'
-import VueI18n from 'vue-i18n'
 import Plugins from '@/plugins'
+import {initI18n} from '@/utils/i18n'
 
 Vue.config.productionTip = false
 Vue.use(Viser)
 Vue.use(Antd)
-Vue.use(VueI18n)
 Vue.use(Plugins)
 
-
-
-const i18n = new VueI18n({
-  locale: 'CN',
-  fallbackLocale: 'US',
-  silentFallbackWarn: true
-})
+const i18n = initI18n(router, 'CN', 'US')
 
 new Vue({
   router,

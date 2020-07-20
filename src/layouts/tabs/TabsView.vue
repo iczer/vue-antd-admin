@@ -44,7 +44,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('setting', ['multiPage', 'animate', 'layout', 'dustbins', 'routesI18n']),
+    ...mapState('setting', ['multiPage', 'animate', 'layout', 'dustbins']),
     menuItemList() {
       return [
         { key: '1', icon: 'vertical-right', text: this.$t('closeLeft') },
@@ -57,10 +57,6 @@ export default {
     const route = this.$route
     this.pageList.push(route)
     this.activePage = route.fullPath
-    let i18n = this.routesI18n
-    Object.keys(i18n).forEach(key => {
-      this.$i18n.mergeLocaleMessage(key, i18n[key])
-    })
   },
   watch: {
     '$route': function (newRoute) {

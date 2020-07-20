@@ -31,7 +31,6 @@
  **/
 import Menu from 'ant-design-vue/es/menu'
 import Icon from 'ant-design-vue/es/icon'
-import '@/utils/Objects'
 
 const {Item, SubMenu} = Menu
 
@@ -78,21 +77,15 @@ export default {
       return this.theme == 'light' ? this.theme : 'dark'
     }
   },
-  beforeMount() {
-    let CN = this.generateI18n(new Object(), this.options, 'name')
-    let US = this.generateI18n(new Object(), this.options, 'path')
-    this.$i18n.setLocaleMessage('CN', CN)
-    this.$i18n.setLocaleMessage('US', US)
-    if(this.i18n) {
-      Object.keys(this.i18n).forEach(key => {
-        this.$i18n.mergeLocaleMessage(key, this.i18n[key])
-      })
-    }
-    this.$emit('i18nComplete', this.$i18n._getMessages())
-  },
   created () {
     this.updateMenu()
-    this.formatOptions(this.options, '')
+    // 自定义国际化配置
+    if(this.i18n && this.i18n.messages) {
+      const messages = this.i18n.messages
+      Object.keys(messages).forEach(key => {
+        this.$i18n.mergeLocaleMessage(key, messages[key])
+      })
+    }
   },
   watch: {
     collapsed (val) {
@@ -198,16 +191,6 @@ export default {
         return this.getSelectedKey(route.parent)
       }
       return route.path
-    },
-    generateI18n(lang, options, valueKey) {
-      options.forEach(menu => {
-        let keys = menu.fullPath.substring(1).split('/').concat('name')
-        lang.assignProps(keys, menu[valueKey])
-        if (menu.children) {
-          this.generateI18n(lang, menu.children, valueKey)
-        }
-      })
-      return lang
     }
   },
   render (h) {

@@ -1,6 +1,6 @@
 <template>
   <div class="page-layout">
-    <page-header :i18n="routesI18n" :breadcrumb="breadcrumb" :title="pageTitle" :logo="logo" :avatar="avatar">
+    <page-header :breadcrumb="breadcrumb" :title="pageTitle" :logo="logo" :avatar="avatar">
       <slot name="action"  slot="action"></slot>
       <slot slot="content" name="headerContent"></slot>
       <div slot="content" v-if="!this.$slots.headerContent && desc">
@@ -37,14 +37,10 @@ export default {
     }
   },
   created() {
-    let i18n = this.routesI18n
-    Object.keys(i18n).forEach(key => {
-      this.$i18n.mergeLocaleMessage(key, i18n[key])
-    })
     this.page = this.$route.meta.page
   },
   computed: {
-    ...mapState('setting', ['layout', 'routesI18n']),
+    ...mapState('setting', ['layout']),
     pageTitle() {
       let pageTitle = this.page && this.page.title
       return this.title || this.$t(pageTitle) || this.routeName
