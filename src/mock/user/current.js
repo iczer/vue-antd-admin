@@ -1,19 +1,11 @@
 import Mock from 'mockjs'
 import '@/mock/extend'
 
-const userDB = Mock.mock({
-  'list|2-10': [
-    {
-      name: '@ADMIN',
-      avatar: '@AVATAR',
-      address: '@CITY',
-      welcome: '@WELCOME',
-      timeFix: '@TIMEFIX',
-      position: '@position'
-    }
-  ]
-}).list
+const welcome = Mock.mock({
+  timeFix: '@TIMEFIX',
+  message: '@WELCOME'
+})
 
-Mock.mock('/user/current', 'get', () => {
-  return userDB[0]
+Mock.mock('/user/welcome', 'get', () => {
+  return welcome
 })

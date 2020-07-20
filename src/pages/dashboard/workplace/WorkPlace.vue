@@ -1,8 +1,8 @@
 <template>
   <page-layout :avatar="currUser.avatar">
     <div slot="headerContent">
-      <div class="title">{{$t('timeFix')}}，{{currUser.name}}，{{$t('welcome')}}</div>
-      <div>{{$t('position')}}</div>
+      <div class="title">{{welcome.timeFix[lang]}}，{{currUser.name}}，{{welcome.message[lang]}}</div>
+      <div>{{currUser.position[lang]}}</div>
     </div>
     <template slot="extra">
       <head-info class="split-right" :title="$t('project')" content="56"/>
@@ -79,10 +79,11 @@
 </template>
 
 <script>
-import PageLayout from '../../../layouts/PageLayout'
-import HeadInfo from '../../../components/tool/HeadInfo'
-import Radar from '../../../components/chart/Radar'
+import PageLayout from '@/layouts/PageLayout'
+import HeadInfo from '@/components/tool/HeadInfo'
+import Radar from '@/components/chart/Radar'
 import {mapState} from 'vuex'
+import {request, METHOD} from '@/utils/request'
 
 export default {
   name: 'WorkPlace',
@@ -94,53 +95,24 @@ export default {
       loading: true,
       activities: [],
       teams: [],
+      welcome: {
+        timeFix: '',
+        message: ''
+      }
     }
   },
-  created() {
-    let user = this.currUser
-    let langList = ['CN', 'HK', 'US']
-    langList.forEach(lang => {
-      this.$i18n.mergeLocaleMessage(lang, {
-        timeFix: user.timeFix[lang],
-        welcome: user.welcome[lang],
-        position: user.position[lang]
-      })
-    })
-  },
   computed: {
-    ...mapState('account', {currUser: 'user'})
+    ...mapState('account', {currUser: 'user'}),
+    ...mapState('setting', ['lang'])
   },
-  mounted () {
-    this.getProjectList()
-    this.getActivites()
-    this.getTeams()
-  },
-  methods: {
-    getProjectList () {
-      this.$axios({
-        method: 'get',
-        url: '/project'
-      }).then(res => {
+  beforeCreate() {
+    request('/user/welcome', METHOD.GET).then(res => this.welcome = res.data)
+    request('/work/activity', METHOD.GET).then(res => this.activities = res.data)
+    request('/work/team', METHOD.GET).then(res => this.teams = res.data)
+    request('/project', METHOD.GET).then(res => {
         this.projects = res.data
         this.loading = false
       })
-    },
-    getActivites () {
-      this.$axios({
-        method: 'get',
-        url: '/work/activity'
-      }).then(res => {
-        this.activities = res.data
-      })
-    },
-    getTeams () {
-      this.$axios({
-        method: 'get',
-        url: '/work/team'
-      }).then(res => {
-        this.teams = res.data
-      })
-    }
   }
 }
 </script>
