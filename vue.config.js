@@ -40,7 +40,7 @@ module.exports = {
       }
     }
   },
-  publicPath: './',
+  publicPath: process.env.NODE_ENV === 'production' ? '/vue-antd-admin/' : '/',
   outputDir: 'dist',
   assetsDir: 'static',
   productionSourceMap: false
