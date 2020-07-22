@@ -25,7 +25,7 @@ export default {
     position: relative;
     width: 100%;
     .wrap {
-      background-color: @bg-color;
+      background-color: @layout-bg-color;
       position: relative;
     }
     .progress {

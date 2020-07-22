@@ -1,6 +1,7 @@
 const varyColor = require('webpack-theme-color-replacer/client/varyColor')
 const generate =  require('@ant-design/colors/lib/generate').default
 const {ADMIN, ANTD} = require('../config/default')
+const Config = require('../config')
 
 const themeMode = ADMIN.theme.mode
 
@@ -13,7 +14,11 @@ function getAntdColors(color, mode) {
 // 获取功能性颜色
 function getFunctionalColors(mode) {
   let options = mode && (mode == themeMode.NIGHT) ? {theme: 'dark'} : undefined
-  const {success, warning, error} = ANTD.primary
+  let {success, warning, error} = ANTD.primary
+  const  {success: s1, warning: w1, error: e1} = Config.theme
+  success = success && s1
+  warning = success && w1
+  error = success && e1
   const successColors = generate(success, options)
   const warningColors = generate(warning, options)
   const errorColors = generate(error, options)
