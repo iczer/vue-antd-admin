@@ -16,6 +16,7 @@ module.exports = {
       new ThemeColorReplacer({
         fileName: 'css/theme-colors-[contenthash:8].css',
         matchColors: getThemeColors(),
+        injectCss: true,
         resolveCss
       })
     )
