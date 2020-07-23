@@ -111,7 +111,7 @@ export default {
       if (result.code >= 0) {
         const user = result.data.user
         setAuthorization({token: result.data.token, expireAt: new Date(result.data.expireAt)})
-        this.$router.push('/dashboard/workplace')
+        this.$router.push('/parent1/demo1')
         this.$store.commit('account/setUser', user)
         this.$message.success(result.message, 3)
       } else {

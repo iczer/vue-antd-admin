@@ -15,7 +15,7 @@
         <span slot="tab" :pagekey="page.fullPath">{{pageName(page.path)}}</span>
       </a-tab-pane>
     </a-tabs>
-    <div class="tabs-view-content">
+    <div class="tabs-view-content" :style="`margin-top: ${multiPage ? -24 : 0}px`">
       <page-toggle-transition :disabled="animate.disabled" :animate="animate.name" :direction="animate.direction">
         <keep-alive :exclude="dustbins" v-if="multiPage">
           <router-view />
