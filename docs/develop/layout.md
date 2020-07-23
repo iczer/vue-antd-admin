@@ -29,7 +29,7 @@ lang: zh-CN
 
 ![blank-view](../assets/blank-view.png)
 ## 如何使用
-通常我们会把视图组件和路由配置结合一起使用，我们把配置信息抽离在路由配置文件中 [router/index.js](https://github.com/iczer/vue-antd-admin/blob/master/src/router/index.js) 。如下：
+通常我们会把视图组件和路由配置结合一起使用，我们把配置信息抽离在路由配置文件中 [src/router/config.js](https://github.com/iczer/vue-antd-admin/blob/master/src/router/config.js) 。如下：
 ```jsx {7,12}
 {
   path: 'form',

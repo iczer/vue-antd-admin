@@ -17,9 +17,8 @@ lang: zh-CN
 ## 路由
 Vue Antd Admin 的路由配置完全遵循 vue-router 的 [routes 配置规则](https://router.vuejs.org/zh/api/#routes)。
 另外我们还在 routes 的元数据属性 [meta](https://router.vuejs.org/zh/guide/advanced/meta.html#%E8%B7%AF%E7%94%B1%E5%85%83%E4%BF%A1%E6%81%AF) 中注入了三个属性 icon、invisible 和 page，它们将在生成菜单和页头时发挥作用。配置示例如下：
-```js {8,14}
-import Router from 'vue-router'
-export default new Router({
+```js {7,13}
+const options = {
   routes: [{
     path: '/',
     name: '首页',
@@ -45,9 +44,9 @@ export default new Router({
       }]
     }]
   }]
-})
+}
 ```
-完整配置示例，请查看 [router/index.js](https://github.com/iczer/vue-antd-admin/blob/master/src/router/index.js)
+完整配置示例，请查看 [src/router/config.js](https://github.com/iczer/vue-antd-admin/blob/master/src/router/config.js)
 
 ## 菜单
 Admin 系统的菜单直接通过路由配置生成，路由属性和菜单功能对应关系如下

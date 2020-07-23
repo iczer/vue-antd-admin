@@ -482,7 +482,7 @@ module.exports = {
 ```
 ### 多页签
 在 src/config/config.js 设置 multiPage 来启用或关闭多页签模式
-```js {7}
+```js {6}
 module.exports = {
   theme: {
     color: '#13c2c2',

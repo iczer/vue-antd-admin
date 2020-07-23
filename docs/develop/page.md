@@ -67,9 +67,9 @@ import NewPage from '@/pages/newPage/NewPage'
 export default NewPage
 ```
 ## 配置路由
-路由配置在 src/router/index.js 文件中，我们把上面创建的页面文件加入路由配置中
+路由配置在 src/router/config.js 文件中，我们把上面创建的页面文件加入路由配置中
 ```js {10-14}
-const router =  new Router({
+const options = {
   routes: [
     {name: '登录页'...},
     {
@@ -96,7 +96,7 @@ const router =  new Router({
       ...
     }
   ]
-})
+}
 ```
 :::tip
 我们建议使用英文设置路由的 path 属性，用中文设置路由的 name 属性。因为系统将自动提取路由的 path 和 name 属性作为国际化配置。这在后面的章节
@@ -108,7 +108,7 @@ const router =  new Router({
 如果你想把它配置为二级页面或更深层级的页面，只需为它配置一个父级路由，并为父级路由配置一个[视图组件](./layout.md#admin-的视图)，
 这里我们选择 [PageView](https://github.com/iczer/vue-antd-admin/blob/master/src/layouts/PageView.vue)，如下：
 ```js {10-21}
-const router =  new Router({
+const options = {
   routes: [
     {name: '登录页'...},
     {
@@ -134,7 +134,7 @@ const router =  new Router({
       ...
     }
   ]
-})
+}
 ```
 :::warning
 页面所有父级路由的组件必须配置为[视图组件](../develop/layout.md#admin-的视图)，否则页面的内容可能不会显示。  
