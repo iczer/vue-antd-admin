@@ -12,7 +12,7 @@ export default {
   computed: {
     ...mapState('setting', ['multiPage']),
     minHeight() {
-      return this.multiPage ? this.layoutMinHeight : this.layoutMinHeight
+      return this.multiPage ? this.layoutMinHeight - 32 : this.layoutMinHeight
     }
   }
 }

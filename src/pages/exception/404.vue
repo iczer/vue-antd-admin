@@ -13,7 +13,7 @@ export default {
     ...mapState('setting', ['multiPage']),
     minHeight() {
       let layoutMinHeight = this.layoutMinHeight || window.innerHeight
-      return this.multiPage ? layoutMinHeight: layoutMinHeight
+      return this.multiPage ? layoutMinHeight - 32 : layoutMinHeight
     }
   }
 }
