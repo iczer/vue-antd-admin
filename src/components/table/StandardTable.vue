@@ -20,10 +20,14 @@
       :dataSource="dataSource"
       :rowKey="rowKey"
       :pagination="pagination"
+      @change="onChange"
       :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: updateSelect}"
     >
       <template slot-scope="text, record, index" :slot="slot" v-for="slot in scopedSlots">
         <slot :name="slot" v-bind="{text, record, index}"></slot>
+      </template>
+      <template :slot="slot" v-for="slot in slots">
+        <slot :name="slot"></slot>
       </template>
     </a-table>
   </div>
@@ -36,13 +40,14 @@ export default {
   data () {
     return {
       needTotalList: [],
-      scopedSlots: []
+      scopedSlots: [],
+      slots: []
     }
   },
   methods: {
     updateSelect (selectedRowKeys, selectedRows) {
       this.$emit('update:selectedRows', selectedRows)
-      this.$emit('change', selectedRowKeys, selectedRows)
+      this.$emit('selectedRowChange', selectedRowKeys, selectedRows)
     },
     initTotalList (columns) {
       const totalList = []
@@ -54,16 +59,30 @@ export default {
       return totalList
     },
     getScopedSlots(columns) {
-      return columns.filter(item => item.scopedSlots && item.scopedSlots.customRender)
-        .map(item => item.scopedSlots.customRender)
+      let scopedSlots = columns.filter(item => item.scopedSlots).map(item => item.scopedSlots)
+      scopedSlots = scopedSlots.flatMap(item => {
+        return Object.keys(item).map(key => item[key])
+      })
+      return scopedSlots
+    },
+    getSlots(columns) {
+      let slots = columns.filter(item => item.slots).map(item => item.slots)
+      slots = slots.flatMap(item => {
+        return Object.keys(item).map(key => item[key])
+      })
+      return slots
     },
     onClear() {
       this.updateSelect([], [])
       this.$emit('clear')
+    },
+    onChange(pagination, filters, sorter, {currentDataSource}) {
+      this.$emit('change', pagination, filters, sorter, {currentDataSource})
     }
   },
   created () {
     this.scopedSlots = this.getScopedSlots(this.columns)
+    this.slots = this.getSlots(this.columns)
     this.needTotalList = this.initTotalList(this.columns)
   },
   watch: {

@@ -97,6 +97,8 @@
         :dataSource="dataSource"
         :selectedRows.sync="selectedRows"
         @clear="onClear"
+        @change="onChange"
+        @selectedRowChange="onSelectChange"
       >
         <div slot="description" slot-scope="{text}">
           {{text}}
@@ -104,6 +106,9 @@
         <div slot="action" slot-scope="{text, record, index}">
           <a-icon type="edit" />{{index}}
         </div>
+        <template slot="statusTitle">
+          <a-icon @click.native="onStatusTitleClick" type="info-circle" />
+        </template>
       </standard-table>
     </div>
   </a-card>
@@ -129,9 +134,9 @@ const columns = [
     customRender: (text) => text + ' 次'
   },
   {
-    title: '状态',
     dataIndex: 'status',
-    needTotal: true
+    needTotal: true,
+    slots: {title: 'statusTitle'}
   },
   {
     title: '更新时间',
@@ -178,6 +183,15 @@ export default {
     },
     onClear() {
       this.$message.info('您清空了勾选的所有行')
+    },
+    onStatusTitleClick() {
+      this.$message.info('你点击了状态栏表头')
+    },
+    onChange() {
+      this.$message.info('表格状态改变了')
+    },
+    onSelectChange() {
+      this.$message.info('选中行改变了')
     },
     addNew () {
       this.dataSource.unshift({
