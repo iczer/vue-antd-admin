@@ -36,7 +36,18 @@
 <script>
 export default {
   name: 'StandardTable',
-  props: ['bordered', 'loading', 'columns', 'dataSource', 'rowKey', 'pagination', 'selectedRows'],
+  props: {
+    bordered: Boolean,
+    loading: [Boolean, Object],
+    columns: Array,
+    dataSource: Array,
+    rowKey: {
+      type: [String, Function],
+      default: 'key'
+    },
+    pagination: Object,
+    selectedRows: Array
+  },
   data () {
     return {
       needTotalList: [],
@@ -99,7 +110,9 @@ export default {
   },
   computed: {
     selectedRowKeys() {
-      return this.selectedRows.map(row => row.key)
+      return this.selectedRows.map(record => {
+        return (typeof this.rowKey === 'function') ? this.rowKey(record) : record[this.rowKey]
+      })
     }
   }
 }
