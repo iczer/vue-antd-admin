@@ -7,6 +7,7 @@ export default {
     animates: ADMIN.animates,
     palettes: ADMIN.palettes,
     dustbins: [],
+    pageMinHeight: 0,
     ...config,
   },
   mutations: {
@@ -42,6 +43,9 @@ export default {
     },
     setDustbins(state, dustbins) {
       state.dustbins = dustbins
+    },
+    correctPageMinHeight(state, minHeight) {
+      state.pageMinHeight += minHeight
     }
   }
 }

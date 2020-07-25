@@ -1,6 +1,6 @@
 <template>
   <div class="page-layout">
-    <page-header :style="`margin-top: ${multiPage ? 0 : -24}px`" :breadcrumb="breadcrumb" :title="pageTitle" :logo="logo" :avatar="avatar">
+    <page-header ref="pageHeader" :style="`margin-top: ${multiPage ? 0 : -24}px`" :breadcrumb="breadcrumb" :title="pageTitle" :logo="logo" :avatar="avatar">
       <slot name="action"  slot="action"></slot>
       <slot slot="content" name="headerContent"></slot>
       <div slot="content" v-if="!this.$slots.headerContent && desc">
@@ -21,14 +21,15 @@
 
 <script>
 import PageHeader from '@/components/page/header/PageHeader'
-import {mapState} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 export default {
   name: 'PageLayout',
   components: {PageHeader},
   props: ['desc', 'logo', 'title', 'avatar', 'linkList', 'extraImage'],
   data () {
     return {
-      page: {}
+      page: {},
+      pageHeaderHeight: 0,
     }
   },
   watch: {
@@ -36,11 +37,28 @@ export default {
       this.page = this.$route.meta.page
     }
   },
+  updated() {
+    if (!this._inactive) {
+      this.updatePageHeight()
+    }
+  },
+  activated() {
+    this.updatePageHeight()
+  },
+  deactivated() {
+    this.updatePageHeight(0)
+  },
+  mounted() {
+    this.updatePageHeight()
+  },
   created() {
     this.page = this.$route.meta.page
   },
+  beforeDestroy() {
+    this.updatePageHeight(0)
+  },
   computed: {
-    ...mapState('setting', ['layout', 'multiPage']),
+    ...mapState('setting', ['layout', 'multiPage', 'pageMinHeight']),
     pageTitle() {
       let pageTitle = this.page && this.page.title
       return this.title || this.$t(pageTitle) || this.routeName
@@ -60,9 +78,13 @@ export default {
       } else {
         return this.getRouteBreadcrumb()
       }
+    },
+    marginCorrect() {
+      return this.multiPage ? 24 : 0
     }
   },
   methods: {
+    ...mapMutations('setting', ['correctPageMinHeight']),
     getRouteBreadcrumb() {
       let routes = this.$route.matched
       let breadcrumb = []
@@ -72,6 +94,14 @@ export default {
         breadcrumb.push(this.$t(key.substring(1).replace(new RegExp('/', 'g'), '.') + '.name'))
       })
       return breadcrumb
+    },
+    /**
+     * 用于计算页面内容最小高度
+     * @param newHeight
+     */
+    updatePageHeight(newHeight = this.$refs.pageHeader.$el.offsetHeight + this.marginCorrect) {
+      this.correctPageMinHeight(this.pageHeaderHeight - newHeight)
+      this.pageHeaderHeight = newHeight
     }
   }
 }

@@ -31,7 +31,7 @@ import PageFooter from './footer/PageFooter'
 import Drawer from '../components/tool/Drawer'
 import SideMenu from '../components/menu/SideMenu'
 import Setting from '../components/setting/Setting'
-import {mapState} from 'vuex'
+import {mapState, mapMutations} from 'vuex'
 
 const minHeight = window.innerHeight - 64 - 24 - 122
 
@@ -48,13 +48,8 @@ export default {
       showSetting: false
     }
   },
-  provide() {
-    return{
-      layoutMinHeight: minHeight
-    }
-  },
   computed: {
-    ...mapState('setting', ['isMobile', 'theme', 'layout', 'footerLinks', 'copyright', 'fixedHeader', 'fixedSideBar', 'hideSetting']),
+    ...mapState('setting', ['isMobile', 'theme', 'layout', 'footerLinks', 'copyright', 'fixedHeader', 'fixedSideBar', 'hideSetting', 'pageMinHeight']),
     sideMenuWidth() {
       return this.collapsed ? '80px' : '256px'
     },
@@ -66,12 +61,19 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('setting', ['correctPageMinHeight']),
     toggleCollapse () {
       this.collapsed = !this.collapsed
     },
     onMenuSelect () {
       this.toggleCollapse()
     },
+  },
+  created() {
+    this.correctPageMinHeight(minHeight - 1)
+  },
+  beforeDestroy() {
+    this.correctPageMinHeight(-minHeight + 1)
   },
   beforeCreate () {
     menuData = this.$router.options.routes.find((item) => item.path === '/').children

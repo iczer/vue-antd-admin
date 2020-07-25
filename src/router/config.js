@@ -69,17 +69,17 @@ const options = {
           children: [
             {
               path: '404',
-              name: '404',
+              name: 'Exp404',
               component: () => import('@/pages/exception/404')
             },
             {
               path: '403',
-              name: '403',
+              name: 'Exp403',
               component: () => import('@/pages/exception/403')
             },
             {
               path: '500',
-              name: '500',
+              name: 'Exp500',
               component: () => import('@/pages/exception/500')
             }
           ]
