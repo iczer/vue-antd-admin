@@ -13,7 +13,7 @@
       <div :class="['admin-header-right', headerTheme]">
           <header-search class="header-item" />
           <a-tooltip class="header-item" title="帮助文档" placement="bottom" >
-            <a>
+            <a href="https://iczer.github.io/vue-antd-admin/" target="_blank">
               <a-icon type="question-circle-o" />
             </a>
           </a-tooltip>

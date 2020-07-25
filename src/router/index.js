@@ -1,6 +1,6 @@
 import Vue from 'vue'
-import {checkAuthorization} from '@/utils/request'
 import Router from 'vue-router'
+import {checkAuthorization} from '@/utils/request'
 import {options, loginIgnore} from './config'
 
 Vue.use(Router)
