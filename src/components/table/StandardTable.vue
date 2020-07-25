@@ -61,26 +61,23 @@ export default {
       this.$emit('selectedRowChange', selectedRowKeys, selectedRows)
     },
     initTotalList (columns) {
-      const totalList = []
-      columns.forEach(column => {
-        if (column.needTotal) {
-          totalList.push({...column, total: 0})
-        }
-      })
+      const totalList = columns.filter(item => item.needTotal)
+        .map(item => {
+          return {
+            ...item,
+            total: 0
+          }
+        })
       return totalList
     },
     getScopedSlots(columns) {
       let scopedSlots = columns.filter(item => item.scopedSlots).map(item => item.scopedSlots)
-      scopedSlots = scopedSlots.flatMap(item => {
-        return Object.keys(item).map(key => item[key])
-      })
+      scopedSlots = scopedSlots.flatMap(item => Object.values(item))
       return scopedSlots
     },
     getSlots(columns) {
       let slots = columns.filter(item => item.slots).map(item => item.slots)
-      slots = slots.flatMap(item => {
-        return Object.keys(item).map(key => item[key])
-      })
+      slots = slots.flatMap(item => Object.values(item))
       return slots
     },
     onClear() {
