@@ -51,12 +51,21 @@ export default {
         { key: '2', icon: 'vertical-left', text: this.$t('closeRight') },
         { key: '3', icon: 'close', text: this.$t('closeOthers') }
       ]
+    },
+    tabsOffset() {
+      return this.multiPage ? 24 : 0
     }
   },
   created () {
     const route = this.$route
     this.pageList.push(route)
     this.activePage = route.fullPath
+  },
+  mounted () {
+    this.correctPageMinHeight(-this.tabsOffset)
+  },
+  beforeDestroy() {
+    this.correctPageMinHeight(this.tabsOffset)
   },
   watch: {
     '$route': function (newRoute) {
@@ -72,6 +81,9 @@ export default {
       if (!newVal) {
         this.pageList = [this.$route]
       }
+    },
+    tabsOffset(newVal, oldVal) {
+      this.correctPageMinHeight(oldVal - newVal)
     }
   },
   methods: {
@@ -167,7 +179,7 @@ export default {
     pageName(path) {
       return this.$t(path.substring(1).replace(new RegExp('/', 'g'), '.') + '.name')
     },
-    ...mapMutations('setting', ['setDustbins'])
+    ...mapMutations('setting', ['setDustbins', 'correctPageMinHeight'])
   }
 }
 /**

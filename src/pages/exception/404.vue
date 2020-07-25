@@ -1,5 +1,5 @@
 <template>
-  <exception-page :style="`min-height: ${minHeight}px`" type="404" />
+  <exception-page :style="`min-height: ${minHeight}`" type="404" />
 </template>
 
 <script>
@@ -8,12 +8,10 @@ import {mapState} from 'vuex'
 export default {
   name: 'Exp404',
   components: {ExceptionPage},
-  inject: ['layoutMinHeight'],
   computed: {
-    ...mapState('setting', ['multiPage']),
+    ...mapState('setting', ['pageMinHeight']),
     minHeight() {
-      let layoutMinHeight = this.layoutMinHeight || window.innerHeight
-      return this.multiPage ? layoutMinHeight - 32 : layoutMinHeight
+      return this.pageMinHeight ? this.pageMinHeight + 'px' : '100vh'
     }
   }
 }
