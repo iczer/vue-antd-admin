@@ -12,5 +12,4 @@ const store = new Vuex.Store({modules})
 db.get('currUser')
   .then(doc => store.commit('account/setUser', doc.user))
   .catch(() => {})
-
 export default store

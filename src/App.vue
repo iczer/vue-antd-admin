@@ -17,10 +17,9 @@ export default {
     }
   },
   created () {
-    let _this = this
     this.setLanguage(this.lang)
     enquireScreen(isMobile => {
-      _this.$store.commit('setting/setDevice', isMobile)
+      this.$store.commit('setting/setDevice', isMobile)
     })
   },
   mounted() {

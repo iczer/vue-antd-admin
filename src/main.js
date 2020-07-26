@@ -9,13 +9,15 @@ import store from './store'
 import 'animate.css/source/animate.css'
 import Plugins from '@/plugins'
 import {initI18n} from '@/utils/i18n'
+import bootstrap from '@/bootstrap'
+
+const i18n = initI18n(router, 'CN', 'US')
+bootstrap({router, store, i18n})
 
 Vue.config.productionTip = false
 Vue.use(Viser)
 Vue.use(Antd)
 Vue.use(Plugins)
-
-const i18n = initI18n(router, 'CN', 'US')
 
 new Vue({
   router,

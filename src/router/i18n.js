@@ -9,15 +9,15 @@ module.exports = {
     HK: {
       home: {name: '首頁'},
       demo: {
-        name: '演示頁0'
+        name: '演示頁'
       },
       parent1: {
         name: '父級路由1',
-        demo1: {name: '演示頁面1'},
+        demo: {name: '演示頁面1'},
       },
       parent2: {
         name: '父級路由2',
-        demo2: {name: '演示頁面2'},
+        demo: {name: '演示頁面2'},
       },
       exception: {
         name: '異常頁',
