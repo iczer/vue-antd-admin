@@ -1,10 +1,29 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import {options, loginIgnore} from './config'  //本地路由配置
-import {options, loginIgnore} from './config.async' //异步路由配置
 
 Vue.use(Router)
-const router =  new Router({...options})
 
-export {loginIgnore}
-export default router
+// 不需要登录拦截的路由配置
+const loginIgnore = {
+  names: ['404'],      //根据路由名称匹配
+  paths: ['/login'],   //根据路由fullPath匹配
+  /**
+   * 判断路由是否包含在该配置中
+   * @param route vue-router 的 route 对象
+   * @returns {boolean}
+   */
+  includes(route) {
+    return this.names.includes(route.name) || this.paths.includes(route.path)
+  }
+}
+
+/**
+ * 初始化路由实例
+ * @param isAsync 是否异步路由模式
+ * @returns {VueRouter}
+ */
+function initRouter(isAsync) {
+  const options = isAsync ? require('./config.async').default : require('./config').default
+  return new Router(options)
+}
+export {loginIgnore, initRouter}

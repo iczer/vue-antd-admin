@@ -50,22 +50,30 @@ function parseRoutes(routesConfig, routerMap) {
  * @param router 应用路由实例
  * @param store 应用的 vuex.store 实例
  * @param i18n 应用的 vue-i18n 实例
- * @param routesConfig
+ * @param routesConfig 路由配置
  */
 function loadRoutes({router, store, i18n}, routesConfig) {
-  // 如果 routesConfig 有值，则更新到本地，否则从本地获取
-  if (routesConfig) {
-    store.commit('account/setRoutesConfig', routesConfig)
-  } else {
-    routesConfig = store.getters['account/routesConfig']
+  const asyncRoutes = store.state.setting.asyncRoutes
+  // 如果是开启了异步路由，则加载异步路由配置
+  if (asyncRoutes) {
+    // 如果 routesConfig 有值，则更新到本地，否则从本地获取
+    if (routesConfig) {
+      store.commit('account/setRoutesConfig', routesConfig)
+    } else {
+      routesConfig = store.getters['account/routesConfig']
+    }
+    if (routesConfig && routesConfig.length > 0) {
+      const routes = parseRoutes(routesConfig, routerMap)
+      const finalRoutes = mergeRoutes(router.options.routes, routes)
+      router.options = {...router.options, routes: finalRoutes}
+      router.matcher = new Router({...router.options, routes:[]}).matcher
+      router.addRoutes(finalRoutes)
+    }
   }
-  if (routesConfig && routesConfig.length > 0) {
-    const routes = parseRoutes(routesConfig, routerMap)
-    const finalRoutes = mergeRoutes(router.options.routes, routes)
-    router.options = {...router.options, routes: finalRoutes}
-    router.matcher = new Router({...router.options, routes:[]}).matcher
-    router.addRoutes(finalRoutes)
-    const menuRoutes = finalRoutes.find(item => item.path === '/').children
+  // 初始化Admin后台菜单数据
+  const rootRoute = router.options.routes.find(item => item.path === '/')
+  const menuRoutes = rootRoute && rootRoute.children
+  if (menuRoutes) {
     mergeI18nFromRoutes(i18n, menuRoutes)
     store.commit('setting/setMenuData', menuRoutes)
   }
@@ -78,12 +86,9 @@ function loadRoutes({router, store, i18n}, routesConfig) {
  * @returns {Route[]}
  */
 function mergeRoutes(target, source) {
-  const targetMap = {}
-  const sourceMap = {}
-  target.forEach(item => targetMap[item.path] = item)
-  source.forEach(item => sourceMap[item.path] = item)
-  const routesMap = {...targetMap}
-  Object.keys(sourceMap).forEach(key => routesMap[key] = sourceMap[key])
+  const routesMap = {}
+  target.forEach(item => routesMap[item.path] = item)
+  source.forEach(item => routesMap[item.path] = item)
   return Object.values(routesMap)
 }
 

@@ -1,4 +1,3 @@
-import Login from '@/pages/login/Login'
 import TabsView from '@/layouts/tabs/TabsView'
 import BlankView from '@/layouts/BlankView'
 import PageView from '@/layouts/PageView'
@@ -9,12 +8,17 @@ const options = {
     {
       path: '/login',
       name: '登录页',
-      component: Login
+      component: () => import('@/pages/login')
     },
     {
       path: '*',
       name: '404',
       component: () => import('@/pages/exception/404'),
+    },
+    {
+      path: '/403',
+      name: '403',
+      component: () => import('@/pages/exception/403'),
     },
     {
       path: '/',
@@ -24,7 +28,7 @@ const options = {
       children: [
         {
           path: 'demo',
-          name: '演示页0',
+          name: '演示页',
           meta: {
             icon: 'file-ppt'
           },
@@ -90,18 +94,4 @@ const options = {
   ]
 }
 
-// 不需要登录拦截的路由配置
-const loginIgnore = {
-  names: ['404'],      //根据路由名称匹配
-  paths: ['/login'],   //根据路由fullPath匹配
-  /**
-   * 判断路由是否包含在该配置中
-   * @param route vue-router 的 route 对象
-   * @returns {boolean}
-   */
-  includes(route) {
-    return this.names.includes(route.name) || this.paths.includes(route.path)
-  }
-}
-
-export {options, loginIgnore}
+export default options

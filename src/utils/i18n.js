@@ -5,27 +5,19 @@ import './Objects'
 
 /**
  * 创建 i18n 配置
- * @param router 路由
  * @param locale 本地化语言
  * @param fallback 回退语言
  * @returns {VueI18n}
  */
-function initI18n(router, locale, fallback) {
+function initI18n(locale, fallback) {
   Vue.use(VueI18n)
-  const rootRoute = router.options.routes.find(item => item.path === '/')
-  const menuRoutes = rootRoute && rootRoute.children
   let i18nOptions = {
     locale,
     fallbackLocale: fallback,
     silentFallbackWarn: true,
     messages: routesI18n.messages
   }
-  const i18n = new VueI18n(i18nOptions)
-  if (menuRoutes) {
-    mergeI18nFromRoutes(i18n, menuRoutes)
-  }
-
-  return i18n
+  return new VueI18n(i18nOptions)
 }
 
 /**
