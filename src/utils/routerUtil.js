@@ -53,7 +53,7 @@ function parseRoutes(routesConfig, routerMap) {
  * @param routesConfig
  */
 function loadRoutes({router, store, i18n}, routesConfig) {
-  // 如果 routesConfig 有值，则更新到本地localStorage，否则从本地localStorage获取
+  // 如果 routesConfig 有值，则更新到本地，否则从本地获取
   if (routesConfig) {
     store.commit('account/setRoutesConfig', routesConfig)
   } else {
@@ -61,12 +61,30 @@ function loadRoutes({router, store, i18n}, routesConfig) {
   }
   if (routesConfig && routesConfig.length > 0) {
     const routes = parseRoutes(routesConfig, routerMap)
-    router.matcher = new Router(router.options).matcher
-    router.addRoutes(routes)
-    const menuRoutes = routes.find(item => item.path === '/').children
+    const finalRoutes = mergeRoutes(router.options.routes, routes)
+    router.options = {...router.options, routes: finalRoutes}
+    router.matcher = new Router({...router.options, routes:[]}).matcher
+    router.addRoutes(finalRoutes)
+    const menuRoutes = finalRoutes.find(item => item.path === '/').children
     mergeI18nFromRoutes(i18n, menuRoutes)
     store.commit('setting/setMenuData', menuRoutes)
   }
+}
+
+/**
+ * 合并路由
+ * @param target {Route[]}
+ * @param source {Route[]}
+ * @returns {Route[]}
+ */
+function mergeRoutes(target, source) {
+  const targetMap = {}
+  const sourceMap = {}
+  target.forEach(item => targetMap[item.path] = item)
+  source.forEach(item => sourceMap[item.path] = item)
+  const routesMap = {...targetMap}
+  Object.keys(sourceMap).forEach(key => routesMap[key] = sourceMap[key])
+  return Object.values(routesMap)
 }
 
 /**
