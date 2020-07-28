@@ -1,26 +1,28 @@
-import PouchDB from 'pouchdb'
-
-let db = new PouchDB('adminDb')
-
 export default {
   namespaced: true,
   state: {
-    user: {
-      name: '',
-      avatar: '',
-      position: '',
-      address: ''
-    },
+    user: undefined,
     permissions: [],
     roles: [],
     routesConfig: []
   },
   getters: {
+    user: state => {
+      if (!state.user) {
+        try {
+          const user = localStorage.getItem(process.env.VUE_APP_USER_KEY)
+          state.user = JSON.parse(user)
+        } catch (e) {
+          console.error(e)
+        }
+      }
+      return state.user
+    },
     permissions: state => {
       if (!state.permissions || state.permissions.length === 0) {
         try {
           const permissions = localStorage.getItem(process.env.VUE_APP_PERMISSIONS_KEY)
-          state.permissions = eval(permissions) ? JSON.parse(permissions) : state.permissions
+          state.permissions = JSON.parse(permissions)
         } catch (e) {
           console.error(e.message)
         }
@@ -31,7 +33,7 @@ export default {
       if (!state.roles || state.roles.length === 0) {
         try {
           const roles = localStorage.getItem(process.env.VUE_APP_ROLES_KEY)
-          state.roles = eval(roles) ? JSON.parse(roles) : state.roles
+          state.roles = JSON.parse(roles)
         } catch (e) {
           console.error(e.message)
         }
@@ -53,22 +55,7 @@ export default {
   mutations: {
     setUser (state, user) {
       state.user = user
-      db.get('currUser').then(doc => {
-        db.put({
-          _id: 'currUser',
-          _rev: doc._rev,
-          user: user
-        })
-      }).catch(e => {
-        if (e.status === 404) {
-          db.put({
-            _id: 'currUser',
-            user: user
-          })
-        } else {
-          throw e
-        }
-      })
+      localStorage.setItem(process.env.VUE_APP_USER_KEY, JSON.stringify(user))
     },
     setPermissions(state, permissions) {
       state.permissions = permissions
