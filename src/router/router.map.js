@@ -13,25 +13,22 @@ const routerMap = {
     component: () => import('@/pages/login')
   },
   demo: {
-    authority: 'admin',
     name: '演示页',
     renderMenu: false,
     component: () => import('@/pages/demo')
   },
   exp403: {
-    authority: 'admin',
+    authority: '*',
     name: 'exp403',
     path: '403',
     component: () => import('@/pages/exception/403')
   },
   exp404: {
-    authority: '*',
     name: 'exp404',
     path: '404',
     component: () => import('@/pages/exception/404')
   },
   exp500: {
-    authority: 'admin',
     name: 'exp500',
     path: '500',
     component: () => import('@/pages/exception/500')

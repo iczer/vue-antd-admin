@@ -8,11 +8,21 @@ Mock.mock('/routes', 'get', () => {
     children: ['demo',
       {
         router: 'parent1',
-        children: ['demo'],
+        children: [{
+          router: 'demo',
+          name: 'demo1',
+          authority: {
+            permission: 'demo',
+            role: 'admin'
+          }
+        }],
       },
       {
         router: 'parent2',
-        children: ['demo'],
+        children: [{
+          router: 'demo',
+          name: 'demo2'
+        }],
       },
       {
         router: 'exception',
