@@ -45,7 +45,10 @@ export default {
       type: [String, Function],
       default: 'key'
     },
-    pagination: Object,
+    pagination: {
+      type: [Object, Boolean],
+      default: true
+    },
     selectedRows: Array
   },
   data () {
