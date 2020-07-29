@@ -50,6 +50,9 @@ export default {
     },
     setMenuData(state, menuData) {
       state.menuData = menuData
+    },
+    setAsyncRoutes(state, asyncRoutes) {
+      state.asyncRoutes = asyncRoutes
     }
   }
 }

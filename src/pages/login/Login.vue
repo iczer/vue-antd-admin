@@ -78,6 +78,7 @@ import CommonLayout from '@/layouts/CommonLayout'
 import {login, getRoutesConfig} from '@/services'
 import {setAuthorization} from '@/utils/request'
 import {loadRoutes} from '@/utils/routerUtil'
+import {mapMutations} from 'vuex'
 
 export default {
   name: 'Login',
@@ -95,6 +96,7 @@ export default {
     }
   },
   methods: {
+    ...mapMutations('account', ['setUser', 'setPermissions', 'setRoles']),
     onSubmit (e) {
       e.preventDefault()
       this.form.validateFields((err) => {
@@ -111,14 +113,17 @@ export default {
       const loginRes = res.data
       if (loginRes.code >= 0) {
         const user = loginRes.data.user
+        const permissions = loginRes.data.permissions
+        const roles = loginRes.data.roles
+        this.setUser(user)
+        this.setPermissions(permissions)
+        this.setRoles(roles)
         setAuthorization({token: loginRes.data.token, expireAt: new Date(loginRes.data.expireAt)})
         // 获取路由配置
         getRoutesConfig().then(result => {
           const routesConfig = result.data.data
-          localStorage.setItem('routes', JSON.stringify(routesConfig))
-          loadRoutes(routesConfig, this.$router, this.$store, this.$i18n)
-          this.$router.push('/parent1/demo')
-          this.$store.commit('account/setUser', user)
+          loadRoutes({router: this.$router, store: this.$store, i18n: this.$i18n}, routesConfig)
+          this.$router.push('/demo')
           this.$message.success(loginRes.message, 3)
         })
       } else {
