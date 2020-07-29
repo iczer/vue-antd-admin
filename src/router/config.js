@@ -1,19 +1,24 @@
-import Login from '@/pages/login/Login'
 import TabsView from '@/layouts/tabs/TabsView'
 import BlankView from '@/layouts/BlankView'
 import PageView from '@/layouts/PageView'
 
+// 路由配置
 const options = {
   routes: [
     {
       path: '/login',
       name: '登录页',
-      component: Login
+      component: () => import('@/pages/login')
     },
     {
       path: '*',
       name: '404',
       component: () => import('@/pages/exception/404'),
+    },
+    {
+      path: '/403',
+      name: '403',
+      component: () => import('@/pages/exception/403'),
     },
     {
       path: '/',
@@ -32,12 +37,12 @@ const options = {
             {
               path: 'workplace',
               name: '工作台',
-              component: () => import('@/pages/dashboard/workplace/WorkPlace'),
+              component: () => import('@/pages/dashboard/workplace'),
             },
             {
               path: 'analysis',
               name: '分析页',
-              component: () => import('@/pages/dashboard/analysis/Analysis'),
+              component: () => import('@/pages/dashboard/analysis'),
             }
           ]
         },
@@ -52,17 +57,17 @@ const options = {
             {
               path: 'basic',
               name: '基础表单',
-              component: () => import('@/pages/form/basic/BasicForm'),
+              component: () => import('@/pages/form/basic'),
             },
             {
               path: 'step',
               name: '分步表单',
-              component: () => import('@/pages/form/step/StepForm'),
+              component: () => import('@/pages/form/step'),
             },
             {
               path: 'advance',
               name: '高级表单',
-              component: () => import('@/pages/form/advance/AdvancedForm'),
+              component: () => import('@/pages/form/advance'),
             }
           ]
         },
@@ -197,24 +202,21 @@ const options = {
               component: () => import('@/pages/components/Palette')
             }
           ]
+        },
+        {
+          name: '验权表单',
+          path: 'auth/form',
+          meta: {
+            icon: 'file-excel',
+            authority: {
+              permission: 'form'
+            }
+          },
+          component: () => import('@/pages/form/basic')
         }
       ]
-    }
+    },
   ]
 }
 
-// 不需要登录拦截的路由配置
-const loginIgnore = {
-  names: ['404'],      //根据路由名称匹配
-  paths: ['/login'],   //根据路由fullPath匹配
-  /**
-   * 判断路由是否包含在该配置中
-   * @param route vue-router 的 route 对象
-   * @returns {boolean}
-   */
-  includes(route) {
-    return this.names.includes(route.name) || this.paths.includes(route.path)
-  }
-}
-
-export {options, loginIgnore}
+export default options

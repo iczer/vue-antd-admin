@@ -1,5 +1,5 @@
 <template>
-  <exception-page :style="`min-height: ${pageMinHeight}px`" type="403" />
+  <exception-page home-route="/dashboard/workplace" :style="`min-height: ${minHeight}`" type="403" />
 </template>
 
 <script>
@@ -9,7 +9,10 @@ export default {
   name: 'Exp403',
   components: {ExceptionPage},
   computed: {
-    ...mapState('setting', ['pageMinHeight'])
+    ...mapState('setting', ['pageMinHeight']),
+    minHeight() {
+      return this.pageMinHeight ? this.pageMinHeight + 'px' : '100vh'
+    }
   }
 }
 </script>

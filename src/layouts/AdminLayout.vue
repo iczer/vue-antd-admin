@@ -35,8 +35,6 @@ import {mapState, mapMutations} from 'vuex'
 
 const minHeight = window.innerHeight - 64 - 24 - 122
 
-let menuData = []
-
 export default {
   name: 'AdminLayout',
   components: {Setting, SideMenu, Drawer, PageFooter, AdminHeader},
@@ -44,12 +42,12 @@ export default {
     return {
       minHeight: minHeight,
       collapsed: false,
-      menuData: menuData,
       showSetting: false
     }
   },
   computed: {
-    ...mapState('setting', ['isMobile', 'theme', 'layout', 'footerLinks', 'copyright', 'fixedHeader', 'fixedSideBar', 'hideSetting', 'pageMinHeight']),
+    ...mapState('setting', ['isMobile', 'theme', 'layout', 'footerLinks', 'copyright', 'fixedHeader', 'fixedSideBar',
+      'hideSetting', 'menuData']),
     sideMenuWidth() {
       return this.collapsed ? '80px' : '256px'
     },
@@ -74,9 +72,6 @@ export default {
   },
   beforeDestroy() {
     this.correctPageMinHeight(-minHeight + 1)
-  },
-  beforeCreate () {
-    menuData = this.$router.options.routes.find((item) => item.path === '/').children
   }
 }
 </script>

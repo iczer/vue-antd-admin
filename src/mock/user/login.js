@@ -22,6 +22,8 @@ Mock.mock('/login', 'post', ({body}) => {
     result.data.user = user
     result.data.token = 'Authorization:' + Math.random()
     result.data.expireAt = new Date(new Date().getTime() + 30 * 60 * 1000)
+    result.data.permissions = [{id: 'analysis', extra: ['add', 'edit', 'delete']}]
+    result.data.roles = [{id: 'admin', extra: ['add', 'edit', 'delete']}]
   }
   return result
 })

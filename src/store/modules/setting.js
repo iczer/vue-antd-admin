@@ -8,6 +8,7 @@ export default {
     palettes: ADMIN.palettes,
     dustbins: [],
     pageMinHeight: 0,
+    menuData: [],
     ...config,
   },
   mutations: {
@@ -46,6 +47,12 @@ export default {
     },
     correctPageMinHeight(state, minHeight) {
       state.pageMinHeight += minHeight
+    },
+    setMenuData(state, menuData) {
+      state.menuData = menuData
+    },
+    setAsyncRoutes(state, asyncRoutes) {
+      state.asyncRoutes = asyncRoutes
     }
   }
 }

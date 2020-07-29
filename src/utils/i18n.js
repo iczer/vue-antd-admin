@@ -5,28 +5,19 @@ import './Objects'
 
 /**
  * 创建 i18n 配置
- * @param router 路由
  * @param locale 本地化语言
  * @param fallback 回退语言
  * @returns {VueI18n}
  */
-function initI18n(router, locale, fallback) {
+function initI18n(locale, fallback) {
   Vue.use(VueI18n)
-  const options = router.options.routes.find(item => item.path === '/').children
-  formatOptions(options, '')
-  const CN = generateI18n(new Object(), options, 'name')
-  const US = generateI18n(new Object(), options, 'path')
-  const i18n = new VueI18n({
+  let i18nOptions = {
     locale,
     fallbackLocale: fallback,
     silentFallbackWarn: true,
-    messages: {CN, US}
-  })
-  const messages = routesI18n.messages
-  Object.keys(messages).forEach(key => {
-    i18n.mergeLocaleMessage(key, messages[key])
-  })
-  return i18n
+    messages: routesI18n.messages
+  }
+  return new VueI18n(i18nOptions)
 }
 
 /**
@@ -62,6 +53,15 @@ function formatOptions(options, parentPath) {
   })
 }
 
+function mergeI18nFromRoutes(i18n, routes) {
+  formatOptions(routes, '')
+  const CN = generateI18n(new Object(), routes, 'name')
+  const US = generateI18n(new Object(), routes, 'path')
+  i18n.mergeLocaleMessage('CN', CN)
+  i18n.mergeLocaleMessage('US', US)
+}
+
 export {
-  initI18n
+  initI18n,
+  mergeI18nFromRoutes
 }

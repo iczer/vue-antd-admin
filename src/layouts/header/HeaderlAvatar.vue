@@ -25,13 +25,13 @@
 </template>
 
 <script>
-import {mapState} from 'vuex'
+import {mapGetters} from 'vuex'
 import {logout} from '@/services'
 
 export default {
   name: 'HeaderAvatar',
   computed: {
-    ...mapState('account', ['user']),
+    ...mapGetters('account', ['user']),
   },
   methods: {
     logout() {
