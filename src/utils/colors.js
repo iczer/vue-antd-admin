@@ -1,5 +1,5 @@
 const varyColor = require('webpack-theme-color-replacer/client/varyColor')
-const generate =  require('@ant-design/colors').generate
+const {generate} =  require('@ant-design/colors')
 const {ADMIN, ANTD} = require('../config/default')
 const Config = require('../config')
 

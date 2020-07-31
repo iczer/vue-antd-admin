@@ -22,15 +22,18 @@
  *  }
  * ]
  *
- * i18n: 国际化配置。组件默认会根据 options route配置的 path 和 name 生成英文以及中文的国际化配置，如需自定义或增加其他语言，配置
+ * i18n: 国际化配置。系统默认会根据 options route配置的 path 和 name 生成英文以及中文的国际化配置，如需自定义或增加其他语言，配置
  * 此项即可。如：
  * i18n: {
- *   CN: {dashboard: {name: '监控中心'}}
- *   HK: {dashboard: {name: '監控中心'}}
+ *   messages: {
+ *     CN: {dashboard: {name: '监控中心'}}
+ *     HK: {dashboard: {name: '監控中心'}}
+ *   }
  * }
  **/
 import Menu from 'ant-design-vue/es/menu'
 import Icon from 'ant-design-vue/es/icon'
+import fastEqual from 'fast-deep-equal'
 
 const {Item, SubMenu} = Menu
 
@@ -56,29 +59,26 @@ export default {
       required: false,
       default: false
     },
-    i18n: Object
+    i18n: Object,
+    openKeys: Array
   },
   data () {
     return {
-      openKeys: [],
       selectedKeys: [],
+      sOpenKeys: [],
       cachedOpenKeys: []
     }
   },
   computed: {
-    rootSubmenuKeys: (vm) => {
-      let keys = []
-      vm.options.forEach(item => {
-        keys.push(item.path)
-      })
-      return keys
-    },
     menuTheme() {
       return this.theme == 'light' ? this.theme : 'dark'
     }
   },
   created () {
     this.updateMenu()
+    if (!this.options[0].fullPath) {
+      this.formatOptions(this.options, '')
+    }
     // 自定义国际化配置
     if(this.i18n && this.i18n.messages) {
       const messages = this.i18n.messages
@@ -90,14 +90,18 @@ export default {
   watch: {
     collapsed (val) {
       if (val) {
-        this.cachedOpenKeys = this.openKeys
-        this.openKeys = []
+        this.cachedOpenKeys = this.sOpenKeys
+        this.sOpenKeys = []
       } else {
-        this.openKeys = this.cachedOpenKeys
+        this.sOpenKeys = this.cachedOpenKeys
       }
     },
     '$route': function () {
       this.updateMenu()
+    },
+    sOpenKeys(val) {
+      this.$emit('openChange', val)
+      this.$emit('update:openKeys', val)
     }
   },
   methods: {
@@ -159,32 +163,22 @@ export default {
       return menuArr
     },
     formatOptions(options, parentPath) {
-      let this_ = this
       options.forEach(route => {
         let isFullPath = route.path.substring(0, 1) == '/'
         route.fullPath = isFullPath ? route.path : parentPath + '/' + route.path
         if (route.children) {
-          this_.formatOptions(route.children, route.fullPath)
+          this.formatOptions(route.children, route.fullPath)
         }
       })
     },
-    onOpenChange (openKeys) {
-      const latestOpenKey = openKeys.find(key => this.openKeys.indexOf(key) === -1)
-      if (this.rootSubmenuKeys.indexOf(latestOpenKey) === -1) {
-        this.openKeys = openKeys
-      } else {
-        this.openKeys = latestOpenKey ? [latestOpenKey] : []
-      }
-    },
     updateMenu () {
-      let routes = this.$route.matched.concat()
-      const route = routes.pop()
+      const menuRoutes = this.$route.matched.filter(item => item.path !== '')
+      const route = menuRoutes.pop()
       this.selectedKeys = [this.getSelectedKey(route)]
-      let openKeys = []
-      routes.forEach((item) => {
-        openKeys.push(item.path)
-      })
-      this.collapsed || this.mode === 'horizontal' ? this.cachedOpenKeys = openKeys : this.openKeys = openKeys
+      let openKeys = menuRoutes.map(item => item.path)
+      if (!fastEqual(openKeys, this.sOpenKeys)) {
+        this.collapsed || this.mode === 'horizontal' ? this.cachedOpenKeys = openKeys : this.sOpenKeys = openKeys
+      }
     },
     getSelectedKey (route) {
       if (route.meta.invisible && route.parent) {
@@ -200,14 +194,16 @@ export default {
         props: {
           theme: this.menuTheme,
           mode: this.$props.mode,
-          openKeys: this.openKeys,
-          selectedKeys: this.selectedKeys
+          selectedKeys: this.selectedKeys,
+          openKeys: this.openKeys ? this.openKeys : this.sOpenKeys
         },
         on: {
-          openChange: this.onOpenChange,
           select: (obj) => {
             this.selectedKeys = obj.selectedKeys
             this.$emit('select', obj)
+          },
+          'update:openKeys': (val) => {
+            this.sOpenKeys = val
           }
         }
       }, this.renderMenu(h, this.options)
