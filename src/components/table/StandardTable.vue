@@ -1,7 +1,7 @@
 <template>
   <div class="standard-table">
     <div class="alert">
-      <a-alert type="info" :show-icon="true">
+      <a-alert type="info" :show-icon="true" v-if="selectedRows">
         <div class="message" slot="message">
           已选择&nbsp;<a>{{selectedRows.length}}</a>&nbsp;项 <a class="clear" @click="onClear">清空</a>
           <template  v-for="(item, index) in needTotalList" >
@@ -21,7 +21,7 @@
       :rowKey="rowKey"
       :pagination="pagination"
       @change="onChange"
-      :rowSelection="{selectedRowKeys: selectedRowKeys, onChange: updateSelect}"
+      :rowSelection="selectedRows ? {selectedRowKeys: selectedRowKeys, onChange: updateSelect} : undefined"
     >
       <template slot-scope="text, record, index" :slot="slot" v-for="slot in scopedSlots">
         <slot :name="slot" v-bind="{text, record, index}"></slot>
