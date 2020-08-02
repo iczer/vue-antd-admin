@@ -64,6 +64,7 @@ function loadRoutes({router, store, i18n}, routesConfig) {
   if (asyncRoutes) {
     if (routesConfig && routesConfig.length > 0) {
       const routes = parseRoutes(routesConfig, routerMap)
+      formatAuthority(routes)
       const finalRoutes = mergeRoutes(router.options.routes, routes)
       router.options = {...router.options, routes: finalRoutes}
       router.matcher = new Router({...router.options, routes:[]}).matcher
@@ -151,7 +152,37 @@ function hasRole(route, roles) {
   if (typeof authority === 'object') {
     required = authority.role
   }
-  return authority === '*' || (required && roles.findIndex(item => item === required || item.id === required) !== -1)
+  return authority === '*' || (required && roles && roles.findIndex(item => item === required || item.id === required) !== -1)
 }
 
-export {parseRoutes, loadRoutes, loginGuard, authorityGuard}
+/**
+ * 格式化路由的权限配置
+ * @param routes
+ */
+function formatAuthority(routes) {
+  routes.forEach(route => {
+    const meta = route.meta
+    if (meta) {
+      let authority = {}
+      if (!meta.authority) {
+        authority.permission = '*'
+      }else if (typeof meta.authority === 'string') {
+        authority.permission = meta.authority
+      } else if (typeof meta.authority === 'object') {
+        authority = meta.authority
+      } else {
+        console.log(typeof meta.authority)
+      }
+      meta.authority = authority
+    } else {
+      route.meta = {
+        authority: {permission: '*'}
+      }
+    }
+    if (route.children) {
+      formatAuthority(route.children)
+    }
+  })
+}
+
+export {parseRoutes, loadRoutes, loginGuard, authorityGuard, formatAuthority}
