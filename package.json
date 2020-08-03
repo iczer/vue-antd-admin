@@ -11,7 +11,7 @@
     "deploy": "gh-pages -d dist -b pages -r https://gitee.com/iczer/vue-antd-admin.git",
     "docs:dev": "vuepress dev docs",
     "docs:build": "vuepress build docs",
-    "docs:deploy": "vuepress build docs && gh-pages -d docs/.vuepress/dist"
+    "docs:deploy": "vuepress build docs && gh-pages -d docs/.vuepress/dist -b master -r https://gitee.com/iczer/vue-antd-admin-docs.git"
   },
   "dependencies": {
     "@antv/data-set": "^0.11.4",
