@@ -17,7 +17,7 @@ Multiple theme modes available：
 </div>
 
 - Preview：https://iczer.gitee.io/vue-antd-admin
-- Documentation：https://iczer.github.io/vue-antd-admin
+- Documentation：https://iczer.gitee.io/vue-antd-admin-docs
 - FAQ：https://iczer.github.io/vue-antd-admin/start/faq.html
 - Mirror Repo in China：https://gitee.com/iczer/vue-antd-admin
 
