@@ -36,7 +36,7 @@ module.exports = {
         title: '进阶',
         collapsable: false,
         children: [
-          '/advance/i18n', '/advance/chart', '/advance/theme', '/advance/error', '/advance/authority'
+          '/advance/i18n', '/advance/chart', '/advance/theme', '/advance/async', '/advance/authority', '/advance/error'
         ]
       },
       {
