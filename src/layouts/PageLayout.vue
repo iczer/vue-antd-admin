@@ -22,6 +22,8 @@
 <script>
 import PageHeader from '@/components/page/header/PageHeader'
 import {mapState, mapMutations} from 'vuex'
+import {getI18nKey} from '@/utils/routerUtil'
+
 export default {
   name: 'PageLayout',
   components: {PageHeader},
@@ -64,7 +66,8 @@ export default {
       return this.title || this.$t(pageTitle) || this.routeName
     },
     routeName() {
-      return this.$t(this.$route.path.substring(1).replace(new RegExp('/', 'g'), '.') + '.name')
+      const route = this.$route
+      return this.$t(getI18nKey(route.matched[route.matched.length - 1].path))
     },
     breadcrumb() {
       let page = this.page
@@ -89,9 +92,8 @@ export default {
       let routes = this.$route.matched
       let breadcrumb = []
       routes.forEach(route => {
-        let path = route.path
-        let key = path.length == 0 ? '/home' : path
-        breadcrumb.push(this.$t(key.substring(1).replace(new RegExp('/', 'g'), '.') + '.name'))
+        const path = route.path.length === 0 ? '/home' : route.path
+        breadcrumb.push(this.$t(getI18nKey(path)))
       })
       return breadcrumb
     },
