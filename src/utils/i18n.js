@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueI18n from 'vue-i18n'
 import routesI18n from '@/router/i18n'
 import './Objects'
+import {getI18nKey} from '@/utils/routerUtil'
 
 /**
  * 创建 i18n 配置
@@ -23,16 +24,17 @@ function initI18n(locale, fallback) {
 /**
  * 根据 router options 配置生成 国际化语言
  * @param lang
- * @param options
+ * @param routes
  * @param valueKey
  * @returns {*}
  */
-function generateI18n(lang, options, valueKey) {
-  options.forEach(menu => {
-    let keys = menu.fullPath.substring(1).split('/').concat('name')
-    lang.assignProps(keys, menu[valueKey])
-    if (menu.children) {
-      generateI18n(lang, menu.children, valueKey)
+function generateI18n(lang, routes, valueKey) {
+  routes.forEach(route => {
+    let keys = getI18nKey(route.fullPath).split('.')
+    let value = valueKey === 'path' ? route[valueKey].split('/').filter(item => !item.startsWith(':') && item != '').join('.') : route[valueKey]
+    lang.assignProps(keys, value)
+    if (route.children) {
+      generateI18n(lang, route.children, valueKey)
     }
   })
   return lang

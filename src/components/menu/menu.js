@@ -34,6 +34,7 @@
 import Menu from 'ant-design-vue/es/menu'
 import Icon from 'ant-design-vue/es/icon'
 import fastEqual from 'fast-deep-equal'
+import {getI18nKey} from '@/utils/routerUtil'
 
 const {Item, SubMenu} = Menu
 
@@ -115,7 +116,7 @@ export default {
           h('router-link', {props: {to: menu.fullPath}},
             [
               this.renderIcon(h, menu.meta ? menu.meta.icon : 'none'),
-              h('span', [this.$t(menu.fullPath.substring(1).replace(new RegExp('/', 'g'), '.') + '.name')])
+              h('span', [this.$t(getI18nKey(menu.fullPath))])
             ]
           )
         ]
@@ -126,7 +127,7 @@ export default {
       let subItem = [h('span', {slot: 'title'},
         [
           this.renderIcon(h, menu.meta ? menu.meta.icon : 'none'),
-          h('span', [this.$t(menu.fullPath.substring(1).replace(new RegExp('/', 'g'), '.') + '.name')])
+          h('span', [this.$t(getI18nKey(menu.fullPath))])
         ]
       )]
       let itemArr = []

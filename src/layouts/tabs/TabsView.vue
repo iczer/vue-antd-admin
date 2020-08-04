@@ -12,7 +12,7 @@
       @contextmenu="onContextmenu"
     >
       <a-tab-pane :key="page.fullPath" v-for="page in pageList">
-        <span slot="tab" :pagekey="page.fullPath">{{pageName(page.path)}}</span>
+        <span slot="tab" :pagekey="page.fullPath">{{pageName(page)}}</span>
       </a-tab-pane>
     </a-tabs>
     <div class="tabs-view-content" :style="`margin-top: ${multiPage ? -24 : 0}px`">
@@ -31,6 +31,7 @@ import AdminLayout from '@/layouts/AdminLayout'
 import Contextmenu from '@/components/menu/Contextmenu'
 import PageToggleTransition from '@/components/transition/PageToggleTransition'
 import {mapState, mapMutations} from 'vuex'
+import {getI18nKey} from '@/utils/routerUtil'
 
 export default {
   name: 'TabsView',
@@ -176,8 +177,8 @@ export default {
         this.setDustbins(this.dustbins.filter(item => item !== componentName))
       }
     },
-    pageName(path) {
-      return this.$t(path.substring(1).replace(new RegExp('/', 'g'), '.') + '.name')
+    pageName(page) {
+      return this.$t(getI18nKey(page.matched[page.matched.length - 1].path))
     },
     ...mapMutations('setting', ['setDustbins', 'correctPageMinHeight'])
   }
