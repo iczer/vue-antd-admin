@@ -48,6 +48,7 @@ const auth = function(authConfig, permission, role, permissions, roles) {
  * @returns {boolean}
  */
 const preventClick = function (event) {
+  event.preventDefault()
   event.stopPropagation()
   return false
 }
@@ -55,7 +56,7 @@ const preventClick = function (event) {
 const checkInject = function (el, binding,vnode) {
   const type = binding.arg
   const check = binding.value
-  const instance = vnode.componentInstance
+  const instance = vnode.context
   const $auth = instance.$auth
   if (!$auth || !$auth(check, type)) {
     el.classList.add('disabled')

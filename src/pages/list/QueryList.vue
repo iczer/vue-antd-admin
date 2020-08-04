@@ -103,8 +103,19 @@
         <div slot="description" slot-scope="{text}">
           {{text}}
         </div>
-        <div slot="action" slot-scope="{text, record, index}">
-          <a-icon type="edit" />{{index}}
+        <div slot="action" slot-scope="{text, record}">
+          <a style="margin-right: 8px">
+            <a-icon type="plus"/>新增
+          </a>
+          <a style="margin-right: 8px">
+            <a-icon type="edit"/>编辑
+          </a>
+          <a @click="deleteRecord(record.key)">
+            <a-icon type="delete" />删除1
+          </a>
+          <a @click.native="deleteRecord(record.key)" v-auth="`delete`">
+            <a-icon type="delete" />删除2
+          </a>
         </div>
         <template slot="statusTitle">
           <a-icon @click.native="onStatusTitleClick" type="info-circle" />
@@ -173,7 +184,14 @@ export default {
       selectedRows: []
     }
   },
+  authorize: {
+    deleteRecord: 'delete'
+  },
   methods: {
+    deleteRecord(key) {
+      this.dataSource = this.dataSource.filter(item => item.key !== key)
+      this.selectedRows = this.selectedRows.filter(item => item.key !== key)
+    },
     toggleAdvanced () {
       this.advanced = !this.advanced
     },
