@@ -8,6 +8,7 @@
 import enquireScreen from './utils/device'
 import {mapState} from 'vuex'
 import themeUtil from '@/utils/themeUtil';
+import {getI18nKey} from '@/utils/routerUtil'
 
 export default {
   name: 'App',
@@ -17,10 +18,10 @@ export default {
     }
   },
   created () {
-    let _this = this
+    this.setHtmlTitle()
     this.setLanguage(this.lang)
     enquireScreen(isMobile => {
-      _this.$store.commit('setting/setDevice', isMobile)
+      this.$store.commit('setting/setDevice', isMobile)
     })
   },
   mounted() {
@@ -32,6 +33,9 @@ export default {
     },
     lang(val) {
       this.setLanguage(val)
+    },
+    $route() {
+      this.setHtmlTitle()
     },
     'theme.mode': function(val) {
       let closeMessage = this.$message.loading(`您选择了主题模式 ${val}, 正在切换...`)
@@ -71,7 +75,12 @@ export default {
           this.locale = require('ant-design-vue/es/locale-provider/en_US').default
           break
       }
-    }
+    },
+    setHtmlTitle() {
+      const route = this.$route
+      const key = route.path === '/' ? 'home.name' : getI18nKey(route.matched[route.matched.length - 1].path)
+      document.title = process.env.VUE_APP_NAME + ' | ' + this.$t(key)
+    },
   }
 }
 </script>
