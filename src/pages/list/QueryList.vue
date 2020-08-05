@@ -113,7 +113,7 @@
           <a @click="deleteRecord(record.key)">
             <a-icon type="delete" />删除1
           </a>
-          <a @click.native="deleteRecord(record.key)" v-auth="`delete`">
+          <a @click="deleteRecord(record.key)" v-auth="`delete`">
             <a-icon type="delete" />删除2
           </a>
         </div>

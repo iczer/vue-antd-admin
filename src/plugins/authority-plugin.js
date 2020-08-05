@@ -42,31 +42,31 @@ const auth = function(authConfig, permission, role, permissions, roles) {
   return false
 }
 
-/**
- * 阻止的 click 事件监听
- * @param event
- * @returns {boolean}
- */
-const preventClick = function (event) {
-  event.preventDefault()
-  event.stopPropagation()
-  return false
-}
-
 const checkInject = function (el, binding,vnode) {
   const type = binding.arg
   const check = binding.value
   const instance = vnode.context
   const $auth = instance.$auth
   if (!$auth || !$auth(check, type)) {
-    el.classList.add('disabled')
-    el.setAttribute('title', '无此权限')
-    el.addEventListener('click', preventClick, true)
+    addDisabled(el)
   } else {
-    el.classList.remove('disabled')
-    el.removeAttribute('title')
-    el.removeEventListener('click', preventClick, true)
+    removeDisabled(el)
   }
+}
+
+const addDisabled = function (el) {
+  if (el.tagName === 'BUTTON') {
+    el.setAttribute('disabled', 'disabled')
+  } else {
+    el.classList.add('disabled')
+  }
+  el.setAttribute('title', '无此权限')
+}
+
+const removeDisabled = function (el) {
+  el.classList.remove('disabled')
+  el.removeAttribute('disabled')
+  el.removeAttribute('title')
 }
 
 const AuthorityPlugin = {
@@ -77,6 +77,9 @@ const AuthorityPlugin = {
       },
       update(el, binding,vnode) {
         checkInject(el, binding, vnode)
+      },
+      unbind(el) {
+        removeDisabled(el)
       }
     })
     Vue.mixin({
