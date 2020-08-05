@@ -18,7 +18,7 @@
     <div class="tabs-view-content" :style="`margin-top: ${multiPage ? -24 : 0}px`">
       <page-toggle-transition :disabled="animate.disabled" :animate="animate.name" :direction="animate.direction">
         <keep-alive :exclude="dustbins" v-if="multiPage">
-          <router-view />
+          <router-view :key="$route.fullPath" />
         </keep-alive>
         <router-view v-else />
       </page-toggle-transition>
