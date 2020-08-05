@@ -1,7 +1,7 @@
 <template>
   <page-toggle-transition :disabled="animate.disabled" :animate="animate.name" :direction="animate.direction">
     <keep-alive :exclude="dustbins" v-if="multiPage">
-      <router-view :key="$route.fullPath" />
+      <router-view />
     </keep-alive>
     <router-view v-else />
   </page-toggle-transition>
