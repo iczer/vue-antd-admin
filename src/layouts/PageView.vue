@@ -5,7 +5,7 @@
     </div>
     <page-toggle-transition :disabled="animate.disabled" :animate="animate.name" :direction="animate.direction">
       <keep-alive :exclude="dustbins" v-if="multiPage">
-        <router-view :key="$route.fullPath" ref="page" />
+        <router-view ref="page" />
       </keep-alive>
       <router-view ref="page" v-else />
     </page-toggle-transition>
