@@ -161,7 +161,7 @@ authorize: {
     <standard-table ...>
       ...
       <div slot="action" slot-scope="{text, record}">
-        <a @click.native="deleteRecord(record.key)" v-auth="`delete`">
+        <a @click="deleteRecord(record.key)" v-auth="`delete`">
           <a-icon type="delete" />删除
         </a>
       </div>
@@ -170,9 +170,6 @@ authorize: {
   </a-card>
 </template>
 ```
-:::warning 注意！！！
-使用 v-auth 指令校验控件权限时，其点击事件需要用原生 click 事件，即使用 `@click.native` 绑定点击事件，否则权限校验失败时可能无法禁用 click 事件。
-:::
 假如用户没有 `delete` 操作权限，则控件会被应用 disable 样式，且 click 事件无效，如下图：  
 
 ![权限校验指令](../assets/auth.png)
