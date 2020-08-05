@@ -41,22 +41,27 @@ function generateI18n(lang, routes, valueKey) {
 }
 
 /**
- * 格式化 router options，生成 fullPath
- * @param options
+ * 格式化 router.options.routes，生成 fullPath
+ * @param routes
  * @param parentPath
  */
-function formatOptions(options, parentPath) {
-  options.forEach(route => {
+function formatFullPath(routes, parentPath = '') {
+  routes.forEach(route => {
     let isFullPath = route.path.substring(0, 1) === '/'
-    route.fullPath = isFullPath ? route.path : parentPath + '/' + route.path
+    route.fullPath = isFullPath ? route.path : (parentPath === '/' ? parentPath + route.path : parentPath + '/' + route.path)
     if (route.children) {
-      formatOptions(route.children, route.fullPath)
+      formatFullPath(route.children, route.fullPath)
     }
   })
 }
 
+/**
+ * 从路由提取国际化数据
+ * @param i18n
+ * @param routes
+ */
 function mergeI18nFromRoutes(i18n, routes) {
-  formatOptions(routes, '')
+  formatFullPath(routes)
   const CN = generateI18n(new Object(), routes, 'name')
   const US = generateI18n(new Object(), routes, 'path')
   i18n.mergeLocaleMessage('CN', CN)
