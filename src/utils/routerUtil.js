@@ -36,6 +36,9 @@ function parseRoutes(routesConfig, routerMap) {
           page: routeCfg.page || router.page
         }
       }
+      if (routeCfg.invisible || router.invisible) {
+        route.meta.invisible = true
+      }
       if (routeCfg.children && routeCfg.children.length > 0) {
         route.children = parseRoutes(routeCfg.children, routerMap)
       }
