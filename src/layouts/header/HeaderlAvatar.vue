@@ -16,7 +16,7 @@
       <a-menu-divider />
       <a-menu-item>
         <a @click="logout">
-          <a-icon type="poweroff" />
+          <a-icon style="margin-right: 8px;" type="poweroff" />
           <span>退出登录</span>
         </a>
       </a-menu-item>
