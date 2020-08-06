@@ -61,11 +61,15 @@ export default {
     const route = this.$route
     this.pageList.push(route)
     this.activePage = route.fullPath
+    if (this.multiPage) {
+      window.addEventListener('page:close', this.closePageListener)
+    }
   },
   mounted () {
     this.correctPageMinHeight(-this.tabsOffset)
   },
   beforeDestroy() {
+    window.removeEventListener('page:close', this.closePageListener)
     this.correctPageMinHeight(this.tabsOffset)
   },
   watch: {
@@ -81,6 +85,9 @@ export default {
     'multiPage': function (newVal) {
       if (!newVal) {
         this.pageList = [this.$route]
+        window.removeEventListener('page:close', this.closePageListener)
+      } else {
+        window.addEventListener('page:close', this.closePageListener)
       }
     },
     tabsOffset(newVal, oldVal) {
@@ -95,7 +102,7 @@ export default {
     editPage (key, action) {
       this[action](key) // remove
     },
-    remove (key) {
+    remove (key, next) {
       if (this.pageList.length === 1) {
         return this.$message.warning(this.$t('warn'))
       }
@@ -103,7 +110,9 @@ export default {
       let pageRoute = this.pageList[index]
       this.clearCache(pageRoute)
       this.pageList = this.pageList.filter(item => item.fullPath !== key)
-      if (key === this.activePage) {
+      if (next) {
+        this.$router.push(next)
+      } else if (key === this.activePage) {
         index = index >= this.pageList.length ? this.pageList.length - 1 : index
         this.activePage = this.pageList[index].fullPath
         this.$router.push(this.activePage)
@@ -179,6 +188,11 @@ export default {
     },
     pageName(page) {
       return this.$t(getI18nKey(page.matched[page.matched.length - 1].path))
+    },
+    closePageListener(event) {
+      const {closeRoute, nextRoute} = event.detail
+      const closePath = typeof closeRoute === 'string' ? closeRoute : closeRoute.path
+      this.remove(closePath, nextRoute)
     },
     ...mapMutations('setting', ['setDustbins', 'correctPageMinHeight'])
   }
