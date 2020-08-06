@@ -14,11 +14,9 @@
         <span>设置</span>
       </a-menu-item>
       <a-menu-divider />
-      <a-menu-item>
-        <a @click="logout">
-          <a-icon style="margin-right: 8px;" type="poweroff" />
-          <span>退出登录</span>
-        </a>
+      <a-menu-item @click="logout">
+        <a-icon style="margin-right: 8px;" type="poweroff" />
+        <span>退出登录</span>
       </a-menu-item>
     </a-menu>
   </a-dropdown>
