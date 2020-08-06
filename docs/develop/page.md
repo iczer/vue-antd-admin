@@ -12,10 +12,10 @@ lang: zh-CN
   │   ├── assets               # 本地静态资源
   :   :
   │   ├── pages                # 页面组件和通用模板
-+ │   │   └── newPage.vue      # 新页面文件
++ │   │   └── NewPage.vue      # 新页面文件
 or
-+ │   │   └── newFolder        # 为新页面创建一个文件夹
-+ │   │       ├── newPage.vue  # 新页面文件
++ │   │   └── newPage          # 为新页面创建一个文件夹
++ │   │       ├── NewPage.vue  # 新页面文件
 + │   │       ├── index.less   # 页面样式文件
 + │   │       └── index.js     # import 引导文件
   :   :
@@ -24,26 +24,27 @@ or
   ├── README.md                # README.md
   └── vue.config.js            # vue 配置文件
 ```
-为了更好地演示，我们初始化 newPage.vue 文件如下：
+为了更好地演示，我们初始化 NewPage.vue 文件如下：
 ```vue
 <template>
-  <div class="new-page" :style="`min-height: ${layoutMinHeight}px`">
+  <div class="new-page" :style="`min-height: ${pageMinHeight}px`">
     <h1>演示页面</h1>
   </div>
 </template>
-
 <script>
+  import {mapState} from 'vuex'
   export default {
     name: 'NewPage',
-    inject: ['layoutMinHeight'],
     data() {
       return {
         desc: '这是一个演示页面'
       }
+    },
+    computed: {
+      ...mapState('setting', ['pageMinHeight']),
     }
   }
 </script>
-
 <style scoped lang="less">
 @import "index.less";
 </style>
@@ -63,7 +64,7 @@ index.less 文件：
 ```
 index.js 文件：
 ```js
-import NewPage from '@/pages/newPage/NewPage'
+import NewPage from './NewPage'
 export default NewPage
 ```
 ## 配置路由
@@ -148,14 +149,14 @@ const options = {
 ## i18n国际化配置
 如果你想为页面增加i18n国际化配置，只需在页面同级文件夹下创建 i18n.js 文件，然后在页面文件中引入并使用即可。  
 创建 i18n.js 文件：
-```diff {6-10}                    
+```diff {9}                    
   ├── public
   ├── src
   │   ├── assets               # 本地静态资源
   :   :
   │   ├── pages                # 页面组件和通用模板
-  │   │   └── newFolder        # 为新页面创建一个文件夹
-  │   │       ├── newPage.vue  # 新页面文件
+  │   │   └── newPage        # 为新页面创建一个文件夹
+  │   │       ├── NewPage.vue  # 新页面文件
   │   │       ├── index.less   # 页面样式文件
 + │   │       ├── i18n.js      # i18n 国际化配置文件
   │   │       └── index.js     # import 引导文件
@@ -185,26 +186,25 @@ module.exports = {
 }
 ```
 在 NewPage.vue 文件中引入 i18n.js，并添加需要国际化的内容。如下修改：
-```vue {3,11-15}
+```vue {3,10,13-15}
 <template>
-  <div class="new-page" :style="`min-height: ${layoutMinHeight}px`">
+  <div class="new-page" :style="`min-height: ${pageMinHeight}px`">
     <h1>{{$t('content')}}</h1>
   </div>
 </template>
-
 <script>
+  import {mapState} from 'vuex'
   export default {
     name: 'NewPage',
-    inject: ['layoutMinHeight'],
     i18n: require('./i18n'),
     computed: {
+      ...mapState('setting', ['pageMinHeight']),
       desc() {
         return this.$t('description')
       }
     }
   }
 </script>
-
 <style scoped lang="less">
 @import "index";
 </style>
