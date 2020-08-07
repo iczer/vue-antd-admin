@@ -6,7 +6,6 @@ export default {
     isMobile: false,
     animates: ADMIN.animates,
     palettes: ADMIN.palettes,
-    dustbins: [],
     pageMinHeight: 0,
     menuData: [],
     ...config,
@@ -41,9 +40,6 @@ export default {
     },
     setHideSetting(state, hideSetting) {
       state.hideSetting = hideSetting
-    },
-    setDustbins(state, dustbins) {
-      state.dustbins = dustbins
     },
     correctPageMinHeight(state, minHeight) {
       state.pageMinHeight += minHeight
