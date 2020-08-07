@@ -17,9 +17,9 @@
     </a-tabs>
     <div class="tabs-view-content" :style="`margin-top: ${multiPage ? -24 : 0}px`">
       <page-toggle-transition :disabled="animate.disabled" :animate="animate.name" :direction="animate.direction">
-        <keep-alive :exclude="dustbins" v-if="multiPage">
-          <router-view :key="$route.fullPath" />
-        </keep-alive>
+        <a-keep-alive v-if="multiPage" v-model="clearCaches">
+          <router-view ref="tabContent" :key="$route.fullPath" />
+        </a-keep-alive>
         <router-view v-else />
       </page-toggle-transition>
     </div>
@@ -32,20 +32,23 @@ import Contextmenu from '@/components/menu/Contextmenu'
 import PageToggleTransition from '@/components/transition/PageToggleTransition'
 import {mapState, mapMutations} from 'vuex'
 import {getI18nKey} from '@/utils/routerUtil'
+import AKeepAlive from '@/components/cache/AKeepAlive'
 
 export default {
   name: 'TabsView',
   i18n: require('./i18n'),
-  components: { PageToggleTransition, Contextmenu, AdminLayout },
+  components: { PageToggleTransition, Contextmenu, AdminLayout , AKeepAlive },
   data () {
     return {
+      clearCaches: [],
       pageList: [],
+      cachedKeys: [],
       activePage: '',
       menuVisible: false
     }
   },
   computed: {
-    ...mapState('setting', ['multiPage', 'animate', 'layout', 'dustbins']),
+    ...mapState('setting', ['multiPage', 'animate', 'layout']),
     menuItemList() {
       return [
         { key: '1', icon: 'vertical-right', text: this.$t('closeLeft') },
@@ -67,6 +70,7 @@ export default {
   },
   mounted () {
     this.correctPageMinHeight(-this.tabsOffset)
+    this.cachedKeys.push(this.$refs.tabContent.$vnode.key)
   },
   beforeDestroy() {
     window.removeEventListener('page:close', this.closePageListener)
@@ -75,10 +79,12 @@ export default {
   watch: {
     '$route': function (newRoute) {
       this.activePage = newRoute.fullPath
-      this.putCache(newRoute)
       if (!this.multiPage) {
         this.pageList = [newRoute]
       } else if (this.pageList.findIndex(item => item.fullPath == newRoute.fullPath) == -1) {
+        this.$nextTick(() => {
+          this.cachedKeys.push(this.$refs.tabContent.$vnode.key)
+        })
         this.pageList.push(newRoute)
       }
     },
@@ -107,9 +113,9 @@ export default {
         return this.$message.warning(this.$t('warn'))
       }
       let index = this.pageList.findIndex(item => item.fullPath === key)
-      let pageRoute = this.pageList[index]
-      this.clearCache(pageRoute)
-      this.pageList = this.pageList.filter(item => item.fullPath !== key)
+      //清除缓存
+      this.clearCaches = this.cachedKeys.splice(index, 1)
+      this.pageList.splice(index, 1)
       if (next) {
         this.$router.push(next)
       } else if (key === this.activePage) {
@@ -136,54 +142,38 @@ export default {
     },
     closeOthers (pageKey) {
       const index = this.pageList.findIndex(item => item.fullPath === pageKey)
-      // 要关闭的页面清除缓存
-      this.pageList.forEach(item => {
-        if (item.fullPath !== pageKey){
-          this.clearCache(item)
-        }
-      })
+      // 清除缓存
+      this.clearCaches = this.cachedKeys.filter((item, i) => i != index)
+      this.cachedKeys = this.cachedKeys.slice(index, index + 1)
+
       this.pageList = this.pageList.slice(index, index + 1)
-      this.activePage = this.pageList[0].fullPath
-      this.$router.push(this.activePage)
+      if (this.activePage != pageKey) {
+        this.activePage = pageKey
+        this.$router.push(this.activePage)
+      }
     },
     closeLeft (pageKey) {
       const index = this.pageList.findIndex(item => item.fullPath === pageKey)
       // 清除缓存
-      this.pageList.forEach((item, i) => {
-        if (i < index) {
-          this.clearCache(item)
-        }
-      })
+      this.clearCaches = this.cachedKeys.filter((item, i) => i < index)
+      this.cachedKeys = this.cachedKeys.slice(index)
+
       this.pageList = this.pageList.slice(index)
-      if (this.pageList.findIndex(item => item.fullPath === this.activePage) === -1) {
-        this.activePage = this.pageList[0].fullPath
+      if (!this.pageList.find(item => item.fullPath === this.activePage)) {
+        this.activePage = pageKey
         this.$router.push(this.activePage)
       }
     },
     closeRight (pageKey) {
       const index = this.pageList.findIndex(item => item.fullPath === pageKey)
       // 清除缓存
-      this.pageList.forEach((item, i) => {
-        if (i > index) {
-          this.clearCache(item)
-        }
-      })
+      this.clearCaches = this.cachedKeys.filter((item, i) => i > index)
+      this.cachedKeys = this.cachedKeys.slice(0, index+1)
+
       this.pageList = this.pageList.slice(0, index + 1)
-      if (this.pageList.findIndex(item => item.fullPath === this.activePage) === -1) {
-        this.activePage = this.pageList[this.pageList.length - 1].fullPath
+      if (!this.pageList.find(item => item.fullPath === this.activePage)) {
+        this.activePage = pageKey
         this.$router.push(this.activePage)
-      }
-    },
-    clearCache(route) {
-      const componentName = route.matched.slice(-1)[0].components.default.name
-      if (this.dustbins.findIndex(item => item === componentName) === -1) {
-        this.setDustbins(this.dustbins.concat(componentName))
-      }
-    },
-    putCache(route) {
-      const componentName = route.matched.slice(-1)[0].components.default.name
-      if (this.dustbins.includes(componentName)) {
-        this.setDustbins(this.dustbins.filter(item => item !== componentName))
       }
     },
     pageName(page) {
@@ -194,7 +184,7 @@ export default {
       const closePath = typeof closeRoute === 'string' ? closeRoute : closeRoute.path
       this.remove(closePath, nextRoute)
     },
-    ...mapMutations('setting', ['setDustbins', 'correctPageMinHeight'])
+    ...mapMutations('setting', ['correctPageMinHeight'])
   }
 }
 /**

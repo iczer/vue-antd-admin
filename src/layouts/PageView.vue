@@ -4,10 +4,7 @@
       <img :src="extraImage"/>
     </div>
     <page-toggle-transition :disabled="animate.disabled" :animate="animate.name" :direction="animate.direction">
-      <keep-alive :exclude="dustbins" v-if="multiPage">
         <router-view ref="page" />
-      </keep-alive>
-      <router-view ref="page" v-else />
     </page-toggle-transition>
   </page-layout>
 </template>
@@ -26,7 +23,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('setting', ['isMobile', 'multiPage', 'animate', 'dustbins']),
+    ...mapState('setting', ['isMobile', 'multiPage', 'animate']),
     desc() {
       return this.page.desc
     },
