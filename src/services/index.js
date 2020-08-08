@@ -1,7 +1,5 @@
-import {login, logout, getRoutesConfig} from './user'
+import userService from './user'
 
 export {
-  login,
-  logout,
-  getRoutesConfig
+  userService
 }
