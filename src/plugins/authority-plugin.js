@@ -31,7 +31,7 @@ const hasInjected = (method) => method.toString().indexOf('//--auth-inject') !==
 const auth = function(authConfig, permission, role, permissions, roles) {
   const {check, type} = authConfig
   if (check && typeof check === 'function') {
-    return check(permission, role, permissions, roles)
+    return check.apply(this, [permission, role, permissions, roles])
   } else {
     if (type === 'permission') {
       return permission && permission.operation && permission.operation.indexOf(check) !== -1
@@ -96,7 +96,7 @@ const AuthorityPlugin = {
                 this.$options.methods[key] = function () {
                   //--auth-inject
                   if (this.$auth(check, type)) {
-                    return method(...arguments)
+                    return method.apply(this, arguments)
                   } else {
                     if (onFailure && typeof onFailure === 'function') {
                       this[`$${check}Failure`] = onFailure
@@ -128,7 +128,7 @@ const AuthorityPlugin = {
           if (!type) {
             type = permission ? 'permission' : 'role'
           }
-          return auth({check, type}, permission, role, permissions, roles)
+          return auth.apply(this, [{check, type}, permission, role, permissions, roles])
         }
       }
     })

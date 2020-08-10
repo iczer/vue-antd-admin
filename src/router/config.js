@@ -82,6 +82,9 @@ const options = {
             {
               path: 'query',
               name: '查询表格',
+              meta: {
+                authority: 'queryForm',
+              },
               component: () => import('@/pages/list/QueryList'),
             },
             {
