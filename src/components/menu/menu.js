@@ -175,7 +175,9 @@ export default {
     updateMenu () {
       const menuRoutes = this.$route.matched.filter(item => item.path !== '')
       const route = menuRoutes.pop()
-      this.selectedKeys = [this.getSelectedKey(route)]
+      if(this.selectedKeys.length === 0 || route.meta.invisible) {
+        this.selectedKeys = [this.getSelectedKey(route)]
+      }
       let openKeys = menuRoutes.map(item => item.path)
       if (!fastEqual(openKeys, this.sOpenKeys)) {
         this.collapsed || this.mode === 'horizontal' ? this.cachedOpenKeys = openKeys : this.sOpenKeys = openKeys
