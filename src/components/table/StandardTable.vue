@@ -31,8 +31,8 @@
       <template :slot="slot" v-for="slot in Object.keys($slots)">
         <slot :name="slot"></slot>
       </template>
-      <template slot-scope="record, index, indent, expanded" slot="expandedRowRender" v-if="$scopedSlots.expandedRowRender">
-        <slot v-bind="{record, index, indent, expanded}" name="expandedRowRender"></slot>
+      <template slot-scope="record, index, indent, expanded" :slot="$scopedSlots.expandedRowRender ? 'expandedRowRender' : ''">
+        <slot v-bind="{record, index, indent, expanded}" :name="$scopedSlots.expandedRowRender ? 'expandedRowRender' : ''"></slot>
       </template>
     </a-table>
   </div>
