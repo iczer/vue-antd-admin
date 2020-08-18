@@ -20,14 +20,19 @@
       :dataSource="dataSource"
       :rowKey="rowKey"
       :pagination="pagination"
+      :expandedRowKeys="expandedRowKeys"
+      :expandedRowRender="expandedRowRender"
       @change="onChange"
       :rowSelection="selectedRows ? {selectedRowKeys: selectedRowKeys, onChange: updateSelect} : undefined"
     >
-      <template slot-scope="text, record, index" :slot="slot" v-for="slot in scopedSlots">
+      <template slot-scope="text, record, index" :slot="slot" v-for="slot in Object.keys($scopedSlots).filter(key => key !== 'expandedRowRender') ">
         <slot :name="slot" v-bind="{text, record, index}"></slot>
       </template>
-      <template :slot="slot" v-for="slot in slots">
+      <template :slot="slot" v-for="slot in Object.keys($slots)">
         <slot :name="slot"></slot>
+      </template>
+      <template slot-scope="record, index, indent, expanded" slot="expandedRowRender" v-if="$scopedSlots.expandedRowRender">
+        <slot v-bind="{record, index, indent, expanded}" name="expandedRowRender"></slot>
       </template>
     </a-table>
   </div>
@@ -49,13 +54,13 @@ export default {
       type: [Object, Boolean],
       default: true
     },
-    selectedRows: Array
+    selectedRows: Array,
+    expandedRowKeys: Array,
+    expandedRowRender: Function
   },
   data () {
     return {
-      needTotalList: [],
-      scopedSlots: [],
-      slots: []
+      needTotalList: []
     }
   },
   methods: {
@@ -73,16 +78,6 @@ export default {
         })
       return totalList
     },
-    getScopedSlots(columns) {
-      let scopedSlots = columns.filter(item => item.scopedSlots).map(item => item.scopedSlots)
-      scopedSlots = scopedSlots.flatMap(item => Object.values(item))
-      return scopedSlots
-    },
-    getSlots(columns) {
-      let slots = columns.filter(item => item.slots).map(item => item.slots)
-      slots = slots.flatMap(item => Object.values(item))
-      return slots
-    },
     onClear() {
       this.updateSelect([], [])
       this.$emit('clear')
@@ -92,8 +87,6 @@ export default {
     }
   },
   created () {
-    this.scopedSlots = this.getScopedSlots(this.columns)
-    this.slots = this.getSlots(this.columns)
     this.needTotalList = this.initTotalList(this.columns)
   },
   watch: {
