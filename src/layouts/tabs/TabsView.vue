@@ -70,7 +70,9 @@ export default {
   },
   mounted () {
     this.correctPageMinHeight(-this.tabsOffset)
-    this.cachedKeys.push(this.$refs.tabContent.$vnode.key)
+    if(this.multiPage){
+      this.cachedKeys.push(this.$refs.tabContent.$vnode.key)
+    }
   },
   beforeDestroy() {
     window.removeEventListener('page:close', this.closePageListener)
