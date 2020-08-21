@@ -16,7 +16,6 @@ function initI18n(locale, fallback) {
     locale,
     fallbackLocale: fallback,
     silentFallbackWarn: true,
-    messages: routesI18n.messages
   }
   return new VueI18n(i18nOptions)
 }
@@ -66,6 +65,10 @@ function mergeI18nFromRoutes(i18n, routes) {
   const US = generateI18n(new Object(), routes, 'path')
   i18n.mergeLocaleMessage('CN', CN)
   i18n.mergeLocaleMessage('US', US)
+  const messages = routesI18n.messages
+  Object.keys(messages).forEach(lang => {
+    i18n.mergeLocaleMessage(lang, messages[lang])
+  })
 }
 
 export {
