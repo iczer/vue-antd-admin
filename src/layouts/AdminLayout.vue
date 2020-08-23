@@ -1,9 +1,10 @@
 <template>
-  <a-layout :class="['admin-layout', fixedSideBar ? 'fixed-side-bar' : '', 'beauty-scroll']">
+  <a-layout :class="['admin-layout', 'beauty-scroll']">
     <drawer v-if="isMobile" v-model="collapsed">
       <side-menu :theme="theme.mode" :menuData="menuData" :collapsed="false" :collapsible="false" @menuSelect="onMenuSelect"/>
     </drawer>
-    <side-menu :theme="theme.mode" v-else-if="layout === 'side'" :menuData="menuData" :collapsed="collapsed" :collapsible="true" />
+    <side-menu :class="[fixedSideBar ? 'fixed-side' : '']" :theme="theme.mode" v-else-if="layout === 'side'" :menuData="menuData" :collapsed="collapsed" :collapsible="true" />
+    <div v-if="fixedSideBar" :style="`width: ${sideMenuWidth}`" class="virtual-side"></div>
     <drawer v-if="!hideSetting" v-model="showSetting" placement="right">
       <div class="setting" slot="handler">
         <a-icon :type="showSetting ? 'close' : 'setting'"/>
@@ -78,11 +79,16 @@ export default {
 
 <style lang="less" scoped>
   .admin-layout{
-    &.fixed-side-bar{
-      height: 100vh;
-      .admin-layout-main{
-        overflow: scroll;
+    .side-menu{
+      &.fixed-side{
+        position: fixed;
+        left: 0;
+        top: 0;
       }
+    }
+    .virtual-side{
+      display: inline-block;
+      transition: width 0.2s;
     }
     .admin-layout-main{
       .admin-header{
