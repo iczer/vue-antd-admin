@@ -27,7 +27,7 @@ role = {
 Vue Antd Admin 的 `权限/permission` 也包含 `id` 和 `operation` 两个属性。其中 `id` 为 `权限/permission` 的 id，`operation` 为 `权限/permission` 下的操作权限，是一个字符串数组。
 ```js
 permission = {
-  id: 'form',                                    //角色ID
+  id: 'form',                                    //权限ID
   operation: ['add', 'delete', 'edit', 'close']  //权限下的操作权限
 }
 ```
