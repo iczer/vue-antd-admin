@@ -82,6 +82,7 @@ export default {
     .side-menu{
       &.fixed-side{
         position: fixed;
+        height: 100vh;
         left: 0;
         top: 0;
       }

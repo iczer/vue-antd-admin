@@ -32,7 +32,7 @@
       <a-list :split="false">
         <a-list-item>
           {{$t('navigate.content.title')}}
-          <a-select size="small" defaultValue="1" slot="actions" style="width: 80px">
+          <a-select :getPopupContainer="getPopupContainer" :dropdown-style="{zIndex: 2001}" size="small" defaultValue="1" slot="actions" style="width: 80px">
             <a-select-option value="1">{{$t('navigate.content.fluid')}}</a-select-option>
             <a-select-option value="2">{{$t('navigate.content.fixed')}}</a-select-option>
           </a-select>
@@ -75,6 +75,8 @@
           {{$t('animate.effect')}}
           <a-select
             :value="animate.name"
+            :getPopupContainer="getPopupContainer"
+            :dropdown-style="{zIndex: 2001}"
             @change="val => setAnimate({...animate, name: val})"
             class="select-item" size="small" slot="actions"
           >
@@ -85,6 +87,8 @@
           {{$t('animate.direction')}}
           <a-select
             :value="animate.direction"
+            :getPopupContainer="getPopupContainer"
+            :dropdown-style="{zIndex: 2001}"
             @change="val => setAnimate({...animate, direction: val})"
             class="select-item" size="small" slot="actions"
           >
@@ -135,6 +139,9 @@ export default {
     }
   },
   methods: {
+    getPopupContainer() {
+      return this.$el.parentNode
+    },
     copyCode () {
       let config = {}
       // 提取配置
