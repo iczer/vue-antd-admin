@@ -11,7 +11,7 @@
       <div class="detail">
         <div class="main">
           <div class="row">
-            <h1 v-if="title" class="title">{{title}}</h1>
+            <h1 v-if="showPageTitle && title" class="title">{{title}}</h1>
             <div class="action"><slot name="action"></slot></div>
           </div>
           <div class="row">
@@ -28,11 +28,12 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 export default {
   name: 'PageHeader',
   props: {
     title: {
-      type: String,
+      type: [String, Boolean],
       required: false
     },
     breadcrumb: {
@@ -49,9 +50,7 @@ export default {
     },
   },
   computed: {
-    layout () {
-      return this.$store.state.setting.layout
-    }
+    ...mapState('setting', ['layout', 'showPageTitle'])
   }
 }
 </script>

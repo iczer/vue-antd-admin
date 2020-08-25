@@ -63,7 +63,7 @@ export default {
     ...mapState('setting', ['layout', 'multiPage', 'pageMinHeight']),
     pageTitle() {
       let pageTitle = this.page && this.page.title
-      return this.title || this.$t(pageTitle) || this.routeName
+      return pageTitle === undefined ? (this.title || this.routeName) : this.$t(pageTitle)
     },
     routeName() {
       const route = this.$route
