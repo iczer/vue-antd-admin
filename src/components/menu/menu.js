@@ -89,6 +89,19 @@ export default {
     }
   },
   watch: {
+    options(val) {
+      if (!val[0].fullPath) {
+        this.formatOptions(this.options, '')
+      }
+    },
+    i18n(val) {
+      if(val && val.messages) {
+        const messages = this.i18n.messages
+        Object.keys(messages).forEach(key => {
+          this.$i18n.mergeLocaleMessage(key, messages[key])
+        })
+      }
+    },
     collapsed (val) {
       if (val) {
         this.cachedOpenKeys = this.sOpenKeys
