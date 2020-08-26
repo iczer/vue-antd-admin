@@ -156,7 +156,25 @@ function hasRole(route, roles) {
   if (typeof authority === 'object') {
     required = authority.role
   }
-  return authority === '*' || (required && roles && roles.findIndex(item => item === required || item.id === required) !== -1)
+  return authority === '*' || hasAnyRole(required, roles)
+}
+
+/**
+ * 判断是否有需要的任意一个角色
+ * @param required {String | Array[String]} 需要的角色，可以是单个角色或者一个角色数组
+ * @param roles 拥有的角色
+ * @returns {boolean}
+ */
+function hasAnyRole(required, roles) {
+  if (!required) {
+    return false
+  } else if(Array.isArray(required)) {
+    return roles.findIndex(role => {
+      return required.findIndex(item => item === role || item === role.id) !== -1
+    }) !== -1
+  } else {
+    return roles.findIndex(role => role === required || role.id === required) !== -1
+  }
 }
 
 /**
@@ -174,6 +192,10 @@ function formatAuthority(routes) {
         authority.permission = meta.authority
       } else if (typeof meta.authority === 'object') {
         authority = meta.authority
+        const {role} = authority
+        if (typeof role === 'string') {
+          authority.role = [role]
+        }
       } else {
         console.log(typeof meta.authority)
       }
