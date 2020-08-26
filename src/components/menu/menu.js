@@ -175,9 +175,7 @@ export default {
     updateMenu () {
       const menuRoutes = this.$route.matched.filter(item => item.path !== '')
       const route = menuRoutes.pop()
-      if(this.selectedKeys.length === 0 || route.meta.invisible) {
-        this.selectedKeys = [this.getSelectedKey(route)]
-      }
+      this.selectedKeys = [this.getSelectedKey(route)]
       let openKeys = menuRoutes.map(item => item.path)
       if (!fastEqual(openKeys, this.sOpenKeys)) {
         this.collapsed || this.mode === 'horizontal' ? this.cachedOpenKeys = openKeys : this.sOpenKeys = openKeys
@@ -201,12 +199,12 @@ export default {
           openKeys: this.openKeys ? this.openKeys : this.sOpenKeys
         },
         on: {
-          select: (obj) => {
-            this.selectedKeys = obj.selectedKeys
-            this.$emit('select', obj)
-          },
           'update:openKeys': (val) => {
             this.sOpenKeys = val
+          },
+          click: (obj) => {
+            obj.selectedKeys = [obj.key]
+            this.$emit('select', obj)
           }
         }
       }, this.renderMenu(h, this.options)
