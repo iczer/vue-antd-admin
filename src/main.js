@@ -13,12 +13,13 @@ import bootstrap from '@/bootstrap'
 
 const router = initRouter(store.state.setting.asyncRoutes)
 const i18n = initI18n('CN', 'US')
-bootstrap({router, store, i18n})
 
+Vue.use(Antd)
 Vue.config.productionTip = false
 Vue.use(Viser)
-Vue.use(Antd)
 Vue.use(Plugins)
+
+bootstrap({router, store, i18n, message: Vue.prototype.$message})
 
 new Vue({
   router,
