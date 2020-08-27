@@ -13,7 +13,7 @@ const getRoutePermission = (permissions, route) => permissions.find(item => item
  */
 const getRouteRole = (roles, route) => {
   const requiredRoles = route.meta.authority.role
-  return roles.filter(item => requiredRoles.findIndex(required => required === item.id) !== -1)
+  return requiredRoles ? roles.filter(item => requiredRoles.findIndex(required => required === item.id) !== -1) : []
 }
 /**
  * 判断是否已为方法注入权限认证
