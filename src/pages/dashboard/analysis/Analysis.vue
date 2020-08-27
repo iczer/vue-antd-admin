@@ -1,6 +1,6 @@
 <template>
   <div class="analysis">
-    <a-row :gutter="[24, 24]">
+    <a-row style="margin-top: 0" :gutter="[24, 24]">
       <a-col :sm="24" :md="12" :xl="6">
         <chart-card :loading="loading" :title="$t('totalSales')" total="￥ 189,345">
           <a-tooltip :title="$t('introduce')" slot="action">
