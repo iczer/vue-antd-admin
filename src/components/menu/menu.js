@@ -120,7 +120,7 @@ export default {
   },
   methods: {
     renderIcon: function (h, icon, key) {
-      if (this.$scopedSlots.icon) {
+      if (this.$scopedSlots.icon && icon && icon !== 'none') {
         return this.$scopedSlots.icon({icon, key})
       }
       return !icon || icon == 'none' ? null : h(Icon, {props: {type:  icon}})
