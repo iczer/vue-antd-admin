@@ -2,11 +2,11 @@
 module.exports = {
   theme: {
     color: '#13c2c2',
-    mode: 'night'
+    mode: 'dark',
   },
   multiPage: true,
   animate: {
-    name: 'roll',
-    direction: 'default'
+    name: 'lightSpeed',
+    direction: 'left'
   }
 }
