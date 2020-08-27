@@ -121,7 +121,12 @@ export default {
   methods: {
     renderIcon: function (h, icon, key) {
       if (this.$scopedSlots.icon && icon && icon !== 'none') {
-        return this.$scopedSlots.icon({icon, key})
+        const vnodes = this.$scopedSlots.icon({icon, key})
+        vnodes.forEach(vnode => {
+          vnode.data.class = vnode.data.class ? vnode.data.class : []
+          vnode.data.class.push('anticon')
+        })
+        return vnodes
       }
       return !icon || icon == 'none' ? null : h(Icon, {props: {type:  icon}})
     },
