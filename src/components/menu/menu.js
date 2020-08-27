@@ -119,7 +119,10 @@ export default {
     }
   },
   methods: {
-    renderIcon: function (h, icon) {
+    renderIcon: function (h, icon, key) {
+      if (this.$scopedSlots.icon) {
+        return this.$scopedSlots.icon({icon, key})
+      }
       return !icon || icon == 'none' ? null : h(Icon, {props: {type:  icon}})
     },
     renderMenuItem: function (h, menu) {
@@ -128,7 +131,7 @@ export default {
         [
           h('router-link', {props: {to: menu.fullPath}},
             [
-              this.renderIcon(h, menu.meta ? menu.meta.icon : 'none'),
+              this.renderIcon(h, menu.meta ? menu.meta.icon : 'none', menu.fullPath),
               h('span', [this.$t(getI18nKey(menu.fullPath))])
             ]
           )
@@ -139,7 +142,7 @@ export default {
       let this_ = this
       let subItem = [h('span', {slot: 'title'},
         [
-          this.renderIcon(h, menu.meta ? menu.meta.icon : 'none'),
+          this.renderIcon(h, menu.meta ? menu.meta.icon : 'none', menu.fullPath),
           h('span', [this.$t(getI18nKey(menu.fullPath))])
         ]
       )]
