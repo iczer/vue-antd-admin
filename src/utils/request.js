@@ -108,10 +108,10 @@ function loadInterceptors(interceptors, options) {
   request.forEach(item => {
     let {onFulfilled, onRejected} = item
     if (!onFulfilled || typeof onFulfilled !== 'function') {
-      onFulfilled = () => {}
+      onFulfilled = config => config
     }
     if (!onRejected || typeof onRejected !== 'function') {
-      onRejected = () => {}
+      onRejected = error => Promise.reject(error)
     }
     axios.interceptors.request.use(
       config => onFulfilled(config, options),
@@ -122,10 +122,10 @@ function loadInterceptors(interceptors, options) {
   response.forEach(item => {
     let {onFulfilled, onRejected} = item
     if (!onFulfilled || typeof onFulfilled !== 'function') {
-      onFulfilled = () => {}
+      onFulfilled = response => response
     }
     if (!onRejected || typeof onRejected !== 'function') {
-      onRejected = () => {}
+      onRejected = error => Promise.reject(error)
     }
     axios.interceptors.response.use(
       response => onFulfilled(response, options),
