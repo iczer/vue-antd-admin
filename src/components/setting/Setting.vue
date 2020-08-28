@@ -32,9 +32,9 @@
       <a-list :split="false">
         <a-list-item>
           {{$t('navigate.content.title')}}
-          <a-select :getPopupContainer="getPopupContainer" :dropdown-style="{zIndex: 2001}" size="small" defaultValue="1" slot="actions" style="width: 80px">
-            <a-select-option value="1">{{$t('navigate.content.fluid')}}</a-select-option>
-            <a-select-option value="2">{{$t('navigate.content.fixed')}}</a-select-option>
+          <a-select :getPopupContainer="getPopupContainer" :dropdown-style="{zIndex: 2001}" size="small" :defaultValue="fixedWidth" @change="setFixedWidth" slot="actions" style="width: 80px">
+            <a-select-option :value="1">{{$t('navigate.content.fluid')}}</a-select-option>
+            <a-select-option :value="2">{{$t('navigate.content.fixed')}}</a-select-option>
           </a-select>
         </a-list-item>
         <a-list-item>
@@ -131,7 +131,7 @@ export default {
     directions() {
       return this.animates.find(item => item.name == this.animate.name).directions
     },
-    ...mapState('setting', ['theme', 'layout', 'animate', 'animates', 'palettes', 'multiPage', 'weekMode', 'fixedHeader', 'fixedSideBar', 'hideSetting'])
+    ...mapState('setting', ['theme', 'layout', 'animate', 'animates', 'palettes', 'multiPage', 'weekMode', 'fixedHeader', 'fixedSideBar', 'hideSetting', 'fixedWidth'])
   },
   watch: {
     'animate.name': function(val) {
@@ -165,7 +165,7 @@ export default {
       })
     },
     ...mapMutations('setting', ['setTheme', 'setLayout', 'setMultiPage', 'setWeekMode',
-      'setFixedSideBar', 'setFixedHeader', 'setAnimate', 'setHideSetting'])
+      'setFixedSideBar', 'setFixedHeader', 'setAnimate', 'setHideSetting', 'setFixedWidth'])
   }
 }
 </script>

@@ -5,7 +5,7 @@
       v-if="multiPage"
       type="editable-card"
       :active-key="activePage"
-      :style="`margin: -16px auto 8px; ${layout == 'head' ? 'max-width: 1400px;' : ''}`"
+      :style="`margin: -16px auto 8px; ${layout == 'head' && fixedWidth == 2 ? 'max-width: 1400px;' : ''}`"
       :hide-add="true"
       @change="changePage"
       @edit="editPage"
@@ -48,7 +48,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('setting', ['multiPage', 'animate', 'layout']),
+    ...mapState('setting', ['multiPage', 'animate', 'layout', 'fixedWidth']),
     menuItemList() {
       return [
         { key: '1', icon: 'vertical-right', text: this.$t('closeLeft') },
