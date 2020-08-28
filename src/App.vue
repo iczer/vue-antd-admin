@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import enquireScreen from './utils/device'
-import {mapState} from 'vuex'
+import {enquireScreen} from './utils/util'
+import {mapState, mapMutations} from 'vuex'
 import themeUtil from '@/utils/themeUtil';
 import {getI18nKey} from '@/utils/routerUtil'
 
@@ -20,9 +20,7 @@ export default {
   created () {
     this.setHtmlTitle()
     this.setLanguage(this.lang)
-    enquireScreen(isMobile => {
-      this.$store.commit('setting/setDevice', isMobile)
-    })
+    enquireScreen(isMobile => this.setDevice(isMobile))
   },
   mounted() {
    this.setWeekModeTheme(this.weekMode)
@@ -54,6 +52,7 @@ export default {
     ...mapState('setting', ['theme', 'weekMode', 'lang'])
   },
   methods: {
+    ...mapMutations('setting', ['setDevice']),
     setWeekModeTheme(weekMode) {
       if (weekMode) {
         document.body.classList.add('week-mode')
