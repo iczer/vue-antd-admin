@@ -1,5 +1,6 @@
-import {loadRoutes, loginGuard, authorityGuard} from '@/utils/routerUtil'
+import {loadRoutes, loadGuards} from '@/utils/routerUtil'
 import {loadInterceptors} from '@/utils/request'
+import guards from '@/router/guards'
 import interceptors from '@/utils/axios-interceptors'
 
 /**
@@ -14,9 +15,8 @@ function bootstrap({router, store, i18n, message}) {
   loadInterceptors(interceptors, {router, store, i18n, message})
   // 加载路由
   loadRoutes({router, store, i18n})
-  // 添加路由守卫
-  loginGuard(router)
-  authorityGuard(router, store)
+  // 加载路由守卫
+  loadGuards(guards, {router, store, i18n, message})
 }
 
 export default bootstrap
