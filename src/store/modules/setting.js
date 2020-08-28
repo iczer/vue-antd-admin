@@ -4,7 +4,7 @@ export default {
   namespaced: true,
   state: {
     isMobile: false,
-    fixedWidth: 2,
+    pageWidth: 'fixed',
     animates: ADMIN.animates,
     palettes: ADMIN.palettes,
     pageMinHeight: 0,
@@ -51,8 +51,8 @@ export default {
     setAsyncRoutes(state, asyncRoutes) {
       state.asyncRoutes = asyncRoutes
     },
-    setFixedWidth(state, fixedWidth) {
-      state.fixedWidth = fixedWidth
+    setPageWidth(state, pageWidth) {
+      state.pageWidth = pageWidth
     }
   }
 }

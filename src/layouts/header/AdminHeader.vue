@@ -1,6 +1,6 @@
 <template>
   <a-layout-header :class="[headerTheme, 'admin-header']">
-    <div :class="['admin-header-wide', layout == 'side' ? layout : (fixedWidth == 2 ? layout : '')]">
+    <div :class="['admin-header-wide', layout == 'side' ? layout : (pageWidth == 'fixed' ? layout : '')]">
       <router-link v-if="isMobile || layout === 'head'" to="/" :class="['logo', isMobile ? null : 'pc', headerTheme]">
         <img width="32" src="@/assets/img/logo.png" />
         <h1 v-if="!isMobile">{{systemName}}</h1>
@@ -53,7 +53,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('setting', ['theme', 'isMobile', 'layout', 'systemName', 'lang', 'fixedWidth']),
+    ...mapState('setting', ['theme', 'isMobile', 'layout', 'systemName', 'lang', 'pageWidth']),
     headerTheme () {
       if (this.layout == 'side' && this.theme.mode == 'dark' && !this.isMobile) {
         return 'light'

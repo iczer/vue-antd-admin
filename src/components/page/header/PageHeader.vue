@@ -1,5 +1,5 @@
 <template>
-  <div :class="['page-header', layout == 'head' && fixedWidth == 2 ? layout : '']">
+  <div :class="['page-header', layout == 'head' && pageWidth == 'fixed' ? layout : '']">
     <div :class="['page-header-wide']">
       <div class="breadcrumb">
         <a-breadcrumb>
@@ -50,7 +50,7 @@ export default {
     },
   },
   computed: {
-    ...mapState('setting', ['layout', 'showPageTitle', 'fixedWidth'])
+    ...mapState('setting', ['layout', 'showPageTitle', 'pageWidth'])
   }
 }
 </script>

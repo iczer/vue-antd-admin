@@ -13,7 +13,7 @@
       </div>
       <slot v-if="this.$slots.extra" slot="extra" name="extra"></slot>
     </page-header>
-    <div ref="page" :class="['page-content', layout == 'head' ? (fixedWidth == 2 ? layout : '') : '']" >
+    <div ref="page" :class="['page-content', layout == 'head' ? (pageWidth == 'fixed' ? layout : '') : '']" >
       <slot></slot>
     </div>
   </div>
@@ -60,7 +60,7 @@ export default {
     this.updatePageHeight(0)
   },
   computed: {
-    ...mapState('setting', ['layout', 'multiPage', 'pageMinHeight', 'fixedWidth']),
+    ...mapState('setting', ['layout', 'multiPage', 'pageMinHeight', 'pageWidth']),
     pageTitle() {
       let pageTitle = this.page && this.page.title
       return pageTitle === undefined ? (this.title || this.routeName) : this.$t(pageTitle)
