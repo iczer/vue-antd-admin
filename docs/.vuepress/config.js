@@ -36,7 +36,7 @@ module.exports = {
         title: '进阶',
         collapsable: false,
         children: [
-          '/advance/i18n', '/advance/async', '/advance/authority', '/advance/error'
+          '/advance/i18n', '/advance/async', '/advance/authority', '/advance/login', '/advance/guard', '/advance/interceptors', '/advance/skill'
         ]
       },
       {
