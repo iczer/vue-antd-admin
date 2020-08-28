@@ -24,7 +24,7 @@ module.exports = {
 }
 ```
 ### 注册路由组件
-基础路由组件包含路由基本配置和对应的视图组件，我们统一在 `/router/router.map.js` 文件中注册它们。它和正常的路由配置基本无异，相当于把完整的路由拆分成单个的路由配置进行注册，为后面的路由动态配置打好基础。  
+基础路由组件包含路由基本配置和对应的视图组件，我们统一在 `/router/async/router.map.js` 文件中注册它们。它和正常的路由配置基本无异，相当于把完整的路由拆分成单个的路由配置进行注册，为后面的路由动态配置打好基础。  
 一个单独的路由组件注册示例如下：
 ```jsx
 registerName: {                               //路由组件注册名称，唯一标识
@@ -108,7 +108,7 @@ export default routerMap
 ```
 :::
 ### 配置基本路由
-如果没有任何路由，你的应用是无法访问的，所以我们需要在本地配置一些基本的路由，比如登录页、404、403 等。你可以在 `/router/config.async.js` 文件中配置一些本地必要的路由。如下：
+如果没有任何路由，你的应用是无法访问的，所以我们需要在本地配置一些基本的路由，比如登录页、404、403 等。你可以在 `/router/async/config.async.js` 文件中配置一些本地必要的路由。如下：
 ```js
 const routesConfig = [
   'login',                      //匹配 router.map.js 中注册的 registerName = login 的路由
@@ -163,25 +163,25 @@ export default options
 那么我们就需要先从后端服务获取异步路由配置，后端返回的异步路由配置 `routesConfig` 是一个异步路由配置数组， 应当如下格式：
 ```jsx
 [{
-  router: 'root',                           //匹配 /router/router.map.js 中注册名 registerName = root 的路由
+  router: 'root',                           //匹配 router.map.js 中注册名 registerName = root 的路由
   children: [                               //root 路由的子路由配置
     {
-      router: 'dashboard',                  //匹配 /router/router.map.js 中注册名 registerName = dashboard 的路由
+      router: 'dashboard',                  //匹配 router.map.js 中注册名 registerName = dashboard 的路由
       children: ['workplace', 'analysis'],  //dashboard 路由的子路由配置，依次匹配 registerName 为 workplace 和 analysis 的路由
     },
     {
-      router: 'form',                       //匹配 /router/router.map.js 中注册名 registerName = form 的路由
+      router: 'form',                       //匹配 router.map.js 中注册名 registerName = form 的路由
       children: [                           //form 路由的子路由配置
-        'basicForm',                        //匹配 /router/router.map.js 中注册名 registerName = basicForm 的路由
-        'stepForm',                         //匹配 /router/router.map.js 中注册名 registerName = stepForm 的路由
+        'basicForm',                        //匹配 router.map.js 中注册名 registerName = basicForm 的路由
+        'stepForm',                         //匹配 router.map.js 中注册名 registerName = stepForm 的路由
         {
-          router: 'advanceForm',            //匹配 /router/router.map.js 中注册名 registerName = advanceForm 的路由
+          router: 'advanceForm',            //匹配 router.map.js 中注册名 registerName = advanceForm 的路由
           path: 'advance'                   //重写 advanceForm 路由的 path 属性
         }
       ]   
     },
     {
-      router: 'basicForm',                  //匹配 /router/router.map.js 中注册名 registerName = basicForm 的路由
+      router: 'basicForm',                  //匹配 router.map.js 中注册名 registerName = basicForm 的路由
       name: '验权表单',                     //重写 basicForm 路由的 name 属性
       icon: 'file-excel',                   //重写 basicForm 路由的 icon 属性
       authority: 'form'                     //重写 basicForm 路由的 authority 属性
@@ -203,7 +203,7 @@ getRoutesConfig().then(result => {
 至此，异步路由的加载就完成了，你可以访问异步加载的路由了。
 :::tip
 上面获取异步路由的代码，在 /pages/login/Login.vue 文件中可以找到。   
-loadRoutes 方法会合并 /router/config.async.js 文件中配置的基本路由。
+loadRoutes 方法会合并 /router/async/config.async.js 文件中配置的基本路由。
 :::
 :::details 点击查看 loadRoutes 的详细代码
 ```js
