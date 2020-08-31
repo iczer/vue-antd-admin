@@ -1,6 +1,8 @@
 import config from '@/config'
 import {ADMIN} from '@/config/default'
 import {formatFullPath} from '@/utils/i18n'
+import {filterMenu} from '@/utils/authority-utils'
+
 export default {
   namespaced: true,
   state: {
@@ -13,6 +15,13 @@ export default {
     ...config,
   },
   getters: {
+    menuData(state, getters, rootState) {
+      if (state.filterMenu) {
+        const {permissions, roles} = rootState.account
+        filterMenu(state.menuData, permissions, roles)
+      }
+      return state.menuData
+    },
     firstMenu(state) {
       const {menuData} = state
       if (!menuData[0].fullPath) {
@@ -30,7 +39,7 @@ export default {
         formatFullPath(menuData)
       }
       const current = menuData.find(menu => menu.fullPath === activatedFirst)
-      return current ? current.children : []
+      return current && current.children ? current.children : []
     }
   },
   mutations: {
