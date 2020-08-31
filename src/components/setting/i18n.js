@@ -12,6 +12,7 @@ module.exports = {
         title: '导航设置',
         side: '侧边导航',
         head: '顶部导航',
+        mix: '混合导航',
         content: {
           title: '内容区域宽度',
           fluid: '流式',
@@ -82,6 +83,7 @@ module.exports = {
         title: 'Navigation Mode',
         side: 'Side Menu Layout',
         head: 'Top Menu Layout',
+        mix: 'Mix Menu Layout',
         content: {
           title: 'Content Width',
           fluid: 'Fluid',

@@ -73,5 +73,6 @@ function mergeI18nFromRoutes(i18n, routes) {
 
 export {
   initI18n,
-  mergeI18nFromRoutes
+  mergeI18nFromRoutes,
+  formatFullPath
 }

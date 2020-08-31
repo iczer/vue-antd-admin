@@ -3,7 +3,7 @@
     <drawer v-if="isMobile" v-model="collapsed">
       <side-menu :theme="theme.mode" :menuData="menuData" :collapsed="false" :collapsible="false" @menuSelect="onMenuSelect"/>
     </drawer>
-    <side-menu :class="[fixedSideBar ? 'fixed-side' : '']" :theme="theme.mode" v-else-if="layout === 'side'" :menuData="menuData" :collapsed="collapsed" :collapsible="true" />
+    <side-menu :class="[fixedSideBar ? 'fixed-side' : '']" :theme="theme.mode" v-else-if="layout === 'side' || layout === 'mix'" :menuData="sideMenuData" :collapsed="collapsed" :collapsible="true" />
     <div v-if="fixedSideBar && !isMobile" :style="`width: ${sideMenuWidth}; min-width: ${sideMenuWidth};max-width: ${sideMenuWidth};`" class="virtual-side"></div>
     <drawer v-if="!hideSetting" v-model="showSetting" placement="right">
       <div class="setting" slot="handler">
@@ -12,7 +12,7 @@
       <setting />
     </drawer>
     <a-layout class="admin-layout-main beauty-scroll">
-      <admin-header :style="headerStyle" :menuData="menuData" :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
+      <admin-header :style="headerStyle" :menuData="headMenuData" :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
       <a-layout-header v-if="fixedHeader"></a-layout-header>
       <a-layout-content class="admin-layout-content">
         <div :style="`min-height: ${minHeight}px; position: relative`">
@@ -32,7 +32,7 @@ import PageFooter from './footer/PageFooter'
 import Drawer from '../components/tool/Drawer'
 import SideMenu from '../components/menu/SideMenu'
 import Setting from '../components/setting/Setting'
-import {mapState, mapMutations} from 'vuex'
+import {mapState, mapMutations, mapGetters} from 'vuex'
 
 const minHeight = window.innerHeight - 64 - 24 - 122
 
@@ -46,30 +46,61 @@ export default {
       showSetting: false
     }
   },
+  watch: {
+    $route(val) {
+      this.setActivated(val)
+    },
+    layout() {
+      this.setActivated(this.$route)
+    }
+  },
   computed: {
     ...mapState('setting', ['isMobile', 'theme', 'layout', 'footerLinks', 'copyright', 'fixedHeader', 'fixedSideBar',
       'hideSetting', 'menuData']),
+    ...mapGetters('setting', ['firstMenu', 'subMenu']),
     sideMenuWidth() {
       return this.collapsed ? '80px' : '256px'
     },
     headerStyle() {
-      let width = (this.fixedHeader && this.layout == 'side' && !this.isMobile) ? `calc(100% - ${this.sideMenuWidth})` : '100%'
+      let width = (this.fixedHeader && this.layout !== 'head' && !this.isMobile) ? `calc(100% - ${this.sideMenuWidth})` : '100%'
       let position = this.fixedHeader ? 'fixed' : 'static'
       let transition = this.fixedHeader ? 'transition: width 0.2s' : ''
       return `width: ${width}; position: ${position}; ${transition}`
+    },
+    headMenuData() {
+      const {layout, menuData, firstMenu} = this
+      return layout === 'mix' ? firstMenu : menuData
+    },
+    sideMenuData() {
+      const {layout, menuData, subMenu} = this
+      return layout === 'mix' ? subMenu : menuData
     }
   },
   methods: {
-    ...mapMutations('setting', ['correctPageMinHeight']),
+    ...mapMutations('setting', ['correctPageMinHeight', 'setActivatedFirst']),
     toggleCollapse () {
       this.collapsed = !this.collapsed
     },
     onMenuSelect () {
       this.toggleCollapse()
     },
+    setActivated(route) {
+      if (this.layout === 'mix') {
+        let matched = route.matched
+        matched = matched.slice(0, matched.length - 1)
+        const {firstMenu} = this
+        for (let menu of firstMenu) {
+          if (matched.findIndex(item => item.path === menu.fullPath) !== -1) {
+            this.setActivatedFirst(menu.fullPath)
+            break
+          }
+        }
+      }
+    }
   },
   created() {
     this.correctPageMinHeight(minHeight - 1)
+    this.setActivated(this.$route)
   },
   beforeDestroy() {
     this.correctPageMinHeight(-minHeight + 1)
