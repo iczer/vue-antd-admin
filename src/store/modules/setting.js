@@ -1,5 +1,6 @@
 import config from '@/config'
 import {ADMIN} from '@/config/default'
+import {formatFullPath} from '@/utils/i18n'
 export default {
   namespaced: true,
   state: {
@@ -8,7 +9,29 @@ export default {
     palettes: ADMIN.palettes,
     pageMinHeight: 0,
     menuData: [],
+    activatedFirst: undefined,
     ...config,
+  },
+  getters: {
+    firstMenu(state) {
+      const {menuData} = state
+      if (!menuData[0].fullPath) {
+        formatFullPath(menuData)
+      }
+      return menuData.map(item => {
+        const menuItem = {...item}
+        delete menuItem.children
+        return menuItem
+      })
+    },
+    subMenu(state) {
+      const {menuData, activatedFirst} = state
+      if (!menuData[0].fullPath) {
+        formatFullPath(menuData)
+      }
+      const current = menuData.find(menu => menu.fullPath === activatedFirst)
+      return current ? current.children : []
+    }
   },
   mutations: {
     setDevice (state, isMobile) {
@@ -49,6 +72,9 @@ export default {
     },
     setAsyncRoutes(state, asyncRoutes) {
       state.asyncRoutes = asyncRoutes
+    },
+    setActivatedFirst(state, activatedFirst) {
+      state.activatedFirst = activatedFirst
     }
   }
 }

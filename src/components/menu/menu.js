@@ -77,7 +77,7 @@ export default {
   },
   created () {
     this.updateMenu()
-    if (!this.options[0].fullPath) {
+    if (this.options.length > 0 && !this.options[0].fullPath) {
       this.formatOptions(this.options, '')
     }
     // 自定义国际化配置
@@ -90,7 +90,7 @@ export default {
   },
   watch: {
     options(val) {
-      if (!val[0].fullPath) {
+      if (val.length > 0 && !val[0].fullPath) {
         this.formatOptions(this.options, '')
       }
     },
@@ -195,18 +195,14 @@ export default {
     },
     updateMenu () {
       const menuRoutes = this.$route.matched.filter(item => item.path !== '')
-      const route = menuRoutes.pop()
-      this.selectedKeys = [this.getSelectedKey(route)]
+      this.selectedKeys = this.getSelectedKey(this.$route)
       let openKeys = menuRoutes.map(item => item.path)
       if (!fastEqual(openKeys, this.sOpenKeys)) {
         this.collapsed || this.mode === 'horizontal' ? this.cachedOpenKeys = openKeys : this.sOpenKeys = openKeys
       }
     },
     getSelectedKey (route) {
-      if (route.meta.invisible && route.parent) {
-        return this.getSelectedKey(route.parent)
-      }
-      return route.path
+      return route.matched.map(item => item.path)
     }
   },
   render (h) {

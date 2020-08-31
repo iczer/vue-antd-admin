@@ -6,12 +6,12 @@
         <h1 v-if="!isMobile">{{systemName}}</h1>
       </router-link>
       <a-divider v-if="isMobile" type="vertical" />
-      <a-icon v-if="layout === 'side'" class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
-      <div v-if="layout == 'head' && !isMobile" class="admin-header-menu">
-        <i-menu class="head-menu" style="height: 64px; line-height: 64px;box-shadow: none" :theme="headerTheme" mode="horizontal" :options="menuData" @select="onSelect"/>
+      <a-icon v-if="layout !== 'head'" class="trigger" :type="collapsed ? 'menu-unfold' : 'menu-fold'" @click="toggleCollapse"/>
+      <div v-if="layout !== 'side' && !isMobile" class="admin-header-menu" :style="`width: ${menuWidth};`">
+        <i-menu class="head-menu" :theme="headerTheme" mode="horizontal" :options="menuData" @select="onSelect"/>
       </div>
       <div :class="['admin-header-right', headerTheme]">
-          <header-search class="header-item" />
+          <header-search class="header-item" @active="val => searchActive = val" />
           <a-tooltip class="header-item" title="帮助文档" placement="bottom" >
             <a href="https://iczer.github.io/vue-antd-admin/" target="_blank">
               <a-icon type="question-circle-o" />
@@ -49,7 +49,8 @@ export default {
         {key: 'CN', name: '简体中文', alias: '简体'},
         {key: 'HK', name: '繁體中文', alias: '繁體'},
         {key: 'US', name: 'English', alias: 'English'}
-      ]
+      ],
+      searchActive: false
     }
   },
   computed: {
@@ -63,6 +64,12 @@ export default {
     langAlias() {
       let lang = this.langList.find(item => item.key == this.lang)
       return lang.alias
+    },
+    menuWidth() {
+      const {layout, searchActive} = this
+      const headWidth = layout === 'head' ? '1236px' : '100%'
+      const extraWidth = searchActive ? '564px' : '364px'
+      return `calc(${headWidth} - ${extraWidth})`
     }
   },
   methods: {

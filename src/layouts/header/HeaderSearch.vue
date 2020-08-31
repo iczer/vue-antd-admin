@@ -24,10 +24,12 @@ export default {
   methods: {
     enterSearchMode () {
       this.searchMode = true
+      this.$emit('active', true)
       setTimeout(() => this.$refs.input.focus(), 300)
     },
     leaveSearchMode () {
       this.searchMode = false
+      setTimeout(() => this.$emit('active', false), 300)
     }
   }
 }

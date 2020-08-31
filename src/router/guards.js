@@ -38,7 +38,30 @@ const authorityGuard = (to, from, next, options) => {
   }
 }
 
+/**
+ * 混合导航模式下一级菜单跳转重定向
+ * @param to
+ * @param from
+ * @param next
+ * @param options
+ * @returns {*}
+ */
+const redirectGuard = (to, from, next, options) => {
+  const {store} = options
+  if (store.state.setting.layout === 'mix') {
+    const firstMenu = store.getters['setting/firstMenu']
+    if (firstMenu.find(item => item.fullPath === to.fullPath)) {
+      store.commit('setting/setActivatedFirst', to.fullPath)
+      const subMenu = store.getters['setting/subMenu']
+      if (subMenu.length > 0) {
+        return next({path: subMenu[0].fullPath})
+      }
+    }
+  }
+  next()
+}
+
 export default {
-  beforeEach: [loginGuard, authorityGuard],
+  beforeEach: [loginGuard, authorityGuard, redirectGuard],
   afterEach: []
 }
