@@ -47,4 +47,19 @@ function hasAnyRole(required, roles) {
   }
 }
 
-export {hasPermission, hasRole}
+/**
+ * 根据权限配置过滤菜单数据
+ * @param menuData
+ * @param permissions
+ * @param roles
+ */
+function filterMenu(menuData, permissions, roles) {
+  menuData.forEach(menu => {
+    menu.meta.invisible = !hasPermission(menu, permissions) && !hasRole(menu, roles)
+    if (menu.children && menu.children.length > 0) {
+      filterMenu(menu.children, permissions, roles)
+    }
+  })
+}
+
+export {hasPermission, hasRole, filterMenu}

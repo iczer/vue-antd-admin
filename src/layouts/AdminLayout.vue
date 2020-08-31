@@ -56,8 +56,8 @@ export default {
   },
   computed: {
     ...mapState('setting', ['isMobile', 'theme', 'layout', 'footerLinks', 'copyright', 'fixedHeader', 'fixedSideBar',
-      'hideSetting', 'menuData']),
-    ...mapGetters('setting', ['firstMenu', 'subMenu']),
+      'hideSetting']),
+    ...mapGetters('setting', ['firstMenu', 'subMenu', 'menuData']),
     sideMenuWidth() {
       return this.collapsed ? '80px' : '256px'
     },
