@@ -55,9 +55,11 @@ function hasAnyRole(required, roles) {
  */
 function filterMenu(menuData, permissions, roles) {
   menuData.forEach(menu => {
-    menu.meta.invisible = !hasPermission(menu, permissions) && !hasRole(menu, roles)
-    if (menu.children && menu.children.length > 0) {
-      filterMenu(menu.children, permissions, roles)
+    if (menu.meta && menu.meta.invisible === undefined) {
+      menu.meta.invisible = !hasPermission(menu, permissions) && !hasRole(menu, roles)
+      if (menu.children && menu.children.length > 0) {
+        filterMenu(menu.children, permissions, roles)
+      }
     }
   })
 }
