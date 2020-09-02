@@ -97,15 +97,16 @@ function mergeRoutes(target, source) {
 
 /**
  * 格式化路由的权限配置
- * @param routes
+ * @param routes 路由
+ * @param pAuthorities 父级路由权限配置集合
  */
-function formatAuthority(routes) {
+function formatAuthority(routes, pAuthorities = []) {
   routes.forEach(route => {
     const meta = route.meta
     if (meta) {
       let authority = {}
       if (!meta.authority) {
-        authority.permission = '*'
+        authority = pAuthorities.length > 0 ? pAuthorities[pAuthorities.length - 1] : {permission: '*'}
       }else if (typeof meta.authority === 'string') {
         authority.permission = meta.authority
       } else if (typeof meta.authority === 'object') {
@@ -114,17 +115,20 @@ function formatAuthority(routes) {
         if (typeof role === 'string') {
           authority.role = [role]
         }
+        if (!authority.permission && !authority.role) {
+          authority = pAuthorities.length > 0 ? pAuthorities[pAuthorities.length - 1] : {permission: '*'}
+        }
       } else {
         console.log(typeof meta.authority)
       }
       meta.authority = authority
     } else {
-      route.meta = {
-        authority: {permission: '*'}
-      }
+      const authority = pAuthorities.length > 0 ? pAuthorities[pAuthorities.length - 1] : {permission: '*'}
+      route.meta = {authority}
     }
+    route.meta.pAuthorities = pAuthorities
     if (route.children) {
-      formatAuthority(route.children)
+      formatAuthority(route.children, [...pAuthorities, route.meta.authority])
     }
   })
 }

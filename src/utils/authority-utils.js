@@ -1,11 +1,10 @@
 /**
  * 判断是否有路由的权限
- * @param route 路由
+ * @param authority 路由权限配置
  * @param permissions 用户权限集合
  * @returns {boolean|*}
  */
-function hasPermission(route, permissions) {
-  const authority = route.meta.authority || '*'
+function hasPermission(authority, permissions) {
   let required = '*'
   if (typeof authority === 'string') {
     required = authority
@@ -17,11 +16,10 @@ function hasPermission(route, permissions) {
 
 /**
  * 判断是否有路由需要的角色
- * @param route 路由
+ * @param authority 路由权限配置
  * @param roles 用户角色集合
  */
-function hasRole(route, roles) {
-  const authority = route.meta.authority || '*'
+function hasRole(authority, roles) {
   let required = undefined
   if (typeof authority === 'object') {
     required = authority.role
@@ -48,6 +46,23 @@ function hasAnyRole(required, roles) {
 }
 
 /**
+ * 路由权限校验
+ * @param route 路由
+ * @param permissions 用户权限集合
+ * @param roles 用户角色集合
+ * @returns {boolean}
+ */
+function hasAuthority(route, permissions, roles) {
+  const authorities = [...route.meta.pAuthorities, route.meta.authority]
+  for (let authority of authorities) {
+    if (!hasPermission(authority, permissions) && !hasRole(authority, roles)) {
+      return false
+    }
+  }
+  return true
+}
+
+/**
  * 根据权限配置过滤菜单数据
  * @param menuData
  * @param permissions
@@ -56,7 +71,7 @@ function hasAnyRole(required, roles) {
 function filterMenu(menuData, permissions, roles) {
   menuData.forEach(menu => {
     if (menu.meta && menu.meta.invisible === undefined) {
-      menu.meta.invisible = !hasPermission(menu, permissions) && !hasRole(menu, roles)
+      menu.meta.invisible = !hasAuthority(menu, permissions, roles)
       if (menu.children && menu.children.length > 0) {
         filterMenu(menu.children, permissions, roles)
       }
@@ -64,4 +79,4 @@ function filterMenu(menuData, permissions, roles) {
   })
 }
 
-export {hasPermission, hasRole, filterMenu}
+export {filterMenu, hasAuthority}
