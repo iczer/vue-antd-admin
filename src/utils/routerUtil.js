@@ -1,6 +1,7 @@
 import routerMap from '@/router/async/router.map'
 import {mergeI18nFromRoutes} from '@/utils/i18n'
 import Router from 'vue-router'
+import deepMerge from 'deepmerge'
 
 /**
  * 根据 路由配置 和 路由组件注册 解析路由
@@ -96,6 +97,44 @@ function mergeRoutes(target, source) {
 }
 
 /**
+ * 深度合并路由
+ * @param target {Route[]}
+ * @param source {Route[]}
+ * @returns {Route[]}
+ */
+function deepMergeRoutes(target, source) {
+  // 映射路由数组
+  const mapRoutes = routes => {
+    const routesMap = {}
+    routes.forEach(item => {
+      routesMap[item.path] = {
+        ...item,
+        children: item.children ? mapRoutes(item.children) : undefined
+      }
+    })
+    return routesMap
+  }
+  const tarMap = mapRoutes(target)
+  const srcMap = mapRoutes(source)
+
+  // 合并路由
+  const merge = deepMerge(tarMap, srcMap)
+
+  // 转换为 routes 数组
+  const parseRoutesMap = routesMap => {
+    return Object.values(routesMap).map(item => {
+      if (item.children) {
+        item.children = parseRoutesMap(item.children)
+      } else {
+        delete item.children
+      }
+      return item
+    })
+  }
+  return parseRoutesMap(merge)
+}
+
+/**
  * 格式化路由的权限配置
  * @param routes 路由
  * @param pAuthorities 父级路由权限配置集合
@@ -164,4 +203,4 @@ function loadGuards(guards, options) {
   })
 }
 
-export {parseRoutes, loadRoutes, formatAuthority, getI18nKey, loadGuards}
+export {parseRoutes, loadRoutes, formatAuthority, getI18nKey, loadGuards, deepMergeRoutes}
