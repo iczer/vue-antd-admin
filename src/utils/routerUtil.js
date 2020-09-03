@@ -66,7 +66,7 @@ function loadRoutes({router, store, i18n}, routesConfig) {
   if (asyncRoutes) {
     if (routesConfig && routesConfig.length > 0) {
       const routes = parseRoutes(routesConfig, routerMap)
-      formatAuthority(routes)
+      formatRoutes(routes)
       const finalRoutes = mergeRoutes(router.options.routes, routes)
       router.options = {...router.options, routes: finalRoutes}
       router.matcher = new Router({...router.options, routes:[]}).matcher
@@ -132,6 +132,20 @@ function deepMergeRoutes(target, source) {
     })
   }
   return parseRoutesMap(merge)
+}
+
+/**
+ * 格式化路由
+ * @param routes 路由配置
+ */
+function formatRoutes(routes) {
+  routes.forEach(route => {
+    const {path} = route
+    if (!path.startsWith('/') && path !== '*') {
+      route.path = '/' + path
+    }
+  })
+  formatAuthority(routes)
 }
 
 /**
@@ -203,4 +217,4 @@ function loadGuards(guards, options) {
   })
 }
 
-export {parseRoutes, loadRoutes, formatAuthority, getI18nKey, loadGuards, deepMergeRoutes}
+export {parseRoutes, loadRoutes, formatAuthority, getI18nKey, loadGuards, deepMergeRoutes, formatRoutes}

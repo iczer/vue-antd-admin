@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import {formatAuthority} from '@/utils/routerUtil'
+import {formatRoutes} from '@/utils/routerUtil'
 
 Vue.use(Router)
 
@@ -25,7 +25,7 @@ const loginIgnore = {
  */
 function initRouter(isAsync) {
   const options = isAsync ? require('./async/config.async').default : require('./config').default
-  formatAuthority(options.routes)
+  formatRoutes(options.routes)
   return new Router(options)
 }
 export {loginIgnore, initRouter}
