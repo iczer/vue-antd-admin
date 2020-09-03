@@ -156,10 +156,11 @@ function formatRoutes(routes) {
 function formatAuthority(routes, pAuthorities = []) {
   routes.forEach(route => {
     const meta = route.meta
+    const defaultAuthority = pAuthorities[pAuthorities.length - 1] || {permission: '*'}
     if (meta) {
       let authority = {}
       if (!meta.authority) {
-        authority = pAuthorities.length > 0 ? pAuthorities[pAuthorities.length - 1] : {permission: '*'}
+        authority = defaultAuthority
       }else if (typeof meta.authority === 'string') {
         authority.permission = meta.authority
       } else if (typeof meta.authority === 'object') {
@@ -169,14 +170,12 @@ function formatAuthority(routes, pAuthorities = []) {
           authority.role = [role]
         }
         if (!authority.permission && !authority.role) {
-          authority = pAuthorities.length > 0 ? pAuthorities[pAuthorities.length - 1] : {permission: '*'}
+          authority = defaultAuthority
         }
-      } else {
-        console.log(typeof meta.authority)
       }
       meta.authority = authority
     } else {
-      const authority = pAuthorities.length > 0 ? pAuthorities[pAuthorities.length - 1] : {permission: '*'}
+      const authority = defaultAuthority
       route.meta = {authority}
     }
     route.meta.pAuthorities = pAuthorities
