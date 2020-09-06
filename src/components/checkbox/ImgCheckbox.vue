@@ -1,5 +1,5 @@
 <template>
-  <a-tooltip :title="title">
+  <a-tooltip :title="title" :overlayStyle="{zIndex: 2001}">
     <div class="img-check-box" @click="toggle">
       <img :src="img" />
       <div v-if="sChecked" class="check-item">
