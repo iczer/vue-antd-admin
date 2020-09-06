@@ -82,6 +82,9 @@ export default {
     setAsyncRoutes(state, asyncRoutes) {
       state.asyncRoutes = asyncRoutes
     },
+    setPageWidth(state, pageWidth) {
+      state.pageWidth = pageWidth
+    },
     setActivatedFirst(state, activatedFirst) {
       state.activatedFirst = activatedFirst
     }

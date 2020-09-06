@@ -1,6 +1,6 @@
 <template>
-  <div class="page-header">
-    <div :class="['page-header-wide', layout]">
+  <div :class="['page-header', layout, pageWidth]">
+    <div class="page-header-wide">
       <div class="breadcrumb">
         <a-breadcrumb>
           <a-breadcrumb-item :key="index" v-for="(item, index) in breadcrumb">
@@ -50,7 +50,7 @@ export default {
     },
   },
   computed: {
-    ...mapState('setting', ['layout', 'showPageTitle'])
+    ...mapState('setting', ['layout', 'showPageTitle', 'pageWidth'])
   }
 }
 </script>
