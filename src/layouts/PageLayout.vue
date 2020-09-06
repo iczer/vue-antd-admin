@@ -13,7 +13,7 @@
       </div>
       <slot v-if="this.$slots.extra" slot="extra" name="extra"></slot>
     </page-header>
-    <div ref="page" :class="['page-content', layout == 'head' ? (pageWidth == 'fixed' ? layout : '') : '']" >
+    <div ref="page" :class="['page-content', layout, pageWidth]" >
       <slot></slot>
     </div>
   </div>
@@ -130,7 +130,7 @@ export default {
     padding: 24px 0 0;
     &.side{
     }
-    &.head{
+    &.head.fixed{
       margin: 0 auto;
       max-width: 1400px;
     }

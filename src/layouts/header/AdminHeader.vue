@@ -1,6 +1,6 @@
 <template>
   <a-layout-header :class="[headerTheme, 'admin-header']">
-    <div :class="['admin-header-wide', layout == 'side' ? layout : (pageWidth == 'fixed' ? layout : '')]">
+    <div :class="['admin-header-wide', layout, pageWidth]">
       <router-link v-if="isMobile || layout === 'head'" to="/" :class="['logo', isMobile ? null : 'pc', headerTheme]">
         <img width="32" src="@/assets/img/logo.png" />
         <h1 v-if="!isMobile">{{systemName}}</h1>

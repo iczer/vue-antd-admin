@@ -5,7 +5,7 @@
       v-if="multiPage"
       type="editable-card"
       :active-key="activePage"
-      :style="`margin: -16px auto 8px; ${layout == 'head' && pageWidth == 'fixed' ? 'max-width: 1400px;' : ''}`"
+      :class="['tabs-view', layout, pageWidth]"
       :hide-add="true"
       @change="changePage"
       @edit="editPage"
@@ -206,6 +206,12 @@ function getPageKey (target, depth = 0) {
 </script>
 
 <style scoped lang="less">
+  .tabs-view{
+    margin: -16px auto 8px;
+    &.head.fixed{
+      max-width: 1400px;
+    }
+  }
   .tabs-view-content{
     position: relative;
   }

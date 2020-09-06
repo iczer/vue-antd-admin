@@ -7,7 +7,6 @@ export default {
   namespaced: true,
   state: {
     isMobile: false,
-    pageWidth: 'fixed',
     animates: ADMIN.animates,
     palettes: ADMIN.palettes,
     pageMinHeight: 0,

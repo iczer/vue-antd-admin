@@ -1,6 +1,6 @@
 <template>
-  <div :class="['page-header', layout == 'head' && pageWidth == 'fixed' ? layout : '']">
-    <div :class="['page-header-wide']">
+  <div :class="['page-header', layout, pageWidth]">
+    <div class="page-header-wide">
       <div class="breadcrumb">
         <a-breadcrumb>
           <a-breadcrumb-item :key="index" v-for="(item, index) in breadcrumb">
