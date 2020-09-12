@@ -23,9 +23,9 @@ function getFunctionalColors(mode) {
   const warningColors = generate(warning, options)
   const errorColors = generate(error, options)
   return {
-    success: [...successColors.slice(0, 3), successColors[5]],
-    warning: [...warningColors.slice(0, 3), warningColors[5]],
-    error: [...errorColors.slice(0, 3), errorColors[5]]
+    success: successColors,
+    warning: warningColors,
+    error: errorColors
   }
 }
 
