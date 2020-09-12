@@ -1,6 +1,6 @@
 <template>
   <a-layout :class="['admin-layout', 'beauty-scroll']">
-    <drawer v-if="isMobile" v-model="collapsed">
+    <drawer v-if="isMobile" v-model="drawerOpen">
       <side-menu :theme="theme.mode" :menuData="menuData" :collapsed="false" :collapsible="false" @menuSelect="onMenuSelect"/>
     </drawer>
     <side-menu :class="[fixedSideBar ? 'fixed-side' : '']" :theme="theme.mode" v-else-if="layout === 'side' || layout === 'mix'" :menuData="sideMenuData" :collapsed="collapsed" :collapsible="true" />
@@ -43,7 +43,8 @@ export default {
     return {
       minHeight: minHeight,
       collapsed: false,
-      showSetting: false
+      showSetting: false,
+      drawerOpen: false
     }
   },
   watch: {
@@ -52,6 +53,11 @@ export default {
     },
     layout() {
       this.setActivated(this.$route)
+    },
+    isMobile(val) {
+      if(!val) {
+        this.drawerOpen = false
+      }
     }
   },
   computed: {
