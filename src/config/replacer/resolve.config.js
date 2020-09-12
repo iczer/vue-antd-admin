@@ -37,6 +37,12 @@ const cssResolve = {
       return cssObj.toText()
     }
   },
+  '.ant-menu-horizontal>.ant-menu-item-active,.ant-menu-horizontal>.ant-menu-item-open,.ant-menu-horizontal>.ant-menu-item-selected,.ant-menu-horizontal>.ant-menu-item:hover,.ant-menu-horizontal>.ant-menu-submenu-active,.ant-menu-horizontal>.ant-menu-submenu-open,.ant-menu-horizontal>.ant-menu-submenu-selected,.ant-menu-horizontal>.ant-menu-submenu:hover': {
+    resolve(cssText, cssObj) {
+      cssObj.selector = cssObj.selector.replace(/.ant-menu-horizontal/g, '.ant-menu-horizontal:not(.ant-menu-dark)')
+      return cssObj.toText()
+    }
+  },
   '.ant-layout-sider': {
     resolve(cssText, cssObj) {
       cssObj.selector = '.ant-layout-sider-dark'
