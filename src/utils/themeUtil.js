@@ -43,9 +43,9 @@ module.exports = {
       'primary-9': palettes[8],
       'primary-10': palettes[9],
       'info-color': primary,
-      'success-color': success[3],
-      'warning-color': warning[3],
-      'error-color': error[3],
+      'success-color': success[5],
+      'warning-color': warning[5],
+      'error-color': error[5],
       'alert-info-bg-color': palettes[0],
       'alert-info-border-color': palettes[2],
       'alert-success-bg-color': success[0],
@@ -58,6 +58,8 @@ module.exports = {
       'menu-dark-submenu-bg': menuColors[0],
       'layout-header-background': menuColors[1],
       'layout-trigger-background': menuColors[2],
+      'btn-danger-bg': error[4],
+      'btn-danger-border': error[4],
       ...ANTD.theme[theme.mode]
     }
   }
