@@ -21,6 +21,11 @@ export default {
     this.setHtmlTitle()
     this.setLanguage(this.lang)
     enquireScreen(isMobile => this.setDevice(isMobile))
+	//设置为读取本地存储配置
+	const loadLocalSetting = this.localSaveSetting
+	if (loadLocalSetting) {
+		this.$store.dispatch('setting/loadLocalSetting')
+	}
   },
   mounted() {
    this.setWeekModeTheme(this.weekMode)
@@ -49,7 +54,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('setting', ['theme', 'weekMode', 'lang'])
+    ...mapState('setting', ['theme', 'weekMode', 'lang', 'localSaveSetting'])
   },
   methods: {
     ...mapMutations('setting', ['setDevice']),

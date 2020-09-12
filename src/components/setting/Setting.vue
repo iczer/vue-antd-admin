@@ -98,13 +98,13 @@
         </a-list-item>
       </a-list>
     </setting-item>
-    <a-alert
+    <a-alert v-if="!localSaveSetting"
       style="max-width: 240px; margin: -16px 0 8px; word-break: break-all"
       type="warning"
       :message="$t('alert')"
     >
     </a-alert>
-    <a-button id="copyBtn" :data-clipboard-text="copyConfig" @click="copyCode" style="width: 100%" icon="copy" >{{$t('copy')}}</a-button>
+    <a-button id="copyBtn" :data-clipboard-text="copyConfig" @click="copyCode" style="width: 100%" icon="copy" >{{localSaveSetting?$t('save'):$t('copy')}}</a-button>
   </div>
 </template>
 
@@ -132,7 +132,7 @@ export default {
     directions() {
       return this.animates.find(item => item.name == this.animate.name).directions
     },
-    ...mapState('setting', ['theme', 'layout', 'animate', 'animates', 'palettes', 'multiPage', 'weekMode', 'fixedHeader', 'fixedSideBar', 'hideSetting', 'pageWidth'])
+    ...mapState('setting', ['theme', 'layout', 'animate', 'animates', 'palettes', 'multiPage', 'weekMode', 'fixedHeader', 'fixedSideBar', 'hideSetting', 'pageWidth', 'localSaveSetting'])
   },
   watch: {
     'animate.name': function(val) {
@@ -157,11 +157,19 @@ export default {
       this.copyConfig = '// 自定义配置，参考 ./default/setting.config.js，需要自定义的属性在这里配置即可\n'
       this.copyConfig += 'module.exports = '
       this.copyConfig += formatConfig(config)
+	  
+	  //如果设置保存在本地，则存到浏览器localStroge中
+	  if(this.localSaveSetting) {
+		  localStorage.setItem('localSetting',JSON.stringify(config))
+	  }
 
       let clipboard = new Clipboard('#copyBtn')
-      const _this = this
-      clipboard.on('success', function () {
-        _this.$message.success(`复制成功，覆盖文件 src/config/config.js 然后重启项目即可生效`)
+      clipboard.on('success', () => {
+		if(this.localSaveSetting) {
+			this.$message.success(`保存配置成功`)
+		} else {
+			this.$message.success(`复制成功，覆盖文件 src/config/config.js 然后重启项目即可生效`)
+		}
         clipboard.destroy()
       })
     },
