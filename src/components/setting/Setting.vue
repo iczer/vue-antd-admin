@@ -1,5 +1,9 @@
 <template>
   <div class="side-setting">
+    <setting-item>
+      <a-button @click="saveSetting" type="primary" icon="save">{{$t('save')}}</a-button>
+      <a-button @click="resetSetting" type="dashed" icon="redo" style="float: right">{{$t('reset')}}</a-button>
+    </setting-item>
     <setting-item :title="$t('theme.title')">
       <img-checkbox-group
         @change="values => setTheme({...theme, mode: values[0]})"
@@ -102,12 +106,13 @@
       </a-list>
     </setting-item>
     <a-alert
+      v-if="isDev"
       style="max-width: 240px; margin: -16px 0 8px; word-break: break-all"
       type="warning"
       :message="$t('alert')"
     >
     </a-alert>
-    <a-button id="copyBtn" :data-clipboard-text="copyConfig" @click="copyCode" style="width: 100%" icon="copy" >{{$t('copy')}}</a-button>
+    <a-button v-if="isDev" id="copyBtn" :data-clipboard-text="copyConfig" @click="copyCode" style="width: 100%" icon="copy" >{{$t('copy')}}</a-button>
   </div>
 </template>
 
@@ -128,7 +133,8 @@ export default {
   components: {ImgCheckboxGroup, ImgCheckbox, ColorCheckboxGroup, ColorCheckbox, SettingItem},
   data() {
     return {
-      copyConfig: 'Sorry, you have copied nothing O(∩_∩)O~'
+      copyConfig: 'Sorry, you have copied nothing O(∩_∩)O~',
+      isDev: process.env.NODE_ENV === 'development'
     }
   },
   computed: {
@@ -147,26 +153,48 @@ export default {
       return this.$el.parentNode
     },
     copyCode () {
+      let config = this.extractConfig()
+      this.copyConfig = `// 自定义配置，参考 ./default/setting.config.js，需要自定义的属性在这里配置即可
+      module.exports = ${formatConfig(config)}
+      `
+      let clipboard = new Clipboard('#copyBtn')
+      clipboard.on('success', () => {
+        this.$message.success(`复制成功，覆盖文件 src/config/config.js 然后重启项目即可生效`).then(() => {
+          const localConfig = localStorage.getItem(process.env.VUE_APP_SETTING_KEY)
+          if (localConfig) {
+            console.warn('检测到本地有历史保存的主题配置，想要要拷贝的配置代码生效，您可能需要先重置配置')
+            this.$message.warn('检测到本地有历史保存的主题配置，想要要拷贝的配置代码生效，您可能需要先重置配置', 5)
+          }
+        })
+        clipboard.destroy()
+      })
+    },
+    saveSetting() {
+      const closeMessage = this.$message.loading('正在保存到本地，请稍后...', 0)
+      const config = this.extractConfig()
+      localStorage.setItem(process.env.VUE_APP_SETTING_KEY, JSON.stringify(config))
+      setTimeout(closeMessage, 800)
+    },
+    resetSetting() {
+      this.$confirm({
+        title: '重置主题会刷新页面，当前页面内容不会保留，确认重置？',
+        onOk() {
+          localStorage.removeItem(process.env.VUE_APP_SETTING_KEY)
+          window.location.reload()
+        }
+      })
+    },
+    //提取配置
+    extractConfig() {
       let config = {}
-      // 提取配置
       let mySetting = this.$store.state.setting
       Object.keys(mySetting).forEach(key => {
         const dftValue = setting[key], myValue = mySetting[key]
-        // 只提取与默认配置不同的配置项
         if (dftValue != undefined && !fastEqual(dftValue, myValue)) {
           config[key] = myValue
         }
       })
-      this.copyConfig = '// 自定义配置，参考 ./default/setting.config.js，需要自定义的属性在这里配置即可\n'
-      this.copyConfig += 'module.exports = '
-      this.copyConfig += formatConfig(config)
-
-      let clipboard = new Clipboard('#copyBtn')
-      const _this = this
-      clipboard.on('success', function () {
-        _this.$message.success(`复制成功，覆盖文件 src/config/config.js 然后重启项目即可生效`)
-        clipboard.destroy()
-      })
+      return config
     },
     ...mapMutations('setting', ['setTheme', 'setLayout', 'setMultiPage', 'setWeekMode',
       'setFixedSideBar', 'setFixedHeader', 'setAnimate', 'setHideSetting', 'setPageWidth'])

@@ -1,6 +1,6 @@
 <template>
   <div class="setting-item">
-    <h3 class="title">{{title}}</h3>
+    <h3 v-if="title" class="title">{{title}}</h3>
     <slot></slot>
   </div>
 </template>
