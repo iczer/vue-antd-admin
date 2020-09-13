@@ -37,15 +37,11 @@ export default {
     },
     'theme.mode': function(val) {
       let closeMessage = this.$message.loading(`您选择了主题模式 ${val}, 正在切换...`)
-      themeUtil.changeThemeColor(this.theme.color, val).then(() => {
-        setTimeout(closeMessage, 1000)
-      })
+      themeUtil.changeThemeColor(this.theme.color, val).then(closeMessage)
     },
     'theme.color': function(val) {
       let closeMessage = this.$message.loading(`您选择了主题色 ${val}, 正在切换...`)
-      themeUtil.changeThemeColor(val, this.theme.mode).then(() => {
-        setTimeout(closeMessage, 1000)
-      })
+      themeUtil.changeThemeColor(val, this.theme.mode).then(closeMessage)
     }
   },
   computed: {
