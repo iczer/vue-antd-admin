@@ -66,7 +66,7 @@ export default {
     top: 0;
     background-color: @shadow-color;
     transition: all 0.5s;
-    z-index: 2000;
+    z-index: 100;
     &.open{
       display: inline-block;
     }
@@ -78,7 +78,7 @@ export default {
     position: fixed;
     transition: all 0.5s;
     height: 100vh;
-    z-index: 2000;
+    z-index: 100;
     &.left{
       left: 0px;
       &.open{

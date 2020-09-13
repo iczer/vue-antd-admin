@@ -33,7 +33,12 @@
       <a-list :split="false">
         <a-list-item>
           {{$t('navigate.content.title')}}
-          <a-select :getPopupContainer="getPopupContainer" :dropdown-style="{zIndex: 2001}" size="small" :defaultValue="pageWidth" @change="setPageWidth" slot="actions" style="width: 80px">
+          <a-select
+            :getPopupContainer="getPopupContainer"
+            :value="pageWidth"
+            @change="setPageWidth"
+            class="select-item" size="small" slot="actions"
+          >
             <a-select-option value="fluid">{{$t('navigate.content.fluid')}}</a-select-option>
             <a-select-option value="fixed">{{$t('navigate.content.fixed')}}</a-select-option>
           </a-select>
@@ -77,7 +82,6 @@
           <a-select
             :value="animate.name"
             :getPopupContainer="getPopupContainer"
-            :dropdown-style="{zIndex: 2001}"
             @change="val => setAnimate({...animate, name: val})"
             class="select-item" size="small" slot="actions"
           >
@@ -89,7 +93,6 @@
           <a-select
             :value="animate.direction"
             :getPopupContainer="getPopupContainer"
-            :dropdown-style="{zIndex: 2001}"
             @change="val => setAnimate({...animate, direction: val})"
             class="select-item" size="small" slot="actions"
           >
