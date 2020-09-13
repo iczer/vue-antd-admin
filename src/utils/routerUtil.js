@@ -35,6 +35,11 @@ function parseRoutes(routesConfig, routerMap) {
           page: routeCfg.page || router.page
         }
       }
+      const redirect = routeCfg.redirect || router.redirect
+      // redirect && route.redirect=redirect
+      if (redirect){
+          route.redirect=redirect
+      }
       if (routeCfg.invisible || router.invisible) {
         route.meta.invisible = true
       }
