@@ -88,7 +88,6 @@ function getLocalSetting(loadTheme) {
     console.error(e)
   }
   if (loadTheme) {
-    console.log(localSetting)
     loadLocalTheme(localSetting)
   }
   return localSetting

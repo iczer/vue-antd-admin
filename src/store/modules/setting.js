@@ -28,7 +28,7 @@ export default {
     },
     firstMenu(state) {
       const {menuData} = state
-      if (!menuData[0].fullPath) {
+      if (menuData.length > 0 && !menuData[0].fullPath) {
         formatFullPath(menuData)
       }
       return menuData.map(item => {
