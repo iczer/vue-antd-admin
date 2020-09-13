@@ -20,7 +20,6 @@ module.exports = {
   asyncRoutes: false,                   //异步加载路由，true:开启，false:不开启
   showPageTitle: true,                  //是否显示页面标题（PageLayout 布局中的页面标题），true:显示，false:不显示
   filterMenu: true,                    //根据权限过滤菜单，true:过滤，false:不过滤
-  localSaveSetting:true,				//是否将右侧设置保存在本地,设置为true的时候,将不显示拷贝设置而将设置保存在localStorage
   animate: {                            //动画设置
     disabled: false,                    //禁用动画，true:禁用，false:启用
     name: 'bounce',                     //动画效果，支持的动画效果可参考 ./animate.config.js

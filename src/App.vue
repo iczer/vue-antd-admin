@@ -22,7 +22,7 @@ export default {
     this.setLanguage(this.lang)
     enquireScreen(isMobile => this.setDevice(isMobile))
 	//设置为读取本地存储配置
-	const loadLocalSetting = this.localSaveSetting
+	const loadLocalSetting = process.env.NODE_ENV === 'production'?true:false
 	if (loadLocalSetting) {
 		this.$store.dispatch('setting/loadLocalSetting')
 	}
@@ -54,7 +54,7 @@ export default {
     }
   },
   computed: {
-    ...mapState('setting', ['theme', 'weekMode', 'lang', 'localSaveSetting'])
+    ...mapState('setting', ['theme', 'weekMode', 'lang'])
   },
   methods: {
     ...mapMutations('setting', ['setDevice']),

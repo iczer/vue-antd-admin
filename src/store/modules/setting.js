@@ -91,17 +91,17 @@ export default {
   },
   actions: {
 	loadLocalSetting({commit}) {
-	  const localSetting = localStorage.getItem("localSetting")
-	  if (localSetting !== '' && localSetting != null) {
+      const localSetting = localStorage.getItem("localSetting")
+      if (localSetting !== '' && localSetting != null) {
 		let setting = {}
 		try {
-		  setting = JSON.parse(localSetting)
+          setting = JSON.parse(localSetting)
 		} catch ( e ) {
-		  console.log('json error')
-		  return false
+          console.log('json error')
+          return false
 		}
 		for (let key in setting) {
-		  switch (key) {
+          switch (key) {
 			case 'theme' : commit('setTheme', setting.theme); break;
 			case 'layout': commit('setLayout', setting.layout); break;
 			case 'multiPage': commit('setMultiPage', setting.multiPage); break;
@@ -110,10 +110,21 @@ export default {
 			case 'fixedSideBar': commit('setFixedSideBar', setting.fixedSideBar); break;
 			case 'pageWidth': commit('setPageWidth', setting.pageWidth); break;
 			// case 'hideSetting': commit('setHideSetting', setting.hideSetting); break;
-			case 'animate' : commit('setAnimate', setting.animate)
-	      }
+			case 'animate' : commit('setAnimate', setting.animate); break;
+          }
 		}
-	  }  
+      }  
+	},
+    //初始化配置
+    initSetting({commit}) {
+		commit('setTheme', config.theme); 
+		commit('setLayout', config.layout); 
+		commit('setMultiPage', config.multiPage);
+		commit('setWeekMode', config.weekMode);
+		commit('setFixedHeader', config.fixedHeader);
+		commit('setFixedSideBar', config.fixedSideBar);
+		commit('setPageWidth', config.pageWidth);
+		commit('setAnimate', config.animate)
 	}
   }
 }
