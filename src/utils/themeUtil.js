@@ -66,7 +66,7 @@ function modifyVars(color) {
 }
 
 function loadLocalTheme(localSetting) {
-  if (localSetting) {
+  if (localSetting && localSetting.theme) {
     let {color, mode} = localSetting.theme
     color = color || theme.color
     mode = mode || theme.mode
