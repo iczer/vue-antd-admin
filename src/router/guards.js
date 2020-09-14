@@ -1,7 +1,21 @@
 import {hasAuthority} from '@/utils/authority-utils'
 import {loginIgnore} from '@/router/index'
 import {checkAuthorization} from '@/utils/request'
+import NProgress from 'nprogress'
 
+NProgress.configure({ showSpinner: false })
+
+/**
+ * 前置守卫
+ * @param to
+ * @param form
+ * @param next
+ */
+const beforeGuard = (to, from, next) => {
+  // start progress bar
+  NProgress.start()
+  next()
+}
 /**
  * 登录守卫
  * @param to
@@ -14,6 +28,7 @@ const loginGuard = (to, from, next, options) => {
   if (!loginIgnore.includes(to) && !checkAuthorization()) {
     message.warning('登录已失效，请重新登录')
     next({path: '/login'})
+    NProgress.done()
   } else {
     next()
   }
@@ -33,6 +48,7 @@ const authorityGuard = (to, from, next, options) => {
   if (!hasAuthority(to, permissions, roles)) {
     message.warning(`对不起，您无权访问页面: ${to.fullPath}，请联系管理员`)
     next({path: '/403'})
+    NProgress.done()
   } else {
     next()
   }
@@ -61,7 +77,18 @@ const redirectGuard = (to, from, next, options) => {
   next()
 }
 
+/**
+ * 后置守卫
+ * @param to
+ * @param form
+ * @param options
+ */
+const afterGuard = () => {
+  // finish progress bar
+  NProgress.done()
+}
+
 export default {
-  beforeEach: [loginGuard, authorityGuard, redirectGuard],
-  afterEach: []
+  beforeEach: [beforeGuard, loginGuard, authorityGuard, redirectGuard],
+  afterEach: [afterGuard]
 }
