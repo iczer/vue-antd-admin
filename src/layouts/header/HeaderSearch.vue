@@ -3,6 +3,7 @@
     <a-icon type="search" class="search-icon" @click="enterSearchMode"/>
     <a-auto-complete
       ref="input"
+      :getPopupContainer="e => {return e.parentNode || document.body}"
       :dataSource="dataSource"
       :class="['search-input', searchMode ? 'enter' : 'leave']"
       placeholder="站内搜索"
