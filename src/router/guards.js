@@ -6,16 +6,19 @@ import NProgress from 'nprogress'
 NProgress.configure({ showSpinner: false })
 
 /**
- * 前置守卫
+ * 进度条开始
  * @param to
  * @param form
  * @param next
  */
-const beforeGuard = (to, from, next) => {
+const progressStart = (to, from, next) => {
   // start progress bar
-  NProgress.start()
+  if (!NProgress.isStarted()) {
+    NProgress.start()
+  }
   next()
 }
+
 /**
  * 登录守卫
  * @param to
@@ -28,7 +31,6 @@ const loginGuard = (to, from, next, options) => {
   if (!loginIgnore.includes(to) && !checkAuthorization()) {
     message.warning('登录已失效，请重新登录')
     next({path: '/login'})
-    NProgress.done()
   } else {
     next()
   }
@@ -78,17 +80,17 @@ const redirectGuard = (to, from, next, options) => {
 }
 
 /**
- * 后置守卫
+ * 进度条结束
  * @param to
  * @param form
  * @param options
  */
-const afterGuard = () => {
+const progressDone = () => {
   // finish progress bar
   NProgress.done()
 }
 
 export default {
-  beforeEach: [beforeGuard, loginGuard, authorityGuard, redirectGuard],
-  afterEach: [afterGuard]
+  beforeEach: [progressStart, loginGuard, authorityGuard, redirectGuard],
+  afterEach: [progressDone]
 }
