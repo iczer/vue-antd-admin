@@ -88,7 +88,7 @@ const checkInject = function (el, binding,vnode) {
 
 const addDisabled = function (el) {
   if (el.tagName === 'BUTTON') {
-    el.setAttribute('disabled', 'disabled')
+    el.disabled = true
   } else {
     el.classList.add('disabled')
   }
@@ -96,8 +96,8 @@ const addDisabled = function (el) {
 }
 
 const removeDisabled = function (el) {
+  el.disabled = false
   el.classList.remove('disabled')
-  el.removeAttribute('disabled')
   el.removeAttribute('title')
 }
 
@@ -105,10 +105,10 @@ const AuthorityPlugin = {
   install(Vue) {
     Vue.directive('auth', {
       bind(el, binding,vnode) {
-        checkInject(el, binding, vnode)
+        setTimeout(() => checkInject(el, binding, vnode), 10)
       },
-      update(el, binding,vnode) {
-        checkInject(el, binding, vnode)
+      componentUpdated(el, binding,vnode) {
+        setTimeout(() => checkInject(el, binding, vnode), 10)
       },
       unbind(el) {
         removeDisabled(el)
