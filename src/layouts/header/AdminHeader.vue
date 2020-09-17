@@ -13,7 +13,7 @@
       <div :class="['admin-header-right', headerTheme]">
           <header-search class="header-item" @active="val => searchActive = val" />
           <a-tooltip class="header-item" title="帮助文档" placement="bottom" >
-            <a href="https://iczer.github.io/vue-antd-admin/" target="_blank">
+            <a href="https://iczer.gitee.io/vue-antd-admin-docs/" target="_blank">
               <a-icon type="question-circle-o" />
             </a>
           </a-tooltip>
@@ -67,7 +67,7 @@ export default {
     },
     menuWidth() {
       const {layout, searchActive} = this
-      const headWidth = layout === 'head' ? '1236px' : '100%'
+      const headWidth = layout === 'head' ? '100% - 188px' : '100%'
       const extraWidth = searchActive ? '564px' : '364px'
       return `calc(${headWidth} - ${extraWidth})`
     }
