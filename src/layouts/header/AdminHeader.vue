@@ -68,7 +68,7 @@ export default {
     menuWidth() {
       const {layout, searchActive} = this
       const headWidth = layout === 'head' ? '100% - 188px' : '100%'
-      const extraWidth = searchActive ? '564px' : '364px'
+      const extraWidth = searchActive ? '600px' : '400px'
       return `calc(${headWidth} - ${extraWidth})`
     }
   },
