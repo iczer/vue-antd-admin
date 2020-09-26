@@ -1,6 +1,23 @@
 import {hasAuthority} from '@/utils/authority-utils'
 import {loginIgnore} from '@/router/index'
 import {checkAuthorization} from '@/utils/request'
+import NProgress from 'nprogress'
+
+NProgress.configure({ showSpinner: false })
+
+/**
+ * 进度条开始
+ * @param to
+ * @param form
+ * @param next
+ */
+const progressStart = (to, from, next) => {
+  // start progress bar
+  if (!NProgress.isStarted()) {
+    NProgress.start()
+  }
+  next()
+}
 
 /**
  * 登录守卫
@@ -33,6 +50,7 @@ const authorityGuard = (to, from, next, options) => {
   if (!hasAuthority(to, permissions, roles)) {
     message.warning(`对不起，您无权访问页面: ${to.fullPath}，请联系管理员`)
     next({path: '/403'})
+    NProgress.done()
   } else {
     next()
   }
@@ -61,7 +79,18 @@ const redirectGuard = (to, from, next, options) => {
   next()
 }
 
+/**
+ * 进度条结束
+ * @param to
+ * @param form
+ * @param options
+ */
+const progressDone = () => {
+  // finish progress bar
+  NProgress.done()
+}
+
 export default {
-  beforeEach: [loginGuard, authorityGuard, redirectGuard],
-  afterEach: []
+  beforeEach: [progressStart, loginGuard, authorityGuard, redirectGuard],
+  afterEach: [progressDone]
 }
