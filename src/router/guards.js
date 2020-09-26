@@ -50,7 +50,7 @@ const authorityGuard = (to, from, next, options) => {
   if (!hasAuthority(to, permissions, roles)) {
     message.warning(`对不起，您无权访问页面: ${to.fullPath}，请联系管理员`)
     next({path: '/403'})
-    NProgress.done()
+    // NProgress.done()
   } else {
     next()
   }
