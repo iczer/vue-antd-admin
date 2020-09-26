@@ -15,7 +15,7 @@
         <span slot="tab" :pagekey="page.fullPath">{{pageName(page)}}</span>
       </a-tab-pane>
     </a-tabs>
-    <div class="tabs-view-content" :style="`margin-top: ${multiPage ? -24 : 0}px`">
+    <div :class="['tabs-view-content', layout, pageWidth]" :style="`margin-top: ${multiPage ? -24 : 0}px`">
       <page-toggle-transition :disabled="animate.disabled" :animate="animate.name" :direction="animate.direction">
         <a-keep-alive v-if="multiPage" v-model="clearCaches">
           <router-view ref="tabContent" :key="$route.fullPath" />
@@ -214,5 +214,9 @@ function getPageKey (target, depth = 0) {
   }
   .tabs-view-content{
     position: relative;
+    &.head.fixed{
+      width: 1400px;
+      margin: 0 auto;
+    }
   }
 </style>
