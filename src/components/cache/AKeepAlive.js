@@ -42,6 +42,15 @@ function pruneCache (keepAliveInstance, filter) {
   }
 }
 
+function pruneCacheEntry2(cache, key, keys) {
+  const cached = cache[key]
+  if (cached) {
+    cached.componentInstance.$destroy()
+  }
+  cache[key] = null
+  remove(keys, key)
+}
+
 function pruneCacheEntry (cache, key, keys, current) {
   const cached = cache[key]
   if (cached && (!current || cached.tag !== current.tag)) {
@@ -64,13 +73,12 @@ export default {
     max: [String, Number],
     clearCaches: Array
   },
-
   watch: {
     clearCaches: function(val) {
       if (val && val.length > 0) {
         const {cache, keys} = this
         val.forEach(key => {
-          pruneCacheEntry(cache, key, keys, this._vnode)
+          pruneCacheEntry2(cache, key, keys)
         })
         this.$emit('clear', [])
       }
