@@ -228,16 +228,17 @@ export default {
      * 加载缓存的 tabs
      */
     loadCachedTabs() {
-      const cachedTabs = sessionStorage.getItem(process.env.VUE_APP_TBAS_KEY)
-      if (cachedTabs) {
+      const cachedTabsStr = sessionStorage.getItem(process.env.VUE_APP_TBAS_KEY)
+      if (cachedTabsStr) {
         try {
-          const tabs = JSON.parse(cachedTabs)
-          if (tabs.length > 0) {
-            this.pageList = tabs
+          const cachedTabs = JSON.parse(cachedTabsStr)
+          if (cachedTabs.length > 0) {
+            this.pageList = cachedTabs
           }
-          sessionStorage.removeItem(process.env.VUE_APP_TBAS_KEY)
         } catch (e) {
           console.warn('failed to load cached tabs, got exception:', e)
+        } finally {
+          sessionStorage.removeItem(process.env.VUE_APP_TBAS_KEY)
         }
       }
     },
