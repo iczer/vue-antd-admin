@@ -123,7 +123,9 @@ import Clipboard from 'clipboard'
 import { mapState, mapMutations } from 'vuex'
 import {formatConfig} from '@/utils/formatter'
 import {setting} from '@/config/default'
+import sysConfig from '@/config/config'
 import fastEqual from 'fast-deep-equal'
+import deepMerge from 'deepmerge'
 
 const ColorCheckboxGroup = ColorCheckbox.Group
 const ImgCheckboxGroup = ImgCheckbox.Group
@@ -153,7 +155,7 @@ export default {
       return this.$el.parentNode
     },
     copyCode () {
-      let config = this.extractConfig()
+      let config = this.extractConfig(false)
       this.copyConfig = `// 自定义配置，参考 ./default/setting.config.js，需要自定义的属性在这里配置即可
       module.exports = ${formatConfig(config)}
       `
@@ -171,7 +173,7 @@ export default {
     },
     saveSetting() {
       const closeMessage = this.$message.loading('正在保存到本地，请稍后...', 0)
-      const config = this.extractConfig()
+      const config = this.extractConfig(true)
       localStorage.setItem(process.env.VUE_APP_SETTING_KEY, JSON.stringify(config))
       setTimeout(closeMessage, 800)
     },
@@ -185,11 +187,12 @@ export default {
       })
     },
     //提取配置
-    extractConfig() {
+    extractConfig(local = false) {
       let config = {}
       let mySetting = this.$store.state.setting
+      let dftSetting = local ? deepMerge(setting, sysConfig) : setting
       Object.keys(mySetting).forEach(key => {
-        const dftValue = setting[key], myValue = mySetting[key]
+        const dftValue = dftSetting[key], myValue = mySetting[key]
         if (dftValue != undefined && !fastEqual(dftValue, myValue)) {
           config[key] = myValue
         }
