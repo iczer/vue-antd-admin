@@ -2,6 +2,25 @@ import routerMap from '@/router/async/router.map'
 import {mergeI18nFromRoutes} from '@/utils/i18n'
 import Router from 'vue-router'
 import deepMerge from 'deepmerge'
+import basicOptions from '@/router/async/config.async'
+
+//应用配置
+let appOptions = {
+  router: undefined,
+  i18n: undefined,
+  store: undefined
+}
+
+/**
+ * 设置应用配置
+ * @param options
+ */
+function setAppOptions(options) {
+  const {router, store, i18n} = options
+  appOptions.router = router
+  appOptions.store = store
+  appOptions.i18n = i18n
+}
 
 /**
  * 根据 路由配置 和 路由组件注册 解析路由
@@ -49,12 +68,24 @@ function parseRoutes(routesConfig, routerMap) {
 
 /**
  * 加载路由
- * @param router 应用路由实例
- * @param store 应用的 vuex.store 实例
- * @param i18n 应用的 vue-i18n 实例
- * @param routesConfig 路由配置
+ * @param routesConfig {RouteConfig[]} 路由配置
  */
-function loadRoutes({router, store, i18n}, routesConfig) {
+function loadRoutes(routesConfig) {
+  //兼容 0.6.1 以下版本
+  /*************** 兼容 version < v0.6.1 *****************/
+  if (arguments.length > 0) {
+    const arg0 = arguments[0]
+    if (arg0.router || arg0.i18n || arg0.store) {
+      routesConfig = arguments[1]
+      console.error('the usage of signature loadRoutes({router, store, i18n}, routesConfig) is out of date, please use the new signature: loadRoutes(routesConfig).')
+      console.error('方法签名 loadRoutes({router, store, i18n}, routesConfig) 的用法已过时, 请使用新的方法签名 loadRoutes(routesConfig)。')
+    }
+  }
+  /*************** 兼容 version < v0.6.1 *****************/
+
+  // 应用配置
+  const {router, store, i18n} = appOptions
+
   // 如果 routesConfig 有值，则更新到本地，否则从本地获取
   if (routesConfig) {
     store.commit('account/setRoutesConfig', routesConfig)
@@ -66,8 +97,8 @@ function loadRoutes({router, store, i18n}, routesConfig) {
   if (asyncRoutes) {
     if (routesConfig && routesConfig.length > 0) {
       const routes = parseRoutes(routesConfig, routerMap)
-      formatRoutes(routes)
-      const finalRoutes = mergeRoutes(router.options.routes, routes)
+      const finalRoutes = mergeRoutes(basicOptions.routes, routes)
+      formatRoutes(finalRoutes)
       router.options = {...router.options, routes: finalRoutes}
       router.matcher = new Router({...router.options, routes:[]}).matcher
       router.addRoutes(finalRoutes)
@@ -216,4 +247,4 @@ function loadGuards(guards, options) {
   })
 }
 
-export {parseRoutes, loadRoutes, formatAuthority, getI18nKey, loadGuards, deepMergeRoutes, formatRoutes}
+export {parseRoutes, loadRoutes, formatAuthority, getI18nKey, loadGuards, deepMergeRoutes, formatRoutes, setAppOptions}
