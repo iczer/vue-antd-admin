@@ -1,20 +1,14 @@
 <template>
   <admin-layout>
     <contextmenu :itemList="menuItemList" :visible.sync="menuVisible" @select="onMenuSelect" />
-    <a-tabs
-      v-if="multiPage"
-      type="editable-card"
-      :active-key="activePage"
-      :class="['tabs-view', layout, pageWidth]"
-      :hide-add="true"
-      @change="changePage"
-      @edit="editPage"
-      @contextmenu="onContextmenu"
-    >
-      <a-tab-pane :key="page.fullPath" v-for="page in pageList">
-        <span slot="tab" :pagekey="page.fullPath">{{pageName(page)}}</span>
-      </a-tab-pane>
-    </a-tabs>
+    <tabs-head
+        v-if="multiPage"
+        :active="activePage"
+        :page-list="pageList"
+        @change="changePage"
+        @close="remove"
+        @contextmenu="onContextmenu"
+    />
     <div :class="['tabs-view-content', layout, pageWidth]" :style="`margin-top: ${multiPage ? -24 : 0}px`">
       <page-toggle-transition :disabled="animate.disabled" :animate="animate.name" :direction="animate.direction">
         <a-keep-alive v-if="multiPage" v-model="clearCaches">
@@ -33,11 +27,12 @@ import PageToggleTransition from '@/components/transition/PageToggleTransition'
 import {mapState, mapMutations} from 'vuex'
 import {getI18nKey} from '@/utils/routerUtil'
 import AKeepAlive from '@/components/cache/AKeepAlive'
+import TabsHead from '@/layouts/tabs/TabsHead'
 
 export default {
   name: 'TabsView',
   i18n: require('./i18n'),
-  components: { PageToggleTransition, Contextmenu, AdminLayout , AKeepAlive },
+  components: {TabsHead, PageToggleTransition, Contextmenu, AdminLayout , AKeepAlive },
   data () {
     return {
       clearCaches: [],
