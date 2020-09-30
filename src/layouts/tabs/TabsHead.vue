@@ -16,9 +16,9 @@
       </a-tooltip>
       <a-tab-pane v-for="page in pageList" :key="page.fullPath">
         <div slot="tab" class="tab" @contextmenu="e => onContextmenu(page.fullPath, e)">
-          <a-icon v-if="page.fullPath === active || page.loading" @click="onRefresh(page)" class="icon-sync" :type="page.loading ? 'loading' : 'sync'" />
-          <span @click="onTabClick(page.fullPath)" >{{pageName(page)}}</span>
-          <a-icon @click="onClose(page.fullPath)" class="icon-close" type="close"/>
+          <a-icon @click="onRefresh(page)" :class="['icon-sync', {'hide': page.fullPath !== active && !page.loading}]" :type="page.loading ? 'loading' : 'sync'" />
+          <div class="title" @click="onTabClick(page.fullPath)" >{{pageName(page)}}</div>
+          <a-icon v-if="!page.unclose" @click="onClose(page.fullPath)" class="icon-close" type="close"/>
         </div>
       </a-tab-pane>
     </a-tabs>
@@ -107,6 +107,11 @@
     padding: 0 16px;
     font-size: 14px;
     user-select: none;
+    transition: all 0.2s;
+    .title{
+      display: inline-block;
+      height: 100%;
+    }
     .icon-close{
       font-size: 12px;
       margin-left: 6px;
@@ -119,8 +124,13 @@
     .icon-sync{
       margin-left: -4px;
       color: @primary-4;
+      transition: all 0.3s ease-in-out;
       &:hover{
         color: @primary-color;
+      }
+      font-size: 14px;
+      &.hide{
+        font-size: 0;
       }
     }
   }
