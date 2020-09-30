@@ -5,9 +5,6 @@
         :class="['tabs-container', layout, pageWidth, {'affixed' : affixed, 'fixed-header' : fixedHeader, 'collapsed' : adminLayout.collapsed}]"
         :active-key="active"
         :hide-add="true"
-        @change="onChange"
-        @edit="onEdit"
-        @contextmenu="onContextmenu"
     >
       <a-tooltip placement="left" :title="lockTitle" slot="tabBarExtraContent">
         <a-icon
@@ -18,7 +15,11 @@
         />
       </a-tooltip>
       <a-tab-pane v-for="page in pageList" :key="page.fullPath">
-        <span slot="tab" :pagekey="page.fullPath">{{pageName(page)}}</span>
+        <div slot="tab" class="tab" @contextmenu="e => onContextmenu(page.fullPath, e)">
+          <a-icon v-if="page.fullPath === active || page.loading" @click="onRefresh(page)" class="icon-sync" :type="page.loading ? 'loading' : 'sync'" />
+          <span @click="onTabClick(page.fullPath)" >{{pageName(page)}}</span>
+          <a-icon @click="onClose(page.fullPath)" class="icon-close" type="close"/>
+        </div>
       </a-tab-pane>
     </a-tabs>
     <div v-if="affixed" class="virtual-tabs"></div>
@@ -58,11 +59,6 @@
       }
     },
     inject:['adminLayout'],
-    watch: {
-      'adminLayout.collapsed': (val) => {
-        console.log(val)
-      }
-    },
     created() {
       this.affixed = this.fixedTabs
     },
@@ -84,16 +80,19 @@
           this.affixed = false
         }
       },
-      onChange(key) {
-        this.$emit('change', key)
-      },
-      onEdit(key, action) {
-        if (action === 'remove') {
-          this.$emit('close', key)
+      onTabClick(key) {
+        if (this.active !== key) {
+          this.$emit('change', key)
         }
       },
-      onContextmenu(e) {
-        this.$emit('contextmenu', e)
+      onClose(key) {
+        this.$emit('close', key)
+      },
+      onRefresh(page) {
+        this.$emit('refresh', page.fullPath, page)
+      },
+      onContextmenu(pageKey, e) {
+        this.$emit('contextmenu', pageKey, e)
       },
       pageName(page) {
         return this.$t(getI18nKey(page.keyPath))
@@ -103,6 +102,28 @@
 </script>
 
 <style scoped lang="less">
+  .tab{
+    margin: 0 -16px;
+    padding: 0 16px;
+    font-size: 14px;
+    user-select: none;
+    .icon-close{
+      font-size: 12px;
+      margin-left: 6px;
+      margin-right: -4px;
+      color: @text-color-second;
+      &:hover{
+        color: @text-color;
+      }
+    }
+    .icon-sync{
+      margin-left: -4px;
+      color: @primary-4;
+      &:hover{
+        color: @primary-color;
+      }
+    }
+  }
   .tabs-head{
     margin: 0 auto;
     &.head.fixed{
