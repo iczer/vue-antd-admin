@@ -1,5 +1,6 @@
 <template>
   <div class="search-area" ref="root">
+    <div class="select-root" ref="selectRoot"></div>
     <div class="search-item" :key="index" v-for="(col, index) in searchCols">
       <div v-if="col.dataType === 'boolean'" class="title active">
         <template v-if="col.title">
@@ -13,28 +14,28 @@
           {{col.title}}:
         </template>
         <slot v-else-if="col.slots && col.slots.title" :name="col.slots.title"></slot>
-        <a-time-picker v-model="col.search.value" placeholder="选择时间" @change="(time, timeStr) => onCalendarChange(time, timeStr, col)" @openChange="open => onCalendarOpenChange(open, col)" class="time-picker" size="small" />
+        <a-time-picker v-model="col.search.value" placeholder="选择时间" @change="(time, timeStr) => onCalendarChange(time, timeStr, col)" @openChange="open => onCalendarOpenChange(open, col)" class="time-picker" size="small" :get-popup-container="() => $refs.root"/>
       </div>
       <div v-else-if="col.dataType === 'date'" class="title active">
         <template v-if="col.title">
           {{col.title}}:
         </template>
         <slot v-else-if="col.slots && col.slots.title" :name="col.slots.title"></slot>
-        <a-date-picker v-model="col.search.value" @change="onDateChange(col)" class="date-picker" size="small" />
+        <a-date-picker v-model="col.search.value" @change="onDateChange(col)" class="date-picker" size="small" :getCalendarContainer="() => $refs.root"/>
       </div>
       <div v-else-if="col.dataType === 'datetime'" class="title datetime active">
         <template v-if="col.title">
           {{col.title}}:
         </template>
         <slot v-else-if="col.slots && col.slots.title" :name="col.slots.title"></slot>
-        <a-date-picker v-model="col.search.value" @change="(date, dateStr) => onCalendarChange(date, dateStr, col)" @openChange="open => onCalendarOpenChange(open, col)" show-time class="datetime-picker" size="small" />
+        <a-date-picker v-model="col.search.value" @change="(date, dateStr) => onCalendarChange(date, dateStr, col)" @openChange="open => onCalendarOpenChange(open, col)" class="datetime-picker" size="small" show-time :getCalendarContainer="() => $refs.root"/>
       </div>
-      <div v-else-if="col.dataType === 'select'" class="title active">
+      <div v-else-if="col.dataType === 'select'" class="title active" >
         <template v-if="col.title">
           {{col.title}}:
         </template>
         <slot v-else-if="col.slots && col.slots.title" :name="col.slots.title"></slot>
-        <a-select :allowClear="true" :options="col.search.selectOptions" v-model="col.search.value" placeholder="请选择..." @change="onSelectChange(col)" class="select" slot="content" size="small">
+        <a-select :allowClear="true" :options="col.search.selectOptions" v-model="col.search.value" placeholder="请选择..." @change="onSelectChange(col)" class="select" slot="content" size="small" :get-popup-container="() => $refs.selectRoot">
         </a-select>
       </div>
       <a-popover v-else @visibleChange="onVisibleChange(col, index)" v-model="col.search.visible" placement="bottom" :trigger="['click']" :get-popup-container="() => $refs.root">
@@ -199,6 +200,9 @@
 
 <style scoped lang="less">
 .search-area{
+  .select-root{
+    text-align: left;
+  }
   margin: -4px 0;
   .search-item{
     margin: 4px 4px;
@@ -251,6 +255,7 @@
     margin-left: 4px;
     max-width: 144px;
     min-width: 96px;
+    text-align: left;
   }
   .operations{
     display: flex;

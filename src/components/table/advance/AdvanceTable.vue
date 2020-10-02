@@ -131,6 +131,7 @@
       },
       inFullScreen() {
         const el = this.$refs.table
+        el.classList.add('beauty-scroll')
         if (el.requestFullscreen) {
           el.requestFullscreen()
           return true
@@ -145,6 +146,7 @@
           return true
         }
         this.$message.warn('对不起，您的浏览器不支持全屏模式')
+        el.classList.remove('beauty-scroll')
         return false
       },
       outFullScreen() {
@@ -157,6 +159,7 @@
         } else if (document.msExitFullscreen) {
           document.msExiFullscreen()
         }
+        this.$refs.table.classList.remove('beauty-scroll')
       },
       onColumnsReset(conditions) {
         this.$emit('reset', conditions)
@@ -193,6 +196,7 @@
 
 <style scoped lang="less">
 .advanced-table{
+  overflow-y: auto;
   background-color: @component-background;
   .header-bar{
     padding: 16px 24px;
