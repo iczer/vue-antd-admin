@@ -208,6 +208,11 @@ const options = {
               path: 'palette',
               name: '颜色复选框',
               component: () => import('@/pages/components/Palette')
+            },
+            {
+              path: 'table',
+              name: '高级表格',
+              component: () => import('@/pages/components/Table')
             }
           ]
         },
