@@ -153,8 +153,9 @@ export default {
     },
     closeOthers (pageKey) {
       // 清除缓存
-      this.clearCaches = this.pageList.filter(item => item.fullPath !== pageKey).map(item => item.cachedKey)
-      this.pageList = this.pageList.filter(item => item.fullPath === pageKey)
+      const clearPages = this.pageList.filter(item => item.fullPath !== pageKey && !item.unclose)
+      this.clearCaches = clearPages.map(item => item.cachedKey)
+      this.pageList = this.pageList.filter(item => !clearPages.includes(item))
       // 判断跳转
       if (this.activePage != pageKey) {
         this.activePage = pageKey
@@ -164,8 +165,9 @@ export default {
     closeLeft (pageKey) {
       const index = this.pageList.findIndex(item => item.fullPath === pageKey)
       // 清除缓存
-      this.clearCaches = this.pageList.filter((item, i) => i < index).map(item => item.cachedKey)
-      this.pageList = this.pageList.slice(index)
+      const clearPages = this.pageList.filter((item, i) => i < index && !item.unclose)
+      this.clearCaches = clearPages.map(item => item.cachedKey)
+      this.pageList = this.pageList.filter(item => !clearPages.includes(item))
       // 判断跳转
       if (!this.pageList.find(item => item.fullPath === this.activePage)) {
         this.activePage = pageKey
@@ -175,8 +177,9 @@ export default {
     closeRight (pageKey) {
       // 清除缓存
       const index = this.pageList.findIndex(item => item.fullPath === pageKey)
-      this.clearCaches = this.pageList.filter((item, i) => i > index).map(item => item.cachedKey)
-      this.pageList = this.pageList.slice(0, index + 1)
+      const clearPages = this.pageList.filter((item, i) => i > index && !item.unclose)
+      this.clearCaches = clearPages.map(item => item.cachedKey)
+      this.pageList = this.pageList.filter(item => !clearPages.includes(item))
       // 判断跳转
       if (!this.pageList.find(item => item.fullPath === this.activePage)) {
         this.activePage = pageKey
@@ -243,7 +246,11 @@ export default {
       sessionStorage.setItem(process.env.VUE_APP_TBAS_KEY, JSON.stringify(tabs))
     },
     createPage(route) {
-      return {keyPath: route.matched[route.matched.length - 1].path, fullPath: route.fullPath, loading: false}
+      return {
+        keyPath: route.matched[route.matched.length - 1].path,
+        fullPath: route.fullPath, loading: false,
+        unclose: route.meta && route.meta.page && (route.meta.page.closable === false),
+      }
     },
     /**
      * 设置页面缓存的key
@@ -251,6 +258,7 @@ export default {
      */
     setCachedKey(route) {
       const page = this.pageList.find(item => item.fullPath === route.fullPath)
+      page.unclose = route.meta && route.meta.page && (route.meta.page.closable === false)
       if (!page._init_) {
         page.cachedKey = this.$refs.tabContent.$vnode.key
         page._init_ = true
