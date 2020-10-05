@@ -193,7 +193,7 @@ const options = {
         },
         {
           path: 'components',
-          name: '小组件',
+          name: '内置组件',
           meta: {
             icon: 'appstore-o'
           },
@@ -212,7 +212,7 @@ const options = {
             {
               path: 'table',
               name: '高级表格',
-              component: () => import('@/pages/components/Table')
+              component: () => import('@/pages/components/table')
             }
           ]
         },

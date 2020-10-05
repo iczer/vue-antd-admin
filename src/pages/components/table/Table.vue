@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="table">
     <advance-table
       :columns="columns"
       :data-source="dataSource"
@@ -8,7 +8,19 @@
       rowKey="id"
       @search="onSearch"
       @refresh="onRefresh"
+      :format-conditions="true"
       @reset="onReset"
+      :pagination="{
+        current: page,
+        pageSize: pageSize,
+        total: total,
+        showSizeChanger: true,
+        showLessItems: true,
+        showQuickJumper: true,
+        showTotal: (total, range) => `第 ${range[0]}-${range[1]} 条，总计 ${total} 条`,
+        onChange: onPageChange,
+        onShowSizeChange: onSizeChange,
+      }"
     >
       <template slot="statusTitle">
         状态<a-icon style="margin: 0 4px" type="info-circle" />
@@ -20,31 +32,18 @@
         {{text | statusStr}}
       </template>
     </advance-table>
+    <api />
   </div>
 </template>
 
 <script>
   import AdvanceTable from '@/components/table/advance/AdvanceTable'
-  import moment from 'moment'
+  import {dataSource as ds} from '@/services'
+  import Api from '@/pages/components/table/Api'
 
-  const goods = ['运动鞋', 'T恤', '长裤', '短裤']
-  const dataSource = []
-  const current = new Date().getTime()
-  for (let i = 0; i < 100; i++) {
-    dataSource.push({
-      id: i,
-      name: goods[Math.floor((Math.random() * 4))],
-      orderId: `${new Date().getTime()}-${Math.floor(Math.random() * 10)}`,
-      status: Math.floor((Math.random() * 4) + 1),
-      send: (i % 2) === 1,
-      sendTime: moment(current -  Math.floor((Math.random() * 8000000))).format('YYYY-MM-DD HH:mm:ss'),
-      orderDate: moment(current -  Math.floor((Math.random() * 800000000))).format('YYYY-MM-DD'),
-      auditTime: moment(current -  Math.floor((Math.random() * 8000000))).format('HH:mm:ss'),
-    })
-  }
   export default {
     name: 'Table',
-    components: {AdvanceTable},
+    components: {Api, AdvanceTable},
     filters: {
       statusStr(val) {
         switch (val) {
@@ -58,6 +57,9 @@
     data() {
       return {
         loading: false,
+        page: 1,
+        pageSize: 10,
+        total: 0,
         columns: [
           {
             title: '商品名称',
@@ -103,66 +105,62 @@
           },
           {
             title: '审核时间',
-            searchAble: true,
             dataIndex: 'auditTime',
             dataType: 'time',
           },
         ],
-        dataSource: dataSource
+        dataSource: [],
+        conditions: {}
       }
     },
+    created() {
+      this.getGoodList()
+    },
     methods: {
-      onSearch(conditions) {
+      getGoodList() {
         this.loading = true
-        this.searchGoods(conditions).then(result => {
-          this.dataSource = result
+        const {page, pageSize, conditions} = this
+        ds.goodsList({page, pageSize, ...conditions}).then(result => {
+          const {list, page, pageSize, total} = result.data.data
+          this.dataSource = list
+          this.page = page
+          this.total = total
+          this.pageSize = pageSize
           this.loading = false
         })
+      },
+      onSearch(conditions, searchOptions) {
+        console.log(conditions)
+        console.log(searchOptions)
+        this.page = 1
+        this.conditions = conditions
+        this.getGoodList()
+      },
+      onSizeChange(current, size) {
+        this.page = 1
+        this.pageSize = size
+        this.getGoodList()
       },
       onRefresh(conditions) {
-        this.loading = true
-        this.searchGoods(conditions).then(result => {
-          this.dataSource = result
-          this.loading = false
-        })
+        this.conditions = conditions
+        this.getGoodList()
       },
       onReset(conditions) {
-        this.loading = true
-        this.searchGoods(conditions).then(result => {
-          this.dataSource = result
-          this.loading = false
-        })
+        this.conditions = conditions
+        this.getGoodList()
       },
-      async searchGoods(conditions) {
-        const promise = new Promise((resolve, reject) => {
-          try {
-            const result = dataSource.filter(item => {
-              for (let key of Object.keys(conditions)) {
-                if (key === 'sendTime') {
-                   if (conditions[key].format('YYYY-MM-DD HH:mm:ss') !== item[key]) return false
-                } else if (key === 'orderDate') {
-                  if (conditions[key].format('YYYY-MM-DD') !== item[key]) return false
-                } else if (key === 'auditTime') {
-                  if (conditions[key].format('HH:mm:ss') !== item[key]) return false
-                } else if (item[key] !== conditions[key]) {
-                  return false
-                }
-              }
-              return true
-            })
-            setTimeout(() => {
-              resolve(result)
-            }, 300)
-          } catch (e) {
-            reject(e)
-          }
-        })
-        return promise
+      onPageChange(page, pageSize) {
+        this.page = page
+        this.pageSize = pageSize
+        this.getGoodList()
       }
     }
   }
 </script>
 
-<style scoped>
-
+<style scoped lang="less">
+.table{
+  background-color: @base-bg-color;
+  padding: 24px;
+}
 </style>
