@@ -1,6 +1,5 @@
 <template>
   <div class="action-columns" ref="root">
-    <a-tooltip title="列设置" :get-popup-container="() => $refs.root">
       <a-popover v-model="visible" placement="bottomRight" trigger="click" :get-popup-container="() => $refs.root">
         <div slot="title">
           <a-checkbox :indeterminate="indeterminate" :checked="checkAll" @change="onCheckAllChange" class="check-all" />列展示
@@ -14,13 +13,13 @@
             </template>
             <slot v-else-if="col.slots && col.slots.title" :name="col.slots.title"></slot>
             <template slot="actions">
-              <a-tooltip title="固定在列头" :get-popup-container="() => $refs.root">
+              <a-tooltip title="固定在列头" :mouseEnterDelay="0.5" :get-popup-container="() => $refs.root">
                 <a-icon :class="['left', {active: col.fixed === 'left'}]" @click="fixColumn('left', col)" type="vertical-align-top" />
               </a-tooltip>
-              <a-tooltip title="固定在列尾" :get-popup-container="() => $refs.root">
+              <a-tooltip title="固定在列尾" :mouseEnterDelay="0.5" :get-popup-container="() => $refs.root">
                 <a-icon :class="['right', {active: col.fixed === 'right'}]" @click="fixColumn('right', col)" type="vertical-align-bottom" />
               </a-tooltip>
-              <a-tooltip title="添加搜索" :get-popup-container="() => $refs.root">
+              <a-tooltip title="添加搜索" :mouseEnterDelay="0.5" :get-popup-container="() => $refs.root">
                 <a-icon :class="{active: col.searchAble}" @click="setSearch(col)" type="search" />
               </a-tooltip>
             </template>
@@ -28,7 +27,6 @@
         </a-list>
         <a-icon class="action" type="setting" />
       </a-popover>
-    </a-tooltip>
   </div>
 </template>
 
@@ -87,12 +85,14 @@
       },
       setSearch(col) {
         this.$set(col, 'searchAble', !col.searchAble)
+        console.log(col)
         if (!col.searchAble && col.search) {
           this.resetSearch(col)
         }
       },
       resetSearch(col) {
-        col.search.value = col.dataType === 'boolean' ? false : undefined
+        // col.search.value = col.dataType === 'boolean' ? false : undefined
+        col.search.value = undefined
         col.search.backup = undefined
       },
       resetColumns() {
@@ -114,7 +114,8 @@
           } else {
             this.$set(column, 'fixed', undefined)
           }
-          column.searchAble = back.searchAble
+          this.$set(column, 'searchAble', back.searchAble)
+          // column.searchAble = back.searchAble
           this.resetSearch(column)
         })
         this.checkedCounts = counts
