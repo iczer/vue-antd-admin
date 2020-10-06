@@ -160,7 +160,7 @@
         } else if (document.mozCancelFullScreen) {
           document.mozCancelFullScreen()
         } else if (document.msExitFullscreen) {
-          document.msExiFullscreen()
+          document.msExitFullscreen()
         }
         this.$refs.table.classList.remove('beauty-scroll')
       },
@@ -171,10 +171,10 @@
         this.$emit('expandedRowsChange', expandedRows)
       },
       onChange(pagination, filters, sorter, options) {
-        this.$emit('expandedRowsChange', pagination, filters, sorter, options)
+        this.$emit('change', pagination, filters, sorter, options)
       },
       onExpand(expanded, record) {
-        this.$emit('expandedRowsChange', expanded, record)
+        this.$emit('expand', expanded, record)
       },
       addListener() {
         document.addEventListener('fullscreenchange', this.fullScreenListener)
