@@ -14,8 +14,8 @@
     <a-layout class="admin-layout-main beauty-scroll">
       <admin-header :class="[{'fixed-tabs': fixedTabs, 'fixed-header': fixedHeader, 'multi-page': multiPage}]" :style="headerStyle" :menuData="headMenuData" :collapsed="collapsed" @toggleCollapse="toggleCollapse"/>
       <a-layout-header :class="['virtual-header', {'fixed-tabs' : fixedTabs, 'fixed-header': fixedHeader, 'multi-page': multiPage}]" v-show="fixedHeader"></a-layout-header>
-      <a-layout-content class="admin-layout-content">
-        <div :style="`min-height: ${minHeight}px; position: relative`">
+      <a-layout-content class="admin-layout-content" :style="`min-height: ${minHeight}px;`">
+        <div style="position: relative">
           <slot></slot>
         </div>
       </a-layout-content>
@@ -34,14 +34,14 @@ import SideMenu from '../components/menu/SideMenu'
 import Setting from '../components/setting/Setting'
 import {mapState, mapMutations, mapGetters} from 'vuex'
 
-const minHeight = window.innerHeight - 64 - 24 - 122
+// const minHeight = window.innerHeight - 64 - 122
 
 export default {
   name: 'AdminLayout',
   components: {Setting, SideMenu, Drawer, PageFooter, AdminHeader},
   data () {
     return {
-      minHeight: minHeight,
+      minHeight: window.innerHeight - 64 - 122,
       collapsed: false,
       showSetting: false,
       drawerOpen: false
@@ -109,11 +109,11 @@ export default {
     }
   },
   created() {
-    this.correctPageMinHeight(minHeight - 1)
+    this.correctPageMinHeight(this.minHeight - 24)
     this.setActivated(this.$route)
   },
   beforeDestroy() {
-    this.correctPageMinHeight(-minHeight + 1)
+    this.correctPageMinHeight(-this.minHeight + 24)
   }
 }
 </script>
@@ -152,7 +152,7 @@ export default {
     .admin-layout-content{
       padding: 24px 24px 0;
       /*overflow-x: hidden;*/
-      min-height: calc(100vh - 64px - 122px);
+      /*min-height: calc(100vh - 64px - 122px);*/
     }
     .setting{
       background-color: @primary-color;
