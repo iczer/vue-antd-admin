@@ -8,7 +8,7 @@
         <template v-else>高级表格</template>
       </div>
       <div class="search">
-        <search-area @change="onSearchChange" :columns="columns" >
+        <search-area :format-conditions="formatConditions" @change="onSearchChange" :columns="columns" >
           <template :slot="slot" v-for="slot in slots">
             <slot :name="slot"></slot>
           </template>
@@ -19,11 +19,13 @@
           <a-icon @click="refresh" class="action" :type="loading ? 'loading' : 'reload'" />
         </a-tooltip>
         <action-size v-model="sSize" class="action" />
-        <action-columns :columns="columns" @reset="onColumnsReset" class="action">
-          <template :slot="slot" v-for="slot in slots">
-            <slot :name="slot"></slot>
-          </template>
-        </action-columns>
+        <a-tooltip title="列配置">
+          <action-columns :columns="columns" @reset="onColumnsReset" class="action">
+            <template :slot="slot" v-for="slot in slots">
+              <slot :name="slot"></slot>
+            </template>
+          </action-columns>
+        </a-tooltip>
         <a-tooltip title="全屏">
           <a-icon @click="toggleScreen" class="action" :type="fullScreen ? 'fullscreen-exit' : 'fullscreen'" />
         </a-tooltip>
@@ -85,7 +87,8 @@
       customHeaderRow: Function,
       customRow: Function,
       getPopupContainer: Function,
-      transformCellText: Function
+      transformCellText: Function,
+      formatConditions: Boolean
     },
     provide() {
       return {
@@ -97,7 +100,7 @@
         id: `${new Date().getTime()}-${Math.floor(Math.random() * 10)}`,
         sSize: this.size || 'default',
         fullScreen: false,
-        conditions: []
+        conditions: {}
       }
     },
     computed: {
@@ -118,9 +121,9 @@
       refresh() {
         this.$emit('refresh', this.conditions)
       },
-      onSearchChange(conditions) {
+      onSearchChange(conditions, searchOptions) {
         this.conditions = conditions
-        this.$emit('search', conditions)
+        this.$emit('search', conditions, searchOptions)
       },
       toggleScreen() {
         if (this.fullScreen) {
@@ -157,7 +160,7 @@
         } else if (document.mozCancelFullScreen) {
           document.mozCancelFullScreen()
         } else if (document.msExitFullscreen) {
-          document.msExiFullscreen()
+          document.msExitFullscreen()
         }
         this.$refs.table.classList.remove('beauty-scroll')
       },
@@ -168,10 +171,10 @@
         this.$emit('expandedRowsChange', expandedRows)
       },
       onChange(pagination, filters, sorter, options) {
-        this.$emit('expandedRowsChange', pagination, filters, sorter, options)
+        this.$emit('change', pagination, filters, sorter, options)
       },
       onExpand(expanded, record) {
-        this.$emit('expandedRowsChange', expanded, record)
+        this.$emit('expand', expanded, record)
       },
       addListener() {
         document.addEventListener('fullscreenchange', this.fullScreenListener)
