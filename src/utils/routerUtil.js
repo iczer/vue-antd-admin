@@ -72,7 +72,6 @@ function parseRoutes(routesConfig, routerMap) {
  * @param routesConfig {RouteConfig[]} 路由配置
  */
 function loadRoutes(routesConfig) {
-  console.log('hahah')
   //兼容 0.6.1 以下版本
   /*************** 兼容 version < v0.6.1 *****************/
   if (arguments.length > 0) {
