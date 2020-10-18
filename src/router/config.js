@@ -226,6 +226,22 @@ const options = {
             }
           },
           component: () => import('@/pages/form/basic')
+        },
+        {
+          name: 'Ant Design Vue',
+          path: 'antdv',
+          meta: {
+            icon: 'ant-design',
+            link: 'https://www.antdv.com/docs/vue/introduce-cn/'
+          }
+        },
+        {
+          name: '使用文档',
+          path: 'document',
+          meta: {
+            icon: 'file-word',
+            link: 'https://iczer.gitee.io/vue-antd-admin-docs/'
+          }
         }
       ]
     },

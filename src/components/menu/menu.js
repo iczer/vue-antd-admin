@@ -131,10 +131,16 @@ export default {
       return !icon || icon == 'none' ? null : h(Icon, {props: {type:  icon}})
     },
     renderMenuItem: function (h, menu) {
+      let tag = 'router-link'
+      let config = {props: {to: menu.fullPath}, attrs: {style: 'overflow:hidden;white-space:normal;text-overflow:clip;'}}
+      if (menu.meta && menu.meta.link) {
+        tag = 'a'
+        config = {attrs: {style: 'overflow:hidden;white-space:normal;text-overflow:clip;', href: menu.meta.link, target: '_blank'}}
+      }
       return h(
         Item, {key: menu.fullPath},
         [
-          h('router-link', {props: {to: menu.fullPath}, attrs: {style: 'overflow:hidden;white-space:normal;text-overflow:clip;'}},
+          h(tag, config,
             [
               this.renderIcon(h, menu.meta ? menu.meta.icon : 'none', menu.fullPath),
               this.$t(getI18nKey(menu.fullPath))
