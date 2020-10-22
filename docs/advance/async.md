@@ -197,7 +197,7 @@ export default options
 ```js {3}
 getRoutesConfig().then(result => {
   const routesConfig = result.data.data
-  loadRoutes({router: this.$router, store: this.$store, i18n: this.$i18n}, routesConfig)
+  loadRoutes(routesConfig)
 })
 ```
 至此，异步路由的加载就完成了，你可以访问异步加载的路由了。
@@ -209,12 +209,9 @@ loadRoutes 方法会合并 /router/async/config.async.js 文件中配置的基�
 ```js
 /**
  * 加载路由
- * @param router 应用路由实例
- * @param store 应用的 vuex.store 实例
- * @param i18n 应用的 vue-i18n 实例
  * @param routesConfig 路由配置
  */
-function loadRoutes({router, store, i18n}, routesConfig) {
+function loadRoutes(routesConfig) {
   // 如果 routesConfig 有值，则更新到本地，否则从本地获取
   if (routesConfig) {
     store.commit('account/setRoutesConfig', routesConfig)
