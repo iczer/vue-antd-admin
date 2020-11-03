@@ -156,6 +156,45 @@ model.exports = {
   }
 }
 ```
+后端跨域解决方案采用“CORS“[跨域资源共享"（Cross-origin resource sharing）],目前后端是asp.net mvc，后续会更新 .net core 的后端解决方案。
+```js
+  一、修改配置文件webconfig，在system.webServer节点下添加如下：
+    <!--跨域请求：三个配置信息 webconfig文件中，system.webServer节点下添加-->
+   <system.webServer>
+		<httpProtocol>
+			<customHeaders>
+				<!--如果设置 Access-Control-Allow-Origin:*，则允许所有域名的脚本访问该资源-->
+				<add name="Access-Control-Allow-Origin" value="*" />
+				<!--响应头设置（Content-Type：只限于三个值application/x-www-form-urlencoded、multipart/form-data、text/plain）重点在加上“x-token”-->
+				<add name="Access-Control-Allow-Headers" value="x-requested-with,content-type,x-token"/>
+				<!--<add name="Access-Control-Allow-Origin" value="http://domain1.com, http://domain2.com" />  设置允许跨域访问的网址-->
+				<!--响应类型 (值为逗号分隔的一个字符串，表明服务器支持的所有跨域请求的方法)-->
+				<add name="Access-Control-Allow-Methods" value="GET,POST,PUT,DELETE,OPTIONS"/>
+			</customHeaders>
+		</httpProtocol>
+   </system.webServer>
+   二、在Global.asax文件中加上跨域设置
+        /// <summary>
+        /// 跨域设置
+        /// </summary>
+        protected void Application_BeginRequest()
+        {
+            //OPTIONS请求方法的主要作用：
+            //1、获取服务器支持的HTTP请求方法；也是黑客经常使用的方法。
+            //2、用来检查服务器的性能。如：AJAX进行跨域请求时的预检，需要向另外一个域名的资源发送一个HTTP OPTIONS请求头，用以判断实际发送的请求是否安全。
+            if (Request.Headers.AllKeys.Contains("Origin") && Request.HttpMethod == "OPTIONS")
+            {
+                //表示对输出的内容进行缓冲，执行page.Response.Flush()时，会等所有内容缓冲完毕，将内容发送到客户端。
+                //这样就不会出错，造成页面卡死状态，让用户无限制的等下去
+                Response.Flush();
+            }
+        }
+        
+        在此谢明此文档作者 
+        https://www.cnblogs.com/landeanfen/p/5177176.html
+        https://developer.mozilla.org/zh-CN/docs/Web/HTTP/Access_control_CORS
+```
+
 :::tip
 此代理配置仅适用于开发环境，生产环境的跨域代理请在自己的web服务器配置。
 :::
