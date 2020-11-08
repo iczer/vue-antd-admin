@@ -115,7 +115,7 @@
     .icon-close{
       font-size: 12px;
       margin-left: 6px;
-      margin-right: -4px;
+      margin-right: -4px !important;
       color: @text-color-second;
       &:hover{
         color: @text-color;
