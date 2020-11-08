@@ -127,7 +127,7 @@ export default {
         // same constructor may get registered as different local components
         // so cid alone is not enough (#3269)
         ? componentOptions.Ctor.cid + (componentOptions.tag ? `::${componentOptions.tag}` : '')
-        : vnode.key
+        : vnode.key + componentOptions.Ctor.cid
       if (cache[key]) {
         vnode.componentInstance = cache[key].componentInstance
         // make current key freshest
