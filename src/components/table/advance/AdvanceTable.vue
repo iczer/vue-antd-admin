@@ -32,7 +32,7 @@
       </div>
     </div>
     <a-table
-      v-bind="{...$options.propsData, title: undefined, loading: false}"
+      v-bind="{...$options.propsData, columns: visibleColumns, title: undefined, loading: false}"
       :size="sSize"
       @expandedRowsChange="onExpandedRowsChange"
       @change="onChange"
@@ -109,6 +109,9 @@
       },
       scopedSlots() {
         return Object.keys(this.$scopedSlots).filter(slot => slot !== 'expandedRowRender' && slot !== 'title')
+      },
+      visibleColumns(){
+        return this.columns.filter(col => col.visible)
       }
     },
     created() {
