@@ -59,8 +59,6 @@
         }
         if (!col.visible) {
           this.checkedCounts -= 1
-          this.$set(col, 'colSpan', 0)
-          this.$set(col, 'customCell', () => ({style: 'display: none;'}))
         }
       }
     },
@@ -68,12 +66,8 @@
       onCheckChange(e, col) {
         if (!col.visible) {
           this.checkedCounts -= 1
-          this.$set(col, 'colSpan', 0)
-          this.$set(col, 'customCell', () => ({style: 'display: none;'}))
         } else {
           this.checkedCounts += 1
-          this.$set(col, 'colSpan', undefined)
-          this.$set(col, 'customCell', undefined)
         }
       },
       fixColumn(fixed, col) {
@@ -85,7 +79,6 @@
       },
       setSearch(col) {
         this.$set(col, 'searchAble', !col.searchAble)
-        console.log(col)
         if (!col.searchAble && col.search) {
           this.resetSearch(col)
         }
@@ -101,13 +94,8 @@
         backColumns.forEach((back, index) => {
           const column = columns[index]
           column.visible = back.visible === undefined || back.visible
-          if (column.visible) {
-            this.$set(column, 'colSpan', undefined)
-            this.$set(column, 'customCell', undefined)
-          } else {
+          if (!column.visible) {
             counts -= 1
-            this.$set(column, 'colSpan', 0)
-            this.$set(column, 'customCell', () => ({style: 'display: none;'}))
           }
           if (back.fixed !== undefined) {
             column.fixed = back.fixed
@@ -125,18 +113,10 @@
       onCheckAllChange(e) {
         if (e.target.checked) {
           this.checkedCounts = this.columns.length
-          this.columns.forEach(col => {
-            col.visible = true
-            this.$set(col, 'colSpan', undefined)
-            this.$set(col, 'customCell', undefined)
-          })
+          this.columns.forEach(col => col.visible = true)
         } else {
           this.checkedCounts = 0
-          this.columns.forEach(col => {
-            col.visible = false
-            this.$set(col, 'colSpan', 0)
-            this.$set(col, 'customCell', () => ({style: 'display: none;'}))
-          })
+          this.columns.forEach(col => col.visible = false)
         }
       },
       getConditions(columns) {
