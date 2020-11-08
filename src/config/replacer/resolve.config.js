@@ -19,7 +19,19 @@ const cssResolve = {
       return cssObj.toText()
     }
   },
+  '.ant-tree-checkbox-checked .ant-tree-checkbox-inner::after': {
+    resolve(cssText, cssObj) {
+      cssObj.rules.push('border-top:0', 'border-left:0')
+      return cssObj.toText()
+    }
+  },
   '.ant-checkbox-checked .ant-checkbox-inner:after': {
+    resolve(cssText, cssObj) {
+      cssObj.rules.push('border-top:0', 'border-left:0')
+      return cssObj.toText()
+    }
+  },
+  '.ant-tree-checkbox-checked .ant-tree-checkbox-inner:after': {
     resolve(cssText, cssObj) {
       cssObj.rules.push('border-top:0', 'border-left:0')
       return cssObj.toText()
