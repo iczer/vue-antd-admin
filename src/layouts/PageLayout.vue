@@ -95,6 +95,10 @@ export default {
         const path = route.path.length === 0 ? '/home' : route.path
         breadcrumb.push(this.$t(getI18nKey(path)))
       })
+      let pageTitle = this.page && this.page.title
+      if (pageTitle) {
+        breadcrumb[breadcrumb.length - 1] = pageTitle
+      }
       return breadcrumb
     },
     /**

@@ -95,7 +95,7 @@
         this.$emit('contextmenu', pageKey, e)
       },
       pageName(page) {
-        return this.$t(getI18nKey(page.keyPath))
+        return page.title || this.$t(getI18nKey(page.keyPath))
       }
     }
   }
