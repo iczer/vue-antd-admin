@@ -18,7 +18,7 @@ Multiple theme modes available：
 
 - Preview：https://iczer.gitee.io/vue-antd-admin
 - Documentation：https://iczer.gitee.io/vue-antd-admin-docs
-- FAQ：https://iczer.github.io/vue-antd-admin/start/faq.html
+- FAQ：https://iczer.gitee.io/vue-antd-admin-docs/start/faq.html
 - Mirror Repo in China：https://gitee.com/iczer/vue-antd-admin
 
 ## Browsers support
@@ -43,11 +43,11 @@ $ yarn serve
 $ npm install
 $ npm run serve
 ```
-More instructions at [documentation](https://iczer.github.io/vue-antd-admin).
+More instructions at [documentation](https://iczer.gitee.io/vue-antd-admin-docs).
 
 ## Contributing
 Any type of contribution is welcome, here are some examples of how you may contribute to this project: :star2:：
 - Use Vue Antd Admin in your daily work.
 - Submit [Issue](https://github.com/iczer/vue-antd-admin/issues) to report :bug: or ask questions.
 - Propose [Pull Request](https://github.com/iczer/vue-antd-admin/pulls) to improve our code.
-- Join the community and share your experiences with us. QQ Group: 610090280
+- Join the community and share your experiences with us. QQ Group: 812277510、610090280（已满）

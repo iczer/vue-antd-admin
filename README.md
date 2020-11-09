@@ -18,7 +18,7 @@
 
 - 预览地址：https://iczer.gitee.io/vue-antd-admin
 - 使用文档：https://iczer.gitee.io/vue-antd-admin-docs
-- 常见问题：https://iczer.github.io/vue-antd-admin/start/faq.html
+- 常见问题：https://iczer.gitee.io/vue-antd-admin-docs/start/faq.html
 - 国内镜像：https://gitee.com/iczer/vue-antd-admin
 
 ## 浏览器支持
@@ -43,11 +43,11 @@ $ yarn serve
 $ npm install
 $ npm run serve
 ```
-更多信息参考 [使用文档](https://iczer.github.io/vue-antd-admin)
+更多信息参考 [使用文档](https://iczer.gitee.io/vue-antd-admin-docs)
 
 ## 参与贡献
 我们非常欢迎你的贡献，你可以通过以下方式和我们一起共建 :star2:：
 - 在你的公司或个人项目中使用 Vue Antd Admin。
 - 通过 [Issue](https://github.com/iczer/vue-antd-admin/issues) 报告:bug:或进行咨询。
 - 提交 [Pull Request](https://github.com/iczer/vue-antd-admin/pulls) 改进 Admin 的代码。
-- 加入社群，与小伙伴们一同交流心得。QQ群：610090280
+- 加入社群，与小伙伴们一同交流心得。QQ群：812277510、610090280（已满）
