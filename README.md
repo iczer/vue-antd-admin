@@ -18,7 +18,7 @@
 
 - 预览地址：https://iczer.gitee.io/vue-antd-admin
 - 使用文档：https://iczer.gitee.io/vue-antd-admin-docs
-- 常见问题：https://iczer.github.io/vue-antd-admin/start/faq.html
+- 常见问题：https://iczer.gitee.io/vue-antd-admin-docs/start/faq.html
 - 国内镜像：https://gitee.com/iczer/vue-antd-admin
 
 ## 浏览器支持
@@ -43,7 +43,7 @@ $ yarn serve
 $ npm install
 $ npm run serve
 ```
-更多信息参考 [使用文档](https://iczer.github.io/vue-antd-admin)
+更多信息参考 [使用文档](https://iczer.gitee.io/vue-antd-admin-docs)
 
 ## 参与贡献
 我们非常欢迎你的贡献，你可以通过以下方式和我们一起共建 :star2:：
