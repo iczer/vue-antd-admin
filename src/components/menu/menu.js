@@ -200,9 +200,10 @@ export default {
       })
     },
     updateMenu () {
-      const menuRoutes = this.$route.matched.filter(item => item.path !== '')
+      const matchedRoutes = this.$route.matched.filter(item => item.path !== '')
       this.selectedKeys = this.getSelectedKey(this.$route)
-      let openKeys = menuRoutes.map(item => item.path)
+      let openKeys = matchedRoutes.map(item => item.path)
+      openKeys = openKeys.slice(0, openKeys.length -1)
       if (!fastEqual(openKeys, this.sOpenKeys)) {
         this.collapsed || this.mode === 'horizontal' ? this.cachedOpenKeys = openKeys : this.sOpenKeys = openKeys
       }
