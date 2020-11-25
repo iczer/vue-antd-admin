@@ -39,11 +39,11 @@ export default {
     },
     subMenu(state) {
       const {menuData, activatedFirst} = state
-      if (!menuData[0].fullPath) {
+      if (menuData.length > 0 && !menuData[0].fullPath) {
         formatFullPath(menuData)
       }
       const current = menuData.find(menu => menu.fullPath === activatedFirst)
-      return current && current.children ? current.children : []
+      return current && current.children || []
     }
   },
   mutations: {
