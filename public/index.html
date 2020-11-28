@@ -11,11 +11,13 @@
       <link rel="stylesheet" href="<%= htmlWebpackPlugin.options.cdn.css[i] %>" />
     <% } %>
   </head>
-  <body class="beauty-scroll">
+  <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div class="beauty-scroll" style="height: 100vh; overflow-y: scroll">
+      <div id="app"></div>
+    </div>
     <!-- require cdn assets js -->
     <% for (var i in htmlWebpackPlugin.options.cdn && htmlWebpackPlugin.options.cdn.js) { %>
       <script type="text/javascript" src="<%= htmlWebpackPlugin.options.cdn.js[i] %>"></script>
