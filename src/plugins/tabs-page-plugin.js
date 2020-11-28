@@ -9,6 +9,24 @@ const TabsPagePlugin = {
         $refreshPage(pageKey) {
           const event = new CustomEvent('page:refresh', {detail:{pageKey}})
           window.dispatchEvent(event)
+        },
+        $openPage(route, title) {
+          this.$setPageTitle(route, title)
+          this.$router.push(route)
+        },
+        $setPageTitle(route, title) {
+          if (title) {
+            const fullPath = typeof route === 'object' ? route.fullPath : route
+            this.$store.commit('setting/setCustomTitle', {path: fullPath, title})
+          }
+        }
+      },
+      computed: {
+        customTitle() {
+          const customTitles = this.$store.state.setting.customTitles
+          const fullPath = this.$route.fullPath
+          const custom = customTitles.find(item => item.path === fullPath)
+          return custom && custom.title
         }
       }
     })
