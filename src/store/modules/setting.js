@@ -5,6 +5,8 @@ import {filterMenu} from '@/utils/authority-utils'
 import {getLocalSetting} from '@/utils/themeUtil'
 
 const localSetting = getLocalSetting(true)
+const customTitlesStr = sessionStorage.getItem(process.env.VUE_APP_TBAS_TITLES_KEY)
+const customTitles = (customTitlesStr && JSON.parse(customTitlesStr)) || []
 
 export default {
   namespaced: true,
@@ -15,6 +17,7 @@ export default {
     pageMinHeight: 0,
     menuData: [],
     activatedFirst: undefined,
+    customTitles,
     ...config,
     ...localSetting
   },
@@ -94,6 +97,17 @@ export default {
     },
     setFixedTabs(state, fixedTabs) {
       state.fixedTabs = fixedTabs
+    },
+    setCustomTitle(state, {path, title}) {
+      if (title) {
+        const obj = state.customTitles.find(item => item.path === path)
+        if (obj) {
+          obj.title = title
+        } else {
+          state.customTitles.push({path, title})
+        }
+        sessionStorage.setItem(process.env.VUE_APP_TBAS_TITLES_KEY, JSON.stringify(state.customTitles))
+      }
     }
   }
 }
