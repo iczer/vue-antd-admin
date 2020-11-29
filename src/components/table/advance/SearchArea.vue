@@ -7,7 +7,10 @@
           {{col.title}}:
         </template>
         <slot v-else-if="col.slots && col.slots.title" :name="col.slots.title"></slot>
-        <a-switch @change="onSwitchChange(col)" class="switch" v-model="col.search.value" size="small" checked-children="是" un-checked-children="否" />
+        <a-switch @change="onSwitchChange(col)" class="switch" v-model="col.search.value" size="small"
+                  :checked-children="(col.search.switchOptions && col.search.switchOptions.checkedText) || '是'"
+                  :un-checked-children="(col.search.switchOptions && col.search.switchOptions.uncheckedText) || '否'"
+        />
         <a-icon v-if="col.search.value !== undefined" class="close" @click="e => onCloseClick(e, col)" type="close-circle" theme="filled" />
       </div>
       <div v-else-if="col.dataType === 'time'" :class="['title', {active: col.search.value}]">
@@ -70,12 +73,14 @@
     props: ['columns', 'formatConditions'],
     inject: ['table'],
     created() {
-      this.columns.forEach(item => {
-        this.$set(item, 'search', {...item.search, visible: false, value: undefined, format: this.getFormat(item)})
-      })
-      console.log(this.columns)
+      this.formatColumns(this.columns)
     },
     watch: {
+      columns(newVal, oldVal) {
+        if (newVal != oldVal) {
+          this.formatColumns(newVal)
+        }
+      },
       searchCols(newVal, oldVal) {
         if (newVal.length != oldVal.length) {
           const newConditions = this.getConditions(newVal)
@@ -218,6 +223,11 @@
           return true
         }
         return false
+      },
+      formatColumns(columns) {
+        columns.forEach(item => {
+          this.$set(item, 'search', {...item.search, visible: false, value: undefined, format: this.getFormat(item)})
+        })
       }
     }
   }
