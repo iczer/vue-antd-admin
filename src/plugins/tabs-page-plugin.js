@@ -6,8 +6,9 @@ const TabsPagePlugin = {
           const event = new CustomEvent('page:close', {detail:{closeRoute, nextRoute}})
           window.dispatchEvent(event)
         },
-        $refreshPage(pageKey) {
-          const event = new CustomEvent('page:refresh', {detail:{pageKey}})
+        $refreshPage(route) {
+          const fullPath = typeof route === 'object' ? route.fullPath : route
+          const event = new CustomEvent('page:refresh', {detail:{fullPath}})
           window.dispatchEvent(event)
         },
         $openPage(route, title) {
