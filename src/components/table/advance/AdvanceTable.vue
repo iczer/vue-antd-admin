@@ -32,7 +32,7 @@
       </div>
     </div>
     <a-table
-      v-bind="{...$options.propsData, columns: visibleColumns, title: undefined, loading: false}"
+      v-bind="{...this.$props, columns: visibleColumns, title: undefined, loading: false}"
       :size="sSize"
       @expandedRowsChange="onExpandedRowsChange"
       @change="onChange"

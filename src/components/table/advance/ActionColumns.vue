@@ -49,18 +49,16 @@
       checkedCounts(val) {
         this.checkAll = val === this.columns.length
         this.indeterminate = val > 0 && val < this.columns.length
+      },
+      columns(newVal, oldVal) {
+        if (newVal != oldVal) {
+          this.checkedCounts = newVal.length
+          this.formatColumns(newVal)
+        }
       }
     },
     created() {
-      this.$emit('update:visibleColumns', [...this.columns])
-      for (let col of this.columns) {
-        if (col.visible === undefined) {
-          this.$set(col, 'visible', true)
-        }
-        if (!col.visible) {
-          this.checkedCounts -= 1
-        }
-      }
+      this.formatColumns(this.columns)
     },
     methods: {
       onCheckChange(e, col) {
@@ -126,6 +124,16 @@
             conditions[col.dataIndex] = col.search.value
           })
         return conditions
+      },
+      formatColumns(columns) {
+        for (let col of columns) {
+          if (col.visible === undefined) {
+            this.$set(col, 'visible', true)
+          }
+          if (!col.visible) {
+            this.checkedCounts -= 1
+          }
+        }
       }
     }
   }
