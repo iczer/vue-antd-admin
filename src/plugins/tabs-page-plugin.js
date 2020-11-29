@@ -7,8 +7,8 @@ const TabsPagePlugin = {
           window.dispatchEvent(event)
         },
         $refreshPage(route) {
-          const fullPath = typeof route === 'object' ? route.fullPath : route
-          const event = new CustomEvent('page:refresh', {detail:{fullPath}})
+          const path = typeof route === 'object' ? route.path : route
+          const event = new CustomEvent('page:refresh', {detail:{pageKey: path}})
           window.dispatchEvent(event)
         },
         $openPage(route, title) {
@@ -17,16 +17,16 @@ const TabsPagePlugin = {
         },
         $setPageTitle(route, title) {
           if (title) {
-            const fullPath = typeof route === 'object' ? route.fullPath : route
-            this.$store.commit('setting/setCustomTitle', {path: fullPath, title})
+            const path = typeof route === 'object' ? route.path : route
+            this.$store.commit('setting/setCustomTitle', {path, title})
           }
         }
       },
       computed: {
         customTitle() {
           const customTitles = this.$store.state.setting.customTitles
-          const fullPath = this.$route.fullPath
-          const custom = customTitles.find(item => item.path === fullPath)
+          const path = this.$route.path
+          const custom = customTitles.find(item => item.path === path)
           return custom && custom.title
         }
       }
