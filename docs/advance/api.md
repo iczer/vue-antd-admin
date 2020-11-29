@@ -22,7 +22,7 @@ lang: zn-CN
 ### $openPage(route, title)
 该api用于打开一个新页签，接收两个参数：
 * **route**  
-要刷新的页签对应的 route 对象，可简写为路由的 fullPath 字符串值。
+要打开的页签对应的 route 对象，可简写为路由的 fullPath 字符串值。
 * **title**  
 设置打开页签的标题，可不传。
 
