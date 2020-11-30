@@ -32,7 +32,7 @@
       </div>
     </div>
     <a-table
-      v-bind="{...this.$props, columns: visibleColumns, title: undefined, loading: false}"
+      v-bind="{...$props, columns: visibleColumns, title: undefined, loading: false}"
       :size="sSize"
       @expandedRowsChange="onExpandedRowsChange"
       @change="onChange"
@@ -62,7 +62,7 @@
     props: {
       tableLayout: String,
       bordered: Boolean,
-      childrenColumnName: Array[String],
+      childrenColumnName: {type: String, default: 'children'},
       columns: Array,
       components: Object,
       dataSource: Array,
@@ -81,7 +81,7 @@
       rowKey: [String, Function],
       rowSelection: Object,
       scroll: Object,
-      showHeader: Boolean,
+      showHeader: {type: Boolean, default: true},
       size: String,
       title: String,
       customHeaderRow: Function,
