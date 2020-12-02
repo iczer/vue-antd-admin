@@ -1,5 +1,5 @@
 <template>
-  <a-config-provider :locale="locale">
+  <a-config-provider :locale="locale" :get-popup-container="popContainer">
     <router-view/>
   </a-config-provider>
 </template>
@@ -77,6 +77,9 @@ export default {
       const key = route.path === '/' ? 'home.name' : getI18nKey(route.matched[route.matched.length - 1].path)
       document.title = process.env.VUE_APP_NAME + ' | ' + this.$t(key)
     },
+    popContainer() {
+      return document.getElementById("popContainer")
+    }
   }
 }
 </script>
