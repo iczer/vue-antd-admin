@@ -4,7 +4,16 @@ const patternTypes = [String, RegExp, Array]
 
 function matches (pattern, name) {
   if (Array.isArray(pattern)) {
-    return pattern.indexOf(name) > -1
+    if (pattern.indexOf(name) > -1) {
+      return true
+    } else {
+      for (let item of pattern) {
+        if (isRegExp(item) && item.test(name)) {
+          return true
+        }
+      }
+      return false
+    }
   } else if (typeof pattern === 'string') {
     return pattern.split(',').indexOf(name) > -1
   } else if (isRegExp(pattern)) {
@@ -16,6 +25,13 @@ function matches (pattern, name) {
 
 function getComponentName (opts) {
   return opts && (opts.Ctor.options.name || opts.tag)
+}
+
+function getComponentKey (vnode) {
+  const {componentOptions, key} = vnode
+  return key == null
+    ? componentOptions.Ctor.cid + (componentOptions.tag ? `::${componentOptions.tag}` : '')
+    : key + componentOptions.Ctor.cid
 }
 
 function getFirstComponentChild (children) {
@@ -35,7 +51,8 @@ function pruneCache (keepAliveInstance, filter) {
     const cachedNode = cache[key]
     if (cachedNode) {
       const name = getComponentName(cachedNode.componentOptions)
-      if (name && !filter(name)) {
+      const componentKey = getComponentKey(cachedNode)
+      if (name && !filter(name, componentKey)) {
         pruneCacheEntry(cache, key, keys, _vnode)
       }
     }
@@ -70,6 +87,7 @@ export default {
   props: {
     include: patternTypes,
     exclude: patternTypes,
+    excludeKeys: patternTypes,
     max: [String, Number],
     clearCaches: Array
   },
@@ -98,10 +116,13 @@ export default {
 
   mounted () {
     this.$watch('include', val => {
-      pruneCache(this, name => matches(val, name))
+      pruneCache(this, (name) => matches(val, name))
     })
     this.$watch('exclude', val => {
-      pruneCache(this, name => !matches(val, name))
+      pruneCache(this, (name) => !matches(val, name))
+    })
+    this.$watch('excludeKeys', val => {
+      pruneCache(this, (name, key) => !matches(val, key))
     })
   },
 
@@ -112,12 +133,14 @@ export default {
     if (componentOptions) {
       // check pattern
       const name = getComponentName(componentOptions)
-      const { include, exclude } = this
+      const componentKey = getComponentKey(vnode)
+      const { include, exclude, excludeKeys } = this
       if (
         // not included
         (include && (!name || !matches(include, name))) ||
         // excluded
-        (exclude && name && matches(exclude, name))
+        (exclude && name && matches(exclude, name)) ||
+        (excludeKeys && componentKey && matches(excludeKeys, componentKey))
       ) {
         return vnode
       }

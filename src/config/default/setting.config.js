@@ -15,6 +15,7 @@ module.exports = {
   pageWidth: 'fixed',                   //内容区域宽度，fixed:固定宽度，fluid:流式宽度
   weekMode: false,                      //色弱模式，true:开启，false:不开启
   multiPage: false,                     //多页签模式，true:开启，false:不开启
+  cachePage: true,                      //是否缓存页面数据，仅多页签模式下生效，true 缓存, false 不缓存
   hideSetting: false,                   //隐藏设置抽屉，true:隐藏，false:不隐藏
   systemName: 'Vue Antd Admin',         //系统名称
   copyright: '2018 ICZER 工作室出品',     //copyright

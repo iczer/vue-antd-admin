@@ -12,10 +12,10 @@
     />
     <div :class="['tabs-view-content', layout, pageWidth]" :style="`margin-top: ${multiPage ? -24 : 0}px`">
       <page-toggle-transition :disabled="animate.disabled" :animate="animate.name" :direction="animate.direction">
-        <a-keep-alive v-if="multiPage" v-model="clearCaches">
+        <a-keep-alive :exclude-keys="excludeKeys" v-if="multiPage && cachePage" v-model="clearCaches">
           <router-view v-if="!refreshing" ref="tabContent" :key="$route.fullPath" />
         </a-keep-alive>
-        <router-view v-else />
+        <router-view ref="tabContent" v-else-if="!refreshing" />
       </page-toggle-transition>
     </div>
   </admin-layout>
@@ -40,11 +40,12 @@ export default {
       pageList: [],
       activePage: '',
       menuVisible: false,
-      refreshing: false
+      refreshing: false,
+      excludeKeys: []
     }
   },
   computed: {
-    ...mapState('setting', ['multiPage', 'animate', 'layout', 'pageWidth']),
+    ...mapState('setting', ['multiPage', 'cachePage', 'animate', 'layout', 'pageWidth']),
     menuItemList() {
       return [
         { key: '1', icon: 'vertical-right', text: this.$t('closeLeft') },
@@ -58,6 +59,7 @@ export default {
     }
   },
   created () {
+    this.loadCacheConfig(this.$router?.options?.routes)
     this.loadCachedTabs()
     const route = this.$route
     if (this.pageList.findIndex(item => item.fullPath === route.fullPath) === -1) {
@@ -79,6 +81,10 @@ export default {
     this.correctPageMinHeight(this.tabsOffset)
   },
   watch: {
+    '$router.options.routes': function (val) {
+      this.excludeKeys = []
+      this.loadCacheConfig(val)
+    },
     '$route': function (newRoute) {
       this.activePage = newRoute.fullPath
       if (!this.multiPage) {
@@ -283,6 +289,17 @@ export default {
           sessionStorage.removeItem(process.env.VUE_APP_TBAS_KEY)
         }
       }
+    },
+    loadCacheConfig(routes, pCache = true) {
+      routes.forEach(item => {
+        const cacheAble = item.meta?.page?.cacheAble ?? pCache ?? true
+        if (!cacheAble) {
+          this.excludeKeys.push(new RegExp(`${item.fullPath}\\d+$`))
+        }
+        if (item.children) {
+          this.loadCacheConfig(item.children, cacheAble)
+        }
+      })
     },
     ...mapMutations('setting', ['correctPageMinHeight'])
   }
