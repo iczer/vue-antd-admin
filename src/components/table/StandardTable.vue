@@ -95,7 +95,14 @@ export default {
         return {
           ...item,
           total: selectedRows.reduce((sum, val) => {
-            return sum + val[item.dataIndex]
+            let v
+            try{
+              v = val[item.dataIndex] ? val[item.dataIndex] : eval(`val.${item.dataIndex}`);
+            }catch(_){
+              v = val[item.dataIndex];
+            }
+            v = !isNaN(parseFloat(v)) ? parseFloat(v) : 0;
+            return sum + v
           }, 0)
         }
       })
