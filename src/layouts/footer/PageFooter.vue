@@ -26,6 +26,9 @@ export default {
     .copyright{
       color: @text-color-second;
       font-size: 14px;
+      i {
+          margin: 0 6px;
+      }
     }
     .links{
       margin-bottom: 8px;
