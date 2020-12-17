@@ -11,7 +11,7 @@
       <a-form @submit="onSubmit" :form="form">
         <a-tabs size="large" :tabBarStyle="{textAlign: 'center'}" style="padding: 0 2px;">
           <a-tab-pane tab="账户密码登录" key="1">
-            <a-alert type="error" :closable="true" v-show="error" :message="error" showIcon style="margin-bottom: 24px;" />
+            <a-alert type="error" :closable="true" v-if="error" :message="error" @close='onClose' showIcon style="margin-bottom: 24px;" />
             <a-form-item>
               <a-input
                 autocomplete="autocomplete"
@@ -121,12 +121,15 @@ export default {
         getRoutesConfig().then(result => {
           const routesConfig = result.data.data
           loadRoutes(routesConfig)
-          this.$router.push('/dashboard/workplace')
+          this.$router.push('/demo')
           this.$message.success(loginRes.message, 3)
         })
       } else {
         this.error = loginRes.message
       }
+    },
+    onClose() {
+      this.error = false
     }
   }
 }
