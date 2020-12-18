@@ -79,7 +79,7 @@
       </a-form>
     </div>
     <div>
-      <div class="operator">
+      <a-space class="operator">
         <a-button @click="addNew" type="primary">新建</a-button>
         <a-button >批量操作</a-button>
         <a-dropdown>
@@ -91,7 +91,7 @@
             更多操作 <a-icon type="down" />
           </a-button>
         </a-dropdown>
-      </div>
+      </a-space>
       <standard-table
         :columns="columns"
         :dataSource="dataSource"
