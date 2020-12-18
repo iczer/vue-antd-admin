@@ -27,7 +27,7 @@ export default {
       color: @text-color-second;
       font-size: 14px;
       i {
-          margin: 0 6px;
+          margin: 0 4px;
       }
     }
     .links{
