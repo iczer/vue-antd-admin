@@ -30,14 +30,14 @@ const METHOD = {
  * @param params 请求参数
  * @returns {Promise<AxiosResponse<T>>}
  */
-async function request(url, method, params) {
+async function request(url, method, params, config) {
   switch (method) {
     case METHOD.GET:
-      return axios.get(url, {params})
+      return axios.get(url, {params, ...config})
     case METHOD.POST:
-      return axios.post(url, params)
+      return axios.post(url, params, config)
     default:
-      return axios.get(url, {params})
+      return axios.get(url, {params, ...config})
   }
 }
 
