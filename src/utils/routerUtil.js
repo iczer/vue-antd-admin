@@ -32,7 +32,7 @@ function parseRoutes(routesConfig, routerMap) {
   routesConfig.forEach(item => {
     // 获取注册在 routerMap 中的 router，初始化 routeCfg
     let router = undefined, routeCfg = {}
-    if (typeof item === 'string' && routerMap[item]) {
+    if (typeof item === 'string') {
       router = routerMap[item]
       routeCfg = {path: router.path || item, router: item}
     } else if (typeof item === 'object') {
