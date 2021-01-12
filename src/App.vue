@@ -43,10 +43,13 @@ export default {
     'theme.color': function(val) {
       let closeMessage = this.$message.loading(`您选择了主题色 ${val}, 正在切换...`)
       themeUtil.changeThemeColor(val, this.theme.mode).then(closeMessage)
+    },
+    'layout': function() {
+      window.dispatchEvent(new Event('resize'))
     }
   },
   computed: {
-    ...mapState('setting', ['theme', 'weekMode', 'lang'])
+    ...mapState('setting', ['layout', 'theme', 'weekMode', 'lang'])
   },
   methods: {
     ...mapMutations('setting', ['setDevice']),
