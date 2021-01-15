@@ -25,7 +25,7 @@ export default {
     menuData(state, getters, rootState) {
       if (state.filterMenu) {
         const {permissions, roles} = rootState.account
-        state.menuData = filterMenu(state.menuData, permissions, roles)
+        return filterMenu(state.menuData, permissions, roles)
       }
       return state.menuData
     },
