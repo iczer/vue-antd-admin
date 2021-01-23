@@ -56,6 +56,9 @@ function parseRoutes(routesConfig, routerMap) {
         link: routeCfg.link || router.link ||  routeCfg.meta?.link || router.meta?.link
       }
     }
+    if (router.beforeEnter) {
+      route.beforeEnter = router.beforeEnter
+    }
     if (routeCfg.invisible || router.invisible) {
       route.meta.invisible = true
     }
