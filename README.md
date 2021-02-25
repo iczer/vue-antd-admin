@@ -50,4 +50,4 @@ $ npm run serve
 - 在你的公司或个人项目中使用 Vue Antd Admin。
 - 通过 [Issue](https://github.com/iczer/vue-antd-admin/issues) 报告:bug:或进行咨询。
 - 提交 [Pull Request](https://github.com/iczer/vue-antd-admin/pulls) 改进 Admin 的代码。
-- 加入社群，与小伙伴们一同交流心得。QQ群：812277510、610090280（已满）
+- 加入社群，与小伙伴们一同交流心得。QQ群：942083829、 812277510（已满）、610090280（已满）
