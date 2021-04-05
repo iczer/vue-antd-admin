@@ -34,7 +34,7 @@ function parseRoutes(routesConfig, routerMap) {
     let router = undefined, routeCfg = {}
     if (typeof item === 'string') {
       router = routerMap[item]
-      routeCfg = {path: router.path || item, router: item}
+      routeCfg = {path: (router && router.path) || item, router: item}
     } else if (typeof item === 'object') {
       router = routerMap[item.router]
       routeCfg = item
