@@ -76,7 +76,7 @@
       indentSize: Number,
       loading: Boolean,
       locale: Object,
-      pagination: Object,
+      pagination: [Object, Boolean],
       rowClassName: Function,
       rowKey: [String, Function],
       rowSelection: Object,
