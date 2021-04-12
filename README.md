@@ -54,7 +54,9 @@ $ npm run serve
 
 ## 打赏
 如果该项目对您有所帮助，可以请作者喝一杯咖啡。
+<p>
+  <img src="./src/assets/img/alipay.png" width="320px" style="display: inline-block;" />
+  <img src="./src/assets/img/wechatpay.png" width="320px" style="display: inline-block; margin-left: 24px;" />
+</p>
 
-<img src="./src/assets/img/alipay.png" width="320px" style="display: inline-block;" />
-<img src="./src/assets/img/wechatpay.png" width="320px" style="display: inline-block; margin-left: 24px;" />
 
