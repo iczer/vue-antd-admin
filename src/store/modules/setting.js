@@ -3,8 +3,11 @@ import {ADMIN} from '@/config/default'
 import {formatFullPath} from '@/utils/i18n'
 import {filterMenu} from '@/utils/authority-utils'
 import {getLocalSetting} from '@/utils/themeUtil'
+import deepClone from 'lodash.clonedeep'
 
 const localSetting = getLocalSetting(true)
+const customTitlesStr = sessionStorage.getItem(process.env.VUE_APP_TBAS_TITLES_KEY)
+const customTitles = (customTitlesStr && JSON.parse(customTitlesStr)) || []
 
 export default {
   namespaced: true,
@@ -15,6 +18,7 @@ export default {
     pageMinHeight: 0,
     menuData: [],
     activatedFirst: undefined,
+    customTitles,
     ...config,
     ...localSetting
   },
@@ -22,7 +26,7 @@ export default {
     menuData(state, getters, rootState) {
       if (state.filterMenu) {
         const {permissions, roles} = rootState.account
-        filterMenu(state.menuData, permissions, roles)
+        return filterMenu(deepClone(state.menuData), permissions, roles)
       }
       return state.menuData
     },
@@ -39,11 +43,11 @@ export default {
     },
     subMenu(state) {
       const {menuData, activatedFirst} = state
-      if (!menuData[0].fullPath) {
+      if (menuData.length > 0 && !menuData[0].fullPath) {
         formatFullPath(menuData)
       }
       const current = menuData.find(menu => menu.fullPath === activatedFirst)
-      return current && current.children ? current.children : []
+      return current && current.children || []
     }
   },
   mutations: {
@@ -94,6 +98,17 @@ export default {
     },
     setFixedTabs(state, fixedTabs) {
       state.fixedTabs = fixedTabs
+    },
+    setCustomTitle(state, {path, title}) {
+      if (title) {
+        const obj = state.customTitles.find(item => item.path === path)
+        if (obj) {
+          obj.title = title
+        } else {
+          state.customTitles.push({path, title})
+        }
+        sessionStorage.setItem(process.env.VUE_APP_TBAS_TITLES_KEY, JSON.stringify(state.customTitles))
+      }
     }
   }
 }

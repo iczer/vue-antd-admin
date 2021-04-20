@@ -49,3 +49,58 @@ Mock.mock(RegExp(`${process.env.VUE_APP_API_BASE_URL}/goods` + '.*'),'get', ({ur
     }
   }
 })
+
+const columnsConfig = [
+  {
+    title: '商品名称',
+    dataIndex: 'name',
+    searchAble: true
+  },
+  {
+    title: '订单号',
+    dataIndex: 'orderId'
+  },
+  {
+    searchAble: true,
+    dataIndex: 'status',
+    dataType: 'select',
+    slots: {title: 'statusTitle'},
+    scopedSlots: {customRender: 'status'},
+    search: {
+      selectOptions: [
+        {title: '已下单', value: 1},
+        {title: '已付款', value: 2},
+        {title: '已审核', value: 3},
+        // {title: '已发货', value: 4}
+      ]
+    }
+  },
+  {
+    title: '发货',
+    searchAble: true,
+    dataIndex: 'send',
+    dataType: 'boolean',
+    scopedSlots: {customRender: 'send'}
+  },
+  {
+    title: '发货时间',
+    dataIndex: 'sendTime',
+    dataType: 'datetime'
+  },
+  {
+    title: '下单日期',
+    searchAble: true,
+    dataIndex: 'orderDate',
+    dataType: 'date',
+    visible: false
+  },
+  {
+    title: '审核时间',
+    dataIndex: 'auditTime',
+    dataType: 'time',
+  },
+]
+
+Mock.mock(`${process.env.VUE_APP_API_BASE_URL}/columns`, 'get', () => {
+  return columnsConfig
+})

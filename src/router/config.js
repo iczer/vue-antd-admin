@@ -56,6 +56,9 @@ const options = {
           name: '表单页',
           meta: {
             icon: 'form',
+            page: {
+              cacheAble: false
+            }
           },
           component: PageView,
           children: [

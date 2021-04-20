@@ -90,24 +90,19 @@
             searchAble: true,
             dataIndex: 'send',
             dataType: 'boolean',
-            scopedSlots: {customRender: 'send'}
-          },
-          {
-            title: '发货时间',
-            dataIndex: 'sendTime',
-            dataType: 'datetime'
-          },
-          {
-            title: '下单日期',
-            searchAble: true,
-            dataIndex: 'orderDate',
-            dataType: 'date'
+            scopedSlots: {customRender: 'send'},
+            search: {
+              switchOptions: {
+                checkedText: '开',
+                uncheckedText: '关'
+              }
+            }
           },
           {
             title: '审核时间',
             dataIndex: 'auditTime',
             dataType: 'time',
-          },
+          }
         ],
         dataSource: [],
         conditions: {}
@@ -115,6 +110,7 @@
     },
     created() {
       this.getGoodList()
+      this.getColumns()
     },
     methods: {
       getGoodList() {
@@ -129,8 +125,12 @@
           this.loading = false
         })
       },
+      getColumns() {
+        ds.goodsColumns().then(res => {
+          this.columns = res.data
+        })
+      },
       onSearch(conditions, searchOptions) {
-        console.log(conditions)
         console.log(searchOptions)
         this.page = 1
         this.conditions = conditions

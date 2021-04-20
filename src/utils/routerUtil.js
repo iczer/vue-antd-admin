@@ -32,9 +32,9 @@ function parseRoutes(routesConfig, routerMap) {
   routesConfig.forEach(item => {
     // 获取注册在 routerMap 中的 router，初始化 routeCfg
     let router = undefined, routeCfg = {}
-    if (typeof item === 'string' && routerMap[item]) {
+    if (typeof item === 'string') {
       router = routerMap[item]
-      routeCfg = {path: router.path || item, router: item}
+      routeCfg = {path: (router && router.path) || item, router: item}
     } else if (typeof item === 'object') {
       router = routerMap[item.router]
       routeCfg = item
@@ -50,10 +50,10 @@ function parseRoutes(routesConfig, routerMap) {
       component: router.component,
       redirect: routeCfg.redirect || router.redirect,
       meta: {
-        authority: routeCfg.authority || router.authority || '*',
-        icon: routeCfg.icon || router.icon,
-        page: routeCfg.page || router.page,
-        link: routeCfg.link || router.link
+        authority: routeCfg.authority || router.authority || routeCfg.meta?.authority || router.meta?.authority || '*',
+        icon: routeCfg.icon || router.icon ||  routeCfg.meta?.icon || router.meta?.icon,
+        page: routeCfg.page || router.page ||  routeCfg.meta?.page || router.meta?.page,
+        link: routeCfg.link || router.link ||  routeCfg.meta?.link || router.meta?.link
       }
     }
     if (routeCfg.invisible || router.invisible) {

@@ -35,7 +35,7 @@ const Item = {
     return h(
       'li',
       {class: 'avatar-item'},
-      [!this.$props.tips ? h(ATooltip, {props: {title: this.$props.tips}}, [avatar]) : avatar]
+      [this.$props.tips ? h(ATooltip, {props: {title: this.$props.tips}}, [avatar]) : avatar]
     )
   }
 }

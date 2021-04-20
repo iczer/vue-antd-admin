@@ -60,10 +60,10 @@ export default {
     this.updatePageHeight(0)
   },
   computed: {
-    ...mapState('setting', ['layout', 'multiPage', 'pageMinHeight', 'pageWidth']),
+    ...mapState('setting', ['layout', 'multiPage', 'pageMinHeight', 'pageWidth', 'customTitles']),
     pageTitle() {
       let pageTitle = this.page && this.page.title
-      return pageTitle === undefined ? (this.title || this.routeName) : this.$t(pageTitle)
+      return this.customTitle || (pageTitle && this.$t(pageTitle)) || this.title || this.routeName
     },
     routeName() {
       const route = this.$route
@@ -90,11 +90,17 @@ export default {
     ...mapMutations('setting', ['correctPageMinHeight']),
     getRouteBreadcrumb() {
       let routes = this.$route.matched
+      const path = this.$route.path
       let breadcrumb = []
-      routes.forEach(route => {
+      routes.filter(item => path.includes(item.path))
+        .forEach(route => {
         const path = route.path.length === 0 ? '/home' : route.path
         breadcrumb.push(this.$t(getI18nKey(path)))
       })
+      let pageTitle = this.page && this.page.title
+      if (this.customTitle || pageTitle) {
+        breadcrumb[breadcrumb.length - 1] = this.customTitle || pageTitle
+      }
       return breadcrumb
     },
     /**
