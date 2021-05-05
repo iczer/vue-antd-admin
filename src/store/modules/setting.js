@@ -30,8 +30,8 @@ export default {
       }
       return state.menuData
     },
-    firstMenu(state) {
-      const {menuData} = state
+    firstMenu(state, getters) {
+      const {menuData} = getters
       if (menuData.length > 0 && !menuData[0].fullPath) {
         formatFullPath(menuData)
       }
