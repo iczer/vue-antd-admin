@@ -44,17 +44,31 @@ function parseRoutes(routesConfig, routerMap) {
       router = typeof item === 'string' ? {path: item, name: item} : item
     }
     // 从 router 和 routeCfg 解析路由
+    const meta = {
+      authority: router.authority,
+      icon: router.icon,
+      page: router.page,
+      link: router.link,
+      params: router.params,
+      query: router.query,
+      ...router.meta
+    }
+    const cfgMeta = {
+      authority: routeCfg.authority,
+      icon: routeCfg.icon,
+      page: routeCfg.page,
+      link: routeCfg.link,
+      params: routeCfg.params,
+      query: routeCfg.query,
+      ...routeCfg.meta
+    }
+    Object.assign(meta, cfgMeta)
     const route = {
       path: routeCfg.path || router.path || routeCfg.router,
       name: routeCfg.name || router.name,
       component: router.component,
       redirect: routeCfg.redirect || router.redirect,
-      meta: {
-        authority: routeCfg.authority || router.authority || routeCfg.meta?.authority || router.meta?.authority || '*',
-        icon: routeCfg.icon || router.icon ||  routeCfg.meta?.icon || router.meta?.icon,
-        page: routeCfg.page || router.page ||  routeCfg.meta?.page || router.meta?.page,
-        link: routeCfg.link || router.link ||  routeCfg.meta?.link || router.meta?.link
-      }
+      meta: {...meta, authority: meta.authority || '*'}
     }
     if (routeCfg.invisible || router.invisible) {
       route.meta.invisible = true
