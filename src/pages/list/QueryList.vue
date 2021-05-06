@@ -116,6 +116,7 @@
           <a @click="deleteRecord(record.key)" v-auth="`delete`">
             <a-icon type="delete" />删除2
           </a>
+          <router-link :to="`/list/query/detail/${record.key}`" >详情</router-link>
         </div>
         <template slot="statusTitle">
           <a-icon @click.native="onStatusTitleClick" type="info-circle" />
