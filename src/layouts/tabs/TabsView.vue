@@ -13,7 +13,7 @@
     <div :class="['tabs-view-content', layout, pageWidth]" :style="`margin-top: ${multiPage ? -24 : 0}px`">
       <page-toggle-transition :disabled="animate.disabled" :animate="animate.name" :direction="animate.direction">
         <a-keep-alive :exclude-keys="excludeKeys" v-if="multiPage && cachePage" v-model="clearCaches">
-          <router-view v-if="!refreshing" ref="tabContent" :key="$route.fullPath" />
+          <router-view v-if="!refreshing" ref="tabContent" :key="$route.path" />
         </a-keep-alive>
         <router-view ref="tabContent" v-else-if="!refreshing" />
       </page-toggle-transition>
@@ -62,10 +62,10 @@ export default {
     this.loadCacheConfig(this.$router?.options?.routes)
     this.loadCachedTabs()
     const route = this.$route
-    if (this.pageList.findIndex(item => item.fullPath === route.fullPath) === -1) {
+    if (this.pageList.findIndex(item => item.path === route.path) === -1) {
       this.pageList.push(this.createPage(route))
     }
-    this.activePage = route.fullPath
+    this.activePage = route.path
     if (this.multiPage) {
       this.$nextTick(() => {
         this.setCachedKey(route)
@@ -86,10 +86,13 @@ export default {
       this.loadCacheConfig(val)
     },
     '$route': function (newRoute) {
-      this.activePage = newRoute.fullPath
+      this.activePage = newRoute.path
+      const page = this.pageList.find(item => item.path === newRoute.path)
       if (!this.multiPage) {
         this.pageList = [this.createPage(newRoute)]
-      } else if (this.pageList.findIndex(item => item.fullPath === newRoute.fullPath) === -1) {
+      } else if (page) {
+        page.fullPath = newRoute.fullPath
+      } else if (!page) {
         this.pageList.push(this.createPage(newRoute))
       }
       if (this.multiPage) {
@@ -113,25 +116,26 @@ export default {
   methods: {
     changePage (key) {
       this.activePage = key
-      this.$router.push(key)
+      const page = this.pageList.find(item => item.path === key)
+      this.$router.push(page.fullPath)
     },
     remove (key, next) {
       if (this.pageList.length === 1) {
         return this.$message.warning(this.$t('warn'))
       }
       //清除缓存
-      let index = this.pageList.findIndex(item => item.fullPath === key)
+      let index = this.pageList.findIndex(item => item.path === key)
       this.clearCaches = this.pageList.splice(index, 1).map(page => page.cachedKey)
       if (next) {
         this.$router.push(next)
       } else if (key === this.activePage) {
         index = index >= this.pageList.length ? this.pageList.length - 1 : index
-        this.activePage = this.pageList[index].fullPath
+        this.activePage = this.pageList[index].path
         this.$router.push(this.activePage)
       }
     },
     refresh (key, page) {
-      page = page || this.pageList.find(item => item.fullPath === key)
+      page = page || this.pageList.find(item => item.path === key)
       page.loading = true
       this.clearCache(page)
       if (key === this.activePage) {
@@ -159,7 +163,7 @@ export default {
     },
     closeOthers (pageKey) {
       // 清除缓存
-      const clearPages = this.pageList.filter(item => item.fullPath !== pageKey && !item.unclose)
+      const clearPages = this.pageList.filter(item => item.path !== pageKey && !item.unclose)
       this.clearCaches = clearPages.map(item => item.cachedKey)
       this.pageList = this.pageList.filter(item => !clearPages.includes(item))
       // 判断跳转
@@ -169,25 +173,25 @@ export default {
       }
     },
     closeLeft (pageKey) {
-      const index = this.pageList.findIndex(item => item.fullPath === pageKey)
+      const index = this.pageList.findIndex(item => item.path === pageKey)
       // 清除缓存
       const clearPages = this.pageList.filter((item, i) => i < index && !item.unclose)
       this.clearCaches = clearPages.map(item => item.cachedKey)
       this.pageList = this.pageList.filter(item => !clearPages.includes(item))
       // 判断跳转
-      if (!this.pageList.find(item => item.fullPath === this.activePage)) {
+      if (!this.pageList.find(item => item.path === this.activePage)) {
         this.activePage = pageKey
         this.$router.push(this.activePage)
       }
     },
     closeRight (pageKey) {
       // 清除缓存
-      const index = this.pageList.findIndex(item => item.fullPath === pageKey)
+      const index = this.pageList.findIndex(item => item.path === pageKey)
       const clearPages = this.pageList.filter((item, i) => i > index && !item.unclose)
       this.clearCaches = clearPages.map(item => item.cachedKey)
       this.pageList = this.pageList.filter(item => !clearPages.includes(item))
       // 判断跳转
-      if (!this.pageList.find(item => item.fullPath === this.activePage)) {
+      if (!this.pageList.find(item => item.path === this.activePage)) {
         this.activePage = pageKey
         this.$router.push(this.activePage)
       }
@@ -234,7 +238,8 @@ export default {
     closePageListener(event) {
       const {closeRoute, nextRoute} = event.detail
       const closePath = typeof closeRoute === 'string' ? closeRoute : closeRoute.path
-      this.remove(closePath, nextRoute)
+      const path = closePath && closePath.split('?')[0]
+      this.remove(path, nextRoute)
     },
     /**
      * 页面刷新事件监听
@@ -242,7 +247,8 @@ export default {
      */
     refreshPageListener(event) {
       const {pageKey} = event.detail
-      this.refresh(pageKey)
+      const path = pageKey && pageKey.split('?')[0]
+      this.refresh(path)
     },
     /**
      * 页面 unload 事件监听器，添加页签到 session 缓存，用于刷新时保留页签
@@ -255,6 +261,7 @@ export default {
       return {
         keyPath: route.matched[route.matched.length - 1].path,
         fullPath: route.fullPath, loading: false,
+        path: route.path,
         title: route.meta && route.meta.page && route.meta.page.title,
         unclose: route.meta && route.meta.page && (route.meta.page.closable === false),
       }
@@ -264,7 +271,7 @@ export default {
      * @param route 页面对应的路由
      */
     setCachedKey(route) {
-      const page = this.pageList.find(item => item.fullPath === route.fullPath)
+      const page = this.pageList.find(item => item.path === route.path)
       page.unclose = route.meta && route.meta.page && (route.meta.page.closable === false)
       if (!page._init_) {
         const vnode = this.$refs.tabContent.$vnode
@@ -294,7 +301,7 @@ export default {
       routes.forEach(item => {
         const cacheAble = item.meta?.page?.cacheAble ?? pCache ?? true
         if (!cacheAble) {
-          this.excludeKeys.push(new RegExp(`${item.fullPath}\\d+$`))
+          this.excludeKeys.push(new RegExp(`${item.path}\\d+$`))
         }
         if (item.children) {
           this.loadCacheConfig(item.children, cacheAble)
