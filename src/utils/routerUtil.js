@@ -62,6 +62,11 @@ function parseRoutes(routesConfig, routerMap) {
       query: routeCfg.query,
       ...routeCfg.meta
     }
+    Object.keys(cfgMeta).forEach(key => {
+      if (cfgMeta[key] === undefined || cfgMeta[key] === null || cfgMeta[key] === '') {
+        delete cfgMeta[key]
+      }
+    })
     Object.assign(meta, cfgMeta)
     const route = {
       path: routeCfg.path || router.path || routeCfg.router,
