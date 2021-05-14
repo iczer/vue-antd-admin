@@ -1,5 +1,6 @@
 import axios from 'axios'
-import Cookie from 'js-cookie'
+// import Cookie from 'js-cookie'
+import {setCookie, getCookie, removeCookie, removeLocalStorage} from '@/utils/cache'
 
 // 跨域认证信息 header 名
 const xsrfHeaderName = 'Authorization'
@@ -49,7 +50,7 @@ async function request(url, method, params, config) {
 function setAuthorization(auth, authType = AUTH_TYPE.BEARER) {
   switch (authType) {
     case AUTH_TYPE.BEARER:
-      Cookie.set(xsrfHeaderName, 'Bearer ' + auth.token, {expires: auth.expireAt})
+      setCookie(xsrfHeaderName, 'Bearer ' + auth.token, {expires: auth.expireAt})
       break
     case AUTH_TYPE.BASIC:
     case AUTH_TYPE.AUTH1:
@@ -66,7 +67,7 @@ function setAuthorization(auth, authType = AUTH_TYPE.BEARER) {
 function removeAuthorization(authType = AUTH_TYPE.BEARER) {
   switch (authType) {
     case AUTH_TYPE.BEARER:
-      Cookie.remove(xsrfHeaderName)
+      removeCookie(xsrfHeaderName)
       break
     case AUTH_TYPE.BASIC:
     case AUTH_TYPE.AUTH1:
@@ -74,6 +75,10 @@ function removeAuthorization(authType = AUTH_TYPE.BEARER) {
     default:
       break
   }
+  removeLocalStorage(process.env.VUE_APP_ROUTES_KEY)
+  removeLocalStorage(process.env.VUE_APP_PERMISSIONS_KEY)
+  removeLocalStorage(process.env.VUE_APP_ROLES_KEY)
+  removeLocalStorage(process.env.VUE_APP_USER_KEY)
 }
 
 /**
@@ -84,7 +89,7 @@ function removeAuthorization(authType = AUTH_TYPE.BEARER) {
 function checkAuthorization(authType = AUTH_TYPE.BEARER) {
   switch (authType) {
     case AUTH_TYPE.BEARER:
-      if (Cookie.get(xsrfHeaderName)) {
+      if (getCookie(xsrfHeaderName)) {
         return true
       }
       break

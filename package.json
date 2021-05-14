@@ -6,6 +6,7 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
+    "build:stage": "vue-cli-service build --mode staging",    
     "lint": "vue-cli-service lint",
     "predeploy": "yarn build",
     "deploy": "gh-pages -d dist -b pages -r https://gitee.com/iczer/vue-antd-admin.git",

@@ -2,6 +2,7 @@ const client = require('webpack-theme-color-replacer/client')
 const {theme} = require('../config')
 const {getMenuColors, getAntdColors, getThemeToggleColors, getFunctionalColors} = require('../utils/colors')
 const {ANTD} = require('../config/default')
+const {getLocalStorage} = require('./cache')
 
 function getThemeColors(color, $theme) {
   const _color = color || theme.color
@@ -82,7 +83,7 @@ function loadLocalTheme(localSetting) {
 function getLocalSetting(loadTheme) {
   let localSetting = {}
   try {
-    const localSettingStr = localStorage.getItem(process.env.VUE_APP_SETTING_KEY)
+    const localSettingStr = getLocalStorage(process.env.VUE_APP_SETTING_KEY)
     localSetting = JSON.parse(localSettingStr)
   } catch (e) {
     console.error(e)

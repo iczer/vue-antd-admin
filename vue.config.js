@@ -35,6 +35,7 @@ const assetsCDN = {
 }
 
 module.exports = {
+  lintOnSave: isProd,
   devServer: {
     // proxy: {
     //   '/api': { //此处要与 /services/api.js 中的 API_PROXY_PREFIX 值保持一致
