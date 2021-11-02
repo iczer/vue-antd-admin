@@ -235,7 +235,7 @@ export default {
       let matches = this.$route.matched
       const route = matches[matches.length - 1]
       let chose = this.routesMap[route.path]
-      if (chose.meta && chose.meta.highlight) {
+      if (chose && chose.meta && chose.meta.highlight) {
         chose = this.routesMap[chose.meta.highlight]
         const resolve = this.$router.resolve({path: chose.fullPath})
         matches = (resolve.resolved && resolve.resolved.matched) || matches
