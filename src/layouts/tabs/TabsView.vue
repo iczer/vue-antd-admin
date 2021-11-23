@@ -301,7 +301,8 @@ export default {
       routes.forEach(item => {
         const cacheAble = item.meta?.page?.cacheAble ?? pCache ?? true
         if (!cacheAble) {
-          this.excludeKeys.push(new RegExp(`${item.path}\\d+$`))
+          const path = item.path.replace(/:.+?\//g, '.+?/').replace(/:.+?$/g, '.+$')
+          this.excludeKeys.push(new RegExp(`${path}`))
         }
         if (item.children) {
           this.loadCacheConfig(item.children, cacheAble)
