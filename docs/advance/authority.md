@@ -31,7 +31,7 @@ permission = {
   operation: ['add', 'delete', 'edit', 'close']  //权限下的操作权限
 }
 ```
-你也可以设置 role 的值为字符串，比如 permission = 'form', 它等同于：
+你也可以设置 permission 的值为字符串，比如 permission = 'form', 它等同于：
 ```js
 permission = {
   id: 'form'
