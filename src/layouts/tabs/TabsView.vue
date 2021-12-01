@@ -322,6 +322,7 @@ export default {
   }
   .tabs-view-content{
     position: relative;
+    z-index: 0;
     &.head.fixed{
       width: 1400px;
       margin: 0 auto;
