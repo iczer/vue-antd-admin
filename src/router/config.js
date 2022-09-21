@@ -96,6 +96,15 @@ const options = {
               component: () => import('@/pages/list/QueryList'),
             },
             {
+              path: 'query/detail/:id',
+              name: '查询详情',
+              meta: {
+                highlight: '/list/query',
+                invisible: true
+              },
+              component: () => import('@/pages/Demo')
+            },
+            {
               path: 'primary',
               name: '标准列表',
               component: () => import('@/pages/list/StandardList'),
@@ -229,6 +238,28 @@ const options = {
             }
           },
           component: () => import('@/pages/form/basic')
+        },
+        {
+          name: '带参菜单',
+          path: 'router/query',
+          meta: {
+            icon: 'project',
+            query: {
+              name: '菜单默认参数'
+            }
+          },
+          component: () => import('@/pages/Demo')
+        },
+        {
+          name: '动态路由菜单',
+          path: 'router/dynamic/:id',
+          meta: {
+            icon: 'project',
+            params: {
+              id: 123
+            }
+          },
+          component: () => import('@/pages/Demo')
         },
         {
           name: 'Ant Design Vue',

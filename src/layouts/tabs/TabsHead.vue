@@ -14,11 +14,11 @@
             :type="fixedTabs ? 'lock' : 'unlock'"
         />
       </a-tooltip>
-      <a-tab-pane v-for="page in pageList" :key="page.fullPath">
-        <div slot="tab" class="tab" @contextmenu="e => onContextmenu(page.fullPath, e)">
-          <a-icon @click="onRefresh(page)" :class="['icon-sync', {'hide': page.fullPath !== active && !page.loading}]" :type="page.loading ? 'loading' : 'sync'" />
-          <div class="title" @click="onTabClick(page.fullPath)" >{{pageName(page)}}</div>
-          <a-icon v-if="!page.unclose" @click="onClose(page.fullPath)" class="icon-close" type="close"/>
+      <a-tab-pane v-for="page in pageList" :key="page.path">
+        <div slot="tab" class="tab" @contextmenu="e => onContextmenu(page.path, e)">
+          <a-icon @click="onRefresh(page)" :class="['icon-sync', {'hide': page.path !== active && !page.loading}]" :type="page.loading ? 'loading' : 'sync'" />
+          <div class="title" @click="onTabClick(page.path)" >{{pageName(page)}}</div>
+          <a-icon v-if="!page.unclose" @click="onClose(page.path)" class="icon-close" type="close"/>
         </div>
       </a-tab-pane>
     </a-tabs>
@@ -89,7 +89,7 @@
         this.$emit('close', key)
       },
       onRefresh(page) {
-        this.$emit('refresh', page.fullPath, page)
+        this.$emit('refresh', page.path, page)
       },
       onContextmenu(pageKey, e) {
         this.$emit('contextmenu', pageKey, e)
