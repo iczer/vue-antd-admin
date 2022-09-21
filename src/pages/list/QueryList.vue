@@ -98,6 +98,7 @@
         :selectedRows.sync="selectedRows"
         @clear="onClear"
         @change="onChange"
+        :pagination="{...pagination, onChange: onPageChange}"
         @selectedRowChange="onSelectChange"
       >
         <div slot="description" slot-scope="{text}">
@@ -127,6 +128,7 @@
 
 <script>
 import StandardTable from '@/components/table/StandardTable'
+import {request} from '@/utils/request'
 const columns = [
   {
     title: '规则编号',
@@ -160,19 +162,6 @@ const columns = [
   }
 ]
 
-const dataSource = []
-
-for (let i = 0; i < 100; i++) {
-  dataSource.push({
-    key: i,
-    no: 'NO ' + i,
-    description: '这是一段描述',
-    callNo: Math.floor(Math.random() * 1000),
-    status: Math.floor(Math.random() * 10) % 4,
-    updatedAt: '2018-07-26'
-  })
-}
-
 export default {
   name: 'QueryList',
   components: {StandardTable},
@@ -180,14 +169,37 @@ export default {
     return {
       advanced: true,
       columns: columns,
-      dataSource: dataSource,
-      selectedRows: []
+      dataSource: [],
+      selectedRows: [],
+      pagination: {
+        current: 1,
+        pageSize: 10,
+        total: 0
+      }
     }
   },
   authorize: {
     deleteRecord: 'delete'
   },
+  mounted() {
+    this.getData()
+  },
   methods: {
+    onPageChange(page, pageSize) {
+      this.pagination.current = page
+      this.pagination.pageSize = pageSize
+      this.getData()
+    },
+    getData() {
+      request(process.env.VUE_APP_API_BASE_URL + '/list', 'get', {page: this.pagination.current,
+        pageSize: this.pagination.pageSize}).then(res => {
+        const {list, page, pageSize, total} = res?.data?.data ?? {}
+        this.dataSource = list
+        this.pagination.current = page
+        this.pagination.pageSize = pageSize
+        this.pagination.total = total
+      })
+    },
     deleteRecord(key) {
       this.dataSource = this.dataSource.filter(item => item.key !== key)
       this.selectedRows = this.selectedRows.filter(item => item.key !== key)
