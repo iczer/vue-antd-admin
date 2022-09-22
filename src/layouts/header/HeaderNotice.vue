@@ -56,9 +56,10 @@ export default {
         this.loading = false
         return
       }
-      this.loadding = true
+			if (this.show) return
+      this.loading = true
       setTimeout(() => {
-        this.loadding = false
+        this.loading = false
       }, 1000)
     }
   }
