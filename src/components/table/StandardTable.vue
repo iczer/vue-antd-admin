@@ -23,7 +23,7 @@
       :expandedRowKeys="expandedRowKeys"
       :expandedRowRender="expandedRowRender"
       @change="onChange"
-      :rowSelection="selectedRows ? {selectedRowKeys: selectedRowKeys, onChange: updateSelect} : undefined"
+      :rowSelection="selectedRows ? {selectedRowKeys, onSelect, onSelectAll} : undefined"
     >
       <template slot-scope="text, record, index" :slot="slot" v-for="slot in Object.keys($scopedSlots).filter(key => key !== 'expandedRowRender') ">
         <slot :name="slot" v-bind="{text, record, index}"></slot>
@@ -64,22 +64,70 @@ export default {
     }
   },
   methods: {
-    updateSelect (selectedRowKeys, selectedRows) {
-      this.$emit('update:selectedRows', selectedRows)
-      this.$emit('selectedRowChange', selectedRowKeys, selectedRows)
+    equals(record1, record2) {
+      if (record1 === record2) {
+        return true
+      }
+      const {rowKey} = this
+      if (rowKey && typeof rowKey === 'string') {
+        return record1[rowKey] === record2[rowKey]
+      } else if (rowKey && typeof rowKey === 'function') {
+        return rowKey(record1) === rowKey(record2)
+      }
+      return false
+    },
+    contains(arr, item) {
+      if (!arr || arr.length === 0) {
+        return false
+      }
+      const {equals} = this
+      for (let i = 0; i < arr.length; i++) {
+        if (equals(arr[i], item)) {
+          return true
+        }
+      }
+      return false
+    },
+    onSelectAll(selected, rows) {
+      const {getKey, contains} = this
+      const unselected = this.dataSource.filter(item => !contains(rows, item, this.rowKey))
+      const _selectedRows = this.selectedRows.filter(item => !contains(unselected, item, this.rowKey))
+      const set = {}
+      _selectedRows.forEach(item => set[getKey(item)] = item)
+      rows.forEach(item => set[getKey(item)] = item)
+      const _rows = Object.values(set)
+      this.$emit('update:selectedRows', _rows)
+      this.$emit('selectedRowChange', _rows.map(item => getKey(item)), _rows)
+    },
+    getKey(record) {
+      const {rowKey} = this
+      if (!rowKey || !record) {
+        return undefined
+      }
+      if (typeof rowKey === 'string') {
+        return record[rowKey]
+      } else {
+        return rowKey(record)
+      }
+    },
+    onSelect(record, selected) {
+      const {equals, selectedRows, getKey} = this
+      const _selectedRows = selected ? [...selectedRows, record] : selectedRows.filter(row => !equals(row, record))
+      this.$emit('update:selectedRows', _selectedRows)
+      this.$emit('selectedRowChange', _selectedRows.map(item => getKey(item)), _selectedRows)
     },
     initTotalList (columns) {
-      const totalList = columns.filter(item => item.needTotal)
+      return columns.filter(item => item.needTotal)
         .map(item => {
           return {
             ...item,
             total: 0
           }
         })
-      return totalList
     },
     onClear() {
-      this.updateSelect([], [])
+      this.$emit('update:selectedRows', [])
+      this.$emit('selectedRowChange', [], [])
       this.$emit('clear')
     },
     onChange(pagination, filters, sorter, {currentDataSource}) {
@@ -110,10 +158,8 @@ export default {
   },
   computed: {
     selectedRowKeys() {
-      return this.selectedRows.map(record => {
-        return (typeof this.rowKey === 'function') ? this.rowKey(record) : record[this.rowKey]
-      })
-    }
+      return this.selectedRows.map(record => this.getKey(record))
+    },
   }
 }
 </script>
