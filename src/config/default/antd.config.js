@@ -13,9 +13,34 @@ const ANTD = {
     },
     night: {
       menuColors: ['#151515', '#1f1f1f', '#1e1e1e'],
+    },
+    blue: {
+      menuColors: ['#1e3a8a'/*二级菜单背景*/, '#1e40af'/*菜单/顶部背景*/, '#1d4ed8'/*logo 背景*/]
     }
   },
   theme: {
+    blue: {
+      'layout-body-background': '#f0f2f5',
+      'body-background': '#fff',
+      'component-background': '#fff',
+      'heading-color': 'rgba(0, 0, 0, 0.85)',
+      'text-color': 'rgba(0, 0, 0, 0.65)',
+      'text-color-inverse': '#fff',
+      'text-color-secondary': 'rgba(0, 0, 0, 0.45)',
+      'shadow-color': 'rgba(0, 0, 0, 0.15)',
+      'border-color-split': '#f0f0f0',
+      'border-color-base': '#d9d9d9',
+      'background-color-light': '#fafafa',
+      'background-color-base': '#f5f5f5',
+      'table-selected-row-bg': '#fafafa',
+      'table-expanded-row-bg': '#fbfbfb',
+      'checkbox-check-color': '#fff',
+      'disabled-color': 'rgba(0, 0, 0, 0.25)',
+      'menu-dark-color': 'rgba(254, 254, 254, 0.65)',
+      'menu-dark-highlight-color': '#fefefe',
+      'menu-dark-arrow-color': '#fefefe',
+      'btn-primary-color': '#fff',
+    },
     dark: {
       'layout-body-background': '#f0f2f5',
       'body-background': '#fff',
