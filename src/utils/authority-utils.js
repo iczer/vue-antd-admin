@@ -8,10 +8,12 @@ function hasPermission(authority, permissions) {
   let required = '*'
   if (typeof authority === 'string') {
     required = authority
+  } else if (Array.isArray(authority)) {
+    required = authority
   } else if (typeof authority === 'object') {
     required = authority.permission
   }
-  return required === '*' || (permissions && permissions.findIndex(item => item === required || item.id === required) !== -1)
+  return required === '*' || hasAnyItem(required, permissions, (r, t) => !!(r === t || r === t.id))
 }
 
 /**
@@ -24,25 +26,23 @@ function hasRole(authority, roles) {
   if (typeof authority === 'object') {
     required = authority.role
   }
-  return authority === '*' || hasAnyRole(required, roles)
+  return authority === '*' || hasAnyItem(required, roles, (r, t) => !!(r === t || r === t.id))
 }
 
 /**
- * 判断是否有需要的任意一个角色
- * @param required {String | Array[String]} 需要的角色，可以是单个角色或者一个角色数组
- * @param roles 拥有的角色
+ * 判断目标数组是否有所需元素
+ * @param {String | String[]}required 所需元素，数组或单个元素
+ * @param {String[]|Object[]} source 目标数组
+ * @param {Function} filter 匹配条件
+ * (r: String, s: String|Object) => boolean
  * @returns {boolean}
  */
-function hasAnyRole(required, roles) {
+function hasAnyItem(required, source, filter) {
   if (!required) {
     return false
-  } else if(Array.isArray(required)) {
-    return roles.findIndex(role => {
-      return required.findIndex(item => item === role || item === role.id) !== -1
-    }) !== -1
-  } else {
-    return roles.findIndex(role => role === required || role.id === required) !== -1
   }
+  let checkedList = Array.isArray(required) ? required : [required]
+  return !!source.find(s => checkedList.find(r => filter(r, s)))
 }
 
 /**
