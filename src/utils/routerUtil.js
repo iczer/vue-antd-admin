@@ -212,7 +212,7 @@ function formatAuthority(routes, pAuthorities = []) {
       let authority = {}
       if (!meta.authority) {
         authority = defaultAuthority
-      }else if (typeof meta.authority === 'string') {
+      }else if (typeof meta.authority === 'string' || Array.isArray(meta.authority)) {
         authority.permission = meta.authority
       } else if (typeof meta.authority === 'object') {
         authority = meta.authority
