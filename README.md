@@ -1,9 +1,3 @@
-<p align="center">
-  vue-antd-admin vue3 版本现已推出，更名为
-  <a href="https://github.com/stepui/stepin-template">stepin-template</a>，欢迎体验，
-  <a href="https://github.com/stepui/stepin-template">立即前往</a>
-</p>
-
 
 
 简体中文 | [English](./README.en-US.md)
@@ -13,6 +7,12 @@
   
 [Ant Design Pro](https://github.com/ant-design/ant-design-pro) 的 Vue 实现版本  
 开箱即用的中后台前端/设计解决方案
+
+:star::star::star:
+vue3 版本现已推出，更名为
+[stepin-template](https://github.com/stepui/stepin-template)，欢迎体验，
+[立即前往](https://github.com/stepui/stepin-template)
+--
 
 [![MIT](https://img.shields.io/github/license/iczer/vue-antd-admin)](https://github.com/iczer/vue-antd-admin/blob/master/LICENSE)
 [![Dependence](https://img.shields.io/david/iczer/vue-antd-admin)](https://david-dm.org/iczer/vue-antd-admin)
