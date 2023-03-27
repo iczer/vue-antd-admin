@@ -1,3 +1,11 @@
+<p align="center">
+  vue-antd-admin vue3 版本现已推出，更名为
+  <a href="https://github.com/stepui/stepin-template">stepin-template</a>，欢迎体验，
+  <a href="https://github.com/stepui/stepin-template">立即前往</a>
+</p>
+
+
+
 简体中文 | [English](./README.en-US.md)
 <h1 align="center">Vue Antd Admin</h1>
 
