@@ -75,6 +75,9 @@ function parseRoutes(routesConfig, routerMap) {
       redirect: routeCfg.redirect || router.redirect,
       meta: {...meta, authority: meta.authority || '*'}
     }
+    if (router.beforeEnter) {
+      route.beforeEnter = router.beforeEnter
+    }
     if (routeCfg.invisible || router.invisible) {
       route.meta.invisible = true
     }
