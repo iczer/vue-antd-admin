@@ -44,7 +44,7 @@ const tokenCheck = {
 * `options: Object`: 应用配置，包含: {router, i18n, store, message}，可根据需要扩展。
 
 ### onRejected
-我们会为 onFulfilled 钩子函数注入 error 和 options 两个参数：
+我们会为 onRejected 钩子函数注入 error 和 options 两个参数：
 * `error: Error`: axios 请求错误对象
 * `options: Object`: 应用配置，包含: {router, i18n, store, message}，可根据需要扩展。 
 
