@@ -95,8 +95,7 @@
         this.$emit('contextmenu', pageKey, e)
       },
       pageName(page) {
-        const pagePath = page.fullPath.split('?')[0]
-        const custom = this.customTitles.find(item => item.path === pagePath)
+        const custom = this.customTitles.find(item => item.path === page.path)
         return (custom && custom.title) || page.title || this.$t(getI18nKey(page.keyPath))
       }
     }
