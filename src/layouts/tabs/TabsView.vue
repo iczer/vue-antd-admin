@@ -13,7 +13,7 @@
     <div :class="['tabs-view-content', layout, pageWidth]" :style="`margin-top: ${multiPage ? -24 : 0}px`">
       <page-toggle-transition :disabled="animate.disabled" :animate="animate.name" :direction="animate.direction">
         <a-keep-alive :exclude-keys="excludeKeys" v-if="multiPage && cachePage" v-model="clearCaches">
-          <router-view v-if="!refreshing" ref="tabContent" :key="$route.path" />
+          <router-view v-if="!refreshing" ref="tabContent" :key="$route.fullPath" />
         </a-keep-alive>
         <router-view ref="tabContent" v-else-if="!refreshing" />
       </page-toggle-transition>
@@ -62,10 +62,10 @@ export default {
     this.loadCacheConfig(this.$router?.options?.routes)
     this.loadCachedTabs()
     const route = this.$route
-    if (this.pageList.findIndex(item => item.path === route.path) === -1) {
+    if (this.pageList.findIndex(item => item.path === route.fullPath) === -1) {
       this.pageList.push(this.createPage(route))
     }
-    this.activePage = route.path
+    this.activePage = route.fullPath
     if (this.multiPage) {
       this.$nextTick(() => {
         this.setCachedKey(route)
@@ -86,8 +86,8 @@ export default {
       this.loadCacheConfig(val)
     },
     '$route': function (newRoute) {
-      this.activePage = newRoute.path
-      const page = this.pageList.find(item => item.path === newRoute.path)
+      this.activePage = newRoute.fullPath
+      const page = this.pageList.find(item => item.path === newRoute.fullPath)
       if (!this.multiPage) {
         this.pageList = [this.createPage(newRoute)]
       } else if (page) {
@@ -261,7 +261,7 @@ export default {
       return {
         keyPath: route.matched[route.matched.length - 1].path,
         fullPath: route.fullPath, loading: false,
-        path: route.path,
+        path: route.fullPath,
         title: route.meta && route.meta.page && route.meta.page.title,
         unclose: route.meta && route.meta.page && (route.meta.page.closable === false),
       }
@@ -271,7 +271,7 @@ export default {
      * @param route 页面对应的路由
      */
     setCachedKey(route) {
-      const page = this.pageList.find(item => item.path === route.path)
+      const page = this.pageList.find(item => item.path === route.fullPath)
       page.unclose = route.meta && route.meta.page && (route.meta.page.closable === false)
       if (!page._init_) {
         const vnode = this.$refs.tabContent.$vnode
@@ -301,7 +301,7 @@ export default {
       routes.forEach(item => {
         const cacheAble = item.meta?.page?.cacheAble ?? pCache ?? true
         if (!cacheAble) {
-          this.excludeKeys.push(new RegExp(`${item.path.replace(/:[^/]*/g, '[^/]*')}\\d*$`))
+          this.excludeKeys.push(new RegExp(`${item.path.replace(/:[^/]*/g, '[^/]*')}(\\?.*)?\\d*$`))
         }
         if (item.children) {
           this.loadCacheConfig(item.children, cacheAble)
