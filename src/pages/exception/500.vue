@@ -1,5 +1,5 @@
 <template>
-  <exception-page home-route="/dashboard/workplace" :style="`min-height: ${minHeight}`" type="500" />
+  <exception-page home-route="/" :style="`min-height: ${minHeight}`" type="500" />
 </template>
 
 <script>

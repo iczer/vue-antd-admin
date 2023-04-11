@@ -1,8 +1,10 @@
-import routerMap from '@/router/async/router.map'
+import {initRouterMap} from '@/router/async/router.map'
 import {mergeI18nFromRoutes} from '@/utils/i18n'
 import Router from 'vue-router'
 import deepMerge from 'deepmerge'
 import basicOptions from '@/router/async/config.async'
+import {getRoutesConfig} from '@/services/user'
+import {checkAuthorization} from '@/utils/request'
 
 //应用配置
 let appOptions = {
@@ -90,6 +92,24 @@ function parseRoutes(routesConfig, routerMap) {
 }
 
 /**
+ * 初始化路由
+ * @param func function 回调方法
+ */
+function initRoutes(func) {
+  if (!checkAuthorization()) {
+    return
+  }
+  getRoutesConfig().then(result => {
+    if (result.data.data && result.data.data.length > 0) {
+      loadRoutes(result.data.data)
+      if (func){
+        func(result)
+      }
+    }
+  })
+}
+
+/**
  * 加载路由
  * @param routesConfig {RouteConfig[]} 路由配置
  */
@@ -109,17 +129,35 @@ function loadRoutes(routesConfig) {
   // 应用配置
   const {router, store, i18n} = appOptions
 
-  // 如果 routesConfig 有值，则更新到本地，否则从本地获取
+  // 如果 routesConfig 不存在则重新加载
+  if (!routesConfig || routesConfig.length <= 0) {
+    routesConfig = store.getters['account/routesConfig']
+    if (!routesConfig || routesConfig.length <= 0){
+      initRoutes()
+    }
+  }
+  // 如果 routesConfig 有值，则更新到本地
   if (routesConfig) {
     store.commit('account/setRoutesConfig', routesConfig)
-  } else {
-    routesConfig = store.getters['account/routesConfig']
   }
   // 如果开启了异步路由，则加载异步路由配置
   const asyncRoutes = store.state.setting.asyncRoutes
   if (asyncRoutes) {
     if (routesConfig && routesConfig.length > 0) {
-      const routes = parseRoutes(routesConfig, routerMap)
+      const routes = parseRoutes(routesConfig, initRouterMap())
+      // 解决动态路由初始化时找不到首页
+      if (routes && routes.length > 0) {
+        const getFirstChild = (routes) => {
+          const route = routes[0]
+          let path = route.path
+          if (!route.children || route.children.length === 0) {
+            return path
+          }
+          return !(path) || path === '/' ? '/' + getFirstChild(route.children) : path + '/'+ getFirstChild(route.children)
+        }
+        const redirect =  getFirstChild(routes)
+        routes[0].redirect = redirect
+      }
       const finalRoutes = mergeRoutes(basicOptions.routes, routes)
       formatRoutes(finalRoutes)
       router.options = {...router.options, routes: finalRoutes}
@@ -270,4 +308,4 @@ function loadGuards(guards, options) {
   })
 }
 
-export {parseRoutes, loadRoutes, formatAuthority, getI18nKey, loadGuards, deepMergeRoutes, formatRoutes, setAppOptions}
+export {parseRoutes, loadRoutes, initRoutes, formatAuthority, getI18nKey, loadGuards, deepMergeRoutes, formatRoutes, setAppOptions}

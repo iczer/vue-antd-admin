@@ -126,6 +126,7 @@ import {setting} from '@/config/default'
 import sysConfig from '@/config/config'
 import fastEqual from 'fast-deep-equal'
 import deepMerge from 'deepmerge'
+import {getLocalStorage, setLocalStorage, removeLocalStorage} from '@/utils/cache'
 
 const ColorCheckboxGroup = ColorCheckbox.Group
 const ImgCheckboxGroup = ImgCheckbox.Group
@@ -162,7 +163,7 @@ export default {
       let clipboard = new Clipboard('#copyBtn')
       clipboard.on('success', () => {
         this.$message.success(`复制成功，覆盖文件 src/config/config.js 然后重启项目即可生效`).then(() => {
-          const localConfig = localStorage.getItem(process.env.VUE_APP_SETTING_KEY)
+          const localConfig = getLocalStorage(process.env.VUE_APP_SETTING_KEY)
           if (localConfig) {
             console.warn('检测到本地有历史保存的主题配置，想要要拷贝的配置代码生效，您可能需要先重置配置')
             this.$message.warn('检测到本地有历史保存的主题配置，想要要拷贝的配置代码生效，您可能需要先重置配置', 5)
@@ -174,14 +175,14 @@ export default {
     saveSetting() {
       const closeMessage = this.$message.loading('正在保存到本地，请稍后...', 0)
       const config = this.extractConfig(true)
-      localStorage.setItem(process.env.VUE_APP_SETTING_KEY, JSON.stringify(config))
+      setLocalStorage(process.env.VUE_APP_SETTING_KEY, JSON.stringify(config))
       setTimeout(closeMessage, 800)
     },
     resetSetting() {
       this.$confirm({
         title: '重置主题会刷新页面，当前页面内容不会保留，确认重置？',
         onOk() {
-          localStorage.removeItem(process.env.VUE_APP_SETTING_KEY)
+          removeLocalStorage(process.env.VUE_APP_SETTING_KEY)
           window.location.reload()
         }
       })
