@@ -136,13 +136,15 @@ export default {
     },
     refresh (key, page) {
       page = page || this.pageList.find(item => item.path === key)
-      page.loading = true
-      this.clearCache(page)
-      if (key === this.activePage) {
-        this.reloadContent(() => page.loading = false)
-      } else {
-        // 其实刷新很快，加这个延迟纯粹为了 loading 状态多展示一会儿，让用户感知刷新这一过程
-        setTimeout(() => page.loading = false, 500)
+      if(page){
+        page.loading = true
+        this.clearCache(page)
+        if (key === this.activePage) {
+          this.reloadContent(() => page.loading = false)
+        } else {
+          // 其实刷新很快，加这个延迟纯粹为了 loading 状态多展示一会儿，让用户感知刷新这一过程
+          setTimeout(() => page.loading = false, 500)
+        }
       }
     },
     onContextmenu(pageKey, e) {
