@@ -6,7 +6,7 @@ import {getLocalSetting} from '@/utils/themeUtil'
 import deepClone from 'lodash.clonedeep'
 
 const localSetting = getLocalSetting(true)
-const customTitlesStr = sessionStorage.getItem(process.env.VUE_APP_TBAS_TITLES_KEY)
+const customTitlesStr = sessionStorage.getItem(process.env.VUE_APP_TABS_TITLES_KEY)
 const customTitles = (customTitlesStr && JSON.parse(customTitlesStr)) || []
 
 export default {
@@ -107,7 +107,7 @@ export default {
         } else {
           state.customTitles.push({path, title})
         }
-        sessionStorage.setItem(process.env.VUE_APP_TBAS_TITLES_KEY, JSON.stringify(state.customTitles))
+        sessionStorage.setItem(process.env.VUE_APP_TABS_TITLES_KEY, JSON.stringify(state.customTitles))
       }
     }
   }
