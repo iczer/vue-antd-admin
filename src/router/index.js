@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import {formatRoutes} from '@/utils/routerUtil'
+import deepmerge from "deepmerge";
 
 Vue.use(Router)
 
@@ -26,6 +27,8 @@ const loginIgnore = {
 function initRouter(isAsync) {
   const options = isAsync ? require('./async/config.async').default : require('./config').default
   formatRoutes(options.routes)
-  return new Router(options)
+  return new Router(deepmerge(options, {
+    mode: 'history',
+  }));
 }
 export {loginIgnore, initRouter}

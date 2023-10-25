@@ -6,7 +6,7 @@
       </a>
     </div>
     <div class="copyright">
-      Copyright<a-icon type="copyright" />{{copyright}}
+      Copyright &copy; {{copyright}}
     </div>
   </div>
 </template>
@@ -33,7 +33,7 @@ export default {
     .links{
       margin-bottom: 8px;
       a:not(:last-child) {
-        margin-right: 40px;
+        margin:auto 5px;
       }
       a{
         color: @text-color-second;
