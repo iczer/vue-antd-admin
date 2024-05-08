@@ -25,13 +25,13 @@ export default {
   computed: {
     ...mapState('setting', ['isMobile', 'multiPage', 'animate']),
     desc() {
-      return this.page.desc
+      return this.page?.desc
     },
     linkList() {
-      return this.page.linkList
+      return this.page?.linkList
     },
     extraImage() {
-      return this.page.extraImage
+      return this.page?.extraImage
     }
   },
   mounted () {
