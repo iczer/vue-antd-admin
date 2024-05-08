@@ -24,9 +24,9 @@ vue3 版本现已推出，更名为
 ![image](./src/assets/img/preview-nine.png)
 </div>
 
-- 预览地址：https://iczer.gitee.io/vue-antd-admin
-- 使用文档：https://iczer.gitee.io/vue-antd-admin-docs
-- 常见问题：https://iczer.gitee.io/vue-antd-admin-docs/start/faq.html
+- 预览地址：https://vue-antd-admin.pages.dev
+- 使用文档：https://doc.vue-antd-admin.pages.dev
+- 常见问题：https://doc.vue-antd-admin.pages.dev/start/faq.html
 - 国内镜像：https://gitee.com/iczer/vue-antd-admin
 
 ## 浏览器支持
