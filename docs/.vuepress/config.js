@@ -1,7 +1,7 @@
 module.exports = {
   title: 'Vue Antd Admin',
   description: 'Vue Antd Admin',
-  base: '/vue-antd-admin-docs/',
+  base: '/',
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }]
   ],

@@ -4,14 +4,15 @@
   "homepage": "https://iczer.github.io/vue-antd-admin",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "serve": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service serve",
+    "build": "export NODE_OPTIONS=--openssl-legacy-provider && vue-cli-service build",
     "lint": "vue-cli-service lint",
     "predeploy": "yarn build",
-    "deploy": "gh-pages -d dist -b pages -r https://gitee.com/iczer/vue-antd-admin.git",
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
-    "docs:deploy": "vuepress build docs && gh-pages -d docs/.vuepress/dist -b master -r https://gitee.com/iczer/vue-antd-admin-docs.git"
+    "deploy": "gh-pages -d dist -b pages -r https://github.com/iczer/vue-antd-admin.git",
+    "docs:dev": "export NODE_OPTIONS=--openssl-legacy-provider && vuepress dev docs",
+    "docs:build": "export NODE_OPTIONS=--openssl-legacy-provider && vuepress build docs",
+    "predocs:deploy": "yarn docs:build",
+    "docs:deploy": "gh-pages -d docs/.vuepress/dist -b doc -r https://github.com/iczer/vue-antd-admin.git"
   },
   "dependencies": {
     "@antv/data-set": "^0.11.4",
