@@ -39,9 +39,9 @@ const auth = function(authConfig, permission, role, permissions, roles) {
   if (type === 'permission') {
     return checkFromPermission(check, permission)
   } else if (type === 'role') {
-    return checkFromRoles(check, role)
+    return checkFromRoles(check, roles)
   } else {
-    return checkFromPermission(check, permission) || checkFromRoles(check, role)
+    return checkFromPermission(check, permission) || checkFromRoles(check, roles)
   }
 }
 
